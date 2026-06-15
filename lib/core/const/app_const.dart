@@ -15,8 +15,7 @@ abstract class AppConstant {
   static const String currentLocation = "currentLocation";
   static const String locationList = "locationList";
   static const String adressBox = "adressBox";
-  static const kFontFamily = "Cairo";
-  static const kFontFamily2 = "ScheherazadeNew";
+  static const kFontFamily = "Tajawal";
   static const knotification = "notification";
   static const kTheme = "Ktheme";
   String kDeviceToken = "";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
-import 'package:metw_go/dental_clinic.dart';
+import 'package:metw_go/metw_go.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

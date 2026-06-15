@@ -11,9 +11,7 @@ abstract class AppTextStyle {
       fontFamily: AppConstant.kFontFamily,
       fontSize: 16.sp,
       fontWeight: FontWeight.w500,
-      color:
-          Theme.of(context).textTheme.bodyMedium?.color ??
-          MyColors.darkBlueLight,
+      color: Theme.of(context).colorScheme.shadow ,
     );
   }
 
@@ -22,9 +20,7 @@ abstract class AppTextStyle {
       fontFamily: AppConstant.kFontFamily,
       fontSize: 14.sp,
       fontWeight: FontWeight.w500,
-      color:
-          Theme.of(context).textTheme.bodyMedium?.color ??
-          MyColors.darkBlueLight,
+      color: Theme.of(context).colorScheme.shadow ,
     );
   }
 
@@ -33,9 +29,8 @@ abstract class AppTextStyle {
       fontFamily: AppConstant.kFontFamily,
       fontSize: 18.sp,
       fontWeight: FontWeight.w500,
-      color:
-          Theme.of(context).textTheme.bodyMedium?.color ??
-          MyColors.darkBlueLight,
+      color: Theme.of(context).colorScheme.shadow ,
+
     );
   }
 
@@ -45,9 +40,8 @@ abstract class AppTextStyle {
       fontFamily: AppConstant.kFontFamily,
       fontSize: 16.sp,
       fontWeight: FontWeight.bold,
-      color:
-          Theme.of(context).textTheme.bodyMedium?.color ??
-          MyColors.darkBlueLight,
+      color: Theme.of(context).colorScheme.shadow ,
+
     );
   }
 
@@ -56,9 +50,8 @@ abstract class AppTextStyle {
       fontFamily: AppConstant.kFontFamily,
       fontSize: 18.sp,
       fontWeight: FontWeight.bold,
-      color:
-          Theme.of(context).textTheme.bodyMedium?.color ??
-          MyColors.darkBlueLight,
+      color: Theme.of(context).colorScheme.shadow ,
+
     );
   }
 
@@ -67,9 +60,8 @@ abstract class AppTextStyle {
       fontFamily: AppConstant.kFontFamily,
       fontSize: 20.sp,
       fontWeight: FontWeight.bold,
-      color:
-          Theme.of(context).textTheme.bodyMedium?.color ??
-          MyColors.darkBlueLight,
+      color: Theme.of(context).colorScheme.shadow ,
+
     );
   }
 
@@ -79,9 +71,7 @@ abstract class AppTextStyle {
       fontFamily: AppConstant.kFontFamily,
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
-      color:
-          Theme.of(context).textTheme.bodyMedium?.color ??
-          MyColors.darkBlueLight,
+      color: Theme.of(context).colorScheme.shadow ,
     );
   }
 
@@ -90,9 +80,7 @@ abstract class AppTextStyle {
       fontFamily: AppConstant.kFontFamily,
       fontSize: 16.sp,
       fontWeight: FontWeight.w400,
-      color:
-          Theme.of(context).textTheme.bodyMedium?.color ??
-          MyColors.darkBlueLight,
+      color: Theme.of(context).colorScheme.shadow ,
     );
   }
 
@@ -100,7 +88,7 @@ abstract class AppTextStyle {
     return _getTextStyle(
       fontSize: 12.sp,
       fontWeight: FontWeight.bold,
-      color: MyColors.greyLight,
+      color: Theme.of(context).colorScheme.surface ,
     );
   }
 
@@ -108,7 +96,7 @@ abstract class AppTextStyle {
     return _getTextStyle(
       fontSize: 24.sp,
       fontWeight: FontWeight.bold,
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface ,
     );
   }
 
@@ -116,7 +104,7 @@ abstract class AppTextStyle {
     return _getTextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeight.bold,
-      color: MyColors.greyLight,
+      color: Theme.of(context).colorScheme.surface ,
     );
   }
 
@@ -124,7 +112,7 @@ abstract class AppTextStyle {
     return _getTextStyle(
       fontSize: 15.sp,
       fontWeight: FontWeight.bold,
-      color: MyColors.greyLight,
+      color: Theme.of(context).colorScheme.surface ,
     );
   }
 
@@ -132,7 +120,7 @@ abstract class AppTextStyle {
     return _getTextStyle(
       fontSize: 12.sp,
       fontWeight: FontWeight.w500,
-      color: MyColors.greyLight,
+      color: Theme.of(context).colorScheme.surface ,
     );
   }
 
@@ -140,7 +128,7 @@ abstract class AppTextStyle {
     return _getTextStyle(
       fontSize: 12.sp,
       fontWeight: FontWeight.normal,
-      color: MyColors.greyLight,
+      color: Theme.of(context).colorScheme.surface ,
     );
   }
 

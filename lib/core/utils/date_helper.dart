@@ -14,11 +14,11 @@ abstract class DateHelper {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.light(
-              primary: MyColors.purpleNormal, // header color
+              primary: MyColors.secondaryColor, // header color
               onPrimary: Colors.white, // header text
               surface: Colors.grey.shade900, // background color
               onSurface: Colors.white,
-              secondary: MyColors.purpleNormal, // calendar text color
+              secondary: MyColors.secondaryColor, // calendar text color
             ),
             dialogTheme: DialogThemeData(backgroundColor: Colors.grey.shade900),
           ),
@@ -50,7 +50,7 @@ abstract class DateHelper {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.light(
-              primary: MyColors.purpleNormal, // header color
+              primary: MyColors.secondaryColor, // header color
               onPrimary: Colors.white, // header text
               surface: Colors.grey.shade900, // background color
               onSurface: Colors.white, // calendar text color

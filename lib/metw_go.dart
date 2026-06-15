@@ -7,7 +7,7 @@ import 'package:metw_go/core/di/dependency_injection.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/router/app_router.dart';
 import 'package:metw_go/core/theme/app_theme.dart';
-import 'package:metw_go/core/widgets/liquid_background.dart';
+// import 'package:metw_go/core/widgets/liquid_background.dart';
 
 class MetwGo extends StatelessWidget {
   const MetwGo({super.key});
@@ -31,10 +31,11 @@ class MetwGo extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 routerConfig: AppRouter.router,
                 debugShowCheckedModeBanner: false,
-                builder: (context, child) {
-                  // Wrap all screens with LiquidBackground
-                  return LiquidBackground(child: child ?? const SizedBox());
-                },
+                // builder: (context, child) {
+                //   // Wrap all screens with LiquidBackground
+                //   return LiquidBackground(child: child ?? const SizedBox());
+                // },
+                 builder: (context, child) => child!,
               );
             },
           ),

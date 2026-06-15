@@ -15,7 +15,7 @@ class LiquidBackground extends StatelessWidget {
           child: Stack(
             children: [
               // Base dark background
-              Container(color: MyColors.greyDarker),
+              Container(color: MyColors.grey),
               // Ambient Background Gradient 1
               Positioned.fill(
                 child: Container(
@@ -24,7 +24,7 @@ class LiquidBackground extends StatelessWidget {
                       center: const Alignment(-0.8, -0.8),
                       radius: 1.5,
                       colors: [
-                        MyColors.purpleNormal.withValues(alpha: 0.15),
+                        MyColors.primaryColor.withValues(alpha: 0.15),
                         Colors.transparent,
                       ],
                     ),
@@ -39,7 +39,7 @@ class LiquidBackground extends StatelessWidget {
                       center: const Alignment(0.8, 0.8),
                       radius: 1.5,
                       colors: [
-                        MyColors.tealNormal.withValues(alpha: 0.1),
+                        MyColors.secondaryColor.withValues(alpha: 0.1),
                         Colors.transparent,
                       ],
                     ),

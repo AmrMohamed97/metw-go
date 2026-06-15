@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
-import 'package:metw_go/core/widgets/primary_button.dart';
+import 'package:metw_go/core/widgets/custom_button.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   const CustomErrorWidget({
@@ -57,7 +57,7 @@ class CustomErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final errorColor = iconColor ?? theme.colorScheme.error;
-    final bgColor = backgroundColor ?? MyColors.greyNormal;
+    final bgColor = backgroundColor ?? MyColors.grey;
 
     final defaultPadding =
         padding ??
@@ -152,7 +152,7 @@ class CustomErrorWidget extends StatelessWidget {
       return Row(
         children: [
           Expanded(
-            child: PrimaryButton(
+            child: CustomButton(
               text: 'إعادة تحميل الصفحة',
               onPressed: onPressed ?? () {},
               height: compact ? 44.h : 48.h,
@@ -160,7 +160,7 @@ class CustomErrorWidget extends StatelessWidget {
           ),
           SizedBox(width: 12.w),
           Expanded(
-            child: PrimaryButton(
+            child: CustomButton(
               text: 'العودة',
               onPressed: onBackPressed,
               height: compact ? 44.h : 48.h,
@@ -171,7 +171,7 @@ class CustomErrorWidget extends StatelessWidget {
     } else {
       return SizedBox(
         width: double.infinity,
-        child: PrimaryButton(
+        child: CustomButton(
           text: onPressed != null ? 'إعادة تحميل الصفحة' : 'العودة',
           onPressed: onPressed ?? onBackPressed ?? () {},
           height: compact ? 44.h : 48.h,

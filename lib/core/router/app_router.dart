@@ -2,8 +2,9 @@ import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/const/app_const.dart';
 import 'package:metw_go/core/models/user_model.dart';
 import 'package:metw_go/core/utils/cache_helper.dart';
-// Section Worker screens
+import 'package:metw_go/features/auth/presentation/sign_up_flow_screen.dart';
 import 'app_routes.dart';
+
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -53,6 +54,22 @@ class AppRouter {
       }
     },
     routes: [
+      GoRoute(
+        path: AppRoutes.onbording,
+        name: AppRoutes.onbordingName,
+        builder: (context, state) => const SignUpFlowScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.login,
+        name: AppRoutes.loginName,
+        builder: (context, state) => const SignUpFlowScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.register,
+        name: AppRoutes.registerName,
+        builder: (context, state) => const SignUpFlowScreen(),
+      ),
+
       // ========== onbording ==========
       // GoRoute(
       //   path: AppRoutes.onbording,
@@ -82,8 +99,6 @@ class AppRouter {
       //   name: AppRoutes.openLocationPageName,
       //   builder: (context, state) => const OpenLocationPage(),
       // ),
-
- 
     ],
   );
 }

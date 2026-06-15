@@ -6,27 +6,29 @@ import 'my_colors.dart';
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
-      brightness: Brightness.light,
-      primaryColor: MyColors.purpleNormal,
+      brightness: Brightness.dark,
+      primaryColor: MyColors.primaryColor,
       scaffoldBackgroundColor: Colors.transparent,
       fontFamily: AppConstant.kFontFamily,
-      fontFamilyFallback: [AppConstant.kFontFamily2],
-      colorScheme: const ColorScheme.light(
-        primary: MyColors.purpleNormal,
-        secondary: MyColors.purpleLight,
-        surface: Color(0x1AFFFFFF),
+      fontFamilyFallback: [AppConstant.kFontFamily],
+      colorScheme: const ColorScheme.dark(
+        primary: MyColors.primaryColor,
+        secondary: MyColors.secondaryColor,
+        // surface: Color(0x1AFFFFFF),
+        shadow: MyColors.black,
+        surface: MyColors.white,
       ),
       // AppBar Theme
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.transparent,
+        backgroundColor: MyColors.white,
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          color: MyColors.darkBlueLight,
+          color: MyColors.black,
           fontSize: 17,
           fontWeight: FontWeight.w600,
         ),
-        iconTheme: IconThemeData(color: MyColors.purpleNormal),
+        iconTheme: IconThemeData(color: MyColors.primaryColor),
       ),
 
       // Input Decoration (Glassy)
@@ -43,24 +45,24 @@ class AppTheme {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: MyColors.darkBlueLight.withValues(alpha: 0.1),
-          ),
+          // borderSide: BorderSide(
+          //   color: MyColors.darkBlueLight.withValues(alpha: 0.1),
+          // ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: MyColors.purpleNormal),
+          // borderSide: const BorderSide(color: MyColors.purpleNormal),
         ),
         hintStyle: TextStyle(
-          color: MyColors.darkBlueLight.withValues(alpha: 0.5),
+          color: MyColors.grey,
         ),
       ),
 
       // Button Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: MyColors.purpleNormal,
-          foregroundColor: MyColors.darkBlueLight,
+          backgroundColor: MyColors.primaryColor,
+          foregroundColor: MyColors.white,
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
@@ -71,12 +73,13 @@ class AppTheme {
       ),
 
       // Text Theme
-      textTheme: const TextTheme(
-        bodyLarge: TextStyle(color: MyColors.darkBlueLight, fontSize: 17),
-        bodyMedium: TextStyle(color: MyColors.darkBlueLight, fontSize: 15),
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(color: MyColors.black, fontSize: 17),
+        bodyMedium: TextStyle(color: MyColors.black, fontSize: 15),
         titleLarge: TextStyle(
-          color: MyColors.darkBlueLight,
+          color: MyColors.black,
           fontSize: 34,
+          fontFamily: AppConstant.kFontFamily,
           fontWeight: FontWeight.bold,
         ),
       ),
