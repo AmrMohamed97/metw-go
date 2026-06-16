@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
+import 'package:metw_go/features/register/presentation/view/first_view.dart';
 
 @injectable
 class RegisterCubit extends Cubit<RegisterState> {
@@ -13,6 +14,11 @@ class RegisterCubit extends Cubit<RegisterState> {
     currentPage = index;
     emit(ChangePageSuccess()); // هنا StepProgress هيتحدث تلقائيًا
   }
+  List<Widget> pages=[
+    FirstView(),
+    SizedBox(),
+    SizedBox(),
+  ];
 
   @override
   Future<void> close() {
