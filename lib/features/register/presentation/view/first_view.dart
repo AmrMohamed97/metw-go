@@ -15,7 +15,7 @@ class FirstView extends StatelessWidget {
         FirstViewAppBar(),
         FirstViewBody(
           body: AnimatedColumn(
-            // crossAxisAlignment: .start,
+            revealOnScroll: true,
             children: [
               Padding(
                 padding: const EdgeInsetsDirectional.only(start: 16.0, end: 60),
