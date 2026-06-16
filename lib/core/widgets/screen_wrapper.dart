@@ -40,7 +40,7 @@ class ScreenWrapper extends StatelessWidget {
       canPop: onWillPop ?? true,
       onPopInvoked: onPopInvoked,
       child: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+        // onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: MediaQuery(
           data: MediaQuery.of(
             context,

@@ -7,6 +7,7 @@ abstract class MyColors {
 
   // Primary Colors - Grey
   static const Color grey = Color(0xFFA4A4A4);
+  static const Color greyFill = Color(0xFFF7F7F7);
   static const Color greyLight = Color(0xFFE2E2E4);
 
   // Secondary Colors - Green

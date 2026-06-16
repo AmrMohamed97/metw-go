@@ -8,7 +8,7 @@ class AppTheme {
     return ThemeData(
       brightness: Brightness.dark,
       primaryColor: MyColors.primaryColor,
-      scaffoldBackgroundColor: MyColors.white ,
+      scaffoldBackgroundColor: MyColors.white,
       fontFamily: AppConstant.kFontFamily,
       fontFamilyFallback: [AppConstant.kFontFamily],
       colorScheme: const ColorScheme.dark(
@@ -34,28 +34,37 @@ class AppTheme {
       // Input Decoration (Glassy)
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color(0x1AFFFFFF),
+        fillColor: const Color(0xFFF7F7F7),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 12,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
+          // borderSide: BorderSide.none,
+          borderSide: BorderSide(
+            color: MyColors.greyFill.withValues(alpha: 0.1),
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          // borderSide: BorderSide(
-          //   color: MyColors.darkBlueLight.withValues(alpha: 0.1),
-          // ),
+          borderSide: BorderSide(
+            color: MyColors.greyFill.withValues(alpha: 0.1),
+          ),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          // borderSide: const BorderSide(color: MyColors.greyFill),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          // borderSide: const BorderSide(color: MyColors.greyFill),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          // borderSide: const BorderSide(color: MyColors.purpleNormal),
+          // borderSide: const BorderSide(color: MyColors.greyFill),
         ),
-        hintStyle: TextStyle(
-          color: MyColors.grey,
-        ),
+        hintStyle: TextStyle(color: MyColors.grey),
       ),
 
       // Button Theme

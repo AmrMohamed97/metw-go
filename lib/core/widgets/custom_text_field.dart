@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/theme/my_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -67,6 +68,9 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
+      onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
       enabled: enabled,
       textAlign: textAlign ?? TextAlign.start,
       validator: validator,
@@ -74,7 +78,7 @@ class CustomTextField extends StatelessWidget {
       readOnly: readOnly ?? false,
       autofillHints: autofillHints,
       inputFormatters: inputFormatters,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      // autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration:
           inputDecoration ??
           InputDecoration(
@@ -83,13 +87,13 @@ class CustomTextField extends StatelessWidget {
                 hintStyle ??
                 Theme.of(context).textTheme.titleMedium!.copyWith(
                   fontSize: 12.sp,
-                  color: hintColor,
+                  color: hintColor ?? MyColors.grey,
                 ),
             border: outLineBorder(),
             focusedBorder: outLineBorder(),
             enabledBorder: outLineBorder(),
             filled: filled ?? true,
-            fillColor: filledColor ?? Colors.transparent, // Color(0xffF5F5F5),
+            fillColor: filledColor ?? MyColors.greyFill, // Color(0xffF5F5F5),
             isDense: true,
             contentPadding: EdgeInsets.symmetric(
               vertical: verticalPadding ?? 14.h,
@@ -102,7 +106,7 @@ class CustomTextField extends StatelessWidget {
       cursorColor: cursorColor ?? Colors.black,
       cursorHeight: cursorHieght,
       cursorWidth: cursorWidth ?? 2,
-      
+
       keyboardType: textInputType,
       controller: controller,
       onFieldSubmitted: onFieldSubmitted,
@@ -125,10 +129,8 @@ class CustomTextField extends StatelessWidget {
 
   OutlineInputBorder outLineBorder() {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(radius ?? 4.0),
-      borderSide: BorderSide(
-        color: borderColor ?? Color(0xFF267349).withValues(alpha: .3),
-      ),
+      borderRadius: BorderRadius.circular(radius ?? 8.0),
+      borderSide: BorderSide(color: borderColor ?? const Color(0xFFF7F7F7)),
     );
   }
 }
