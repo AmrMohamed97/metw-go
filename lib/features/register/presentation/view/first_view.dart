@@ -8,23 +8,24 @@ class FirstView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isRtl = Directionality.of(context) == TextDirection.rtl;
     return CustomScrollView(
       slivers: [
         SliverAppBar(
           automaticallyImplyLeading: false,
-          // backgroundColor: AppColors.greyWhiteBGColor,
-          // surfaceTintColor: AppColors.greyWhiteBGColor,
+          backgroundColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
           floating: false,
           pinned: true,
           elevation: 0,
           primary: true,
-          // shadowColor: AppColors.greyWhiteBGColor,
+          shadowColor:  Colors.transparent,
           snap: false,
           stretch: true,
           toolbarHeight: kToolbarHeight,
           collapsedHeight: kToolbarHeight,
           stretchTriggerOffset: 100,
-          expandedHeight: MediaQuery.sizeOf(context).height * .45,
+          expandedHeight: MediaQuery.sizeOf(context).height * .25,
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: false,
             stretchModes: const [
@@ -54,7 +55,12 @@ class FirstView extends StatelessWidget {
                   )
                   .animate()
                   .fade(delay: 500.ms, duration: 600.ms)
-                  .slideY(begin: 0.1, end: 0, delay: 500.ms, duration: 600.ms),
+                  .slide(
+                    begin: Offset(isRtl ? -0.1 : 0.1, 0.1),
+                    end: Offset.zero,
+                    delay: 500.ms,
+                    duration: 600.ms,
+                  ),
         ),
       ],
     );
