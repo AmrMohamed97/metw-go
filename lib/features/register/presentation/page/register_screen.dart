@@ -1,4 +1,3 @@
-import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
@@ -17,7 +16,7 @@ class RegisterScreen extends StatelessWidget {
           backGroundColor: cubit.currentPage == 0
               ? Theme.of(context).colorScheme.scrim
               : null,
-          body: ExpandablePageView.builder(
+          body: PageView.builder(
             controller: cubit.pageController,
             onPageChanged: (value) {
               cubit.changePage(value);
