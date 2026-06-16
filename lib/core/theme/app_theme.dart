@@ -14,6 +14,8 @@ class AppTheme {
       colorScheme: const ColorScheme.dark(
         primary: MyColors.primaryColor,
         secondary: MyColors.secondaryColor,
+        onSurface: MyColors.grey,
+        outline: MyColors.greyFill,
         scrim:MyColors.offWhite,
         shadow: MyColors.black,
         surface: MyColors.white,

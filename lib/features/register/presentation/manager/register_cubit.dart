@@ -18,6 +18,8 @@ class RegisterCubit extends Cubit<RegisterState> {
     FirstView(),
     SizedBox(),
     SizedBox(),
+    SizedBox(),
+    SizedBox(),
   ];
 
   @override

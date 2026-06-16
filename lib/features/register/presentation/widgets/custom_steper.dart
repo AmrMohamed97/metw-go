@@ -14,7 +14,7 @@ class CustomSteper extends StatelessWidget {
         final cubit = context.read<RegisterCubit>();
         return StepProgress(
           currentStep: cubit.currentPage,
-          totalSteps: 3,
+          totalSteps: cubit.pages.length,
 
           visibilityOptions: StepProgressVisibilityOptions.lineOnly,
           // controller: cubit.stepProgressController,
@@ -26,10 +26,10 @@ class CustomSteper extends StatelessWidget {
           // onStepLineTapped: (index) {
           //   debugPrint('onStepLineTapped: $index');
           // },
-          theme:   StepProgressThemeData(
+          theme: StepProgressThemeData(
             stepLineSpacing: 6,
-            defaultForegroundColor: Theme.of(context).primaryColor,
-            activeForegroundColor: Theme.of(context).colorScheme.secondary,
+            defaultForegroundColor: Theme.of(context).colorScheme.outline,
+            activeForegroundColor: Theme.of(context).colorScheme.primary,
             stepLineStyle: StepLineStyle(
               lineThickness: 9,
               borderRadius: Radius.circular(2),

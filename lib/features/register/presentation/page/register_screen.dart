@@ -21,7 +21,7 @@ class RegisterScreen extends StatelessWidget {
             onPageChanged: (value) {
               cubit.changePage(value);
             },
-            itemCount: 3,
+            itemCount: cubit.pages.length,
             itemBuilder: (context, index) => cubit.pages[index],
           ),
         );
