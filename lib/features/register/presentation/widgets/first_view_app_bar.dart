@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 
@@ -57,25 +58,51 @@ class _FirstViewAppBarState extends State<FirstViewAppBar>
             ).copyWith(top: 30),
             child: GestureDetector(
               onTap: () {
+                HapticFeedback.lightImpact();
                 _controller.forward(from: 0.0);
               },
               child: FadeIn(
-                delay: Duration(milliseconds: 1500),
-                duration: Duration(seconds: 1),
+                delay: const Duration(milliseconds: 1500),
+                duration: const Duration(seconds: 1),
                 child: Image.asset(AppImages.logo, width: 210, height: 350)
                     .animate(controller: _controller, autoPlay: false)
                     .scale(
                       begin: const Offset(1, 1),
-                      end: const Offset(1.1, 1.1),
-                      duration: 150.ms,
-                      curve: Curves.easeOutBack,
+                      end: const Offset(1.12, 1.12),
+                      duration: 120.ms,
+                      curve: Curves.easeOutCubic,
+                    )
+                    .rotate(
+                      begin: 0,
+                      end: 0.02,
+                      duration: 120.ms,
+                      curve: Curves.easeOutCubic,
                     )
                     .then()
                     .scale(
-                      begin: const Offset(1.1, 1.1),
+                      begin: const Offset(1.12, 1.12),
+                      end: const Offset(0.95, 0.95),
+                      duration: 100.ms,
+                      curve: Curves.easeInOutCubic,
+                    )
+                    .rotate(
+                      begin: 0.02,
+                      end: -0.02,
+                      duration: 100.ms,
+                      curve: Curves.easeInOutCubic,
+                    )
+                    .then()
+                    .scale(
+                      begin: const Offset(0.95, 0.95),
                       end: const Offset(1, 1),
-                      duration: 150.ms,
-                      curve: Curves.easeIn,
+                      duration: 100.ms,
+                      curve: Curves.easeInCubic,
+                    )
+                    .rotate(
+                      begin: -0.02,
+                      end: 0,
+                      duration: 100.ms,
+                      curve: Curves.easeInCubic,
                     ),
               ),
             ),
