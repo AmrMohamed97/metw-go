@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 
@@ -192,7 +191,7 @@ class _HeroLogo extends StatelessWidget {
       padding: EdgeInsets.only(top: 64.h),
       child: Align(
         alignment: Alignment.topCenter,
-        child: SvgPicture.asset(
+        child: Image.asset(
           AppImages.logo,
           width: 256.w,
           height: 130.h,

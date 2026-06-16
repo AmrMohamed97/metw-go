@@ -7,7 +7,7 @@ class AppImages {
   // static const String onboarding3 = "assets/images/onboarding_3.jpg";
 
   // Logo
-  static const String logo = "assets/images/metw_go.svg";
+  static const String logo = "assets/images/metw_go.png";
   // // map
   // static const String map = "assets/images/map.jpg";
 

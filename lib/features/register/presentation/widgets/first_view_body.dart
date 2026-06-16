@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -17,7 +18,11 @@ class FirstViewBody extends StatelessWidget {
                   ),
                   color: Theme.of(context).colorScheme.surface,
                 ),
-                child: body,
+                child: FadeIn(
+                  delay: Duration(milliseconds: 1500),
+                  duration: Duration(seconds: 1),
+                  child: body,
+                ),
               )
               .animate()
               .fade(delay: 500.ms, duration: 600.ms)
