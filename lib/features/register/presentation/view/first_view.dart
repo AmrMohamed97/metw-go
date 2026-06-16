@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
+import 'package:metw_go/core/widgets/animated_column.dart';
 import 'package:metw_go/features/register/presentation/widgets/custom_steper.dart';
 import 'package:metw_go/features/register/presentation/widgets/first_view_app_bar.dart';
 import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';
@@ -13,8 +14,8 @@ class FirstView extends StatelessWidget {
       slivers: [
         FirstViewAppBar(),
         FirstViewBody(
-          body: Column(
-            crossAxisAlignment: .start,
+          body: AnimatedColumn(
+            // crossAxisAlignment: .start,
             children: [
               Padding(
                 padding: const EdgeInsetsDirectional.only(start: 16.0, end: 60),
@@ -25,6 +26,384 @@ class FirstView extends StatelessWidget {
                 style: AppTextStyle.medium16(
                   context,
                 ).copyWith(color: Theme.of(context).primaryColor),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Text(
+                'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                style: AppTextStyle.medium14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
               Text(
                 'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',

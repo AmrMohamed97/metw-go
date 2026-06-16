@@ -7,7 +7,7 @@ class FirstViewBody extends StatelessWidget {
   final Widget body;
   @override
   Widget build(BuildContext context) {
-    return SliverFillRemaining(
+    return SliverToBoxAdapter(
       child:
           Container(
                 clipBehavior: Clip.antiAlias,
