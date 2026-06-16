@@ -55,7 +55,7 @@ class FirstView extends StatelessWidget {
                   .animate()
                   .fade(delay: 500.ms, duration: 600.ms)
                   .slide(
-                    begin: Offset(Directionality.of(context) == TextDirection.rtl ? -0.1 : 0.1, 0.1),
+                    begin: Offset(Directionality.of(context) == TextDirection.rtl ? -1.0 : 1.0, 1.0),
                     end: Offset.zero,
                     delay: 500.ms,
                     duration: 600.ms,
