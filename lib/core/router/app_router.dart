@@ -1,10 +1,13 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/const/app_const.dart';
+import 'package:metw_go/core/di/dependency_injection.dart';
 import 'package:metw_go/core/models/user_model.dart';
 import 'package:metw_go/core/utils/cache_helper.dart';
-import 'package:metw_go/features/auth/presentation/sign_up_flow_screen.dart';
-import 'app_routes.dart';
+import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
+import 'package:metw_go/features/register/presentation/page/register_screen.dart';
 
+import 'app_routes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -57,17 +60,26 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.onbording,
         name: AppRoutes.onbordingName,
-        builder: (context, state) => const SignUpFlowScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<RegisterCubit>(),
+          child: const RegisterScreen(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.login,
         name: AppRoutes.loginName,
-        builder: (context, state) => const SignUpFlowScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<RegisterCubit>(),
+          child: const RegisterScreen(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.register,
         name: AppRoutes.registerName,
-        builder: (context, state) => const SignUpFlowScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<RegisterCubit>(),
+          child: const RegisterScreen(),
+        ),
       ),
 
       // ========== onbording ==========

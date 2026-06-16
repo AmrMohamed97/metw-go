@@ -8,7 +8,7 @@ class AppTheme {
     return ThemeData(
       brightness: Brightness.dark,
       primaryColor: MyColors.primaryColor,
-      scaffoldBackgroundColor: Colors.transparent,
+      scaffoldBackgroundColor: MyColors.white ,
       fontFamily: AppConstant.kFontFamily,
       fontFamilyFallback: [AppConstant.kFontFamily],
       colorScheme: const ColorScheme.dark(

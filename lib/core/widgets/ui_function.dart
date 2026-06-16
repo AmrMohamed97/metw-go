@@ -3,92 +3,92 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
-import 'package:motion_toast/motion_toast.dart';
+// import 'package:motion_toast/motion_toast.dart';
 
 import '../theme/app_text_style.dart';
 import '../theme/my_colors.dart';
 
 class UiHelper {
-  static void showSnakeBar({
-    required String message,
-    required BuildContext context,
-    required MotionToastType type,
-  }) {
-    // Custom colors matching the app theme
-    final primaryColor = MyColors.primaryColor;
-    final successColor = MyColors.green;
-    final errorColor = MyColors.red;
-    final warningColor =Colors.yellow;
-    final infoColor = MyColors.white;
+  // static void showSnakeBar({
+  //   required String message,
+  //   required BuildContext context,
+  //   required MotionToastType type,
+  // }) {
+  //   // Custom colors matching the app theme
+  //   final primaryColor = MyColors.primaryColor;
+  //   final successColor = MyColors.green;
+  //   final errorColor = MyColors.red;
+  //   final warningColor =Colors.yellow;
+  //   final infoColor = MyColors.white;
 
-    switch (type) {
-      case MotionToastType.success:
-        _showCustomToast(
-          context: context,
-          message: message,
-          primaryColor: successColor,
-          icon: Icons.check_circle_outline,
-        );
-        break;
-      case MotionToastType.error:
-        _showCustomToast(
-          context: context,
-          message: message,
-          primaryColor: errorColor,
-          icon: Icons.error_outline,
-        );
-        break;
-      case MotionToastType.warning:
-        _showCustomToast(
-          context: context,
-          message: message,
-          primaryColor: warningColor,
-          icon: Icons.warning_amber_outlined,
-        );
-        break;
-      case MotionToastType.info:
-        _showCustomToast(
-          context: context,
-          message: message,
-          primaryColor: infoColor,
-          icon: Icons.info_outline,
-        );
-        break;
-      case MotionToastType.custom:
-        _showCustomToast(
-          context: context,
-          message: message,
-          primaryColor: primaryColor,
-          icon: Icons.notifications_outlined,
-        );
-        break;
-    }
-  }
+  //   switch (type) {
+  //     case MotionToastType.success:
+  //       _showCustomToast(
+  //         context: context,
+  //         message: message,
+  //         primaryColor: successColor,
+  //         icon: Icons.check_circle_outline,
+  //       );
+  //       break;
+  //     case MotionToastType.error:
+  //       _showCustomToast(
+  //         context: context,
+  //         message: message,
+  //         primaryColor: errorColor,
+  //         icon: Icons.error_outline,
+  //       );
+  //       break;
+  //     case MotionToastType.warning:
+  //       _showCustomToast(
+  //         context: context,
+  //         message: message,
+  //         primaryColor: warningColor,
+  //         icon: Icons.warning_amber_outlined,
+  //       );
+  //       break;
+  //     case MotionToastType.info:
+  //       _showCustomToast(
+  //         context: context,
+  //         message: message,
+  //         primaryColor: infoColor,
+  //         icon: Icons.info_outline,
+  //       );
+  //       break;
+  //     case MotionToastType.custom:
+  //       _showCustomToast(
+  //         context: context,
+  //         message: message,
+  //         primaryColor: primaryColor,
+  //         icon: Icons.notifications_outlined,
+  //       );
+  //       break;
+  //   }
+  // }
 
-  static void _showCustomToast({
-    required BuildContext context,
-    required String message,
-    required Color primaryColor,
-    required IconData icon,
-  }) {
-    MotionToast(
-      icon: icon,
-      primaryColor: primaryColor,
-      secondaryColor: Colors.white,
-      toastDuration: const Duration(seconds: 3),
-      width: 350,
-      height: 80,
-      borderRadius: 16,
-      toastAlignment: Alignment.topCenter, // Position at top center
-      description: Text(
-        message,
-        textAlign: TextAlign.right, // RTL text alignment
-        style: AppTextStyle.medium16(
-          context,
-        ).copyWith(color: Colors.white, fontWeight: FontWeight.w600),
-      ),
-    ).show(context);
-  }
+  // static void _showCustomToast({
+  //   required BuildContext context,
+  //   required String message,
+  //   required Color primaryColor,
+  //   required IconData icon,
+  // }) {
+  //   MotionToast(
+  //     icon: icon,
+  //     primaryColor: primaryColor,
+  //     secondaryColor: Colors.white,
+  //     toastDuration: const Duration(seconds: 3),
+  //     width: 350,
+  //     height: 80,
+  //     borderRadius: 16,
+  //     toastAlignment: Alignment.topCenter, // Position at top center
+  //     description: Text(
+  //       message,
+  //       textAlign: TextAlign.right, // RTL text alignment
+  //       style: AppTextStyle.medium16(
+  //         context,
+  //       ).copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+  //     ),
+  //   ).show(context);
+  // }
 
   static BoxShadow shadow(BuildContext context) {
     return BoxShadow(
