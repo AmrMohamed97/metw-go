@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
 
+@injectable
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
   PageController pageController = PageController();
   int currentPage = 0;
 
- void changePage(int index) {
-  currentPage = index;
-  emit(ChangePageSuccess()); // هنا StepProgress هيتحدث تلقائيًا
-}
-
-
+  void changePage(int index) {
+    currentPage = index;
+    emit(ChangePageSuccess()); // هنا StepProgress هيتحدث تلقائيًا
+  }
 
   @override
   Future<void> close() {
