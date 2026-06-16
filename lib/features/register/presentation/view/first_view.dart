@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
+import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/animated_column.dart';
+import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
@@ -83,25 +85,73 @@ class FirstView extends StatelessWidget {
                   4.verticalSpace,
                   CustomTextField(
                     hintText: '+02 010X XXX XXXX',
-                    controller: cubit.firstPhoneController),
+                    controller: cubit.firstPhoneController,
+                  ),
                   16.verticalSpace,
                   FieldTitle(title: 'رقم الهاتف اخر'),
                   4.verticalSpace,
                   CustomTextField(
                     hintText: '+02 010X XXX XXXX',
-                    controller: cubit.secondPhoneController),
+                    controller: cubit.secondPhoneController,
+                  ),
                   16.verticalSpace,
                   FieldTitle(title: 'البريد الالكتروني'),
                   4.verticalSpace,
                   CustomTextField(
                     hintText: 'captain@metwgo.com',
-                    controller: cubit.emailController),
+                    controller: cubit.emailController,
+                  ),
                   16.verticalSpace,
                   FieldTitle(title: 'تاريخ الميلاد'),
                   4.verticalSpace,
                   CustomTextField(
                     hintText: 'mm/dd/yyyy',
-                    controller: cubit.boarnDateController),
+                    controller: cubit.boarnDateController,
+                  ),
+                  16.verticalSpace,
+                  Row(
+                    mainAxisAlignment: .spaceBetween,
+                    children: [
+                      FieldTitle(title: 'تاريخ الميلاد'),
+                      Row(
+                        children: [
+                          Image.asset(AppImages.locationIcon),
+                          4.horizontalSpace,
+                          FieldTitle(title: 'المدينة / الحي / الشارع'),
+                        ],
+                      ),
+                    ],
+                  ),
+                  4.verticalSpace,
+                  CustomTextField(
+                    minLine: 2,
+                    hintText:
+                        'أدخل تفاصيل عنوانك هنا ليتمكن النظام من \nتحديد نطاق عملك',
+                    controller: cubit.boarnDateController,
+                  ),
+                  16.verticalSpace,
+                  FieldTitle(title: 'كلمة المرور'),
+                  4.verticalSpace,
+                  CustomTextField(
+                    hintText: '...............',
+                    controller: cubit.passwordController,
+                  ),
+                  16.verticalSpace,
+                  FieldTitle(title: 'تأكيد كلمة المرور'),
+                  4.verticalSpace,
+                  CustomTextField(
+                    hintText: '...............',
+                    controller: cubit.confirmPasswordController,
+                  ),
+                  34.verticalSpace,
+                  Row(
+                    children: [
+                      Expanded(flex: 2, child: Container()),
+                      Expanded(
+                        child: CustomButton(text: 'التالى', onPressed: () {}),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

@@ -8,6 +8,9 @@ class AppImages {
 
   // Logo
   static const String logo = "assets/images/metw_go.png";
+  static const String locationIcon = "assets/images/locationIcon.png";
+  static const String closedLook = "assets/images/closedLook.png";
+  static const String openLook = "assets/images/openLook.png";
   // // map
   // static const String map = "assets/images/map.jpg";
 

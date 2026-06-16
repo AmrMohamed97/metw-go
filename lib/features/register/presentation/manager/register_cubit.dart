@@ -31,6 +31,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   TextEditingController secondPhoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController boarnDateController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Future<void> close() {
