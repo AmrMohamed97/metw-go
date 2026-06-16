@@ -4,6 +4,7 @@ abstract class MyColors {
   // Primary Colors - Orange
   static const Color primaryColor = Color(0xFFF97847);
   static const Color secondaryColor = Color(0xFF670098);
+  static const Color textColor = Color(0xFF333333);
 
   // Primary Colors - Grey
   static const Color grey = Color(0xFFA4A4A4);

@@ -14,13 +14,23 @@ class RegisterCubit extends Cubit<RegisterState> {
     currentPage = index;
     emit(ChangePageSuccess()); // هنا StepProgress هيتحدث تلقائيًا
   }
-  List<Widget> pages=[
+
+  List<Widget> pages = [
     FirstView(),
     SizedBox(),
     SizedBox(),
     SizedBox(),
     SizedBox(),
   ];
+
+  ///first part data
+  //----------------------------------------------------------------------------
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController firstPhoneController = TextEditingController();
+  TextEditingController secondPhoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController boarnDateController = TextEditingController();
 
   @override
   Future<void> close() {
