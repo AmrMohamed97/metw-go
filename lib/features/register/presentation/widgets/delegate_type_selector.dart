@@ -20,18 +20,18 @@ class DelegateTypeSelector extends StatelessWidget {
           children: [
             Expanded(
               child: _DelegateTypeTile(
-                title: AppLocalizations.of(context)!.warehouseDelegate,
-                iconPath: AppImages.homeIcon,
-                isSelected: !cubit.isIndependentDelegate,
-                onTap: () => cubit.changeDelegateType(false),
-              ),
-            ),
-            Expanded(
-              child: _DelegateTypeTile(
                 title: AppLocalizations.of(context)!.independentDelegate,
                 iconPath: AppImages.personIcon,
                 isSelected: cubit.isIndependentDelegate,
                 onTap: () => cubit.changeDelegateType(true),
+              ),
+            ),
+            Expanded(
+              child: _DelegateTypeTile(
+                title: AppLocalizations.of(context)!.warehouseDelegate,
+                iconPath: AppImages.homeIcon,
+                isSelected: !cubit.isIndependentDelegate,
+                onTap: () => cubit.changeDelegateType(false),
               ),
             ),
           ],
