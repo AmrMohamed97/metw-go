@@ -42,15 +42,14 @@ class RegisterCubit extends Cubit<RegisterState> {
   TextEditingController secondPhoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController boarnDateController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  void firstViewPress() => firstViewFormKey.currentState?.validate() == true
-      ? currentPage = 1
-      : null;
+  void firstViewPress() =>
+      firstViewFormKey.currentState?.validate() == true ? changePage(1) : null;
 
   /// second view data
   //----------------------------------------------------------------------------
-  
 
   @override
   Future<void> close() {

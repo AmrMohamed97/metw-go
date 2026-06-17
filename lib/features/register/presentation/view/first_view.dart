@@ -5,6 +5,7 @@ import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/utils/validitions.dart';
+import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/animated_column.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
@@ -160,7 +161,7 @@ class FirstView extends StatelessWidget {
                     CustomTextField(
                       minLine: 2,
                       hintText: AppLocalizations.of(context)!.addressHintText,
-                      controller: cubit.boarnDateController,
+                      controller: cubit.addressController,
                       validator: (val) => addressValidator(context, val),
                     ),
                     16.verticalSpace,
@@ -182,7 +183,7 @@ class FirstView extends StatelessWidget {
                       validator: (val) =>
                           confirmPasswordValidator(context, val),
                     ),
-                    34.verticalSpace,
+                    18.verticalSpace,
                     Row(
                       children: [
                         Expanded(
@@ -230,6 +231,8 @@ class FirstView extends StatelessWidget {
                             onPressed: () => cubit.firstViewPress(),
                           ),
                         ),
+                        20.verticalSpace,
+                        ViewInsetsSpace(),
                       ],
                     ),
                   ],

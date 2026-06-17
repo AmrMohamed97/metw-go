@@ -72,7 +72,7 @@ class CustomTextField extends StatelessWidget {
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
-        onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
+        // onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
         enabled: enabled,
         textAlign: textAlign ?? TextAlign.start,
         validator: validator,
