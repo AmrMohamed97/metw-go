@@ -70,10 +70,13 @@ class RuralServiceToggle extends StatelessWidget {
             ),
           ),
           16.horizontalSpace,
-          CupertinoSwitch(
-            value: value,
-            activeTrackColor: Theme.of(context).primaryColor,
-            onChanged: onChanged,
+          Transform.scale(
+            scale: 0.7,
+            child: CupertinoSwitch(
+              value: value,
+              activeTrackColor: Theme.of(context).primaryColor,
+              onChanged: onChanged,
+            ),
           ),
         ],
       ),
