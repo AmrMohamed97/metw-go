@@ -67,67 +67,71 @@ class CustomTextField extends StatelessWidget {
   final TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      onTapOutside: (event) => FocusScope.of(context).unfocus(),
-      onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
-      enabled: enabled,
-      textAlign: textAlign ?? TextAlign.start,
-      validator: validator,
-      textDirection: textDirection,
-      readOnly: readOnly ?? false,
-      autofillHints: autofillHints,
-      inputFormatters: inputFormatters,
-      // autovalidateMode: AutovalidateMode.onUserInteraction,
-      decoration:
-          inputDecoration ??
-          InputDecoration(
-            hintText: hintText,
-            hintStyle:
-                hintStyle ??
-                Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontSize: 12.sp,
-                  color: hintColor ?? MyColors.grey,
-                ),
-            border: outLineBorder(),
-            focusedBorder: outLineBorder(),
-            enabledBorder: outLineBorder(),
-            filled: filled ?? true,
-            fillColor: filledColor ?? MyColors.greyFill, // Color(0xffF5F5F5),
-            isDense: true,
-            contentPadding: EdgeInsets.symmetric(
-              vertical: verticalPadding ?? 14.h,
-              horizontal: horizontalPadding ?? 8.w,
+    return SizedBox(
+      height: 75.h,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        onTapOutside: (event) => FocusScope.of(context).unfocus(),
+        onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
+        enabled: enabled,
+        textAlign: textAlign ?? TextAlign.start,
+        validator: validator,
+        textDirection: textDirection,
+        readOnly: readOnly ?? false,
+        autofillHints: autofillHints,
+        inputFormatters: inputFormatters,
+        // autovalidateMode: AutovalidateMode.onUserInteraction,
+        decoration:
+            inputDecoration ??
+            InputDecoration(
+              hintText: hintText,
+              hintStyle:
+                  hintStyle ??
+                  Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontSize: 12.sp,
+                    color: hintColor ?? MyColors.grey,
+                  ),
+              errorBorder: outLineBorder(borderColor: MyColors.red),
+              border: outLineBorder(),
+              focusedBorder: outLineBorder(),
+              enabledBorder: outLineBorder(),
+              filled: filled ?? true,
+              fillColor: filledColor ?? MyColors.greyFill, // Color(0xffF5F5F5),
+              isDense: true,
+              contentPadding: EdgeInsets.symmetric(
+                vertical: verticalPadding ?? 14.h,
+                horizontal: horizontalPadding ?? 8.w,
+              ),
+              prefixIcon: prefixIcon,
+              suffixIcon: suffixIcon,
+              counter: counter,
             ),
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
-            counter: counter,
-          ),
-      cursorColor: cursorColor ?? Colors.black,
-      cursorHeight: cursorHieght,
-      cursorWidth: cursorWidth ?? 2,
+        cursorColor: cursorColor ?? Colors.black,
+        cursorHeight: cursorHieght,
+        cursorWidth: cursorWidth ?? 2,
 
-      keyboardType: textInputType,
-      controller: controller,
-      onFieldSubmitted: onFieldSubmitted,
-      onSaved: onSaved,
-      minLines: minLine ?? 1,
-      maxLines: minLine ?? 1,
-      focusNode: focusNode,
-      obscureText: obscureText ?? false,
-      maxLengthEnforcement: maxLengthEnforcement,
-      maxLength: maxLength,
-      onChanged: onChanged,
-      style:
-          textStyle ??
-          Theme.of(context).textTheme.titleSmall!.copyWith(
-            fontSize: 14.sp,
-            // color: Colors.black,
-          ),
+        keyboardType: textInputType,
+        controller: controller,
+        onFieldSubmitted: onFieldSubmitted,
+        onSaved: onSaved,
+        minLines: minLine ?? 1,
+        maxLines: minLine ?? 1,
+        focusNode: focusNode,
+        obscureText: obscureText ?? false,
+        maxLengthEnforcement: maxLengthEnforcement,
+        maxLength: maxLength,
+        onChanged: onChanged,
+        style:
+            textStyle ??
+            Theme.of(context).textTheme.titleSmall!.copyWith(
+              fontSize: 14.sp,
+              // color: Colors.black,
+            ),
+      ),
     );
   }
 
-  OutlineInputBorder outLineBorder() {
+  OutlineInputBorder outLineBorder({Color? borderColor}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(radius ?? 8.0),
       borderSide: BorderSide(color: borderColor ?? const Color(0xFFF7F7F7)),

@@ -40,7 +40,7 @@ class FirstView extends StatelessWidget {
                       ),
                       child: CustomSteper(),
                     ),
-                    16.verticalSpace,
+                    // 16.verticalSpace,
                     Text(
                       AppLocalizations.of(context)!.personalInfo,
                       style: AppTextStyle.medium16(
@@ -98,7 +98,7 @@ class FirstView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    16.verticalSpace,
+                    // 16.verticalSpace,
                     FieldTitle(
                       title: AppLocalizations.of(context)!.phoneNumber,
                     ),
@@ -108,7 +108,7 @@ class FirstView extends StatelessWidget {
                       controller: cubit.firstPhoneController,
                       validator: (val) => firstPhoneValidator(context, val),
                     ),
-                    16.verticalSpace,
+                    // 16.verticalSpace,
                     FieldTitle(
                       title: AppLocalizations.of(context)!.anotherPhoneNumber,
                     ),
@@ -118,7 +118,7 @@ class FirstView extends StatelessWidget {
                       controller: cubit.secondPhoneController,
                       validator: (val) => secondPhoneValidator(context, val),
                     ),
-                    16.verticalSpace,
+                    // 16.verticalSpace,
                     FieldTitle(title: AppLocalizations.of(context)!.email),
                     4.verticalSpace,
                     CustomTextField(
@@ -126,7 +126,7 @@ class FirstView extends StatelessWidget {
                       controller: cubit.emailController,
                       validator: (val) => emailValidator(context, val),
                     ),
-                    16.verticalSpace,
+                    // 16.verticalSpace,
                     FieldTitle(title: AppLocalizations.of(context)!.birthDate),
                     4.verticalSpace,
                     CustomTextField(
@@ -134,7 +134,7 @@ class FirstView extends StatelessWidget {
                       controller: cubit.boarnDateController,
                       validator: (val) => boarnDateValidator(context, val),
                     ),
-                    16.verticalSpace,
+                    // 16.verticalSpace,
                     GenderSelector(),
                     16.verticalSpace,
                     Row(
@@ -171,7 +171,7 @@ class FirstView extends StatelessWidget {
                       controller: cubit.passwordController,
                       validator: (val) => passwordValidator(context, val),
                     ),
-                    16.verticalSpace,
+                    // 16.verticalSpace,
                     FieldTitle(
                       title: AppLocalizations.of(context)!.confirmPassword,
                     ),
