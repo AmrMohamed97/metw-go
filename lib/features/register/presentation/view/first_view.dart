@@ -188,7 +188,7 @@ class FirstView extends StatelessWidget {
                         Expanded(
                           flex: 2,
                           child: Container(
-                            height: 46,
+                            height: 46.h,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(8),
