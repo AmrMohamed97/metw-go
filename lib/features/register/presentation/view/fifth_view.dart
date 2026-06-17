@@ -24,7 +24,7 @@ class FifthView extends StatelessWidget {
     return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
         final cubit = context.read<RegisterCubit>();
-        final isLoading = state is PickDocumentImageLoading;
+        bool isDocLoading(String key) => state is PickDocumentImageLoading && cubit.currentlyLoadingDoc == key;
 
         return CustomScrollView(
           slivers: [
@@ -58,7 +58,7 @@ class FifthView extends StatelessWidget {
                   ),
                   12.verticalSpace,
                   PersonalPhotoContainer(
-                    isLoading: isLoading,
+                    isLoading: isDocLoading('personalPhoto'),
                     imageFile: cubit.personalPhoto,
                     onTap: () {
                       showModalBottomSheet(
@@ -89,7 +89,7 @@ class FifthView extends StatelessWidget {
                           title: AppLocalizations.of(context)!.idBack,
                           iconPath: AppImages.personalCard,
                           imageFile: cubit.nationalIdBack,
-                          isLoading: isLoading,
+                          isLoading: isDocLoading('nationalId_back'),
                           onTap: () => cubit.pickDocumentPhoto(docType: 'nationalId', isFront: false),
                         ),
                       ),
@@ -99,7 +99,7 @@ class FifthView extends StatelessWidget {
                           title: AppLocalizations.of(context)!.idFront,
                           iconPath: AppImages.personalCard,
                           imageFile: cubit.nationalIdFront,
-                          isLoading: isLoading,
+                          isLoading: isDocLoading('nationalId_front'),
                           onTap: () => cubit.pickDocumentPhoto(docType: 'nationalId', isFront: true),
                         ),
                       ),
@@ -120,7 +120,7 @@ class FifthView extends StatelessWidget {
                           title: AppLocalizations.of(context)!.backSide,
                           iconPath: AppImages.driveLicenceIcon,
                           imageFile: cubit.drivingLicenseBack,
-                          isLoading: isLoading,
+                          isLoading: isDocLoading('drivingLicense_back'),
                           onTap: () => cubit.pickDocumentPhoto(docType: 'drivingLicense', isFront: false),
                         ),
                       ),
@@ -130,7 +130,7 @@ class FifthView extends StatelessWidget {
                           title: AppLocalizations.of(context)!.frontSide,
                           iconPath: AppImages.driveLicenceIcon,
                           imageFile: cubit.drivingLicenseFront,
-                          isLoading: isLoading,
+                          isLoading: isDocLoading('drivingLicense_front'),
                           onTap: () => cubit.pickDocumentPhoto(docType: 'drivingLicense', isFront: true),
                         ),
                       ),
@@ -151,7 +151,7 @@ class FifthView extends StatelessWidget {
                           title: AppLocalizations.of(context)!.backSide,
                           iconPath: AppImages.carLicenceIcon,
                           imageFile: cubit.vehicleLicenseBack,
-                          isLoading: isLoading,
+                          isLoading: isDocLoading('vehicleLicense_back'),
                           onTap: () => cubit.pickDocumentPhoto(docType: 'vehicleLicense', isFront: false),
                         ),
                       ),
@@ -161,7 +161,7 @@ class FifthView extends StatelessWidget {
                           title: AppLocalizations.of(context)!.frontSide,
                           iconPath: AppImages.carLicenceIcon,
                           imageFile: cubit.vehicleLicenseFront,
-                          isLoading: isLoading,
+                          isLoading: isDocLoading('vehicleLicense_front'),
                           onTap: () => cubit.pickDocumentPhoto(docType: 'vehicleLicense', isFront: true),
                         ),
                       ),

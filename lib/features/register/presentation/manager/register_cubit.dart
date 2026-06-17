@@ -198,12 +198,16 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
   File? vehicleLicenseFront;
   File? vehicleLicenseBack;
 
+  String? currentlyLoadingDoc;
+
   Future<void> pickPersonalPhoto(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: source);
     if (image != null) {
+      currentlyLoadingDoc = 'personalPhoto';
       emit(PickDocumentImageLoading());
       personalPhoto = await compress(targetImage: File(image.path));
+      currentlyLoadingDoc = null;
       emit(PickDocumentImageSuccess());
     }
   }
@@ -212,6 +216,7 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.camera); // Forced to camera
     if (image != null) {
+      currentlyLoadingDoc = '${docType}_${isFront ? 'front' : 'back'}';
       emit(PickDocumentImageLoading());
       final compressed = await compress(targetImage: File(image.path));
       
@@ -226,6 +231,7 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
           isFront ? vehicleLicenseFront = compressed : vehicleLicenseBack = compressed;
           break;
       }
+      currentlyLoadingDoc = null;
       emit(PickDocumentImageSuccess());
     }
   }
