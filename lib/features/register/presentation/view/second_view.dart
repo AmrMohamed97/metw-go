@@ -31,7 +31,6 @@ class SecondView extends StatelessWidget {
               body: Form(
                 key: cubit.secondViewFormKey,
                 child: AnimatedColumn(
-                  revealOnScroll: true,
                   children: [
                     50.verticalSpace,
                     Padding(
