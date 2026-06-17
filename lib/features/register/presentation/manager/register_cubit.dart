@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
+import 'package:metw_go/features/register/presentation/view/fifth_view.dart';
 import 'package:metw_go/features/register/presentation/view/first_view.dart';
+import 'package:metw_go/features/register/presentation/view/fourth_view.dart';
+import 'package:metw_go/features/register/presentation/view/second_view.dart';
+import 'package:metw_go/features/register/presentation/view/third_view.dart';
 
 @injectable
 class RegisterCubit extends Cubit<RegisterState> {
@@ -28,10 +32,10 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   List<Widget> pages = [
     FirstView(),
-    SizedBox(),
-    SizedBox(),
-    SizedBox(),
-    SizedBox(),
+    SecondView(),
+    ThirdView(),
+    FourthView(),
+    FifthView(),
   ];
 
   /// first view data
