@@ -158,4 +158,60 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errChooseWorkClassification =>
       'Please choose at least one work classification';
+
+  @override
+  String get vehicleData => 'Vehicle Data';
+
+  @override
+  String get transportMethod => 'Transportation Method';
+
+  @override
+  String get chooseTransportMethod => 'Choose Transportation Method';
+
+  @override
+  String get maxWeight => 'Max Weight';
+
+  @override
+  String get maxWeightHint => '20 kg';
+
+  @override
+  String get maxVolume => 'Max Volume';
+
+  @override
+  String get maxVolumeHint => '0.05 c.m';
+
+  @override
+  String get plateNumber => 'Plate Number';
+
+  @override
+  String get plateNumberHint => 'A B C - 1 2 3';
+
+  @override
+  String get plateNumberDesc =>
+      'Please write the letters and numbers as they appear on the vehicle license';
+
+  @override
+  String get uploadVehicleImage => 'Upload Vehicle Image';
+
+  @override
+  String get uploadVehicleImageDesc => 'Max 5 MB JPG, PNG';
+
+  @override
+  String get vehicleDataWarning =>
+      'Ensure the data is entered accurately, as it will be matched with the official documents you will upload in the next step.';
+
+  @override
+  String get errChooseTransportMethod => 'Please choose transportation method';
+
+  @override
+  String get errEnterMaxWeight => 'Please enter max weight';
+
+  @override
+  String get errEnterMaxVolume => 'Please enter max volume';
+
+  @override
+  String get errEnterPlateNumber => 'Please enter plate number';
+
+  @override
+  String get errUploadVehicleImage => 'Please upload vehicle image';
 }

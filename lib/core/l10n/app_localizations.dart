@@ -385,6 +385,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please choose at least one work classification'**
   String get errChooseWorkClassification;
+
+  /// No description provided for @vehicleData.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Data'**
+  String get vehicleData;
+
+  /// No description provided for @transportMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Transportation Method'**
+  String get transportMethod;
+
+  /// No description provided for @chooseTransportMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Transportation Method'**
+  String get chooseTransportMethod;
+
+  /// No description provided for @maxWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Max Weight'**
+  String get maxWeight;
+
+  /// No description provided for @maxWeightHint.
+  ///
+  /// In en, this message translates to:
+  /// **'20 kg'**
+  String get maxWeightHint;
+
+  /// No description provided for @maxVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Max Volume'**
+  String get maxVolume;
+
+  /// No description provided for @maxVolumeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'0.05 c.m'**
+  String get maxVolumeHint;
+
+  /// No description provided for @plateNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Plate Number'**
+  String get plateNumber;
+
+  /// No description provided for @plateNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A B C - 1 2 3'**
+  String get plateNumberHint;
+
+  /// No description provided for @plateNumberDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please write the letters and numbers as they appear on the vehicle license'**
+  String get plateNumberDesc;
+
+  /// No description provided for @uploadVehicleImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Vehicle Image'**
+  String get uploadVehicleImage;
+
+  /// No description provided for @uploadVehicleImageDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Max 5 MB JPG, PNG'**
+  String get uploadVehicleImageDesc;
+
+  /// No description provided for @vehicleDataWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Ensure the data is entered accurately, as it will be matched with the official documents you will upload in the next step.'**
+  String get vehicleDataWarning;
+
+  /// No description provided for @errChooseTransportMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Please choose transportation method'**
+  String get errChooseTransportMethod;
+
+  /// No description provided for @errEnterMaxWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter max weight'**
+  String get errEnterMaxWeight;
+
+  /// No description provided for @errEnterMaxVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter max volume'**
+  String get errEnterMaxVolume;
+
+  /// No description provided for @errEnterPlateNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter plate number'**
+  String get errEnterPlateNumber;
+
+  /// No description provided for @errUploadVehicleImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please upload vehicle image'**
+  String get errUploadVehicleImage;
 }
 
 class _AppLocalizationsDelegate

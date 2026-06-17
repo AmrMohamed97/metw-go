@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/widgets/image_mixin.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
 import 'package:metw_go/features/register/presentation/view/fifth_view.dart';
 import 'package:metw_go/features/register/presentation/view/first_view.dart';
@@ -10,7 +14,7 @@ import 'package:metw_go/features/register/presentation/view/second_view.dart';
 import 'package:metw_go/features/register/presentation/view/third_view.dart';
 
 @injectable
-class RegisterCubit extends Cubit<RegisterState> {
+class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
   RegisterCubit() : super(RegisterInitial());
 
   /// global data in register
@@ -117,6 +121,38 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   /// thired view data
   //----------------------------------------------------------------------------
+  final thirdViewFormKey = GlobalKey<FormState>();
+  String? selectedTransportMethod;
+  TextEditingController maxWeightController = TextEditingController();
+  TextEditingController maxVolumeController = TextEditingController();
+  TextEditingController plateNumberController = TextEditingController();
+  File? vehicleImage;
+
+  Future<void> pickVehicleImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      vehicleImage=await compress(targetImage: File(image.path));
+      // vehicleImagePath = image.path;
+      emit(PickVehicleImageSuccess());
+    }
+  }
+
+  void thirdViewPress(BuildContext context) {
+    if (thirdViewFormKey.currentState?.validate() == true) {
+      if (vehicleImage == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.errUploadVehicleImage),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+      changePage(3);
+    }
+  }
 
   @override
   Future<void> close() {

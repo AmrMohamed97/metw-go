@@ -40,11 +40,13 @@ class CustomTextField extends StatelessWidget {
     this.autofillHints,
     this.readOnly,
     this.hintColor,
+    this.onTap,
   });
   final String? hintText;
   final TextInputType? textInputType;
   final TextEditingController? controller;
   final ValueSetter? onFieldSubmitted, onSaved, onChanged;
+  final VoidCallback? onTap;
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
   // final int maxLines;
@@ -78,6 +80,7 @@ class CustomTextField extends StatelessWidget {
         validator: validator,
         textDirection: textDirection,
         readOnly: readOnly ?? false,
+        onTap: onTap,
         autofillHints: autofillHints,
         inputFormatters: inputFormatters,
         // autovalidateMode: AutovalidateMode.onUserInteraction,

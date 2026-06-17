@@ -9,3 +9,5 @@ class ChangeGenderSuccess extends RegisterState {}
 class ChangeDelegateTypeSuccess extends RegisterState {}
 
 class ChangeWorkClassificationSuccess extends RegisterState {}
+
+class PickVehicleImageSuccess extends RegisterState {}
