@@ -18,3 +18,7 @@ class ChangeRuralServiceState extends RegisterState {}
 class RemoveGovernorateState extends RegisterState {}
 
 class RemoveCityState extends RegisterState {}
+
+class PickDocumentImageSuccess extends RegisterState {}
+
+class PickDocumentImageLoading extends RegisterState {}

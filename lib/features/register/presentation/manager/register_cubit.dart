@@ -188,6 +188,53 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
     }
   }
 
+  /// fifth view data
+  //----------------------------------------------------------------------------
+  File? personalPhoto;
+  File? nationalIdFront;
+  File? nationalIdBack;
+  File? drivingLicenseFront;
+  File? drivingLicenseBack;
+  File? vehicleLicenseFront;
+  File? vehicleLicenseBack;
+
+  Future<void> pickPersonalPhoto(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: source);
+    if (image != null) {
+      emit(PickDocumentImageLoading());
+      personalPhoto = await compress(targetImage: File(image.path));
+      emit(PickDocumentImageSuccess());
+    }
+  }
+
+  Future<void> pickDocumentPhoto({required String docType, required bool isFront}) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.camera); // Forced to camera
+    if (image != null) {
+      emit(PickDocumentImageLoading());
+      final compressed = await compress(targetImage: File(image.path));
+      
+      switch (docType) {
+        case 'nationalId':
+          isFront ? nationalIdFront = compressed : nationalIdBack = compressed;
+          break;
+        case 'drivingLicense':
+          isFront ? drivingLicenseFront = compressed : drivingLicenseBack = compressed;
+          break;
+        case 'vehicleLicense':
+          isFront ? vehicleLicenseFront = compressed : vehicleLicenseBack = compressed;
+          break;
+      }
+      emit(PickDocumentImageSuccess());
+    }
+  }
+
+  void fifthViewPress(BuildContext context) {
+    // Validate if all images are picked
+    // Move to next step or submit
+  }
+
   @override
   Future<void> close() {
     pageController.dispose();

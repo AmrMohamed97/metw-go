@@ -252,4 +252,38 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ruralServiceWarning =>
       'Activating rural service may increase your available orders by 25%, but ensure you have an appropriate transport method for rough roads.';
+
+  @override
+  String get uploadOfficialDocs => 'Upload official documents';
+
+  @override
+  String get uploadOfficialDocsDesc =>
+      'Please ensure image clarity before uploading';
+
+  @override
+  String get personalPhoto => 'Personal Photo';
+
+  @override
+  String get nationalId => 'National ID';
+
+  @override
+  String get idFront => 'Front side';
+
+  @override
+  String get idBack => 'Back side';
+
+  @override
+  String get drivingLicense => 'Driving License';
+
+  @override
+  String get frontSide => 'Front side';
+
+  @override
+  String get backSide => 'Back side';
+
+  @override
+  String get vehicleLicense => 'Vehicle License';
+
+  @override
+  String get editPhoto => 'Edit Photo';
 }

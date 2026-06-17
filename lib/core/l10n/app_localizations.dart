@@ -565,6 +565,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Activating rural service may increase your available orders by 25%, but ensure you have an appropriate transport method for rough roads.'**
   String get ruralServiceWarning;
+
+  /// No description provided for @uploadOfficialDocs.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload official documents'**
+  String get uploadOfficialDocs;
+
+  /// No description provided for @uploadOfficialDocsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please ensure image clarity before uploading'**
+  String get uploadOfficialDocsDesc;
+
+  /// No description provided for @personalPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Photo'**
+  String get personalPhoto;
+
+  /// No description provided for @nationalId.
+  ///
+  /// In en, this message translates to:
+  /// **'National ID'**
+  String get nationalId;
+
+  /// No description provided for @idFront.
+  ///
+  /// In en, this message translates to:
+  /// **'Front side'**
+  String get idFront;
+
+  /// No description provided for @idBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back side'**
+  String get idBack;
+
+  /// No description provided for @drivingLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'Driving License'**
+  String get drivingLicense;
+
+  /// No description provided for @frontSide.
+  ///
+  /// In en, this message translates to:
+  /// **'Front side'**
+  String get frontSide;
+
+  /// No description provided for @backSide.
+  ///
+  /// In en, this message translates to:
+  /// **'Back side'**
+  String get backSide;
+
+  /// No description provided for @vehicleLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle License'**
+  String get vehicleLicense;
+
+  /// No description provided for @editPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Photo'**
+  String get editPhoto;
 }
 
 class _AppLocalizationsDelegate

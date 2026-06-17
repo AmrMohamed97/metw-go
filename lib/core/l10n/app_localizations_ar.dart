@@ -250,4 +250,37 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get ruralServiceWarning =>
       'تفعيل خدمة القرى قد يزيد من عدد الطلبات المتاحة لك بنسبة 25٪، ولكن تأكد من توفر وسيلة النقل المناسبة للطرق الوعرة.';
+
+  @override
+  String get uploadOfficialDocs => 'رفع المستندات الرسمية';
+
+  @override
+  String get uploadOfficialDocsDesc => 'يرجى التأكد من وضوح الصور قبل الرفع';
+
+  @override
+  String get personalPhoto => 'الصورة الشخصية';
+
+  @override
+  String get nationalId => 'الهوية الوطنية';
+
+  @override
+  String get idFront => 'وجه البطاقة';
+
+  @override
+  String get idBack => 'ظهر البطاقة';
+
+  @override
+  String get drivingLicense => 'رخصة القيادة';
+
+  @override
+  String get frontSide => 'الوجه الأمامي';
+
+  @override
+  String get backSide => 'الوجه الخلفي';
+
+  @override
+  String get vehicleLicense => 'رخصة العربية';
+
+  @override
+  String get editPhoto => 'تعديل الصورة';
 }

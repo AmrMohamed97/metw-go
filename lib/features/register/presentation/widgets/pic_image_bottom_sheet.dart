@@ -9,8 +9,14 @@ import 'package:metw_go/features/register/presentation/manager/register_cubit.da
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
 
 class PickImageBottomSheet extends StatelessWidget {
-  const PickImageBottomSheet({super.key, required this.ctx});
+  const PickImageBottomSheet({
+    super.key,
+    required this.ctx,
+    required this.onPick,
+  });
+
   final BuildContext ctx;
+  final void Function(ImageSource) onPick;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterCubit, RegisterState>(
@@ -58,7 +64,7 @@ class PickImageBottomSheet extends StatelessWidget {
                       color: Colors.blueAccent,
                       onTap: () {
                         Navigator.pop(ctx);
-                        cubit.pickVehicleImage(ImageSource.camera);
+                        onPick(ImageSource.camera);
                       },
                     ),
                   ),
@@ -70,7 +76,7 @@ class PickImageBottomSheet extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                       onTap: () {
                         Navigator.pop(ctx);
-                        cubit.pickVehicleImage(ImageSource.gallery);
+                        onPick(ImageSource.gallery);
                       },
                     ),
                   ),

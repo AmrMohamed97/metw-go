@@ -76,5 +76,16 @@
     "cities": "Cities",
     "activateRuralService": "Activate rural service",
     "ruralServiceDesc": "Working in surrounding rural areas",
-    "ruralServiceWarning": "Activating rural service may increase your available orders by 25%, but ensure you have an appropriate transport method for rough roads."
+    "ruralServiceWarning": "Activating rural service may increase your available orders by 25%, but ensure you have an appropriate transport method for rough roads.",
+    "uploadOfficialDocs": "Upload official documents",
+    "uploadOfficialDocsDesc": "Please ensure image clarity before uploading",
+    "personalPhoto": "Personal Photo",
+    "nationalId": "National ID",
+    "idFront": "Front side",
+    "idBack": "Back side",
+    "drivingLicense": "Driving License",
+    "frontSide": "Front side",
+    "backSide": "Back side",
+    "vehicleLicense": "Vehicle License",
+    "editPhoto": "Edit Photo"
 }

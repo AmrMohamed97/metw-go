@@ -178,7 +178,10 @@ class ThirdView extends StatelessWidget {
                           builder: (ctx) {
                             return BlocProvider.value(
                               value: cubit,
-                              child: PickImageBottomSheet(ctx: ctx),
+                              child: PickImageBottomSheet(
+                                ctx: ctx,
+                                onPick: (source) => cubit.pickVehicleImage(source),
+                              ),
                             );
                           },
                         );
