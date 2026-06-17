@@ -9,6 +9,7 @@ import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
+import 'package:metw_go/features/register/presentation/widgets/ads_widgets.dart';
 import 'package:metw_go/features/register/presentation/widgets/custom_steper.dart';
 import 'package:metw_go/features/register/presentation/widgets/delegate_type_selector.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
@@ -101,55 +102,7 @@ class SecondView extends StatelessWidget {
                     12.verticalSpace,
                     const WorkClassificationSelector(),
                     24.verticalSpace,
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 20.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF6B1A99), // Purple from design
-                        borderRadius: BorderRadius.circular(16.r),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(8.r),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.trending_up,
-                              color: Colors.white,
-                            ),
-                          ),
-                          16.horizontalSpace,
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context)!.higherProfitOpp,
-                                  style: AppTextStyle.medium16(
-                                    context,
-                                  ).copyWith(color: Colors.white),
-                                ),
-                                4.verticalSpace,
-                                Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.intercityShippingIncreasesIncome,
-                                  style: AppTextStyle.regular12(context)
-                                      .copyWith(
-                                        color: Colors.white.withOpacity(0.8),
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    const AdsWidgets(),
                     34.verticalSpace,
                     Row(
                       mainAxisAlignment: .spaceBetween,
