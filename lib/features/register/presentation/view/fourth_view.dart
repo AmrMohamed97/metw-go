@@ -37,33 +37,35 @@ class FourthView extends StatelessWidget {
                       padding: const EdgeInsetsDirectional.only(end: 32),
                       child: const CustomSteper(),
                     ),
-                    30.verticalSpace,
+                    25.verticalSpace,
                     Text(
                       AppLocalizations.of(context)!.serviceAreas,
-                      style: AppTextStyle.medium18(context).copyWith(
-                        color: Theme.of(context).primaryColor,
-                      ),
+                      style: AppTextStyle.medium16(
+                        context,
+                      ).copyWith(color: Theme.of(context).primaryColor),
                     ),
-                    12.verticalSpace,
+                    // 4.verticalSpace,
                     Text(
                       AppLocalizations.of(context)!.serviceAreasDesc,
-                      style: AppTextStyle.medium16(context).copyWith(
-                        color: Colors.grey.shade400,
-                      ),
+                      style: AppTextStyle.regular14(
+                        context,
+                      ).copyWith(color: Colors.grey.shade400),
                     ),
-                    30.verticalSpace,
+                    16.verticalSpace,
                     FieldTitle(
                       title: AppLocalizations.of(context)!.chooseGovernorates,
                     ),
-                    8.verticalSpace,
+                    4.verticalSpace,
                     CustomTextField(
                       hintText: AppLocalizations.of(context)!.governorates,
+                      isFixed: false,
                       readOnly: true,
                       suffixIcon: const Icon(Icons.keyboard_arrow_down),
                       onTap: () {},
                     ),
+                    8.verticalSpace,
                     if (cubit.selectedGovernorates.isNotEmpty) ...[
-                      16.verticalSpace,
+                      // 16.verticalSpace,
                       Wrap(
                         spacing: 8.w,
                         runSpacing: 8.h,
@@ -75,19 +77,21 @@ class FourthView extends StatelessWidget {
                         }).toList(),
                       ),
                     ],
-                    24.verticalSpace,
+                    16.verticalSpace,
                     FieldTitle(
                       title: AppLocalizations.of(context)!.citiesTitle,
                     ),
-                    8.verticalSpace,
+                    4.verticalSpace,
                     CustomTextField(
                       hintText: AppLocalizations.of(context)!.cities,
                       readOnly: true,
                       suffixIcon: const Icon(Icons.keyboard_arrow_down),
                       onTap: () {},
+                      isFixed: false,
                     ),
+                    8.verticalSpace,
                     if (cubit.selectedCities.isNotEmpty) ...[
-                      16.verticalSpace,
+                      // 16.verticalSpace,
                       Wrap(
                         spacing: 8.w,
                         runSpacing: 8.h,
@@ -128,7 +132,7 @@ class FourthView extends StatelessWidget {
                               size: 18.sp,
                               color: Colors.grey.shade600,
                             ),
-                            onPressed: () => cubit.changePage(2), 
+                            onPressed: () => cubit.changePage(2),
                           ),
                         ),
                         CustomButton(

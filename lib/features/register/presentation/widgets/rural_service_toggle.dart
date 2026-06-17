@@ -35,33 +35,6 @@ class RuralServiceToggle extends StatelessWidget {
       ),
       child: Row(
         children: [
-          CupertinoSwitch(
-            value: value,
-            activeColor: Theme.of(context).primaryColor,
-            onChanged: onChanged,
-          ),
-          16.horizontalSpace,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  title,
-                  style: AppTextStyle.medium16(context),
-                  textAlign: TextAlign.end,
-                ),
-                4.verticalSpace,
-                Text(
-                  subtitle,
-                  style: AppTextStyle.regular12(context).copyWith(
-                    color: Colors.grey.shade500,
-                  ),
-                  textAlign: TextAlign.end,
-                ),
-              ],
-            ),
-          ),
-          16.horizontalSpace,
           Container(
             padding: EdgeInsets.all(12.r),
             decoration: BoxDecoration(
@@ -73,6 +46,34 @@ class RuralServiceToggle extends StatelessWidget {
               width: 24.w,
               height: 24.w,
             ),
+          ),
+
+          16.horizontalSpace,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: AppTextStyle.medium16(context),
+                  textAlign: TextAlign.start,
+                ),
+                4.verticalSpace,
+                Text(
+                  subtitle,
+                  style: AppTextStyle.regular12(
+                    context,
+                  ).copyWith(color: Colors.grey.shade500),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+          ),
+          16.horizontalSpace,
+          CupertinoSwitch(
+            value: value,
+            activeTrackColor: Theme.of(context).primaryColor,
+            onChanged: onChanged,
           ),
         ],
       ),
