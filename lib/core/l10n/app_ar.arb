@@ -1,6 +1,23 @@
 {
-    
     "male": "ذكر",
     "female": "انثى",
-    "gender": "الجنس"
+    "gender": "الجنس",
+    "personalInfo": "المعلومات الشخصية",
+    "startCreatingProfile": "لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo",
+    "firstName": "الاسم الاول",
+    "exampleAhmed": "مثال: احمد",
+    "lastName": "الاسم الاخير",
+    "exampleMohamed": "مثال: محمد",
+    "phoneNumber": "رقم الهاتف",
+    "anotherPhoneNumber": "رقم الهاتف اخر",
+    "email": "البريد الالكتروني",
+    "birthDate": "تاريخ الميلاد",
+    "detailedAddress": " العنوان بالتفصيل",
+    "cityNeighborhoodStreet": "المدينة / الحي / الشارع",
+    "addressHintText": "أدخل تفاصيل عنوانك هنا ليتمكن النظام من \nتحديد نطاق عملك",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "alreadyHaveAccount": "لديك حساب الفعل؟",
+    "login": "تسجيل الدخول",
+    "next": "التالى"
 }

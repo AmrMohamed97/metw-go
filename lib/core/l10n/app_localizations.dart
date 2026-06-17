@@ -115,6 +115,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Gender'**
   String get gender;
+
+  /// No description provided for @personalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Information'**
+  String get personalInfo;
+
+  /// No description provided for @startCreatingProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s start creating your profile as a delegate in MetwGo'**
+  String get startCreatingProfile;
+
+  /// No description provided for @firstName.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstName;
+
+  /// No description provided for @exampleAhmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Example: Ahmed'**
+  String get exampleAhmed;
+
+  /// No description provided for @lastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastName;
+
+  /// No description provided for @exampleMohamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Example: Mohamed'**
+  String get exampleMohamed;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneNumber;
+
+  /// No description provided for @anotherPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Another Phone Number'**
+  String get anotherPhoneNumber;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @birthDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date of Birth'**
+  String get birthDate;
+
+  /// No description provided for @detailedAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed Address'**
+  String get detailedAddress;
+
+  /// No description provided for @cityNeighborhoodStreet.
+  ///
+  /// In en, this message translates to:
+  /// **'City / Neighborhood / Street'**
+  String get cityNeighborhoodStreet;
+
+  /// No description provided for @addressHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your address details here so the system can determine your work scope'**
+  String get addressHintText;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPassword;
+
+  /// No description provided for @alreadyHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get alreadyHaveAccount;
+
+  /// No description provided for @login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
 }
 
 class _AppLocalizationsDelegate

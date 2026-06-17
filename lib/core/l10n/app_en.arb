@@ -1,5 +1,23 @@
 {
     "male": "Male",
     "female": "Female",
-    "gender": "Gender"
+    "gender": "Gender",
+    "personalInfo": "Personal Information",
+    "startCreatingProfile": "Let's start creating your profile as a delegate in MetwGo",
+    "firstName": "First Name",
+    "exampleAhmed": "Example: Ahmed",
+    "lastName": "Last Name",
+    "exampleMohamed": "Example: Mohamed",
+    "phoneNumber": "Phone Number",
+    "anotherPhoneNumber": "Another Phone Number",
+    "email": "Email",
+    "birthDate": "Date of Birth",
+    "detailedAddress": "Detailed Address",
+    "cityNeighborhoodStreet": "City / Neighborhood / Street",
+    "addressHintText": "Enter your address details here so the system can determine your work scope",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login",
+    "next": "Next"
 }

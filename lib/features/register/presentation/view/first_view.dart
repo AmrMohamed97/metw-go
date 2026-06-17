@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/animated_column.dart';
@@ -38,14 +39,14 @@ class FirstView extends StatelessWidget {
                   ),
                   16.verticalSpace,
                   Text(
-                    'المعلومات الشخصية',
+                    AppLocalizations.of(context)!.personalInfo,
                     style: AppTextStyle.medium16(
                       context,
                     ).copyWith(color: Theme.of(context).primaryColor),
                   ),
                   3.verticalSpace,
                   Text(
-                    'لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo',
+                    AppLocalizations.of(context)!.startCreatingProfile,
                     style: AppTextStyle.medium14(
                       context,
                     ).copyWith(color: Theme.of(context).colorScheme.onSurface),
@@ -58,10 +59,10 @@ class FirstView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: .start,
                           children: [
-                            FieldTitle(title: 'الاسم الاول'),
+                            FieldTitle(title: AppLocalizations.of(context)!.firstName),
                             4.verticalSpace,
                             CustomTextField(
-                              hintText: 'مثال: احمد',
+                              hintText: AppLocalizations.of(context)!.exampleAhmed,
                               controller: cubit.firstNameController,
                             ),
                           ],
@@ -71,10 +72,10 @@ class FirstView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: .start,
                           children: [
-                            FieldTitle(title: 'الاسم الاخير'),
+                            FieldTitle(title: AppLocalizations.of(context)!.lastName),
                             4.verticalSpace,
                             CustomTextField(
-                              hintText: 'مثال: محمد',
+                              hintText: AppLocalizations.of(context)!.exampleMohamed,
                               controller: cubit.lastNameController,
                             ),
                           ],
@@ -83,28 +84,28 @@ class FirstView extends StatelessWidget {
                     ],
                   ),
                   16.verticalSpace,
-                  FieldTitle(title: 'رقم الهاتف'),
+                  FieldTitle(title: AppLocalizations.of(context)!.phoneNumber),
                   4.verticalSpace,
                   CustomTextField(
                     hintText: '+02 010X XXX XXXX',
                     controller: cubit.firstPhoneController,
                   ),
                   16.verticalSpace,
-                  FieldTitle(title: 'رقم الهاتف اخر'),
+                  FieldTitle(title: AppLocalizations.of(context)!.anotherPhoneNumber),
                   4.verticalSpace,
                   CustomTextField(
                     hintText: '+02 010X XXX XXXX',
                     controller: cubit.secondPhoneController,
                   ),
                   16.verticalSpace,
-                  FieldTitle(title: 'البريد الالكتروني'),
+                  FieldTitle(title: AppLocalizations.of(context)!.email),
                   4.verticalSpace,
                   CustomTextField(
                     hintText: 'captain@metwgo.com',
                     controller: cubit.emailController,
                   ),
                   16.verticalSpace,
-                  FieldTitle(title: 'تاريخ الميلاد'),
+                  FieldTitle(title: AppLocalizations.of(context)!.birthDate),
                   4.verticalSpace,
                   CustomTextField(
                     hintText: 'mm/dd/yyyy',
@@ -116,12 +117,12 @@ class FirstView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: .spaceBetween,
                     children: [
-                      FieldTitle(title: ' العنوان بالتفصيل'),
+                      FieldTitle(title: AppLocalizations.of(context)!.detailedAddress),
                       Row(
                         children: [
                           Image.asset(AppImages.locationIcon),
                           4.horizontalSpace,
-                          FieldTitle(title: 'المدينة / الحي / الشارع'),
+                          FieldTitle(title: AppLocalizations.of(context)!.cityNeighborhoodStreet),
                         ],
                       ),
                     ],
@@ -129,19 +130,18 @@ class FirstView extends StatelessWidget {
                   4.verticalSpace,
                   CustomTextField(
                     minLine: 2,
-                    hintText:
-                        'أدخل تفاصيل عنوانك هنا ليتمكن النظام من \nتحديد نطاق عملك',
+                    hintText: AppLocalizations.of(context)!.addressHintText,
                     controller: cubit.boarnDateController,
                   ),
                   16.verticalSpace,
-                  FieldTitle(title: 'كلمة المرور'),
+                  FieldTitle(title: AppLocalizations.of(context)!.password),
                   4.verticalSpace,
                   CustomTextField(
                     hintText: '...............',
                     controller: cubit.passwordController,
                   ),
                   16.verticalSpace,
-                  FieldTitle(title: 'تأكيد كلمة المرور'),
+                  FieldTitle(title: AppLocalizations.of(context)!.confirmPassword),
                   4.verticalSpace,
                   CustomTextField(
                     hintText: '...............',
@@ -162,14 +162,14 @@ class FirstView extends StatelessWidget {
                             mainAxisAlignment: .center,
                             children: [
                               Text(
-                                'لديك حساب الفعل؟',
+                                AppLocalizations.of(context)!.alreadyHaveAccount,
                                 style: AppTextStyle.regular14(context).copyWith(
                                   color: Theme.of(context).colorScheme.tertiary,
                                 ),
                               ),
                               4.horizontalSpace,
                               Text(
-                                'تسجيل الدخول',
+                                AppLocalizations.of(context)!.login,
                                 style: AppTextStyle.regular14(context).copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
@@ -180,7 +180,7 @@ class FirstView extends StatelessWidget {
                       ),
                       12.horizontalSpace,
                       Expanded(
-                        child: CustomButton(text: 'التالى', onPressed: () {}),
+                        child: CustomButton(text: AppLocalizations.of(context)!.next, onPressed: () {}),
                       ),
                     ],
                   ),
