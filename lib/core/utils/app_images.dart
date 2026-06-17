@@ -20,6 +20,9 @@ class AppImages {
   static const String countryIcon = "assets/images/countryIcon.png";
   static const String uploadIcon = "assets/images/uploadIcon.png";
   static const String warningIcon = "assets/images/warningIcon.png";
+  static const String carLicenceIcon = "assets/images/carLicenceIcon.png";
+  static const String driveLicenceIcon = "assets/images/driveLicenceIcon.png";
+  static const String personalCard = "assets/images/personalCard.png";
   // // map
   // static const String map = "assets/images/map.jpg";
 
