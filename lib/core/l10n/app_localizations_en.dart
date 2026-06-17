@@ -99,4 +99,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errEnterAddress => 'Please enter your address';
+
+  @override
+  String get delegateInfo => 'Delegate Information';
+
+  @override
+  String get delegateType => 'Delegate Type';
+
+  @override
+  String get warehouseDelegate => 'Warehouse Delegate';
+
+  @override
+  String get independentDelegate => 'Independent Delegate';
+
+  @override
+  String get warehouseNumber => 'Warehouse Number';
+
+  @override
+  String get chooseWarehouseNumber => 'Choose Warehouse Number';
+
+  @override
+  String get workClassification => 'Work Classification';
+
+  @override
+  String get chooseMultipleClassifications =>
+      'You can choose more than one classification based on your work scope.';
+
+  @override
+  String get deliveryDelegate => 'Delivery Delegate';
+
+  @override
+  String get deliveryDelegateSubtitle =>
+      'Delivery delegate within a governorate';
+
+  @override
+  String get shippingDelegate => 'Shipping Delegate';
+
+  @override
+  String get shippingDelegateSubtitle =>
+      'Shipping delegate between governorates';
+
+  @override
+  String get busDriver => 'Bus Driver';
+
+  @override
+  String get busDriverSubtitle => 'Transporting passengers and light goods';
+
+  @override
+  String get higherProfitOpp => 'Higher profit opportunities!';
+
+  @override
+  String get intercityShippingIncreasesIncome =>
+      'Activating intercity shipping options increases your income by 40%';
+
+  @override
+  String get errChooseWarehouse => 'Please choose a warehouse number';
+
+  @override
+  String get errChooseWorkClassification =>
+      'Please choose at least one work classification';
 }

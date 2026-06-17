@@ -99,4 +99,61 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get errEnterAddress => 'الرجاء إدخال العنوان';
+
+  @override
+  String get delegateInfo => 'معلومات المندوب';
+
+  @override
+  String get delegateType => 'نوع المندوب';
+
+  @override
+  String get warehouseDelegate => 'مندوب مستودع';
+
+  @override
+  String get independentDelegate => 'مندوب مستقل';
+
+  @override
+  String get warehouseNumber => 'رقم المستودع';
+
+  @override
+  String get chooseWarehouseNumber => 'اختر رقم المستودع';
+
+  @override
+  String get workClassification => 'تصنيف العمل';
+
+  @override
+  String get chooseMultipleClassifications =>
+      'يمكنك اختيار أكثر من تصنيف حسب نطاق عملك.';
+
+  @override
+  String get deliveryDelegate => 'مندوب توصيل';
+
+  @override
+  String get deliveryDelegateSubtitle => 'مندوب توصيل بداخل محافظة';
+
+  @override
+  String get shippingDelegate => 'مندوب شحن';
+
+  @override
+  String get shippingDelegateSubtitle => 'مندوب شحن بين محافظات';
+
+  @override
+  String get busDriver => 'سائق باص';
+
+  @override
+  String get busDriverSubtitle => 'نقل ركاب وبضائع خفيفة';
+
+  @override
+  String get higherProfitOpp => 'فرص أرباح أعلى!';
+
+  @override
+  String get intercityShippingIncreasesIncome =>
+      'تفعيل خيارات الشحن بين المدن يزيد من دخلك بنسبة 40%';
+
+  @override
+  String get errChooseWarehouse => 'الرجاء اختيار رقم المستودع';
+
+  @override
+  String get errChooseWorkClassification =>
+      'الرجاء اختيار تصنيف عمل واحد على الأقل';
 }

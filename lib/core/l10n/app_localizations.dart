@@ -277,6 +277,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter your address'**
   String get errEnterAddress;
+
+  /// No description provided for @delegateInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Delegate Information'**
+  String get delegateInfo;
+
+  /// No description provided for @delegateType.
+  ///
+  /// In en, this message translates to:
+  /// **'Delegate Type'**
+  String get delegateType;
+
+  /// No description provided for @warehouseDelegate.
+  ///
+  /// In en, this message translates to:
+  /// **'Warehouse Delegate'**
+  String get warehouseDelegate;
+
+  /// No description provided for @independentDelegate.
+  ///
+  /// In en, this message translates to:
+  /// **'Independent Delegate'**
+  String get independentDelegate;
+
+  /// No description provided for @warehouseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Warehouse Number'**
+  String get warehouseNumber;
+
+  /// No description provided for @chooseWarehouseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Warehouse Number'**
+  String get chooseWarehouseNumber;
+
+  /// No description provided for @workClassification.
+  ///
+  /// In en, this message translates to:
+  /// **'Work Classification'**
+  String get workClassification;
+
+  /// No description provided for @chooseMultipleClassifications.
+  ///
+  /// In en, this message translates to:
+  /// **'You can choose more than one classification based on your work scope.'**
+  String get chooseMultipleClassifications;
+
+  /// No description provided for @deliveryDelegate.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Delegate'**
+  String get deliveryDelegate;
+
+  /// No description provided for @deliveryDelegateSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery delegate within a governorate'**
+  String get deliveryDelegateSubtitle;
+
+  /// No description provided for @shippingDelegate.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping Delegate'**
+  String get shippingDelegate;
+
+  /// No description provided for @shippingDelegateSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping delegate between governorates'**
+  String get shippingDelegateSubtitle;
+
+  /// No description provided for @busDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Bus Driver'**
+  String get busDriver;
+
+  /// No description provided for @busDriverSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Transporting passengers and light goods'**
+  String get busDriverSubtitle;
+
+  /// No description provided for @higherProfitOpp.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher profit opportunities!'**
+  String get higherProfitOpp;
+
+  /// No description provided for @intercityShippingIncreasesIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Activating intercity shipping options increases your income by 40%'**
+  String get intercityShippingIncreasesIncome;
+
+  /// No description provided for @errChooseWarehouse.
+  ///
+  /// In en, this message translates to:
+  /// **'Please choose a warehouse number'**
+  String get errChooseWarehouse;
+
+  /// No description provided for @errChooseWorkClassification.
+  ///
+  /// In en, this message translates to:
+  /// **'Please choose at least one work classification'**
+  String get errChooseWorkClassification;
 }
 
 class _AppLocalizationsDelegate

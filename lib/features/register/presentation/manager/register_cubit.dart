@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
 import 'package:metw_go/features/register/presentation/view/fifth_view.dart';
 import 'package:metw_go/features/register/presentation/view/first_view.dart';
@@ -58,12 +59,63 @@ class RegisterCubit extends Cubit<RegisterState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   void firstViewPress() {
-    if (firstViewFormKey.currentState?.validate() == true) {
-      changePage(1);
-    }
+    changePage(1);
+    // if (firstViewFormKey.currentState?.validate() == true) {
+    //   changePage(1);
+    // }
   }
 
   /// second view data
+  //----------------------------------------------------------------------------
+  final secondViewFormKey = GlobalKey<FormState>();
+  bool isIndependentDelegate = true;
+  String? selectedWarehouse;
+
+  void changeDelegateType(bool isIndependent) {
+    isIndependentDelegate = isIndependent;
+    emit(ChangeDelegateTypeSuccess());
+  }
+
+  bool isDeliveryDelegate = false;
+  bool isShippingDelegate = false;
+  bool isBusDriver = false;
+
+  void toggleDeliveryDelegate(bool value) {
+    isDeliveryDelegate = value;
+    emit(ChangeWorkClassificationSuccess());
+  }
+
+  void toggleShippingDelegate(bool value) {
+    isShippingDelegate = value;
+    emit(ChangeWorkClassificationSuccess());
+  }
+
+  void toggleBusDriver(bool value) {
+    isBusDriver = value;
+    emit(ChangeWorkClassificationSuccess());
+  }
+
+  void secondViewPress(BuildContext context) {
+    // First, check if form fields (like warehouse dropdown) are valid
+    if (secondViewFormKey.currentState?.validate() == true) {
+      // Validate work classification
+      if (!isDeliveryDelegate && !isShippingDelegate && !isBusDriver) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context)!.errChooseWorkClassification,
+            ),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+      changePage(2);
+    }
+  }
+
+  /// thired view data
   //----------------------------------------------------------------------------
 
   @override
