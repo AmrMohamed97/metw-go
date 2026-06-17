@@ -111,7 +111,7 @@ class _ScrollRevealState extends State<ScrollReveal>
   }
 
   void _checkVisibility() {
-    if (_isVisible || !mounted) return;
+    if (!mounted) return;
 
     final RenderObject? renderObject = context.findRenderObject();
     if (renderObject == null || !renderObject.attached) return;
@@ -121,11 +121,19 @@ class _ScrollRevealState extends State<ScrollReveal>
     final screenHeight = MediaQuery.sizeOf(context).height;
 
     if (position.dy < screenHeight - 30) {
-      setState(() {
-        _isVisible = true;
-      });
-      _controller.forward();
-      _scrollable?.position.removeListener(_checkVisibility);
+      if (!_isVisible) {
+        setState(() {
+          _isVisible = true;
+        });
+        _controller.forward();
+      }
+    } else {
+      if (_isVisible) {
+        setState(() {
+          _isVisible = false;
+        });
+        _controller.reset();
+      }
     }
   }
 
