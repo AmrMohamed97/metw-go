@@ -23,14 +23,16 @@ class WorkClassificationSelector extends StatelessWidget {
               subtitle: AppLocalizations.of(context)!.deliveryDelegateSubtitle,
               iconPath: AppImages.carIcon,
               isSelected: cubit.isDeliveryDelegate,
-              onTap: () => cubit.toggleDeliveryDelegate(!cubit.isDeliveryDelegate),
+              onTap: () =>
+                  cubit.toggleDeliveryDelegate(!cubit.isDeliveryDelegate),
             ),
             _WorkClassificationTile(
               title: AppLocalizations.of(context)!.shippingDelegate,
               subtitle: AppLocalizations.of(context)!.shippingDelegateSubtitle,
               iconPath: AppImages.locationSuffixIcon,
               isSelected: cubit.isShippingDelegate,
-              onTap: () => cubit.toggleShippingDelegate(!cubit.isShippingDelegate),
+              onTap: () =>
+                  cubit.toggleShippingDelegate(!cubit.isShippingDelegate),
             ),
             _WorkClassificationTile(
               title: AppLocalizations.of(context)!.busDriver,
@@ -63,46 +65,21 @@ class _WorkClassificationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = Theme.of(context).colorScheme.primary;
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainer,
+          color: Theme.of(context).colorScheme.outline,
           borderRadius: BorderRadius.circular(16.r),
-          border: isSelected ? Border.all(color: primaryColor) : Border.all(color: Colors.transparent),
+          border: isSelected
+              ? Border.all(color: primaryColor)
+              : Border.all(color: Theme.of(context).colorScheme.outline),
         ),
         child: Row(
           children: [
-            Image.asset(
-              iconPath,
-              height: 24.h,
-              width: 24.h,
-              color: primaryColor.withOpacity(0.6), // Make it pale orange as per design
-            ),
-            12.horizontalSpace,
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: AppTextStyle.medium16(context).copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                  4.verticalSpace,
-                  Text(
-                    subtitle,
-                    style: AppTextStyle.regular12(context).copyWith(
-                      color: Colors.grey.shade500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             Container(
               height: 24.h,
               width: 24.h,
@@ -116,6 +93,33 @@ class _WorkClassificationTile extends StatelessWidget {
               child: isSelected
                   ? const Icon(Icons.check, color: Colors.white, size: 16)
                   : null,
+            ),
+            16.horizontalSpace,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: AppTextStyle.medium16(
+                      context,
+                    ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                  ),
+                  4.verticalSpace,
+                  Text(
+                    subtitle,
+                    style: AppTextStyle.regular12(
+                      context,
+                    ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                  ),
+                ],
+              ),
+            ),
+            Image.asset(
+              iconPath,
+              height: 24.h,
+              width: 24.h,
+              color: primaryColor, // Make it pale orange as per design
             ),
           ],
         ),
