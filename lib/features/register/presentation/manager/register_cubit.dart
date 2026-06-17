@@ -25,6 +25,13 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   ///first part data
   //----------------------------------------------------------------------------
+  bool isMale = true;
+
+  void changeGender(bool value) {
+    isMale = value;
+    emit(ChangeGenderSuccess());
+  }
+
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController firstPhoneController = TextEditingController();
