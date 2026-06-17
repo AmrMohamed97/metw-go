@@ -98,29 +98,23 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
-  /// No description provided for @getStarted.
+  /// No description provided for @male.
   ///
   /// In en, this message translates to:
-  /// **'Get Started'**
-  String get getStarted;
+  /// **'Male'**
+  String get male;
 
-  /// No description provided for @signInWithGoogle.
+  /// No description provided for @female.
   ///
   /// In en, this message translates to:
-  /// **'Sign in with Google'**
-  String get signInWithGoogle;
+  /// **'Female'**
+  String get female;
 
-  /// No description provided for @shareSuccess.
+  /// No description provided for @gender.
   ///
   /// In en, this message translates to:
-  /// **'App Shared Successfully Thanks For Your Feedback'**
-  String get shareSuccess;
-
-  /// No description provided for @shareAppMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Share App \n Google Play Store: https://play.google.com/store/apps \n Apple AppStore: https://apps.apple.com/us/app '**
-  String get shareAppMessage;
+  /// **'Gender'**
+  String get gender;
 }
 
 class _AppLocalizationsDelegate

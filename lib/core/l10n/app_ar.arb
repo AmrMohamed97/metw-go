@@ -1,8 +1,6 @@
 {
     
-    "getStarted": "ابدأ رحلتك",
-    "signInWithGoogle": "تسجيل الدخول بواسطة جوجل",
-        "shareSuccess" : "تم مشاركة التطبيق بنجاح",
-    "shareAppMessage"  : "مشاركه التطبيق  \n Google Play Store: https://play.google.com/store/apps \n Apple AppStore: https://apps.apple.com/us/app "
-
+    "male": "ذكر",
+    "female": "انثى",
+    "gender": "الجنس"
 }

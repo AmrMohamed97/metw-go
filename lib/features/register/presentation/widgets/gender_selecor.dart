@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
@@ -15,7 +16,7 @@ class GenderSelector extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const FieldTitle(title: 'الجنس'),
+             FieldTitle(title: AppLocalizations.of(context)!.gender),
             SizedBox(height: 4),
             Row(
               children: [
@@ -23,7 +24,7 @@ class GenderSelector extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () => cubit.changeGender(true),
                     child: _ChoiceTile(
-                      text: 'ذكر',
+                      text: AppLocalizations.of(context)!.male,
                       isSelected: cubit.isMale,
                       icon: Icons.male_rounded,
                     ),
@@ -34,7 +35,7 @@ class GenderSelector extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () => cubit.changeGender(false),
                     child: _ChoiceTile(
-                      text: 'انثى',
+                      text: AppLocalizations.of(context)!.female,
                       icon: Icons.female_rounded,
                       isSelected: !cubit.isMale,
                     ),

@@ -1,7 +1,5 @@
 {
-    "getStarted": "Get Started",
-    "signInWithGoogle": "Sign in with Google",
-        "shareSuccess" : "App Shared Successfully Thanks For Your Feedback",
-    "shareAppMessage"  : "Share App \n Google Play Store: https://play.google.com/store/apps \n Apple AppStore: https://apps.apple.com/us/app "
-
+    "male": "Male",
+    "female": "Female",
+    "gender": "Gender"
 }

@@ -9,15 +9,11 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get getStarted => 'ابدأ رحلتك';
+  String get male => 'ذكر';
 
   @override
-  String get signInWithGoogle => 'تسجيل الدخول بواسطة جوجل';
+  String get female => 'انثى';
 
   @override
-  String get shareSuccess => 'تم مشاركة التطبيق بنجاح';
-
-  @override
-  String get shareAppMessage =>
-      'مشاركه التطبيق  \n Google Play Store: https://play.google.com/store/apps \n Apple AppStore: https://apps.apple.com/us/app ';
+  String get gender => 'الجنس';
 }

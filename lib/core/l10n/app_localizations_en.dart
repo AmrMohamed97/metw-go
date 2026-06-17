@@ -9,15 +9,11 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get getStarted => 'Get Started';
+  String get male => 'Male';
 
   @override
-  String get signInWithGoogle => 'Sign in with Google';
+  String get female => 'Female';
 
   @override
-  String get shareSuccess => 'App Shared Successfully Thanks For Your Feedback';
-
-  @override
-  String get shareAppMessage =>
-      'Share App \n Google Play Store: https://play.google.com/store/apps \n Apple AppStore: https://apps.apple.com/us/app ';
+  String get gender => 'Gender';
 }
