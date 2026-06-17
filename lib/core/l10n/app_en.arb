@@ -67,5 +67,14 @@
     "errUploadVehicleImage": "Please upload vehicle image",
     "camera": "Camera",
     "gallery": "Gallery",
-    "chooseImageSource": "Choose Image Source"
+    "chooseImageSource": "Choose Image Source",
+    "serviceAreas": "Service Areas",
+    "serviceAreasDesc": "Specify the governorates and cities you will cover to ensure appropriate orders reach you.",
+    "chooseGovernorates": "Choose governorates",
+    "governorates": "Governorates",
+    "citiesTitle": "Cities",
+    "cities": "Cities",
+    "activateRuralService": "Activate rural service",
+    "ruralServiceDesc": "Working in surrounding rural areas",
+    "ruralServiceWarning": "Activating rural service may increase your available orders by 25%, but ensure you have an appropriate transport method for rough roads."
 }

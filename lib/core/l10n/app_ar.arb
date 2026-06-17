@@ -67,5 +67,14 @@
     "errUploadVehicleImage": "الرجاء تحميل صورة المركبة",
     "camera": "الكاميرا",
     "gallery": "الاستوديو",
-    "chooseImageSource": "اختر مصدر الصورة"
+    "chooseImageSource": "اختر مصدر الصورة",
+    "serviceAreas": "مناطق الخدمة",
+    "serviceAreasDesc": "حدد المحافظات والمدن التي ستقوم بتغطيتها لضمان وصول الطلبات المناسبة إليك.",
+    "chooseGovernorates": "اختر المحافظات",
+    "governorates": "المحافظات",
+    "citiesTitle": "المدن",
+    "cities": "المدن",
+    "activateRuralService": "تفعيل خدمة القرى",
+    "ruralServiceDesc": "العمل في المناطق الريفية المحيطة",
+    "ruralServiceWarning": "تفعيل خدمة القرى قد يزيد من عدد الطلبات المتاحة لك بنسبة 25٪، ولكن تأكد من توفر وسيلة النقل المناسبة للطرق الوعرة."
 }

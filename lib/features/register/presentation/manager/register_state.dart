@@ -12,3 +12,9 @@ class ChangeWorkClassificationSuccess extends RegisterState {}
 
 class PickVehicleImageSuccess extends RegisterState {}
 class PickVehicleImageLoading extends RegisterState {}
+
+class ChangeRuralServiceState extends RegisterState {}
+
+class RemoveGovernorateState extends RegisterState {}
+
+class RemoveCityState extends RegisterState {}

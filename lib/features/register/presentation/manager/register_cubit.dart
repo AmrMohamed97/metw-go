@@ -156,6 +156,38 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
     }
   }
 
+    /// fourth view data
+  //----------------------------------------------------------------------------
+  final GlobalKey<FormState> fourthViewFormKey = GlobalKey<FormState>();
+  List<String> selectedGovernorates = ['القاهرة', 'الجيزة'];
+  List<String> selectedCities = ['مدينة نصر', 'مصر الجديدة'];
+  bool isRuralServiceEnabled = false;
+
+  void toggleRuralService(bool value) {
+    isRuralServiceEnabled = value;
+    emit(ChangeRuralServiceState());
+  }
+
+  void removeGovernorate(String governorate) {
+    selectedGovernorates.remove(governorate);
+    emit(RemoveGovernorateState());
+  }
+
+  void removeCity(String city) {
+    selectedCities.remove(city);
+    emit(RemoveCityState());
+  }
+
+  void fourthViewPress(BuildContext context) {
+    if (fourthViewFormKey.currentState!.validate()) {
+      if (selectedGovernorates.isEmpty || selectedCities.isEmpty) {
+        // Maybe show a toast or error
+        return;
+      }
+      changePage(4); // Move to fifth view
+    }
+  }
+
   @override
   Future<void> close() {
     pageController.dispose();

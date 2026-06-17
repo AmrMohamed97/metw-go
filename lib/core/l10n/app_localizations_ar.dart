@@ -221,4 +221,33 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get chooseImageSource => 'اختر مصدر الصورة';
+
+  @override
+  String get serviceAreas => 'مناطق الخدمة';
+
+  @override
+  String get serviceAreasDesc =>
+      'حدد المحافظات والمدن التي ستقوم بتغطيتها لضمان وصول الطلبات المناسبة إليك.';
+
+  @override
+  String get chooseGovernorates => 'اختر المحافظات';
+
+  @override
+  String get governorates => 'المحافظات';
+
+  @override
+  String get citiesTitle => 'المدن';
+
+  @override
+  String get cities => 'المدن';
+
+  @override
+  String get activateRuralService => 'تفعيل خدمة القرى';
+
+  @override
+  String get ruralServiceDesc => 'العمل في المناطق الريفية المحيطة';
+
+  @override
+  String get ruralServiceWarning =>
+      'تفعيل خدمة القرى قد يزيد من عدد الطلبات المتاحة لك بنسبة 25٪، ولكن تأكد من توفر وسيلة النقل المناسبة للطرق الوعرة.';
 }

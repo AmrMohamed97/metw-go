@@ -223,4 +223,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chooseImageSource => 'Choose Image Source';
+
+  @override
+  String get serviceAreas => 'Service Areas';
+
+  @override
+  String get serviceAreasDesc =>
+      'Specify the governorates and cities you will cover to ensure appropriate orders reach you.';
+
+  @override
+  String get chooseGovernorates => 'Choose governorates';
+
+  @override
+  String get governorates => 'Governorates';
+
+  @override
+  String get citiesTitle => 'Cities';
+
+  @override
+  String get cities => 'Cities';
+
+  @override
+  String get activateRuralService => 'Activate rural service';
+
+  @override
+  String get ruralServiceDesc => 'Working in surrounding rural areas';
+
+  @override
+  String get ruralServiceWarning =>
+      'Activating rural service may increase your available orders by 25%, but ensure you have an appropriate transport method for rough roads.';
 }

@@ -511,6 +511,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose Image Source'**
   String get chooseImageSource;
+
+  /// No description provided for @serviceAreas.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Areas'**
+  String get serviceAreas;
+
+  /// No description provided for @serviceAreasDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Specify the governorates and cities you will cover to ensure appropriate orders reach you.'**
+  String get serviceAreasDesc;
+
+  /// No description provided for @chooseGovernorates.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose governorates'**
+  String get chooseGovernorates;
+
+  /// No description provided for @governorates.
+  ///
+  /// In en, this message translates to:
+  /// **'Governorates'**
+  String get governorates;
+
+  /// No description provided for @citiesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cities'**
+  String get citiesTitle;
+
+  /// No description provided for @cities.
+  ///
+  /// In en, this message translates to:
+  /// **'Cities'**
+  String get cities;
+
+  /// No description provided for @activateRuralService.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate rural service'**
+  String get activateRuralService;
+
+  /// No description provided for @ruralServiceDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Working in surrounding rural areas'**
+  String get ruralServiceDesc;
+
+  /// No description provided for @ruralServiceWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Activating rural service may increase your available orders by 25%, but ensure you have an appropriate transport method for rough roads.'**
+  String get ruralServiceWarning;
 }
 
 class _AppLocalizationsDelegate
