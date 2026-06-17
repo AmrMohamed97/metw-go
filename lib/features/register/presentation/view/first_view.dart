@@ -146,7 +146,35 @@ class FirstView extends StatelessWidget {
                   34.verticalSpace,
                   Row(
                     children: [
-                      Expanded(flex: 2, child: Container()),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          height: 46,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: .center,
+                            children: [
+                              Text(
+                                'لديك حساب الفعل؟',
+                                style: AppTextStyle.regular14(context).copyWith(
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                ),
+                              ),
+                              4.horizontalSpace,
+                              Text(
+                                'تسجيل الدخول',
+                                style: AppTextStyle.regular14(context).copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      12.horizontalSpace,
                       Expanded(
                         child: CustomButton(text: 'التالى', onPressed: () {}),
                       ),
