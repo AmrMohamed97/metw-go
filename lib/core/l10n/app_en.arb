@@ -64,5 +64,8 @@
     "errEnterMaxWeight": "Please enter max weight",
     "errEnterMaxVolume": "Please enter max volume",
     "errEnterPlateNumber": "Please enter plate number",
-    "errUploadVehicleImage": "Please upload vehicle image"
+    "errUploadVehicleImage": "Please upload vehicle image",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "chooseImageSource": "Choose Image Source"
 }

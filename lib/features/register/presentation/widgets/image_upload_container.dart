@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
@@ -13,6 +14,7 @@ class ImageUploadContainer extends StatelessWidget {
     required this.iconPath,
     required this.onTap,
     this.imagePath,
+    required this.isLoading,
   });
 
   final String title;
@@ -20,11 +22,12 @@ class ImageUploadContainer extends StatelessWidget {
   final String iconPath;
   final VoidCallback onTap;
   final String? imagePath;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
-    
+
     return GestureDetector(
       onTap: onTap,
       child: DottedBorder(
@@ -41,13 +44,12 @@ class ImageUploadContainer extends StatelessWidget {
             color: primaryColor.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(24.r),
           ),
-          child: imagePath != null
+          child: isLoading
+              ? CupertinoActivityIndicator(color: primaryColor)
+              : imagePath != null
               ? ClipRRect(
                   borderRadius: BorderRadius.circular(24.r),
-                  child: Image.file(
-                    File(imagePath!),
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.file(File(imagePath!), fit: BoxFit.cover),
                 )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -61,16 +63,16 @@ class ImageUploadContainer extends StatelessWidget {
                     12.verticalSpace,
                     Text(
                       title,
-                      style: AppTextStyle.medium16(context).copyWith(
-                        color: primaryColor,
-                      ),
+                      style: AppTextStyle.medium16(
+                        context,
+                      ).copyWith(color: primaryColor),
                     ),
                     8.verticalSpace,
                     Text(
                       subtitle,
-                      style: AppTextStyle.regular12(context).copyWith(
-                        color: Colors.grey.shade500,
-                      ),
+                      style: AppTextStyle.regular12(
+                        context,
+                      ).copyWith(color: Colors.grey.shade500),
                     ),
                   ],
                 ),

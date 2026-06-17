@@ -64,5 +64,8 @@
     "errEnterMaxWeight": "الرجاء إدخال أقصى وزن",
     "errEnterMaxVolume": "الرجاء إدخال أقصى حجم",
     "errEnterPlateNumber": "الرجاء إدخال رقم اللوحة",
-    "errUploadVehicleImage": "الرجاء تحميل صورة المركبة"
+    "errUploadVehicleImage": "الرجاء تحميل صورة المركبة",
+    "camera": "الكاميرا",
+    "gallery": "الاستوديو",
+    "chooseImageSource": "اختر مصدر الصورة"
 }

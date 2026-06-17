@@ -15,6 +15,7 @@ import 'package:metw_go/features/register/presentation/widgets/field_title.dart'
 import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';
 import 'package:metw_go/features/register/presentation/widgets/image_upload_container.dart';
 import 'package:metw_go/features/register/presentation/widgets/info_banner.dart';
+import 'package:metw_go/features/register/presentation/widgets/pic_image_bottom_sheet.dart';
 
 class ThirdView extends StatelessWidget {
   const ThirdView({super.key});
@@ -64,8 +65,7 @@ class ThirdView extends StatelessWidget {
                       )!.chooseTransportMethod,
                       suffixIcon: const Icon(Icons.keyboard_arrow_down),
                       readOnly: true,
-                      onTap: () {
-                      },
+                      onTap: () {},
                       validator: (value) {
                         // Normally this validates selectedTransportMethod
                         // For UI implementation, we can just return null or hook it up later.
@@ -170,7 +170,19 @@ class ThirdView extends StatelessWidget {
                       )!.uploadVehicleImageDesc,
                       iconPath: AppImages.uploadIcon, // Camera icon with plus
                       imagePath: cubit.vehicleImage?.path,
-                      onTap: () => cubit.pickVehicleImage(),
+                      isLoading:state is PickVehicleImageLoading,
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          builder: (ctx) {
+                            return BlocProvider.value(
+                              value: cubit,
+                              child: PickImageBottomSheet(ctx: ctx),
+                            );
+                          },
+                        );
+                      },
                     ),
                     24.verticalSpace,
                     InfoBanner(

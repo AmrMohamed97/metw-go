@@ -212,4 +212,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get errUploadVehicleImage => 'الرجاء تحميل صورة المركبة';
+
+  @override
+  String get camera => 'الكاميرا';
+
+  @override
+  String get gallery => 'الاستوديو';
+
+  @override
+  String get chooseImageSource => 'اختر مصدر الصورة';
 }

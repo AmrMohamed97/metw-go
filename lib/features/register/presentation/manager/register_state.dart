@@ -11,3 +11,4 @@ class ChangeDelegateTypeSuccess extends RegisterState {}
 class ChangeWorkClassificationSuccess extends RegisterState {}
 
 class PickVehicleImageSuccess extends RegisterState {}
+class PickVehicleImageLoading extends RegisterState {}

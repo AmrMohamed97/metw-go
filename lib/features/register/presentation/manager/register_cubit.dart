@@ -128,10 +128,12 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
   TextEditingController plateNumberController = TextEditingController();
   File? vehicleImage;
 
-  Future<void> pickVehicleImage() async {
+  Future<void> pickVehicleImage(ImageSource source) async {
+
     final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? image = await picker.pickImage(source: source);
     if (image != null) {
+      emit(PickVehicleImageLoading());
       vehicleImage=await compress(targetImage: File(image.path));
       // vehicleImagePath = image.path;
       emit(PickVehicleImageSuccess());

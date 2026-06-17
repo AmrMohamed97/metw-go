@@ -493,6 +493,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please upload vehicle image'**
   String get errUploadVehicleImage;
+
+  /// No description provided for @camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get camera;
+
+  /// No description provided for @gallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get gallery;
+
+  /// No description provided for @chooseImageSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Image Source'**
+  String get chooseImageSource;
 }
 
 class _AppLocalizationsDelegate

@@ -214,4 +214,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errUploadVehicleImage => 'Please upload vehicle image';
+
+  @override
+  String get camera => 'Camera';
+
+  @override
+  String get gallery => 'Gallery';
+
+  @override
+  String get chooseImageSource => 'Choose Image Source';
 }
