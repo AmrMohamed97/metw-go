@@ -11,6 +11,11 @@ class AppImages {
   static const String locationIcon = "assets/images/locationIcon.png";
   static const String closedLook = "assets/images/closedLook.png";
   static const String openLook = "assets/images/openLook.png";
+  static const String busIcon = "assets/images/busIcon.png";
+  static const String carIcon = "assets/images/carIcon.png";
+  static const String locationSuffixIcon = "assets/images/locationSuffixIcon.png";
+  static const String personIcon = "assets/images/personIcon.png";
+  static const String homeIcon = "assets/images/homeIcon.png";
   // // map
   // static const String map = "assets/images/map.jpg";
 
