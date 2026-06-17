@@ -85,7 +85,7 @@ class SecondView extends StatelessWidget {
                         },
                       ),
                     ],
-                    24.verticalSpace,
+                    if (cubit.isIndependentDelegate) 24.verticalSpace,
                     FieldTitle(
                       title: AppLocalizations.of(context)!.workClassification,
                     ),
@@ -152,6 +152,7 @@ class SecondView extends StatelessWidget {
                     ),
                     34.verticalSpace,
                     Row(
+                      mainAxisAlignment: .spaceBetween,
                       children: [
                         Container(
                           height: 46.h,
@@ -169,12 +170,11 @@ class SecondView extends StatelessWidget {
                             onPressed: () => cubit.changePage(0),
                           ),
                         ),
-                        12.horizontalSpace,
-                        Expanded(
-                          child: CustomButton(
-                            text: AppLocalizations.of(context)!.next,
-                            onPressed: () => cubit.secondViewPress(context),
-                          ),
+                        // 12.horizontalSpace,
+                        CustomButton(
+                          horizontalPadding: 40,
+                          text: AppLocalizations.of(context)!.next,
+                          onPressed: () => cubit.secondViewPress(context),
                         ),
                       ],
                     ),
