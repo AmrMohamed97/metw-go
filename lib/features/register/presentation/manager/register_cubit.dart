@@ -31,7 +31,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     isMale = value;
     emit(ChangeGenderSuccess());
   }
-
+  final firstViewFormKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController firstPhoneController = TextEditingController();
@@ -40,6 +40,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   TextEditingController boarnDateController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+ 
 
   @override
   Future<void> close() {
