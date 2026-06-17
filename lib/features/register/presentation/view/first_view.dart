@@ -9,8 +9,10 @@ import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
 import 'package:metw_go/features/register/presentation/widgets/custom_steper.dart';
+import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 import 'package:metw_go/features/register/presentation/widgets/first_view_app_bar.dart';
 import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';
+import 'package:metw_go/features/register/presentation/widgets/gender_selecor.dart';
 
 class FirstView extends StatelessWidget {
   const FirstView({super.key});
@@ -109,7 +111,7 @@ class FirstView extends StatelessWidget {
                     controller: cubit.boarnDateController,
                   ),
                   16.verticalSpace,
-                  _GenderSelector(),
+                  GenderSelector(),
                   16.verticalSpace,
                   Row(
                     mainAxisAlignment: .spaceBetween,
@@ -192,104 +194,3 @@ class FirstView extends StatelessWidget {
   }
 }
 
-class FieldTitle extends StatelessWidget {
-  const FieldTitle({super.key, required this.title});
-  final String title;
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: AppTextStyle.regular14(
-        context,
-      ).copyWith(color: Theme.of(context).colorScheme.tertiary),
-    );
-  }
-}
-
-class _GenderSelector extends StatelessWidget {
-  const _GenderSelector();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<RegisterCubit, RegisterState>(
-      builder: (context, state) {
-        final cubit = context.read<RegisterCubit>();
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const FieldTitle(title: 'الجنس'),
-            SizedBox(height: 4.h),
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => cubit.changeGender(true),
-                    child: _ChoiceTile(
-                      text: 'ذكر',
-                      isSelected: cubit.isMale,
-                      icon: Icons.male_rounded,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 12.w),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => cubit.changeGender(false),
-                    child: _ChoiceTile(
-                      text: 'انثى',
-                      icon: Icons.female_rounded,
-                      isSelected: !cubit.isMale,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _ChoiceTile extends StatelessWidget {
-  const _ChoiceTile({required this.text, this.isSelected = false, this.icon});
-
-  final String text;
-  final bool isSelected;
-  final IconData? icon;
-
-  @override
-  Widget build(BuildContext context) {
-    final color = isSelected
-        ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).colorScheme.tertiary;
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 240),
-      height: 46,
-      decoration: BoxDecoration(
-        color: isSelected
-            ? const Color(0xFFFFFAF5)
-            : Theme.of(context).colorScheme.outline,
-        borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(
-          color: isSelected
-              ? Theme.of(context).colorScheme.primary
-              : Colors.transparent,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            text,
-            style: TextStyle(color: color, fontSize: 14.sp),
-          ),
-          if (icon != null) ...[
-            SizedBox(width: 8.w),
-            Icon(icon, color: color, size: 18.sp),
-          ],
-        ],
-      ),
-    );
-  }
-}
