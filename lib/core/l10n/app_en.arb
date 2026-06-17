@@ -19,5 +19,14 @@
     "confirmPassword": "Confirm Password",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Login",
-    "next": "Next"
+    "next": "Next",
+    "errEnterFirstName": "Please enter your first name",
+    "errEnterLastName": "Please enter your last name",
+    "errEnterFirstPhone": "Please enter your first phone number",
+    "errEnterSecondPhone": "Please enter your second phone number",
+    "errEnterEmail": "Please enter your email",
+    "errEnterBirthDate": "Please enter your birth date",
+    "errEnterPassword": "Please enter your password",
+    "errEnterConfirmPassword": "Please enter your confirm password",
+    "errEnterAddress": "Please enter your address"
 }

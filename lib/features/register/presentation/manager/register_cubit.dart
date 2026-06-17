@@ -7,6 +7,9 @@ import 'package:metw_go/features/register/presentation/view/first_view.dart';
 @injectable
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
+
+  /// global data in register
+  //----------------------------------------------------------------------------
   PageController pageController = PageController();
   int currentPage = 0;
 
@@ -23,7 +26,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     SizedBox(),
   ];
 
-  ///first part data
+  /// first view data
   //----------------------------------------------------------------------------
   bool isMale = true;
 
@@ -31,6 +34,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     isMale = value;
     emit(ChangeGenderSuccess());
   }
+
   final firstViewFormKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -40,7 +44,13 @@ class RegisterCubit extends Cubit<RegisterState> {
   TextEditingController boarnDateController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
- 
+  void firstViewPress() => firstViewFormKey.currentState?.validate() == true
+      ? currentPage = 1
+      : null;
+
+  /// second view data
+  //----------------------------------------------------------------------------
+  
 
   @override
   Future<void> close() {

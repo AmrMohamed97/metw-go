@@ -1,48 +1,57 @@
- String? firstNameValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your first name';
-    }
-    return null;
+import 'package:flutter/material.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
+
+String? firstNameValidator(BuildContext context, String? value) {
+  if (value == null || value.isEmpty) {
+    return AppLocalizations.of(context)!.errEnterFirstName;
   }
-  String? lastNameValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your last name';
-    }
-    return null;
+  return null;
+}
+String? lastNameValidator(BuildContext context, String? value) {
+  if (value == null || value.isEmpty) {
+    return AppLocalizations.of(context)!.errEnterLastName;
   }
-  String? firstPhoneValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your first phone number';
-    }
-    return null;
+  return null;
+}
+String? firstPhoneValidator(BuildContext context, String? value) {
+  if (value == null || value.isEmpty) {
+    return AppLocalizations.of(context)!.errEnterFirstPhone;
   }
-  String? secondPhoneValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your second phone number';
-    }
-    return null;
+  return null;
+}
+String? secondPhoneValidator(BuildContext context, String? value) {
+  if (value == null || value.isEmpty) {
+    return AppLocalizations.of(context)!.errEnterSecondPhone;
   }
-  String? emailValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your email';
-    }
-    return null;
+  return null;
+}
+String? emailValidator(BuildContext context, String? value) {
+  if (value == null || value.isEmpty) {
+    return AppLocalizations.of(context)!.errEnterEmail;
   }
-  String? boarnDateValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your birth date';
-    }
-    return null;
+  return null;
+}
+String? boarnDateValidator(BuildContext context, String? value) {
+  if (value == null || value.isEmpty) {
+    return AppLocalizations.of(context)!.errEnterBirthDate;
   }
-  String? passwordValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your password';
-    }
-    return null;
+  return null;
+}
+String?  addressValidator(BuildContext context, String? value) {
+  if (value == null || value.isEmpty) {
+    return AppLocalizations.of(context)!.errEnterAddress;
   }
-  String? confirmPasswordValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your confirm password';
-    }
-    return null;
+  return null;
+}
+String? passwordValidator(BuildContext context, String? value) {
+  if (value == null || value.isEmpty) {
+    return AppLocalizations.of(context)!.errEnterPassword;
   }
+  return null;
+}
+String? confirmPasswordValidator(BuildContext context, String? value) {
+  if (value == null || value.isEmpty) {
+    return AppLocalizations.of(context)!.errEnterConfirmPassword;
+  }
+  return null;
+}

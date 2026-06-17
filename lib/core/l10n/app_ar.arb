@@ -19,5 +19,14 @@
     "confirmPassword": "تأكيد كلمة المرور",
     "alreadyHaveAccount": "لديك حساب الفعل؟",
     "login": "تسجيل الدخول",
-    "next": "التالى"
+    "next": "التالى",
+    "errEnterFirstName": "الرجاء إدخال الاسم الأول",
+    "errEnterLastName": "الرجاء إدخال الاسم الأخير",
+    "errEnterFirstPhone": "الرجاء إدخال رقم الهاتف الأول",
+    "errEnterSecondPhone": "الرجاء إدخال رقم الهاتف الثاني",
+    "errEnterEmail": "الرجاء إدخال البريد الإلكتروني",
+    "errEnterBirthDate": "الرجاء إدخال تاريخ الميلاد",
+    "errEnterPassword": "الرجاء إدخال كلمة المرور",
+    "errEnterConfirmPassword": "الرجاء إدخال تأكيد كلمة المرور",
+    "errEnterAddress": "الرجاء إدخال العنوان"
 }

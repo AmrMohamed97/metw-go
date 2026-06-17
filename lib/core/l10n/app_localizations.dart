@@ -223,6 +223,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next'**
   String get next;
+
+  /// No description provided for @errEnterFirstName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your first name'**
+  String get errEnterFirstName;
+
+  /// No description provided for @errEnterLastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your last name'**
+  String get errEnterLastName;
+
+  /// No description provided for @errEnterFirstPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your first phone number'**
+  String get errEnterFirstPhone;
+
+  /// No description provided for @errEnterSecondPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your second phone number'**
+  String get errEnterSecondPhone;
+
+  /// No description provided for @errEnterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email'**
+  String get errEnterEmail;
+
+  /// No description provided for @errEnterBirthDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your birth date'**
+  String get errEnterBirthDate;
+
+  /// No description provided for @errEnterPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password'**
+  String get errEnterPassword;
+
+  /// No description provided for @errEnterConfirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your confirm password'**
+  String get errEnterConfirmPassword;
+
+  /// No description provided for @errEnterAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your address'**
+  String get errEnterAddress;
 }
 
 class _AppLocalizationsDelegate

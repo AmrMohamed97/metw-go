@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
+import 'package:metw_go/core/utils/validitions.dart';
 import 'package:metw_go/core/widgets/animated_column.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
@@ -49,9 +50,9 @@ class FirstView extends StatelessWidget {
                     3.verticalSpace,
                     Text(
                       AppLocalizations.of(context)!.startCreatingProfile,
-                      style: AppTextStyle.medium14(
-                        context,
-                      ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                      style: AppTextStyle.medium14(context).copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                     24.verticalSpace,
                     Row(
@@ -61,11 +62,17 @@ class FirstView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: .start,
                             children: [
-                              FieldTitle(title: AppLocalizations.of(context)!.firstName),
+                              FieldTitle(
+                                title: AppLocalizations.of(context)!.firstName,
+                              ),
                               4.verticalSpace,
                               CustomTextField(
-                                hintText: AppLocalizations.of(context)!.exampleAhmed,
+                                hintText: AppLocalizations.of(
+                                  context,
+                                )!.exampleAhmed,
                                 controller: cubit.firstNameController,
+                                validator: (val) =>
+                                    firstNameValidator(context, val),
                               ),
                             ],
                           ),
@@ -74,11 +81,17 @@ class FirstView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: .start,
                             children: [
-                              FieldTitle(title: AppLocalizations.of(context)!.lastName),
+                              FieldTitle(
+                                title: AppLocalizations.of(context)!.lastName,
+                              ),
                               4.verticalSpace,
                               CustomTextField(
-                                hintText: AppLocalizations.of(context)!.exampleMohamed,
+                                hintText: AppLocalizations.of(
+                                  context,
+                                )!.exampleMohamed,
                                 controller: cubit.lastNameController,
+                                validator: (val) =>
+                                    lastNameValidator(context, val),
                               ),
                             ],
                           ),
@@ -86,18 +99,24 @@ class FirstView extends StatelessWidget {
                       ],
                     ),
                     16.verticalSpace,
-                    FieldTitle(title: AppLocalizations.of(context)!.phoneNumber),
+                    FieldTitle(
+                      title: AppLocalizations.of(context)!.phoneNumber,
+                    ),
                     4.verticalSpace,
                     CustomTextField(
                       hintText: '+02 010X XXX XXXX',
                       controller: cubit.firstPhoneController,
+                      validator: (val) => firstPhoneValidator(context, val),
                     ),
                     16.verticalSpace,
-                    FieldTitle(title: AppLocalizations.of(context)!.anotherPhoneNumber),
+                    FieldTitle(
+                      title: AppLocalizations.of(context)!.anotherPhoneNumber,
+                    ),
                     4.verticalSpace,
                     CustomTextField(
                       hintText: '+02 010X XXX XXXX',
                       controller: cubit.secondPhoneController,
+                      validator: (val) => secondPhoneValidator(context, val),
                     ),
                     16.verticalSpace,
                     FieldTitle(title: AppLocalizations.of(context)!.email),
@@ -105,6 +124,7 @@ class FirstView extends StatelessWidget {
                     CustomTextField(
                       hintText: 'captain@metwgo.com',
                       controller: cubit.emailController,
+                      validator: (val) => emailValidator(context, val),
                     ),
                     16.verticalSpace,
                     FieldTitle(title: AppLocalizations.of(context)!.birthDate),
@@ -112,6 +132,7 @@ class FirstView extends StatelessWidget {
                     CustomTextField(
                       hintText: 'mm/dd/yyyy',
                       controller: cubit.boarnDateController,
+                      validator: (val) => boarnDateValidator(context, val),
                     ),
                     16.verticalSpace,
                     GenderSelector(),
@@ -119,12 +140,18 @@ class FirstView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        FieldTitle(title: AppLocalizations.of(context)!.detailedAddress),
+                        FieldTitle(
+                          title: AppLocalizations.of(context)!.detailedAddress,
+                        ),
                         Row(
                           children: [
                             Image.asset(AppImages.locationIcon),
                             4.horizontalSpace,
-                            FieldTitle(title: AppLocalizations.of(context)!.cityNeighborhoodStreet),
+                            FieldTitle(
+                              title: AppLocalizations.of(
+                                context,
+                              )!.cityNeighborhoodStreet,
+                            ),
                           ],
                         ),
                       ],
@@ -134,6 +161,7 @@ class FirstView extends StatelessWidget {
                       minLine: 2,
                       hintText: AppLocalizations.of(context)!.addressHintText,
                       controller: cubit.boarnDateController,
+                      validator: (val) => addressValidator(context, val),
                     ),
                     16.verticalSpace,
                     FieldTitle(title: AppLocalizations.of(context)!.password),
@@ -141,13 +169,18 @@ class FirstView extends StatelessWidget {
                     CustomTextField(
                       hintText: '...............',
                       controller: cubit.passwordController,
+                      validator: (val) => passwordValidator(context, val),
                     ),
                     16.verticalSpace,
-                    FieldTitle(title: AppLocalizations.of(context)!.confirmPassword),
+                    FieldTitle(
+                      title: AppLocalizations.of(context)!.confirmPassword,
+                    ),
                     4.verticalSpace,
                     CustomTextField(
                       hintText: '...............',
                       controller: cubit.confirmPasswordController,
+                      validator: (val) =>
+                          confirmPasswordValidator(context, val),
                     ),
                     34.verticalSpace,
                     Row(
@@ -157,24 +190,34 @@ class FirstView extends StatelessWidget {
                           child: Container(
                             height: 46,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(8),
+                              ),
                               color: Theme.of(context).colorScheme.outline,
                             ),
                             child: Row(
                               mainAxisAlignment: .center,
                               children: [
                                 Text(
-                                  AppLocalizations.of(context)!.alreadyHaveAccount,
-                                  style: AppTextStyle.regular14(context).copyWith(
-                                    color: Theme.of(context).colorScheme.tertiary,
-                                  ),
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.alreadyHaveAccount,
+                                  style: AppTextStyle.regular14(context)
+                                      .copyWith(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.tertiary,
+                                      ),
                                 ),
                                 4.horizontalSpace,
                                 Text(
                                   AppLocalizations.of(context)!.login,
-                                  style: AppTextStyle.regular14(context).copyWith(
-                                    color: Theme.of(context).colorScheme.primary,
-                                  ),
+                                  style: AppTextStyle.regular14(context)
+                                      .copyWith(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.primary,
+                                      ),
                                 ),
                               ],
                             ),
@@ -182,7 +225,10 @@ class FirstView extends StatelessWidget {
                         ),
                         12.horizontalSpace,
                         Expanded(
-                          child: CustomButton(text: AppLocalizations.of(context)!.next, onPressed: () {}),
+                          child: CustomButton(
+                            text: AppLocalizations.of(context)!.next,
+                            onPressed: () => cubit.firstViewPress(),
+                          ),
                         ),
                       ],
                     ),
@@ -196,4 +242,3 @@ class FirstView extends StatelessWidget {
     );
   }
 }
-

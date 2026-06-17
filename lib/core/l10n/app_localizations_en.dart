@@ -72,4 +72,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get next => 'Next';
+
+  @override
+  String get errEnterFirstName => 'Please enter your first name';
+
+  @override
+  String get errEnterLastName => 'Please enter your last name';
+
+  @override
+  String get errEnterFirstPhone => 'Please enter your first phone number';
+
+  @override
+  String get errEnterSecondPhone => 'Please enter your second phone number';
+
+  @override
+  String get errEnterEmail => 'Please enter your email';
+
+  @override
+  String get errEnterBirthDate => 'Please enter your birth date';
+
+  @override
+  String get errEnterPassword => 'Please enter your password';
+
+  @override
+  String get errEnterConfirmPassword => 'Please enter your confirm password';
+
+  @override
+  String get errEnterAddress => 'Please enter your address';
 }
