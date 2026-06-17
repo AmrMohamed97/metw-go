@@ -14,7 +14,15 @@ class RegisterCubit extends Cubit<RegisterState> {
   int currentPage = 0;
 
   void changePage(int index) {
+    if (currentPage == index) return;
     currentPage = index;
+    if (pageController.hasClients && pageController.page?.round() != index) {
+      pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
     emit(ChangePageSuccess()); // هنا StepProgress هيتحدث تلقائيًا
   }
 
@@ -45,8 +53,11 @@ class RegisterCubit extends Cubit<RegisterState> {
   TextEditingController addressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  void firstViewPress() =>
-      firstViewFormKey.currentState?.validate() == true ? changePage(1) : null;
+  void firstViewPress() {
+    if (firstViewFormKey.currentState?.validate() == true) {
+      changePage(1);
+    }
+  }
 
   /// second view data
   //----------------------------------------------------------------------------
