@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
+import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/animated_column.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
-import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/features/login/presentation/manager/login_cubit.dart';
 import 'package:metw_go/features/login/presentation/manager/login_state.dart';
 import 'package:metw_go/features/register/presentation/widgets/first_view_app_bar.dart';
 import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';
-import 'package:metw_go/core/router/app_routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -54,9 +54,9 @@ class _LoginPageState extends State<LoginPage> {
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
                           "رقم الهاتف",
-                          style: AppTextStyle.medium16(context).copyWith(
-                            color: MyColors.textColor,
-                          ),
+                          style: AppTextStyle.medium16(
+                            context,
+                          ).copyWith(color: MyColors.textColor),
                         ),
                       ),
                       12.verticalSpace,
@@ -72,9 +72,9 @@ class _LoginPageState extends State<LoginPage> {
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
                           "كلمة المرور",
-                          style: AppTextStyle.medium16(context).copyWith(
-                            color: MyColors.textColor,
-                          ),
+                          style: AppTextStyle.medium16(
+                            context,
+                          ).copyWith(color: MyColors.textColor),
                         ),
                       ),
                       12.verticalSpace,
@@ -94,16 +94,16 @@ class _LoginPageState extends State<LoginPage> {
                           onTap: () {},
                           child: Text(
                             "نسيت كلمة المرور؟",
-                            style: AppTextStyle.regular14(context).copyWith(
-                              color: MyColors.primaryColor,
-                            ),
+                            style: AppTextStyle.regular14(
+                              context,
+                            ).copyWith(color: MyColors.primaryColor),
                           ),
                         ),
                       ),
                       40.verticalSpace,
                       CustomButton(
                         text: "تسجيل الدخول",
-                        textColor: MyColors.white,
+                        // textColor: MyColors.white,
                         onPressed: () {},
                         isMax: true,
                         radius: 20.r,
@@ -115,9 +115,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Text(
                             "ليس لديك حساب؟ ",
-                            style: AppTextStyle.medium14(context).copyWith(
-                              color: MyColors.textColor,
-                            ),
+                            style: AppTextStyle.medium14(
+                              context,
+                            ).copyWith(color: MyColors.textColor),
                           ),
                           InkWell(
                             onTap: () {
@@ -125,9 +125,9 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             child: Text(
                               "انشاء حساب",
-                              style: AppTextStyle.medium14(context).copyWith(
-                                color: MyColors.primaryColor,
-                              ),
+                              style: AppTextStyle.medium14(
+                                context,
+                              ).copyWith(color: MyColors.primaryColor),
                             ),
                           ),
                         ],
