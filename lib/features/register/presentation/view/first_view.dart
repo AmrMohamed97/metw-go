@@ -29,6 +29,7 @@ class FirstView extends StatelessWidget {
           slivers: [
             FirstViewAppBar(),
             FirstViewBody(
+              animate: true,
               body: Form(
                 key: cubit.firstViewFormKey,
                 child: AnimatedColumn(
