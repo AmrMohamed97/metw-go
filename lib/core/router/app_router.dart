@@ -1,19 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
+import 'package:metw_go/features/login/presentation/manager/login_cubit.dart';
+import 'package:metw_go/features/login/presentation/page/login_page.dart';
 import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart';
 import 'package:metw_go/features/otp/presentation/page/otp_page.dart';
 // import 'package:metw_go/core/const/app_const.dart';
 // import 'package:metw_go/core/models/user_model.dart';
 // import 'package:metw_go/core/utils/cache_helper.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
-import 'package:metw_go/features/register/presentation/page/register_screen.dart';
+import 'package:metw_go/features/register/presentation/page/register_page.dart';
 
 import 'app_routes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    // initialLocation: AppRoutes.onbording,
+    initialLocation: AppRoutes.login,
     // redirect: (context, state) async {
     //   final String currentPath = state.matchedLocation;
 
@@ -71,8 +73,8 @@ class AppRouter {
         path: AppRoutes.login,
         name: AppRoutes.loginName,
         builder: (context, state) => BlocProvider(
-          create: (context) => getIt<RegisterCubit>(),
-          child: const RegisterScreen(),
+          create: (context) => getIt<LoginCubit>(),
+          child: const LoginPage(),
         ),
       ),
       GoRoute(
@@ -80,7 +82,7 @@ class AppRouter {
         name: AppRoutes.registerName,
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<RegisterCubit>(),
-          child: const RegisterScreen(),
+          child: const RegisterPage(),
         ),
       ),
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
-import 'package:go_router/go_router.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({super.key});
@@ -14,7 +15,10 @@ class OtpPage extends StatefulWidget {
 
 class _OtpPageState extends State<OtpPage> {
   final List<FocusNode> _focusNodes = List.generate(4, (index) => FocusNode());
-  final List<TextEditingController> _controllers = List.generate(4, (index) => TextEditingController());
+  final List<TextEditingController> _controllers = List.generate(
+    4,
+    (index) => TextEditingController(),
+  );
 
   @override
   void initState() {
@@ -101,10 +105,9 @@ class _OtpPageState extends State<OtpPage> {
               Text(
                 "أدخل الرمز المكون من 4 أرقام الذي أرسلناه للتو إلى\n000*******2010+",
                 textAlign: TextAlign.center,
-                style: AppTextStyle.regular16(context).copyWith(
-                  color: MyColors.grey,
-                  height: 1.6,
-                ),
+                style: AppTextStyle.regular16(
+                  context,
+                ).copyWith(color: MyColors.grey, height: 1.6),
               ),
               SizedBox(height: 48.h),
               Directionality(
@@ -120,16 +123,21 @@ class _OtpPageState extends State<OtpPage> {
                       decoration: BoxDecoration(
                         color: isFocused ? MyColors.white : MyColors.greyFill,
                         borderRadius: BorderRadius.circular(16.r),
-                        border: isFocused 
-                            ? Border.all(color: MyColors.primaryColor.withOpacity(0.3), width: 1.5) 
+                        border: isFocused
+                            ? Border.all(
+                                color: MyColors.primaryColor.withOpacity(0.3),
+                                width: 1.5,
+                              )
                             : Border.all(color: Colors.transparent, width: 1.5),
                         boxShadow: isFocused
                             ? [
                                 BoxShadow(
-                                  color: MyColors.primaryColor.withOpacity(0.15),
+                                  color: MyColors.primaryColor.withOpacity(
+                                    0.15,
+                                  ),
                                   blurRadius: 10,
                                   spreadRadius: 2,
-                                )
+                                ),
                               ]
                             : [],
                       ),
@@ -140,10 +148,9 @@ class _OtpPageState extends State<OtpPage> {
                           textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
                           maxLength: 1,
-                          style: AppTextStyle.bold24(context).copyWith(
-                            color: MyColors.black,
-                            fontSize: 24.sp,
-                          ),
+                          style: AppTextStyle.bold24(
+                            context,
+                          ).copyWith(color: MyColors.black, fontSize: 24.sp),
                           decoration: const InputDecoration(
                             counterText: "",
                             border: InputBorder.none,
@@ -164,9 +171,9 @@ class _OtpPageState extends State<OtpPage> {
                 ),
                 child: Text(
                   "00:20",
-                  style: AppTextStyle.medium16(context).copyWith(
-                    color: MyColors.secondaryColor,
-                  ),
+                  style: AppTextStyle.medium16(
+                    context,
+                  ).copyWith(color: MyColors.secondaryColor),
                 ),
               ),
               SizedBox(height: 24.h),
@@ -181,14 +188,17 @@ class _OtpPageState extends State<OtpPage> {
                   ),
                 ),
               ),
-              const Spacer(),
+              // const Spacer(),
+              18.verticalSpace,
               CustomButton(
                 text: "تأكيد",
-                textColor: MyColors.white,
-                onPressed: () {},
+                // textColor: MyColors.white,
+                onPressed: () {
+                  context.go(AppRoutes.login);
+                },
                 isMax: true,
-                radius: 20.r,
-                height: 56.h,
+                // radius: 20.r,
+                // height: 56.h,
               ),
               SizedBox(height: 32.h),
             ],

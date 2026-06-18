@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/utils/view_insets_space.dart';
@@ -23,7 +25,9 @@ class FifthView extends StatelessWidget {
     return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
         final cubit = context.read<RegisterCubit>();
-        bool isDocLoading(String key) => state is PickDocumentImageLoading && cubit.currentlyLoadingDoc == key;
+        bool isDocLoading(String key) =>
+            state is PickDocumentImageLoading &&
+            cubit.currentlyLoadingDoc == key;
 
         return CustomScrollView(
           slivers: [
@@ -33,23 +37,23 @@ class FifthView extends StatelessWidget {
                   50.verticalSpace,
                   Padding(
                     padding: const EdgeInsetsDirectional.only(end: 32),
-                    child: const CustomSteper(), 
+                    child: const CustomSteper(),
                   ),
                   25.verticalSpace,
                   Text(
                     AppLocalizations.of(context)!.uploadOfficialDocs,
-                    style: AppTextStyle.medium16(context).copyWith(
-                      color: Theme.of(context).primaryColor,
-                    ),
+                    style: AppTextStyle.medium16(
+                      context,
+                    ).copyWith(color: Theme.of(context).primaryColor),
                   ),
                   Text(
                     AppLocalizations.of(context)!.uploadOfficialDocsDesc,
-                    style: AppTextStyle.regular14(context).copyWith(
-                      color: Colors.grey.shade400,
-                    ),
+                    style: AppTextStyle.regular14(
+                      context,
+                    ).copyWith(color: Colors.grey.shade400),
                   ),
                   24.verticalSpace,
-                  
+
                   // Personal Photo
                   Text(
                     AppLocalizations.of(context)!.personalPhoto,
@@ -89,7 +93,10 @@ class FifthView extends StatelessWidget {
                           iconPath: AppImages.personalCard,
                           imageFile: cubit.nationalIdBack,
                           isLoading: isDocLoading('nationalId_back'),
-                          onTap: () => cubit.pickDocumentPhoto(docType: 'nationalId', isFront: false),
+                          onTap: () => cubit.pickDocumentPhoto(
+                            docType: 'nationalId',
+                            isFront: false,
+                          ),
                         ),
                       ),
                       16.horizontalSpace,
@@ -99,7 +106,10 @@ class FifthView extends StatelessWidget {
                           iconPath: AppImages.personalCard,
                           imageFile: cubit.nationalIdFront,
                           isLoading: isDocLoading('nationalId_front'),
-                          onTap: () => cubit.pickDocumentPhoto(docType: 'nationalId', isFront: true),
+                          onTap: () => cubit.pickDocumentPhoto(
+                            docType: 'nationalId',
+                            isFront: true,
+                          ),
                         ),
                       ),
                     ],
@@ -120,7 +130,10 @@ class FifthView extends StatelessWidget {
                           iconPath: AppImages.driveLicenceIcon,
                           imageFile: cubit.drivingLicenseBack,
                           isLoading: isDocLoading('drivingLicense_back'),
-                          onTap: () => cubit.pickDocumentPhoto(docType: 'drivingLicense', isFront: false),
+                          onTap: () => cubit.pickDocumentPhoto(
+                            docType: 'drivingLicense',
+                            isFront: false,
+                          ),
                         ),
                       ),
                       16.horizontalSpace,
@@ -130,7 +143,10 @@ class FifthView extends StatelessWidget {
                           iconPath: AppImages.driveLicenceIcon,
                           imageFile: cubit.drivingLicenseFront,
                           isLoading: isDocLoading('drivingLicense_front'),
-                          onTap: () => cubit.pickDocumentPhoto(docType: 'drivingLicense', isFront: true),
+                          onTap: () => cubit.pickDocumentPhoto(
+                            docType: 'drivingLicense',
+                            isFront: true,
+                          ),
                         ),
                       ),
                     ],
@@ -151,7 +167,10 @@ class FifthView extends StatelessWidget {
                           iconPath: AppImages.carLicenceIcon,
                           imageFile: cubit.vehicleLicenseBack,
                           isLoading: isDocLoading('vehicleLicense_back'),
-                          onTap: () => cubit.pickDocumentPhoto(docType: 'vehicleLicense', isFront: false),
+                          onTap: () => cubit.pickDocumentPhoto(
+                            docType: 'vehicleLicense',
+                            isFront: false,
+                          ),
                         ),
                       ),
                       16.horizontalSpace,
@@ -161,7 +180,10 @@ class FifthView extends StatelessWidget {
                           iconPath: AppImages.carLicenceIcon,
                           imageFile: cubit.vehicleLicenseFront,
                           isLoading: isDocLoading('vehicleLicense_front'),
-                          onTap: () => cubit.pickDocumentPhoto(docType: 'vehicleLicense', isFront: true),
+                          onTap: () => cubit.pickDocumentPhoto(
+                            docType: 'vehicleLicense',
+                            isFront: true,
+                          ),
                         ),
                       ),
                     ],
@@ -184,13 +206,17 @@ class FifthView extends StatelessWidget {
                             size: 18.sp,
                             color: Colors.grey.shade600,
                           ),
-                          onPressed: () => cubit.changePage(3), // Back to FourthView
+                          onPressed: () =>
+                              cubit.changePage(3), // Back to FourthView
                         ),
                       ),
                       CustomButton(
                         horizontalPadding: 40,
                         text: AppLocalizations.of(context)!.next,
-                        onPressed: () => cubit.fifthViewPress(context),
+                        onPressed: () {
+                          // cubit.fifthViewPress(context);
+                          context.go(AppRoutes.otp);
+                        },
                       ),
                     ],
                   ),
