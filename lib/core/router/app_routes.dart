@@ -7,6 +7,7 @@ class AppRoutes {
   static const String onbording = '/';
   static const String login = '/login';
   static const String register = '/register';
+  static const String otp = '/otp';
 
   // Admin routes
   static const String admin = '/admin';
@@ -64,7 +65,7 @@ class AppRoutes {
   static const String worderStatisticsPage = '/worderStatisticsPage';
 
   // Route names (for named navigation)
-  static const String onbordingName = 'onbording';
+  static const String otpName = 'otp';
   static const String loginName = 'login';
   static const String registerName = 'register';
   static const String notificationsName = 'notifications';
