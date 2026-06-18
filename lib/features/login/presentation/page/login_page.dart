@@ -106,8 +106,8 @@ class _LoginPageState extends State<LoginPage> {
                         // textColor: MyColors.white,
                         onPressed: () {},
                         isMax: true,
-                        radius: 20.r,
-                        height: 56.h,
+                        // radius: 20.r,
+                        // height: 56.h,
                       ),
                       24.verticalSpace,
                       Row(
