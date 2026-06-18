@@ -17,8 +17,25 @@ import 'package:metw_go/features/register/presentation/widgets/first_view_app_ba
 import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';
 import 'package:metw_go/features/register/presentation/widgets/gender_selecor.dart';
 
-class FirstView extends StatelessWidget {
+class FirstView extends StatefulWidget {
   const FirstView({super.key});
+
+  @override
+  State<FirstView> createState() => _FirstViewState();
+}
+
+class _FirstViewState extends State<FirstView> {
+  bool _shouldAnimate = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final cubit = context.read<RegisterCubit>();
+    if (!cubit.isFirstViewAnimated) {
+      _shouldAnimate = true;
+      cubit.isFirstViewAnimated = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +46,7 @@ class FirstView extends StatelessWidget {
           slivers: [
             FirstViewAppBar(),
             FirstViewBody(
-              animate: true,
+              animate: _shouldAnimate,
               body: Form(
                 key: cubit.firstViewFormKey,
                 child: AnimatedColumn(

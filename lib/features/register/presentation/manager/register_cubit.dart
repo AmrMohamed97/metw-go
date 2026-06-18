@@ -45,6 +45,7 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
 
   /// first view data
   //----------------------------------------------------------------------------
+  bool isFirstViewAnimated = false;
   bool isMale = true;
 
   void changeGender(bool value) {
