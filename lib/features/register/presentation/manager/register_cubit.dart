@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/widgets/image_mixin.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
 import 'package:metw_go/features/register/presentation/view/fifth_view.dart';
@@ -101,23 +100,24 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
   }
 
   void secondViewPress(BuildContext context) {
+    changePage(2);
     // First, check if form fields (like warehouse dropdown) are valid
-    if (secondViewFormKey.currentState?.validate() == true) {
-      // Validate work classification
-      if (!isDeliveryDelegate && !isShippingDelegate && !isBusDriver) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              AppLocalizations.of(context)!.errChooseWorkClassification,
-            ),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-        return;
-      }
-      changePage(2);
-    }
+    // if (secondViewFormKey.currentState?.validate() == true) {
+    //   // Validate work classification
+    //   if (!isDeliveryDelegate && !isShippingDelegate && !isBusDriver) {
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(
+    //         content: Text(
+    //           AppLocalizations.of(context)!.errChooseWorkClassification,
+    //         ),
+    //         backgroundColor: Colors.red,
+    //         behavior: SnackBarBehavior.floating,
+    //       ),
+    //     );
+    //     return;
+    //   }
+    //   changePage(2);
+    // }
   }
 
   /// thired view data

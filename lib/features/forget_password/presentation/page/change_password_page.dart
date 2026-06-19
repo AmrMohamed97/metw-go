@@ -57,7 +57,7 @@ class ChangePasswordPage extends StatelessWidget {
                     CustomButton(
                       text: AppLocalizations.of(context)!.save,
                       onPressed: () {
-                        context.pushReplacement(AppRoutes.otp);
+                        context.go(AppRoutes.login);
                       },
                       isMax: true,
                     ),

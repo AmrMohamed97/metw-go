@@ -17,7 +17,9 @@ class OtpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenWrapper(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        popPress:fromLogin?null: () => context.go(AppRoutes.login),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
