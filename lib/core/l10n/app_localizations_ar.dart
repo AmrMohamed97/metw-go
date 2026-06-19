@@ -305,4 +305,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sendVerificationCode => 'إرسال رمز التحقق';
+
+  @override
+  String get changePassword => 'تغيير كلمة المرور';
+
+  @override
+  String get changePasswordDesc =>
+      'كلمة المرور الجديدة ستساعدك في الحفاظ على أمان بياناتك';
+
+  @override
+  String get save => 'حفظ';
 }

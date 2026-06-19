@@ -673,6 +673,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Send Verification Code'**
   String get sendVerificationCode;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get changePassword;
+
+  /// No description provided for @changePasswordDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'The new password will help you keep your data safe'**
+  String get changePasswordDesc;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
 }
 
 class _AppLocalizationsDelegate

@@ -308,4 +308,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sendVerificationCode => 'Send Verification Code';
+
+  @override
+  String get changePassword => 'Change Password';
+
+  @override
+  String get changePasswordDesc =>
+      'The new password will help you keep your data safe';
+
+  @override
+  String get save => 'Save';
 }

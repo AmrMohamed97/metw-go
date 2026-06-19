@@ -94,5 +94,8 @@
     "forgotPasswordTitle": "Did you forget your password?",
     "forgotPasswordDesc": "Don't worry! This happens sometimes. Please enter the phone number associated with your account.",
     "confirm": "Confirm",
-    "sendVerificationCode": "Send Verification Code"
+    "sendVerificationCode": "Send Verification Code",
+    "changePassword": "Change Password",
+    "changePasswordDesc": "The new password will help you keep your data safe",
+    "save": "Save"
 }
