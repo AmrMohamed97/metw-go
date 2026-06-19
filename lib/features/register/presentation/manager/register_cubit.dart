@@ -14,7 +14,7 @@ import 'package:metw_go/features/register/presentation/view/second_view.dart';
 import 'package:metw_go/features/register/presentation/view/third_view.dart';
 
 @injectable
-class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
+class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
   RegisterCubit() : super(RegisterInitial());
 
   /// global data in register
@@ -130,34 +130,34 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
   File? vehicleImage;
 
   Future<void> pickVehicleImage(ImageSource source) async {
-
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: source);
     if (image != null) {
       emit(PickVehicleImageLoading());
-      vehicleImage=await compress(targetImage: File(image.path));
+      vehicleImage = await compress(targetImage: File(image.path));
       // vehicleImagePath = image.path;
       emit(PickVehicleImageSuccess());
     }
   }
 
   void thirdViewPress(BuildContext context) {
-    if (thirdViewFormKey.currentState?.validate() == true) {
-      if (vehicleImage == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context)!.errUploadVehicleImage),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-        return;
-      }
-      changePage(3);
-    }
+    changePage(3);
+    // if (thirdViewFormKey.currentState?.validate() == true) {
+    //   if (vehicleImage == null) {
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(
+    //         content: Text(AppLocalizations.of(context)!.errUploadVehicleImage),
+    //         backgroundColor: Colors.red,
+    //         behavior: SnackBarBehavior.floating,
+    //       ),
+    //     );
+    //     return;
+    //   }
+    //   changePage(3);
+    // }
   }
 
-    /// fourth view data
+  /// fourth view data
   //----------------------------------------------------------------------------
   final GlobalKey<FormState> fourthViewFormKey = GlobalKey<FormState>();
   List<String> selectedGovernorates = ['القاهرة', 'الجيزة'];
@@ -213,23 +213,32 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin{
     }
   }
 
-  Future<void> pickDocumentPhoto({required String docType, required bool isFront}) async {
+  Future<void> pickDocumentPhoto({
+    required String docType,
+    required bool isFront,
+  }) async {
     final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.camera); // Forced to camera
+    final XFile? image = await picker.pickImage(
+      source: ImageSource.camera,
+    ); // Forced to camera
     if (image != null) {
       currentlyLoadingDoc = '${docType}_${isFront ? 'front' : 'back'}';
       emit(PickDocumentImageLoading());
       final compressed = await compress(targetImage: File(image.path));
-      
+
       switch (docType) {
         case 'nationalId':
           isFront ? nationalIdFront = compressed : nationalIdBack = compressed;
           break;
         case 'drivingLicense':
-          isFront ? drivingLicenseFront = compressed : drivingLicenseBack = compressed;
+          isFront
+              ? drivingLicenseFront = compressed
+              : drivingLicenseBack = compressed;
           break;
         case 'vehicleLicense':
-          isFront ? vehicleLicenseFront = compressed : vehicleLicenseBack = compressed;
+          isFront
+              ? vehicleLicenseFront = compressed
+              : vehicleLicenseBack = compressed;
           break;
       }
       currentlyLoadingDoc = null;
