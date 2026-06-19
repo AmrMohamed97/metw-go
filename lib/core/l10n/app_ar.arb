@@ -87,5 +87,8 @@
     "frontSide": "الوجه الأمامي",
     "backSide": "الوجه الخلفي",
     "vehicleLicense": "رخصة العربية",
-    "editPhoto": "تعديل الصورة"
+    "editPhoto": "تعديل الصورة",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "dontHaveAccount": "ليس لديك حساب؟ ",
+    "signUp": "انشاء حساب"
 }

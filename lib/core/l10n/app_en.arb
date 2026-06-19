@@ -87,5 +87,8 @@
     "frontSide": "Front side",
     "backSide": "Back side",
     "vehicleLicense": "Vehicle License",
-    "editPhoto": "Edit Photo"
+    "editPhoto": "Edit Photo",
+    "forgotPassword": "Forgot Password?",
+    "dontHaveAccount": "Don't have an account? ",
+    "signUp": "Sign Up"
 }

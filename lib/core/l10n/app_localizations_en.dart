@@ -286,4 +286,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get editPhoto => 'Edit Photo';
+
+  @override
+  String get forgotPassword => 'Forgot Password?';
+
+  @override
+  String get dontHaveAccount => 'Don\'t have an account? ';
+
+  @override
+  String get signUp => 'Sign Up';
 }

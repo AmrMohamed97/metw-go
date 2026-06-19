@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
@@ -34,7 +35,7 @@ class LoginPage extends StatelessWidget {
                       20.verticalSpace,
                       Center(
                         child: Text(
-                          "تسجيل الدخول",
+                          AppLocalizations.of(context)!.login,
                           style: AppTextStyle.bold20(context).copyWith(
                             color: MyColors.primaryColor,
                             // fontSize: 28.sp,
@@ -45,7 +46,7 @@ class LoginPage extends StatelessWidget {
                       Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
-                          "رقم الهاتف",
+                          AppLocalizations.of(context)!.phoneNumber,
                           style: AppTextStyle.medium16(
                             context,
                           ).copyWith(color: MyColors.textColor),
@@ -63,7 +64,7 @@ class LoginPage extends StatelessWidget {
                       Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
-                          "كلمة المرور",
+                          AppLocalizations.of(context)!.password,
                           style: AppTextStyle.medium16(
                             context,
                           ).copyWith(color: MyColors.textColor),
@@ -86,7 +87,7 @@ class LoginPage extends StatelessWidget {
                         child: InkWell(
                           onTap: () {},
                           child: Text(
-                            "نسيت كلمة المرور؟",
+                            AppLocalizations.of(context)!.forgotPassword,
                             style: AppTextStyle.regular14(
                               context,
                             ).copyWith(color: MyColors.primaryColor),
@@ -95,7 +96,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       90.verticalSpace,
                       CustomButton(
-                        text: "تسجيل الدخول",
+                        text: AppLocalizations.of(context)!.login,
                         // textColor: MyColors.white,
                         onPressed: () {},
                         isMax: true,
@@ -107,7 +108,7 @@ class LoginPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "ليس لديك حساب؟ ",
+                            AppLocalizations.of(context)!.dontHaveAccount,
                             style: AppTextStyle.medium14(
                               context,
                             ).copyWith(color: MyColors.textColor),
@@ -117,7 +118,7 @@ class LoginPage extends StatelessWidget {
                               context.pushNamed(AppRoutes.registerName);
                             },
                             child: Text(
-                              "انشاء حساب",
+                              AppLocalizations.of(context)!.signUp,
                               style: AppTextStyle.medium14(
                                 context,
                               ).copyWith(color: MyColors.primaryColor),

@@ -283,4 +283,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get editPhoto => 'تعديل الصورة';
+
+  @override
+  String get forgotPassword => 'نسيت كلمة المرور؟';
+
+  @override
+  String get dontHaveAccount => 'ليس لديك حساب؟ ';
+
+  @override
+  String get signUp => 'انشاء حساب';
 }
