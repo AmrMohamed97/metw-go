@@ -47,7 +47,7 @@ class ForgetPasswordPage extends StatelessWidget {
             CustomTextField(hintText: "+966 5X XXX XXXX"),
             Spacer(flex: 1),
             CustomButton(
-              text: AppLocalizations.of(context)!.confirm,
+              text: AppLocalizations.of(context)!.sendVerificationCode,
               // textColor: MyColors.white,
               onPressed: () {
                 context.pushReplacement(AppRoutes.changePasswordPage);

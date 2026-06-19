@@ -302,4 +302,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get confirm => 'تأكيد';
+
+  @override
+  String get sendVerificationCode => 'إرسال رمز التحقق';
 }
