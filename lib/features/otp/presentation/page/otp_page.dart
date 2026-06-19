@@ -9,14 +9,9 @@ import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/otp/presentation/widgets/otp_fields.dart';
 
-class OtpPage extends StatefulWidget {
+class OtpPage extends StatelessWidget {
   const OtpPage({super.key, this.fromLogin = false});
   final bool fromLogin;
-  @override
-  State<OtpPage> createState() => _OtpPageState();
-}
-
-class _OtpPageState extends State<OtpPage> {
   @override
   Widget build(BuildContext context) {
     return ScreenWrapper(
@@ -70,7 +65,7 @@ class _OtpPageState extends State<OtpPage> {
                 ).copyWith(color: MyColors.secondaryColor),
               ),
             ),
-            SizedBox(height: 24.h),
+            16.verticalSpace,
             InkWell(
               onTap: () {},
               child: Text(
@@ -87,8 +82,9 @@ class _OtpPageState extends State<OtpPage> {
             CustomButton(
               text: "تأكيد",
               onPressed: () {
-                // context.go(AppRoutes.login);
-                context.go(AppRoutes.changePasswordPage);
+                fromLogin
+                    ? context.go(AppRoutes.changePasswordPage)
+                    : context.go(AppRoutes.login);
               },
               isMax: true,
             ),
