@@ -295,4 +295,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signUp => 'Sign Up';
+
+  @override
+  String get forgotPasswordTitle => 'Did you forget your password?';
+
+  @override
+  String get forgotPasswordDesc =>
+      'Don\'t worry! This happens sometimes. Please enter the phone number associated with your account.';
+
+  @override
+  String get confirm => 'Confirm';
 }

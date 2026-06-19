@@ -90,5 +90,8 @@
     "editPhoto": "تعديل الصورة",
     "forgotPassword": "نسيت كلمة المرور؟",
     "dontHaveAccount": "ليس لديك حساب؟ ",
-    "signUp": "انشاء حساب"
+    "signUp": "انشاء حساب",
+    "forgotPasswordTitle": "هل نسيت كلمة السر؟",
+    "forgotPasswordDesc": "لا تقلق! يحدث هذا أحيانًا. يُرجى إدخال رقم الهاتف المرتبط بحسابك.",
+    "confirm": "تأكيد"
 }

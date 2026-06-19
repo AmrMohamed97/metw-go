@@ -1,6 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
+import 'package:metw_go/features/forget_password/presentation/manager/forget_password_cubit.dart';
+import 'package:metw_go/features/forget_password/presentation/page/change_password_page.dart';
+import 'package:metw_go/features/forget_password/presentation/page/forget_password_page.dart';
 import 'package:metw_go/features/login/presentation/manager/login_cubit.dart';
 import 'package:metw_go/features/login/presentation/page/login_page.dart';
 import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart';
@@ -63,7 +66,7 @@ class AppRouter {
     routes: [
       GoRoute(
         path: AppRoutes.otp,
-        name: AppRoutes.otpName,
+        name: AppRoutes.otp,
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<OtpCubit>(),
           child: const OtpPage(),
@@ -71,7 +74,7 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.login,
-        name: AppRoutes.loginName,
+        name: AppRoutes.login,
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<LoginCubit>(),
           child: const LoginPage(),
@@ -79,10 +82,26 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.register,
-        name: AppRoutes.registerName,
+        name: AppRoutes.register,
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<RegisterCubit>(),
           child: const RegisterPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.changePasswordPage,
+        name: AppRoutes.changePasswordPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<ForgetPasswordCubit>(),
+          child: const ChangePasswordPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.forgetPasswordPage,
+        name: AppRoutes.forgetPasswordPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<ForgetPasswordCubit>(),
+          child: const ForgetPasswordPage(),
         ),
       ),
 

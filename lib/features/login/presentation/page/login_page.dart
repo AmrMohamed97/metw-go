@@ -89,7 +89,7 @@ class LoginPage extends StatelessWidget {
                       Align(
                         alignment: AlignmentDirectional.centerEnd,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () =>context.push(AppRoutes.forgetPasswordPage),
                           child: Text(
                             AppLocalizations.of(context)!.forgotPassword,
                             style: AppTextStyle.regular14(
@@ -119,7 +119,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              context.pushNamed(AppRoutes.registerName);
+                              context.go(AppRoutes.register);
                             },
                             child: Text(
                               AppLocalizations.of(context)!.signUp,

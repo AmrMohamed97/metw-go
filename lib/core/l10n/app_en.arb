@@ -90,5 +90,8 @@
     "editPhoto": "Edit Photo",
     "forgotPassword": "Forgot Password?",
     "dontHaveAccount": "Don't have an account? ",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "forgotPasswordTitle": "Did you forget your password?",
+    "forgotPasswordDesc": "Don't worry! This happens sometimes. Please enter the phone number associated with your account.",
+    "confirm": "Confirm"
 }

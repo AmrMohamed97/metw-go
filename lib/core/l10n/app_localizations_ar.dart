@@ -292,4 +292,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signUp => 'انشاء حساب';
+
+  @override
+  String get forgotPasswordTitle => 'هل نسيت كلمة السر؟';
+
+  @override
+  String get forgotPasswordDesc =>
+      'لا تقلق! يحدث هذا أحيانًا. يُرجى إدخال رقم الهاتف المرتبط بحسابك.';
+
+  @override
+  String get confirm => 'تأكيد';
 }
