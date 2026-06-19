@@ -691,6 +691,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get save;
+
+  /// No description provided for @enterCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the code'**
+  String get enterCode;
+
+  /// No description provided for @enterCodeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 4-digit code we just sent to\n+2010*******000'**
+  String get enterCodeDesc;
+
+  /// No description provided for @resendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code'**
+  String get resendCode;
 }
 
 class _AppLocalizationsDelegate

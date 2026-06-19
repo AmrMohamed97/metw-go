@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
-import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/otp/presentation/widgets/otp_fields.dart';
+import 'package:metw_go/features/otp/presentation/widgets/otp_timer.dart';
 
 class OtpPage extends StatelessWidget {
   const OtpPage({super.key, this.fromLogin = false});
@@ -20,9 +21,9 @@ class OtpPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            Spacer(flex: 1),
+            Spacer(flex: 2),
             Text(
-              "أدخل الرمز",
+              AppLocalizations.of(context)!.enterCode,
               style: AppTextStyle.medium18(context).copyWith(
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 20,
@@ -30,7 +31,7 @@ class OtpPage extends StatelessWidget {
             ),
             8.verticalSpace,
             Text(
-              "أدخل الرمز المكون من 4 أرقام الذي أرسلناه للتو إلى\n000*******2010+",
+              AppLocalizations.of(context)!.enterCodeDesc,
               textAlign: TextAlign.center,
               style: AppTextStyle.regular16(
                 context,
@@ -52,35 +53,11 @@ class OtpPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 48.h),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
-              decoration: BoxDecoration(
-                color: MyColors.greyFill,
-                borderRadius: BorderRadius.circular(30.r),
-              ),
-              child: Text(
-                "00:20",
-                style: AppTextStyle.medium16(
-                  context,
-                ).copyWith(color: MyColors.secondaryColor),
-              ),
-            ),
-            16.verticalSpace,
-            InkWell(
-              onTap: () {},
-              child: Text(
-                "أرسل الرمز مرة أخرى",
-                style: AppTextStyle.medium14(context).copyWith(
-                  color: MyColors.primaryColor,
-                  decoration: TextDecoration.underline,
-                  decorationColor: MyColors.primaryColor,
-                ),
-              ),
-            ),
+            const OtpTimer(),
             // const Spacer(),
-            18.verticalSpace,
+            Spacer(),
             CustomButton(
-              text: "تأكيد",
+              text: AppLocalizations.of(context)!.confirm,
               onPressed: () {
                 fromLogin
                     ? context.go(AppRoutes.changePasswordPage)
@@ -88,7 +65,7 @@ class OtpPage extends StatelessWidget {
               },
               isMax: true,
             ),
-            Spacer(flex: 2),
+            Spacer(flex: 4),
           ],
         ),
       ),

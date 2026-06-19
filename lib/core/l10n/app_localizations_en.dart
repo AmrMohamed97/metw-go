@@ -318,4 +318,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get save => 'Save';
+
+  @override
+  String get enterCode => 'Enter the code';
+
+  @override
+  String get enterCodeDesc =>
+      'Enter the 4-digit code we just sent to\n+2010*******000';
+
+  @override
+  String get resendCode => 'Resend code';
 }

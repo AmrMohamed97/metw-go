@@ -315,4 +315,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get save => 'حفظ';
+
+  @override
+  String get enterCode => 'أدخل الرمز';
+
+  @override
+  String get enterCodeDesc =>
+      'أدخل الرمز المكون من 4 أرقام الذي أرسلناه للتو إلى\n000*******2010+';
+
+  @override
+  String get resendCode => 'أرسل الرمز مرة أخرى';
 }

@@ -97,5 +97,8 @@
     "sendVerificationCode": "Send Verification Code",
     "changePassword": "Change Password",
     "changePasswordDesc": "The new password will help you keep your data safe",
-    "save": "Save"
+    "save": "Save",
+    "enterCode": "Enter the code",
+    "enterCodeDesc": "Enter the 4-digit code we just sent to\n+2010*******000",
+    "resendCode": "Resend code"
 }
