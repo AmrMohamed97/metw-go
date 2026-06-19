@@ -23,6 +23,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
+        final cubit=context.read<LoginCubit>();
         return ScreenWrapper(
           backGroundColor: Theme.of(context).colorScheme.surfaceDim,
           body: CustomScrollView(
@@ -30,6 +31,7 @@ class LoginPage extends StatelessWidget {
               const LoginAppBar(),
               LoginBody(
                 body: Form(
+                  key: cubit.formKey,
                   child: Column(
                     children: [
                       20.verticalSpace,
@@ -54,6 +56,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       4.verticalSpace,
                       CustomTextField(
+                        controller: cubit.phoneController,
                         hintText: "+966 5X XXX XXXX",
                         radius: 16.r,
                         textInputType: TextInputType.phone,
@@ -72,6 +75,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       4.verticalSpace,
                       CustomTextField(
+                        controller: cubit.passwordController,
                         hintText: "...............",
                         obscureText: true,
                         radius: 16.r,
