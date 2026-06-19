@@ -25,7 +25,7 @@ class ChangePasswordPage extends StatelessWidget {
           mainAxisAlignment: .center,
           children:
               [
-                    Spacer(flex: 1),
+                    Spacer(flex: 2),
                     Center(
                       child: Text(
                         AppLocalizations.of(context)!.changePassword,
@@ -61,7 +61,7 @@ class ChangePasswordPage extends StatelessWidget {
                       },
                       isMax: true,
                     ),
-                    Spacer(flex: 2),
+                    Spacer(flex: 4),
                     // ViewInsetsSpace(),
                   ]
                   .animate(interval: 50.ms)

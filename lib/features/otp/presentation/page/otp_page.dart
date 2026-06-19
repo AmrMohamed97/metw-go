@@ -194,7 +194,8 @@ class _OtpPageState extends State<OtpPage> {
                 text: "تأكيد",
                 // textColor: MyColors.white,
                 onPressed: () {
-                  context.go(AppRoutes.login);
+                  // context.go(AppRoutes.login);
+                  context.go(AppRoutes.changePasswordPage);
                 },
                 isMax: true,
                 // radius: 20.r,
