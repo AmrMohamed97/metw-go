@@ -100,5 +100,7 @@
     "save": "Save",
     "enterCode": "Enter the code",
     "enterCodeDesc": "Enter the 4-digit code we just sent to\n+2010*******000",
-    "resendCode": "Resend code"
+    "resendCode": "Resend code",
+    "thanksForJoining": "Thank you for joining us",
+    "accountUnderReview": "Your account is under review, and we will notify you once it is approved and ready for activation."
 }

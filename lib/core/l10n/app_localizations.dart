@@ -709,6 +709,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Resend code'**
   String get resendCode;
+
+  /// No description provided for @thanksForJoining.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for joining us'**
+  String get thanksForJoining;
+
+  /// No description provided for @accountUnderReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account is under review, and we will notify you once it is approved and ready for activation.'**
+  String get accountUnderReview;
 }
 
 class _AppLocalizationsDelegate

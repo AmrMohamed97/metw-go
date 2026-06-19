@@ -325,4 +325,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get resendCode => 'أرسل الرمز مرة أخرى';
+
+  @override
+  String get thanksForJoining => 'شكراً لانضمامكم إلينا';
+
+  @override
+  String get accountUnderReview =>
+      'حسابك قيد المراجعة، وسنبلغك بمجرد الموافقة عليه وجاهزيته للتفعيل.';
 }

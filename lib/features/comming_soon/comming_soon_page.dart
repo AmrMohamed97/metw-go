@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
@@ -23,7 +24,7 @@ class CommingSoonPage extends StatelessWidget {
             Spacer(flex: 1),
             Center(
               child: Text(
-                'شكراً لانضمامكم إلينا',
+                AppLocalizations.of(context)!.thanksForJoining,
                 style: AppTextStyle.medium18(context).copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 22.sp,
@@ -33,7 +34,7 @@ class CommingSoonPage extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              'حسابك قيد المراجعة، وسنبلغك بمجرد الموافقة عليه وجاهزيته للتفعيل.',
+              AppLocalizations.of(context)!.accountUnderReview,
               textAlign: TextAlign.center,
               style: AppTextStyle.regular16(
                 context,

@@ -328,4 +328,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get resendCode => 'Resend code';
+
+  @override
+  String get thanksForJoining => 'Thank you for joining us';
+
+  @override
+  String get accountUnderReview =>
+      'Your account is under review, and we will notify you once it is approved and ready for activation.';
 }
