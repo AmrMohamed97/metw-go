@@ -61,55 +61,73 @@ class _LoginAppBarState extends State<LoginAppBar>
                 HapticFeedback.lightImpact();
                 _controller.forward(from: 0.0);
               },
-              child: FadeIn(
-                delay: const Duration(milliseconds: 1500),
-                duration: const Duration(seconds: 1),
-                child:
-                    Image.asset(
-                          AppImages.loginImage,
-                          // width: double.infinity,
-                          // height: double.infinity,
-                          // fit: BoxFit.fill,
-                        )
-                        .animate(controller: _controller, autoPlay: false)
-                        .scale(
-                          begin: const Offset(1, 1),
-                          end: const Offset(1.12, 1.12),
-                          duration: 120.ms,
-                          curve: Curves.easeOutCubic,
-                        )
-                        .rotate(
-                          begin: 0,
-                          end: 0.02,
-                          duration: 120.ms,
-                          curve: Curves.easeOutCubic,
-                        )
-                        .then()
-                        .scale(
-                          begin: const Offset(1.12, 1.12),
-                          end: const Offset(0.95, 0.95),
-                          duration: 100.ms,
-                          curve: Curves.easeInOutCubic,
-                        )
-                        .rotate(
-                          begin: 0.02,
-                          end: -0.02,
-                          duration: 100.ms,
-                          curve: Curves.easeInOutCubic,
-                        )
-                        .then()
-                        .scale(
-                          begin: const Offset(0.95, 0.95),
-                          end: const Offset(1, 1),
-                          duration: 100.ms,
-                          curve: Curves.easeInCubic,
-                        )
-                        .rotate(
-                          begin: -0.02,
-                          end: 0,
-                          duration: 100.ms,
-                          curve: Curves.easeInCubic,
-                        ),
+              child: Image.asset(
+                AppImages.loginImage,
+                // width: double.infinity,
+                // height: double.infinity,
+                // fit: BoxFit.fill,
+              )
+              // 1. حركة الضغط الموجودة مسبقاً (تعمل عند النقر)
+              .animate(controller: _controller, autoPlay: false)
+              .scale(
+                begin: const Offset(1, 1),
+                end: const Offset(1.12, 1.12),
+                duration: 120.ms,
+                curve: Curves.easeOutCubic,
+              )
+              .rotate(
+                begin: 0,
+                end: 0.02,
+                duration: 120.ms,
+                curve: Curves.easeOutCubic,
+              )
+              .then()
+              .scale(
+                begin: const Offset(1.12, 1.12),
+                end: const Offset(0.95, 0.95),
+                duration: 100.ms,
+                curve: Curves.easeInOutCubic,
+              )
+              .rotate(
+                begin: 0.02,
+                end: -0.02,
+                duration: 100.ms,
+                curve: Curves.easeInOutCubic,
+              )
+              .then()
+              .scale(
+                begin: const Offset(0.95, 0.95),
+                end: const Offset(1, 1),
+                duration: 100.ms,
+                curve: Curves.easeInCubic,
+              )
+              .rotate(
+                begin: -0.02,
+                end: 0,
+                duration: 100.ms,
+                curve: Curves.easeInCubic,
+              )
+              // 2. حركة الهبوط مثل الباراشوت (تعمل تلقائياً عند فتح الصفحة)
+              .animate(delay: 300.ms)
+              .fadeIn(duration: 1000.ms)
+              .slideY(
+                begin: -1.5, // تبدأ من الأعلى
+                end: 0,
+                duration: 3000.ms, // مدة نزول الباراشوت
+                curve: Curves.easeOutCubic, // نزول ناعم ويبطئ
+              )
+              .moveX(
+                begin: 30, // انحراف خفيف من اليمين
+                end: 0,
+                duration: 3000.ms,
+                curve: Curves.elasticOut, // تأرجح يمين ويسار
+              )
+              .rotate(
+                alignment: Alignment.topCenter, // مركز الدوران من قمة الباراشوت لكي تتأرجح البضاعة بالأسفل
+                begin: 0.08, // ميلان البداية
+                end: 0,
+                duration: 3000.ms,
+                curve: Curves.elasticOut, // حركة البندول الترددية التي تخفت تدريجياً
               ),
             ),
           ),
