@@ -10,8 +10,8 @@ import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/otp/presentation/widgets/otp_fields.dart';
 
 class OtpPage extends StatefulWidget {
-  const OtpPage({super.key});
-
+  const OtpPage({super.key, this.fromLogin = false});
+  final bool fromLogin;
   @override
   State<OtpPage> createState() => _OtpPageState();
 }
