@@ -23,6 +23,7 @@ class AppImages {
   static const String carLicenceIcon = "assets/images/carLicenceIcon.png";
   static const String driveLicenceIcon = "assets/images/driveLicenceIcon.png";
   static const String personalCard = "assets/images/personalCard.png";
+  static const String loginImage = "assets/images/loginImage.png";
   // // map
   // static const String map = "assets/images/map.jpg";
 

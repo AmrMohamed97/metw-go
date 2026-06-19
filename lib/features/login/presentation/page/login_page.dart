@@ -6,46 +6,38 @@ import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/utils/view_insets_space.dart';
-import 'package:metw_go/core/widgets/animated_column.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/login/presentation/manager/login_cubit.dart';
 import 'package:metw_go/features/login/presentation/manager/login_state.dart';
-import 'package:metw_go/features/register/presentation/widgets/first_view_app_bar.dart';
-import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';
+import 'package:metw_go/features/login/presentation/widgets/login_app_bar.dart';
+import 'package:metw_go/features/login/presentation/widgets/login_body.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final bool _shouldAnimate = true;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         return ScreenWrapper(
-          backGroundColor: Theme.of(context).colorScheme.scrim,
+          backGroundColor: Theme.of(context).colorScheme.surfaceDim,
           body: CustomScrollView(
             slivers: [
-              const FirstViewAppBar(),
-              FirstViewBody(
-                animate: _shouldAnimate,
+              const LoginAppBar(),
+              LoginBody(
+                // animate: _shouldAnimate,
                 body: Form(
-                  child: AnimatedColumn(
+                  child: Column(
                     children: [
-                      30.verticalSpace,
+                      20.verticalSpace,
                       Center(
                         child: Text(
                           "تسجيل الدخول",
-                          style: AppTextStyle.bold24(context).copyWith(
+                          style: AppTextStyle.bold20(context).copyWith(
                             color: MyColors.primaryColor,
-                            fontSize: 28.sp,
+                            // fontSize: 28.sp,
                           ),
                         ),
                       ),
@@ -59,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                           ).copyWith(color: MyColors.textColor),
                         ),
                       ),
-                      12.verticalSpace,
+                      4.verticalSpace,
                       CustomTextField(
                         hintText: "+966 5X XXX XXXX",
                         radius: 16.r,
@@ -67,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.end,
                       ),
-                      20.verticalSpace,
+                      // 20.verticalSpace,
                       Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
@@ -77,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                           ).copyWith(color: MyColors.textColor),
                         ),
                       ),
-                      12.verticalSpace,
+                      4.verticalSpace,
                       CustomTextField(
                         hintText: "...............",
                         obscureText: true,
@@ -86,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                           Icons.lock_outline,
                           color: MyColors.grey,
                         ),
+                        isFixed: false,
                       ),
                       12.verticalSpace,
                       Align(
@@ -100,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      40.verticalSpace,
+                      90.verticalSpace,
                       CustomButton(
                         text: "تسجيل الدخول",
                         // textColor: MyColors.white,
