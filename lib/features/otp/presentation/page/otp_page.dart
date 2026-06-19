@@ -61,8 +61,8 @@ class OtpPage extends StatelessWidget {
               text: AppLocalizations.of(context)!.confirm,
               onPressed: () {
                 fromLogin
-                    ? context.go(AppRoutes.changePasswordPage)
-                    : context.go(AppRoutes.login);
+                    ? context.pushReplacement(AppRoutes.changePasswordPage)
+                    : context.pushReplacement(AppRoutes.commingSoonPage);
               },
               isMax: true,
             ),

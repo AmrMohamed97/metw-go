@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,7 +54,7 @@ class ForgetPasswordPage extends StatelessWidget {
                     CustomButton(
                       text: AppLocalizations.of(context)!.sendVerificationCode,
                       onPressed: () {
-                        context.pushReplacement(AppRoutes.otp);
+                        context.pushReplacement(AppRoutes.otp,extra: true);
                       },
                       isMax: true,
                     ),

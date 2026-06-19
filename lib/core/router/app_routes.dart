@@ -9,4 +9,5 @@ class AppRoutes {
   static const String otp = '/otp';
   static const String changePasswordPage = '/changePasswordPage';
   static const String forgetPasswordPage = '/forgetPasswordPage';
+  static const String commingSoonPage = '/commingSoonPage';
 }

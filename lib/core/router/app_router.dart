@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
+import 'package:metw_go/features/comming_soon/comming_soon_page.dart';
 import 'package:metw_go/features/forget_password/presentation/manager/forget_password_cubit.dart';
 import 'package:metw_go/features/forget_password/presentation/page/change_password_page.dart';
 import 'package:metw_go/features/forget_password/presentation/page/forget_password_page.dart';
@@ -18,7 +19,7 @@ import 'app_routes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.otp,
+    initialLocation: AppRoutes.commingSoonPage,
     // redirect: (context, state) async {
     //   final String currentPath = state.matchedLocation;
 
@@ -67,10 +68,13 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.otp,
         name: AppRoutes.otp,
-        builder: (context, state) => BlocProvider(
+        builder: (context, state) {
+          bool? fromLogin=state.extra as bool?;
+          return BlocProvider(
           create: (context) => getIt<OtpCubit>(),
-          child: const OtpPage(),
-        ),
+          child:   OtpPage(fromLogin: fromLogin??false,),
+        );
+        },
       ),
       GoRoute(
         path: AppRoutes.login,
@@ -103,6 +107,11 @@ class AppRouter {
           create: (context) => getIt<ForgetPasswordCubit>(),
           child: const ForgetPasswordPage(),
         ),
+      ),
+      GoRoute(
+        path: AppRoutes.commingSoonPage,
+        name: AppRoutes.commingSoonPage,
+        builder: (context, state) => const CommingSoonPage(),
       ),
 
       // ========== onbording ==========
