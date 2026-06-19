@@ -27,7 +27,6 @@ class LoginPage extends StatelessWidget {
             slivers: [
               const LoginAppBar(),
               LoginBody(
-                // animate: _shouldAnimate,
                 body: Form(
                   child: Column(
                     children: [
