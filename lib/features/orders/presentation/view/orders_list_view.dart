@@ -1,0 +1,33 @@
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart';
+import 'package:metw_go/features/orders/presentation/manager/orders_state.dart';
+import 'package:metw_go/features/orders/presentation/widgets/orders_item.dart';
+
+class OrdersListView extends StatelessWidget {
+  const OrdersListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OrdersCubit, OrdersState>(
+      builder: (context, state) {
+        final cubit = context.read<OrdersCubit>();
+        return Expanded(
+          child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) => OrdersItem(
+              orderId: "#MET-8842",
+              distance: "4.2 كم",
+              isUrgent: true,
+              isTodayOrders: cubit.isTodayOrders,
+              pickup: "مطعم شواية الخليج - طريق التخصصي",
+              delivery: "حي النخيل - شارع الأمير سعود",
+              // borderColor: MyColors.secondaryColor,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

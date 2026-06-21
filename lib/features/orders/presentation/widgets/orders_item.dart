@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
-import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 
 class OrdersItem extends StatelessWidget {
@@ -13,23 +12,23 @@ class OrdersItem extends StatelessWidget {
     required this.pickup,
     required this.delivery,
     this.deliveryLabel = "التسليم إلى:",
-    this.isTodayOrders=false,
-    required this.borderColor,
+    this.isTodayOrders = false,
+    // required this.borderColor,
   });
   final String orderId;
   final String distance;
-  final bool isUrgent,isTodayOrders;
+  final bool isUrgent, isTodayOrders;
   final String pickup;
   final String delivery;
   final String deliveryLabel;
-  final Color borderColor;
+  // final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -42,41 +41,48 @@ class OrdersItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: BorderDirectional(
-            start: BorderSide(color: borderColor, width: 4.w),
+            start: BorderSide(
+              color: isUrgent
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.primary,
+              width: 4,
+            ),
           ),
         ),
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             // Top Row
             Row(
               children: [
-                Text(
-                  orderId,
-                  style: AppTextStyle.medium16(
-                    context,
-                  ).copyWith(color: MyColors.textColor),
-                ),
                 if (isUrgent) ...[
-                  SizedBox(width: 8.w),
                   Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10.w,
-                      vertical: 2,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     decoration: BoxDecoration(
-                      color: MyColors.primaryColor.withValues(alpha: 0.08),
-                      borderRadius: BorderRadius.circular(20.r),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: MyColors.primaryColor.withValues(alpha: 0.3),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.3),
                       ),
                     ),
                     child: Text(
                       "عاجل",
-                      style: AppTextStyle.medium14(
-                        context,
-                      ).copyWith(color: MyColors.primaryColor, fontSize: 12.sp),
+                      style: AppTextStyle.medium14(context).copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 12.sp,
+                      ),
                     ),
+                  ),
+                  8.horizontalSpace,
+                  Text(
+                    orderId,
+                    style: AppTextStyle.medium16(
+                      context,
+                    ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                   ),
                 ],
                 const Spacer(),
@@ -84,7 +90,7 @@ class OrdersItem extends StatelessWidget {
                   distance,
                   style: AppTextStyle.medium14(
                     context,
-                  ).copyWith(color: MyColors.grey),
+                  ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                 ),
               ],
             ),
@@ -97,31 +103,35 @@ class OrdersItem extends StatelessWidget {
                 // Timeline indicators
                 Column(
                   children: [
-                    4.verticalSpace,
+                    SizedBox(height: 4),
                     Container(
                       width: 14,
                       height: 14,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: MyColors.secondaryColor,
+                          color: Theme.of(context).colorScheme.secondary,
                           width: 2.5,
                         ),
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                     ),
-                    Container(width: 1, height: 40, color: MyColors.greyLight),
+                    Container(
+                      width: 1,
+                      height: 40,
+                      color: Theme.of(context).colorScheme.surfaceTint,
+                    ),
                     Container(
                       width: 14,
                       height: 14,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: MyColors.primaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ],
                 ),
-                12.horizontalSpace,
+                SizedBox(height: 12),
                 // Texts
                 Expanded(
                   child: Column(
@@ -129,37 +139,39 @@ class OrdersItem extends StatelessWidget {
                     children: [
                       Text(
                         "الاستلام من:",
-                        style: AppTextStyle.medium14(
-                          context,
-                        ).copyWith(color: MyColors.grey, fontSize: 12.sp),
+                        style: AppTextStyle.medium14(context).copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontSize: 12.sp,
+                        ),
                       ),
                       SizedBox(height: 4),
                       Text(
                         pickup,
-                        style: AppTextStyle.medium14(
-                          context,
-                        ).copyWith(color: MyColors.textColor),
+                        style: AppTextStyle.medium14(context).copyWith(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
                       ),
                       SizedBox(height: 16),
                       Text(
                         deliveryLabel,
-                        style: AppTextStyle.medium14(
-                          context,
-                        ).copyWith(color: MyColors.grey, fontSize: 12.sp),
+                        style: AppTextStyle.medium14(context).copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontSize: 12.sp,
+                        ),
                       ),
                       SizedBox(height: 4),
                       Text(
                         delivery,
-                        style: AppTextStyle.medium14(
-                          context,
-                        ).copyWith(color: MyColors.textColor),
+                        style: AppTextStyle.medium14(context).copyWith(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            20.verticalSpace,
 
             // Bottom Row
             Row(
@@ -175,22 +187,22 @@ class OrdersItem extends StatelessWidget {
                     child: Container(
                       height: 46,
                       decoration: BoxDecoration(
-                        color: MyColors.greyFill,
-                        borderRadius: BorderRadius.circular(12.r),
+                        color: Theme.of(context).colorScheme.outline,
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             "2 يوم - 03:25 ساعة",
-                            style: AppTextStyle.medium14(
-                              context,
-                            ).copyWith(color: MyColors.grey),
+                            style: AppTextStyle.medium14(context).copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
                           ),
                           SizedBox(width: 8.w),
                           Icon(
                             Icons.access_time,
-                            color: MyColors.grey,
+                            color: Theme.of(context).colorScheme.onSurface,
                             size: 18.sp,
                           ),
                         ],
@@ -203,16 +215,18 @@ class OrdersItem extends StatelessWidget {
                   child: Container(
                     height: 46,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: MyColors.greyLight),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.surfaceTint,
+                      ),
                     ),
                     child: Center(
                       child: Text(
                         "تفاصيل",
-                        style: AppTextStyle.medium14(
-                          context,
-                        ).copyWith(color: MyColors.grey),
+                        style: AppTextStyle.medium14(context).copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                       ),
                     ),
                   ),

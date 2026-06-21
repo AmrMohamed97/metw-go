@@ -17,6 +17,7 @@ class AppTheme {
         surfaceDim: MyColors.purpleLight,
         tertiary: MyColors.textColor,
         onSurface: MyColors.grey,
+        surfaceTint: MyColors.greyLight,
         outline: MyColors.greyFill,
         scrim:MyColors.offWhite,
         shadow: MyColors.black,
