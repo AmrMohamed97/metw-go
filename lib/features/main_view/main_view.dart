@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
+import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/features/orders/presentation/page/orders_page.dart';
 
 class MainView extends StatefulWidget {
@@ -73,9 +75,7 @@ class CustomBottomNavBar extends StatelessWidget {
             _buildNavItem(
               context: context,
               index: 0,
-              icon: currentIndex == 0
-                  ? Icons.home_rounded
-                  : Icons.home_outlined,
+              icon: AppImages.home,
               label: 'الرئيسية',
               isSelected: currentIndex == 0,
               onTap: () => onTap(0),
@@ -83,8 +83,7 @@ class CustomBottomNavBar extends StatelessWidget {
             _buildNavItem(
               context: context,
               index: 1,
-              icon:
-                  Icons.shopping_bag_outlined, // Placeholder for bag with check
+              icon: AppImages.orders, // Placeholder for bag with check
               label: 'الطلبات',
               isSelected: currentIndex == 1,
               onTap: () => onTap(1),
@@ -92,7 +91,7 @@ class CustomBottomNavBar extends StatelessWidget {
             _buildNavItem(
               context: context,
               index: 2,
-              icon: Icons.account_balance_wallet_outlined,
+              icon: AppImages.wallet,
               label: 'المحفظة',
               isSelected: currentIndex == 2,
               onTap: () => onTap(2),
@@ -100,7 +99,7 @@ class CustomBottomNavBar extends StatelessWidget {
             _buildNavItem(
               context: context,
               index: 3,
-              icon: Icons.person_outline,
+              icon: AppImages.profile,
               label: 'حسابي',
               isSelected: currentIndex == 3,
               onTap: () => onTap(3),
@@ -113,15 +112,17 @@ class CustomBottomNavBar extends StatelessWidget {
 
   Widget _buildNavItem({
     required int index,
-    required IconData icon,
+    required String icon,
     required String label,
     required bool isSelected,
     required VoidCallback onTap,
     required BuildContext context,
   }) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
+    return CupertinoButton(
+      padding: EdgeInsets.zero,
+      minimumSize: Size.zero,
+      onPressed: onTap,
+      // behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -138,12 +139,12 @@ class CustomBottomNavBar extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
+            Image.asset(
               icon,
               color: isSelected
                   ? Theme.of(context).colorScheme.primary
                   : Theme.of(context).colorScheme.onSurface,
-              size: 26,
+              // size: 26,
             ),
             if (isSelected) ...[
               SizedBox(width: 8),

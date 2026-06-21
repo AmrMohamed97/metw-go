@@ -26,6 +26,10 @@ class AppImages {
   static const String loginImage = "assets/images/loginImage.png";
   static const String commingSoon = "assets/images/commingSoon.png";
   static const String searchIcon = "assets/images/searchIcon.png";
+  static const String home = "assets/images/home.png";
+  static const String orders = "assets/images/orders.png";
+  static const String profile = "assets/images/profile.png";
+  static const String wallet = "assets/images/wallet.png";
   // // map
   // static const String map = "assets/images/map.jpg";
 
