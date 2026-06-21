@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/features/orders/presentation/page/orders_page.dart';
+
 import '../../core/theme/my_colors.dart';
 
 class MainView extends StatefulWidget {
@@ -50,17 +52,17 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
+      height: 80,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
-        color: MyColors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30.r),
           topRight: Radius.circular(30.r),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.05),
             blurRadius: 20,
             offset: const Offset(0, -5),
           ),
@@ -71,20 +73,26 @@ class CustomBottomNavBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildNavItem(
+              context: context,
               index: 0,
-              icon: currentIndex == 0 ? Icons.home_rounded : Icons.home_outlined,
+              icon: currentIndex == 0
+                  ? Icons.home_rounded
+                  : Icons.home_outlined,
               label: 'الرئيسية',
               isSelected: currentIndex == 0,
               onTap: () => onTap(0),
             ),
             _buildNavItem(
+             context: context,
               index: 1,
-              icon: Icons.shopping_bag_outlined, // Placeholder for bag with check
+              icon:
+                  Icons.shopping_bag_outlined, // Placeholder for bag with check
               label: 'الطلبات',
               isSelected: currentIndex == 1,
               onTap: () => onTap(1),
             ),
             _buildNavItem(
+              context: context,
               index: 2,
               icon: Icons.account_balance_wallet_outlined,
               label: 'المحفظة',
@@ -92,6 +100,7 @@ class CustomBottomNavBar extends StatelessWidget {
               onTap: () => onTap(2),
             ),
             _buildNavItem(
+              context: context,
               index: 3,
               icon: Icons.person_outline,
               label: 'حسابي',
@@ -110,6 +119,7 @@ class CustomBottomNavBar extends StatelessWidget {
     required String label,
     required bool isSelected,
     required VoidCallback onTap,
+    required BuildContext context
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -118,31 +128,29 @@ class CustomBottomNavBar extends StatelessWidget {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
         padding: EdgeInsets.symmetric(
-          horizontal: isSelected ? 20.w : 12.w,
-          vertical: 12.h,
+          horizontal: isSelected ? 20 : 12,
+          vertical: 12,
         ),
         decoration: BoxDecoration(
           color: isSelected
-              ? MyColors.primaryColor.withOpacity(0.12)
+              ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.12)
               : Colors.transparent,
-          borderRadius: BorderRadius.circular(30.r),
+          borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               icon,
-              color: isSelected ? MyColors.primaryColor : MyColors.grey,
-              size: 26.sp,
+              color: isSelected ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurface,
+              size: 26,
             ),
             if (isSelected) ...[
               SizedBox(width: 8.w),
               Text(
                 label,
-                style: TextStyle(
-                  color: MyColors.primaryColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16.sp,
+                style: AppTextStyle.regular14(context).copyWith(
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ],
