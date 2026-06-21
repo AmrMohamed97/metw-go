@@ -136,26 +136,30 @@ class CustomBottomNavBar extends StatelessWidget {
               : Colors.transparent,
           borderRadius: BorderRadius.circular(30),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              icon,
-              color: isSelected
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.onSurface,
-              // size: 26,
-            ),
-            if (isSelected) ...[
-              SizedBox(width: 8),
-              Text(
-                label,
-                style: AppTextStyle.regular14(
-                  context,
-                ).copyWith(color: Theme.of(context).colorScheme.primary),
+        child: AnimatedSize(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                icon,
+                color: isSelected
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.onSurface,
+                // size: 26,
               ),
+              if (isSelected) ...[
+                SizedBox(width: 8),
+                Text(
+                  label,
+                  style: AppTextStyle.regular14(
+                    context,
+                  ).copyWith(color: Theme.of(context).colorScheme.primary),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
