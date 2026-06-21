@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/features/orders/presentation/page/orders_page.dart';
 
-import '../../core/theme/my_colors.dart';
-
 class MainView extends StatefulWidget {
   const MainView({super.key});
 
@@ -25,7 +23,7 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.greyFill,
+      backgroundColor: Theme.of(context).colorScheme.outline,
       body: _pages[_currentIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
@@ -83,7 +81,7 @@ class CustomBottomNavBar extends StatelessWidget {
               onTap: () => onTap(0),
             ),
             _buildNavItem(
-             context: context,
+              context: context,
               index: 1,
               icon:
                   Icons.shopping_bag_outlined, // Placeholder for bag with check
@@ -119,7 +117,7 @@ class CustomBottomNavBar extends StatelessWidget {
     required String label,
     required bool isSelected,
     required VoidCallback onTap,
-    required BuildContext context
+    required BuildContext context,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -129,7 +127,7 @@ class CustomBottomNavBar extends StatelessWidget {
         curve: Curves.easeInOut,
         padding: EdgeInsets.symmetric(
           horizontal: isSelected ? 20 : 12,
-          vertical: 12,
+          vertical: 8,
         ),
         decoration: BoxDecoration(
           color: isSelected
@@ -142,16 +140,18 @@ class CustomBottomNavBar extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: isSelected ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurface,
+              color: isSelected
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.onSurface,
               size: 26,
             ),
             if (isSelected) ...[
-              SizedBox(width: 8.w),
+              SizedBox(width: 8),
               Text(
                 label,
-                style: AppTextStyle.regular14(context).copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                style: AppTextStyle.regular14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.primary),
               ),
             ],
           ],
