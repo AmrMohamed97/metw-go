@@ -69,7 +69,8 @@ dependencies:
   dotted_border: ^3.1.0
   flutter_image_compress: ^2.4.0
   pinput: ^6.0.2
-
+  persistent_bottom_nav_bar: ^6.2.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

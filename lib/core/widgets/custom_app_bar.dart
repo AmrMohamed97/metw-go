@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, this.popPress});
+  const CustomAppBar({super.key, this.popPress, this.title, this.centerTitle});
   final void Function()? popPress;
+  final String? title;
+  final bool? centerTitle;
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      title: title==null?null:Text(title!),
+      centerTitle: centerTitle,
       leading: CupertinoButton(
         onPressed: popPress ?? () => context.pop(),
         padding: EdgeInsets.zero,

@@ -7,6 +7,7 @@ import 'package:metw_go/features/forget_password/presentation/page/change_passwo
 import 'package:metw_go/features/forget_password/presentation/page/forget_password_page.dart';
 import 'package:metw_go/features/login/presentation/manager/login_cubit.dart';
 import 'package:metw_go/features/login/presentation/page/login_page.dart';
+import 'package:metw_go/features/main_view/main_view.dart';
 import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart';
 import 'package:metw_go/features/otp/presentation/page/otp_page.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
@@ -16,7 +17,7 @@ import 'app_routes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.register,
+    initialLocation: AppRoutes.mainView,
     // redirect: (context, state) async {
     //   final String currentPath = state.matchedLocation;
 
@@ -109,6 +110,11 @@ class AppRouter {
         path: AppRoutes.commingSoonPage,
         name: AppRoutes.commingSoonPage,
         builder: (context, state) => const CommingSoonPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.mainView,
+        name: AppRoutes.mainView,
+        builder: (context, state) => const MainView(),
       ),
 
       // ========== onbording ==========

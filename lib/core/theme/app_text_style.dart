@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/const/app_const.dart';
 
-import 'my_colors.dart';
 
 abstract class AppTextStyle {
   // Medium text styles

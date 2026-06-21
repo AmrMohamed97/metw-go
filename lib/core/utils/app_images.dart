@@ -25,6 +25,7 @@ class AppImages {
   static const String personalCard = "assets/images/personalCard.png";
   static const String loginImage = "assets/images/loginImage.png";
   static const String commingSoon = "assets/images/commingSoon.png";
+  static const String searchIcon = "assets/images/searchIcon.png";
   // // map
   // static const String map = "assets/images/map.jpg";
 
