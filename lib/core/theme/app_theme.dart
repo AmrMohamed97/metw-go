@@ -19,7 +19,7 @@ class AppTheme {
         onSurface: MyColors.grey,
         surfaceTint: MyColors.greyLight,
         outline: MyColors.greyFill,
-        scrim:MyColors.offWhite,
+        scrim: MyColors.offWhite,
         shadow: MyColors.black,
         surface: MyColors.white,
       ),
@@ -85,7 +85,12 @@ class AppTheme {
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
-
+      bottomAppBarTheme: BottomAppBarThemeData(
+        elevation: 0,
+        shadowColor: MyColors.white,
+        color: MyColors.white,
+        surfaceTintColor: MyColors.white,
+      ),
       // Text Theme
       textTheme: TextTheme(
         bodyLarge: TextStyle(color: MyColors.black, fontSize: 17),
