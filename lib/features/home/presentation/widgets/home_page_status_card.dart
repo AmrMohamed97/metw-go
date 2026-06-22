@@ -78,7 +78,9 @@ class HomePageStatusCard extends StatelessWidget {
               16.horizontalSpace,
               CustomButton(
                 text: "إيقاف الاستقبال",
-                onPressed: () {},
+                onPressed: () {
+                  
+                },
                 // fixedSize: false,
                 height: 35,
                 horizontalPadding: 16,

@@ -71,6 +71,10 @@ dependencies:
   pinput: ^6.0.2
   persistent_bottom_nav_bar: ^6.2.1
   firebase_core: ^4.11.0
+  location: ^8.0.1
+  permission_handler: ^12.0.3
+  geolocator: ^14.0.3
+  firebase_database: ^12.4.4
   
 dev_dependencies:
   flutter_test:
