@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
@@ -6,14 +5,12 @@ import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 
 class HomePageStatusCard extends StatelessWidget {
-  const HomePageStatusCard({
-    super.key,
-  });
+  const HomePageStatusCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(16),
@@ -40,34 +37,33 @@ class HomePageStatusCard extends StatelessWidget {
               ),
               const Spacer(),
               Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 12.w,
-                  vertical: 6.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface.withValues(alpha:0.15),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.surface.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
                   children: [
                     Icon(
                       Icons.access_time,
-                      color:Theme.of(context).colorScheme.surface,
+                      color: Theme.of(context).colorScheme.surface,
                       size: 16.sp,
                     ),
                     SizedBox(width: 8),
                     Text(
                       "02:45:14",
-                      style: AppTextStyle.regular14(context).copyWith(
-                        color: Theme.of(context).colorScheme.surface,
-                      ),
+                      style: AppTextStyle.regular14(
+                        context,
+                      ).copyWith(color: Theme.of(context).colorScheme.surface),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          SizedBox(height: 12),
+          4.verticalSpace,
           Row(
             children: [
               Expanded(

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
@@ -24,24 +23,25 @@ class HomeAppBar extends StatelessWidget {
           children: [
             Text(
               "أهلاً، محمد",
-              style: AppTextStyle.bold16(context).copyWith(
+              style: AppTextStyle.regular16(context).copyWith(
                 color: Theme.of(context).colorScheme.secondary,
                 fontSize: 18.sp,
               ),
             ),
             Row(
+              crossAxisAlignment: .start,
               children: [
+                Icon(
+                  Icons.star,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 16.sp,
+                ),
+                3.horizontalSpace,
                 Text(
                   "4.9",
                   style: AppTextStyle.medium14(
                     context,
                   ).copyWith(color: Theme.of(context).colorScheme.onSurface),
-                ),
-                SizedBox(width: 4.w),
-                Icon(
-                  Icons.star,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 16.sp,
                 ),
               ],
             ),
@@ -50,14 +50,14 @@ class HomeAppBar extends StatelessWidget {
         const Spacer(),
         // Notification Bell
         Container(
-          width: 48.w,
-          height: 48.w,
+          width: 40,
+          height: 40,
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.outline,
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.04),
+                color: Colors.black.withValues(alpha: 0.04),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -71,19 +71,19 @@ class HomeAppBar extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onSurface,
                 size: 24.sp,
               ),
-              Positioned(
-                top: 10.h,
-                right: 12.w,
-                child: Container(
-                  width: 10.w,
-                  height: 10.w,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 1.5),
-                  ),
-                ),
-              ),
+              // Positioned(
+              //   top: 10.h,
+              //   right: 12.w,
+              //   child: Container(
+              //     width: 10.w,
+              //     height: 10.w,
+              //     decoration: BoxDecoration(
+              //       color: Theme.of(context).colorScheme.primary,
+              //       shape: BoxShape.circle,
+              //       border: Border.all(color: Colors.white, width: 1.5),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

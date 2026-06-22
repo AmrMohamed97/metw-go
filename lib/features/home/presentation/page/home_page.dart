@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
+import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/order_item.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/home/presentation/view/home_today_earnings.dart';
@@ -27,10 +28,11 @@ class HomePage extends StatelessWidget {
             16.verticalSpace,
             // Today's Earnings and Completed Orders Row
             HomeTodayEarnings(),
-            16.verticalSpace,
+            12.verticalSpace,
             // Wallet Card
             HomeWalletView(),
             20.verticalSpace,
+            Image.asset(AppImages.offline),
             // Upcoming Orders Header
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

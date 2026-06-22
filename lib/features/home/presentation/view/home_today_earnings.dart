@@ -11,10 +11,10 @@ class HomeTodayEarnings extends StatelessWidget {
       children: [
         Expanded(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.062),
@@ -35,17 +35,16 @@ class HomeTodayEarnings extends StatelessWidget {
               children: [
                 Text(
                   "أرباح اليوم",
-                  style: AppTextStyle.medium14(
+                  style: AppTextStyle.regular12(
                     context,
-                  ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                  ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                 ),
                 SizedBox(height: 8),
                 Text(
                   "245.50 م.ج",
-                  style: AppTextStyle.bold16(context).copyWith(
-                    fontSize: 20,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
+                  style: AppTextStyle.medium16(
+                    context,
+                  ).copyWith(color: Theme.of(context).colorScheme.secondary),
                 ),
                 // SizedBox(height: 4.h),
               ],
@@ -55,10 +54,10 @@ class HomeTodayEarnings extends StatelessWidget {
         8.horizontalSpace,
         Expanded(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 20),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.062),
@@ -73,21 +72,21 @@ class HomeTodayEarnings extends StatelessWidget {
               children: [
                 Text(
                   "الطلبات المكتملة",
-                  style: AppTextStyle.medium14(
-                    context,
-                  ).copyWith(color: Theme.of(context).colorScheme.onSurface),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  "14",
-                  style: AppTextStyle.bold20(
+                  style: AppTextStyle.regular12(
                     context,
                   ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                 ),
                 SizedBox(height: 2),
                 Text(
+                  "14",
+                  style: AppTextStyle.medium18(
+                    context,
+                  ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                ),
+                // SizedBox(height: 2),
+                Text(
                   "من أصل 18 مخطط",
-                  style: AppTextStyle.medium12(
+                  style: AppTextStyle.regular12(
                     context,
                   ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                 ),

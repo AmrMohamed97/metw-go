@@ -30,6 +30,7 @@ class AppImages {
   static const String orders = "assets/images/orders.png";
   static const String profile = "assets/images/profile.png";
   static const String wallet = "assets/images/wallet.png";
+  static const String offline = "assets/images/offline.png";
   // // map
   // static const String map = "assets/images/map.jpg";
 
