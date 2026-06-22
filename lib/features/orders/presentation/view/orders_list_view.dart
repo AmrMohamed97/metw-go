@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_state.dart';
-import 'package:metw_go/features/orders/presentation/widgets/orders_item.dart';
+import 'package:metw_go/core/widgets/order_item.dart';
 
 class OrdersListView extends StatelessWidget {
   const OrdersListView({super.key});
@@ -16,7 +15,7 @@ class OrdersListView extends StatelessWidget {
         return Expanded(
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) => OrdersItem(
+            itemBuilder: (context, index) => OrderItem(
               orderId: "#MET-8842",
               distance: "4.2 كم",
               isUrgent: true,

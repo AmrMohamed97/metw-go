@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "947444247858",
+    "project_id": "new-lasco",
+    "storage_bucket": "new-lasco.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947444247858:android:a76a5484900d4b5570fb2b",
+        "android_client_info": {
+          "package_name": "com.evyx.metw_go"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnro1CUf6cmVdrCdzWGqqHeZkIgwfpDfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
+import 'package:metw_go/features/home/presentation/page/home_page.dart';
 import 'package:metw_go/features/orders/presentation/page/orders_page.dart';
 
 class MainView extends StatefulWidget {
@@ -16,7 +17,7 @@ class _MainViewState extends State<MainView> {
   int _currentIndex = 0; // Starts with Home
 
   final List<Widget> _pages = [
-    const Center(child: Text("الرئيسية")),
+    HomePage(),
     OrdersPage(),
     const Center(child: Text("المحفظة")),
     const Center(child: Text("حسابي")),

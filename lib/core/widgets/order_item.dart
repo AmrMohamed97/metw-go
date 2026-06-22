@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 
-class OrdersItem extends StatelessWidget {
-  const OrdersItem({
+class OrderItem extends StatelessWidget {
+  const OrderItem({
     super.key,
     required this.orderId,
     required this.distance,
