@@ -88,13 +88,13 @@ class HomePageStatusCard extends StatelessWidget {
                       await locationService.checkAndRequestLocationService();
                   if (!serviceEnabled) {
                     await ph.openAppSettings();
-                    return;
+                    // return;
                   }
                   bool permissionGranted =
                       await locationService.checkAndRequestPermission();
                   if (!permissionGranted) {
                     await ph.openAppSettings();
-                    return;
+                    // return;
                   }
                   if (context.mounted) {
                     context.read<AppCubit>().trackDriver();

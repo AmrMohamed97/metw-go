@@ -11,8 +11,8 @@ class AppCubit extends Cubit<AppState> {
   AppCubit(this._appRepo) : super(AppInitial());
   void trackDriver() {
     TrackingLocationService().startTracking(
-      driverId: CacheHelper.getUserData()?.id.toString() ?? '',
-      driverName: CacheHelper.getUserData()?.name ?? '',
+      driverId: '1', //CacheHelper.getUserData()?.id.toString() ?? '',
+      // driverName: "محمد احمد", //CacheHelper.getUserData()?.name ?? '',
     );
   }
 

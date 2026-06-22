@@ -53,7 +53,7 @@ class TrackingLocationService {
   /// Start tracking the rider's location and upload to Firestore
   Future<void> startTracking({
     required String driverId,
-    required String driverName,
+    // required String driverName,
   }) async {
     final hasPermission = await initialize();
     if (!hasPermission) {
@@ -99,7 +99,11 @@ class TrackingLocationService {
     _positionStreamSubscription =
         Geolocator.getPositionStream(locationSettings: locationSettings).listen(
           (Position position) {
-            _throttledUpdate(driverId, position, driverName);
+            _throttledUpdate(
+              driverId, 
+              position, 
+              // driverName
+              );
           },
           onError: (e) {
             debugPrint('Error in location stream: $e');
@@ -112,7 +116,7 @@ class TrackingLocationService {
   /// Stop tracking
   Future<void> stopTracking(String driverId) async {
     await _database.ref('drivers').child(driverId).update({
-      'lastUpdated': ServerValue.timestamp,
+      // 'lastUpdated': ServerValue.timestamp,
       'status': 'offline',
     });
     // _updateLocationInRealtimeDatabase(driverId, position, driverName,'offline');
@@ -123,7 +127,11 @@ class TrackingLocationService {
     }
   }
 
-  void _throttledUpdate(String driverId, Position position, String driverName) {
+  void _throttledUpdate(
+    String driverId, 
+    Position position, 
+    // String driverName
+    ) {
     final now = DateTime.now();
 
     // Battery Optimization: Adjust interval based on speed
@@ -143,7 +151,7 @@ class TrackingLocationService {
       _updateLocationInRealtimeDatabase(
         driverId,
         position,
-        driverName,
+        // driverName,
         'online',
       );
     }
@@ -153,17 +161,17 @@ class TrackingLocationService {
   Future<void> _updateLocationInRealtimeDatabase(
     String driverId,
     Position position,
-    String driverName,
+    // String driverName,
     String status,
   ) async {
     try {
       await _database.ref('drivers').child(driverId).set({
         'location': {'lat': position.latitude, 'lng': position.longitude},
-        'lastUpdated': ServerValue.timestamp,
+        // 'lastUpdated': ServerValue.timestamp,
         'status': status,
-        'name': driverName,
-        'speed': position.speed,
-        'heading': position.heading,
+        // 'name': driverName,
+        // 'speed': position.speed,
+        // 'heading': position.heading,
       });
       debugPrint(
         'Location updated in Realtime Database: ${position.latitude}, ${position.longitude}',
