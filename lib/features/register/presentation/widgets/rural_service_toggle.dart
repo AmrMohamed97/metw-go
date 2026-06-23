@@ -27,7 +27,7 @@ class RuralServiceToggle extends StatelessWidget {
         borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.02),
+            color: Colors.black.withValues(alpha: 0.02),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -43,8 +43,8 @@ class RuralServiceToggle extends StatelessWidget {
             ),
             child: Image.asset(
               AppImages.countryIcon, // user preferred this
-              width: 24.w,
-              height: 24.w,
+              width: 24,
+              height: 24,
             ),
           ),
 

@@ -5,6 +5,7 @@ import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
+import 'package:metw_go/features/wallet/presentation/view/balance_card.dart';
 
 class WalletPage extends StatelessWidget {
   const WalletPage({super.key});
@@ -23,7 +24,7 @@ class WalletPage extends StatelessWidget {
         child: Column(
           children: [
             16.verticalSpace,
-            _buildBalanceCard(context),
+            BalanceCard(),
             20.verticalSpace,
             _buildStatsSection(context),
             20.verticalSpace,
@@ -37,80 +38,6 @@ class WalletPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBalanceCard(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(24.w),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.r),
-        gradient: const LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [MyColors.secondaryColor, MyColors.primaryColor],
-        ),
-      ),
-      child: Column(
-        children: [
-          Text(
-            "الرصيد المتاح",
-            style: AppTextStyle.medium14(
-              context,
-            ).copyWith(color: Colors.white.withValues(alpha: 0.8)),
-          ),
-          8.verticalSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "ر.س",
-                style: AppTextStyle.medium14(
-                  context,
-                ).copyWith(color: Colors.white),
-              ),
-              4.horizontalSpace,
-              Text(
-                "1,250.50",
-                style: AppTextStyle.bold16(
-                  context,
-                ).copyWith(color: Colors.white, fontSize: 28.sp),
-              ),
-            ],
-          ),
-          24.verticalSpace,
-          Material(
-            color: MyColors.primaryColor,
-            borderRadius: BorderRadius.circular(16.r),
-            child: InkWell(
-              onTap: () {},
-              borderRadius: BorderRadius.circular(16.r),
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "سحب الأرباح",
-                      style: AppTextStyle.medium14(context).copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    8.horizontalSpace,
-                    Icon(
-                      Icons.account_balance_wallet_outlined,
-                      color: Colors.white,
-                      size: 20.sp,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildStatsSection(BuildContext context) {
     return Row(
