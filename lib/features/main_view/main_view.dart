@@ -6,6 +6,7 @@ import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/features/home/presentation/page/home_page.dart';
 import 'package:metw_go/features/orders/presentation/page/orders_page.dart';
+import 'package:metw_go/features/wallet/presentation/page/wallet_page.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -22,7 +23,7 @@ class _MainViewState extends State<MainView> {
     final List<Widget> pages = [
       HomePage(),
       OrdersPage(),
-      Center(child: Text(AppLocalizations.of(context)!.wallet)),
+      WalletPage(),
       Center(child: Text(AppLocalizations.of(context)!.myAccount)),
     ];
 
