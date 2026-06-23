@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/features/home/presentation/services/tracking_location_service.dart';
@@ -30,7 +31,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
               ),
               8.horizontalSpace,
               Text(
-                "غير متاح للعمل",
+                AppLocalizations.of(context)!.unavailableForWork,
                 style: AppTextStyle.regular14(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.surface),
@@ -68,7 +69,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  "قم بتفعيل حالتك لاستقبال طلبات التوصيل الجديدة في منطقتك.",
+                  AppLocalizations.of(context)!.activateStatusToReceiveOrders,
                   style: AppTextStyle.regular12(context).copyWith(
                     color: Theme.of(context).colorScheme.surface,
                     height: 1.5,
@@ -77,7 +78,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
               ),
               16.horizontalSpace,
               CustomButton(
-                text: "جاهز للاستقبال",
+                text: AppLocalizations.of(context)!.readyToReceive,
                 onPressed: () async {
                   // final locationService = LocationService();
                   // bool serviceEnabled = await locationService

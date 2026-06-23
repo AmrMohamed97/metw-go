@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
@@ -31,7 +32,7 @@ class HomePageOnlineStatusCard extends StatelessWidget {
               ),
               8.horizontalSpace,
               Text(
-                "متاح للاستقبال",
+                AppLocalizations.of(context)!.availableToReceive,
                 style: AppTextStyle.regular14(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.surface),
@@ -69,7 +70,7 @@ class HomePageOnlineStatusCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  "أنت الآن في وضع الاتصال، بانتظار طلباتك القادمة.",
+                  AppLocalizations.of(context)!.onlineWaitingForOrders,
                   style: AppTextStyle.regular12(context).copyWith(
                     color: Theme.of(context).colorScheme.surface,
                     height: 1.5,
@@ -78,7 +79,7 @@ class HomePageOnlineStatusCard extends StatelessWidget {
               ),
               16.horizontalSpace,
               CustomButton(
-                text: "إيقاف الاستقبال",
+                text: AppLocalizations.of(context)!.stopReceiving,
                 onPressed: () {
                   TrackingLocationService().stopTracking('9');
                 },

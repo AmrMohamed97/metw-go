@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/features/home/presentation/page/home_page.dart';
@@ -16,18 +17,18 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   int _currentIndex = 0; // Starts with Home
 
-  final List<Widget> _pages = [
-    HomePage(),
-    OrdersPage(),
-    const Center(child: Text("المحفظة")),
-    const Center(child: Text("حسابي")),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      HomePage(),
+      OrdersPage(),
+      Center(child: Text(AppLocalizations.of(context)!.wallet)),
+      Center(child: Text(AppLocalizations.of(context)!.myAccount)),
+    ];
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.outline,
-      body: _pages[_currentIndex],
+      body: pages[_currentIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -77,7 +78,7 @@ class CustomBottomNavBar extends StatelessWidget {
               context: context,
               index: 0,
               icon: AppImages.home,
-              label: 'الرئيسية',
+              label: AppLocalizations.of(context)!.home,
               isSelected: currentIndex == 0,
               onTap: () => onTap(0),
             ),
@@ -85,7 +86,7 @@ class CustomBottomNavBar extends StatelessWidget {
               context: context,
               index: 1,
               icon: AppImages.orders, // Placeholder for bag with check
-              label: 'الطلبات',
+              label: AppLocalizations.of(context)!.orders,
               isSelected: currentIndex == 1,
               onTap: () => onTap(1),
             ),
@@ -93,7 +94,7 @@ class CustomBottomNavBar extends StatelessWidget {
               context: context,
               index: 2,
               icon: AppImages.wallet,
-              label: 'المحفظة',
+              label: AppLocalizations.of(context)!.wallet,
               isSelected: currentIndex == 2,
               onTap: () => onTap(2),
             ),
@@ -101,7 +102,7 @@ class CustomBottomNavBar extends StatelessWidget {
               context: context,
               index: 3,
               icon: AppImages.profile,
-              label: 'حسابي',
+              label: AppLocalizations.of(context)!.myAccount,
               isSelected: currentIndex == 3,
               onTap: () => onTap(3),
             ),

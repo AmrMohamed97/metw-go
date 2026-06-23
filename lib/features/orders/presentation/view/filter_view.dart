@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart';
@@ -16,14 +17,14 @@ class FilterView extends StatelessWidget {
         return Row(
           children: [
             _buildTab(
-              "طلبات اليوم",
+              AppLocalizations.of(context)!.todayOrders,
               cubit.isTodayOrders,
               () => cubit.selectTodayOrders(true),
               context,
             ),
             SizedBox(width: 8),
             _buildTab(
-              "طلبات مجدولة",
+              AppLocalizations.of(context)!.scheduledOrders,
               !cubit.isTodayOrders,
               () => cubit.selectTodayOrders(false),
               context,
@@ -74,7 +75,7 @@ Widget _buildDatePicker(BuildContext context) {
     child: Row(
       children: [
         Text(
-          "اليوم",
+          AppLocalizations.of(context)!.today,
           style: AppTextStyle.medium14(context).copyWith(color: MyColors.grey),
         ),
         SizedBox(width: 8),

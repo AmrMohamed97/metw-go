@@ -341,4 +341,51 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get outOf18Planned => 'من أصل 18 مخطط';
+
+  @override
+  String get wallet => 'المحفظة';
+
+  @override
+  String get withdrawBalance => 'سحب الرصيد';
+
+  @override
+  String get unavailableForWork => 'غير متاح للعمل';
+
+  @override
+  String get activateStatusToReceiveOrders =>
+      'قم بتفعيل حالتك لاستقبال طلبات التوصيل الجديدة في منطقتك.';
+
+  @override
+  String get readyToReceive => 'جاهز للاستقبال';
+
+  @override
+  String get availableToReceive => 'متاح للاستقبال';
+
+  @override
+  String get onlineWaitingForOrders =>
+      'أنت الآن في وضع الاتصال، بانتظار طلباتك القادمة.';
+
+  @override
+  String get stopReceiving => 'إيقاف الاستقبال';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get orders => 'الطلبات';
+
+  @override
+  String get myAccount => 'حسابي';
+
+  @override
+  String get search => 'بحث';
+
+  @override
+  String get todayOrders => 'طلبات اليوم';
+
+  @override
+  String get scheduledOrders => 'طلبات مجدولة';
+
+  @override
+  String get today => 'اليوم';
 }

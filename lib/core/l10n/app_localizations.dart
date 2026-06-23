@@ -739,6 +739,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'out of 18 planned'**
   String get outOf18Planned;
+
+  /// No description provided for @wallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get wallet;
+
+  /// No description provided for @withdrawBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdraw Balance'**
+  String get withdrawBalance;
+
+  /// No description provided for @unavailableForWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Unavailable for work'**
+  String get unavailableForWork;
+
+  /// No description provided for @activateStatusToReceiveOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate your status to receive new delivery orders in your area.'**
+  String get activateStatusToReceiveOrders;
+
+  /// No description provided for @readyToReceive.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to receive'**
+  String get readyToReceive;
+
+  /// No description provided for @availableToReceive.
+  ///
+  /// In en, this message translates to:
+  /// **'Available to receive'**
+  String get availableToReceive;
+
+  /// No description provided for @onlineWaitingForOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'You are online, waiting for upcoming orders.'**
+  String get onlineWaitingForOrders;
+
+  /// No description provided for @stopReceiving.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop receiving'**
+  String get stopReceiving;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get orders;
+
+  /// No description provided for @myAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'My Account'**
+  String get myAccount;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @todayOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Orders'**
+  String get todayOrders;
+
+  /// No description provided for @scheduledOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled Orders'**
+  String get scheduledOrders;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
 }
 
 class _AppLocalizationsDelegate

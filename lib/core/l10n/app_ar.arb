@@ -105,5 +105,20 @@
     "accountUnderReview": "حسابك قيد المراجعة، وسنبلغك بمجرد الموافقة عليه وجاهزيته للتفعيل.",
     "todayEarnings": "أرباح اليوم",
     "completedOrders": "الطلبات المكتملة",
-    "outOf18Planned": "من أصل 18 مخطط"
+    "outOf18Planned": "من أصل 18 مخطط",
+    "wallet": "المحفظة",
+    "withdrawBalance": "سحب الرصيد",
+    "unavailableForWork": "غير متاح للعمل",
+    "activateStatusToReceiveOrders": "قم بتفعيل حالتك لاستقبال طلبات التوصيل الجديدة في منطقتك.",
+    "readyToReceive": "جاهز للاستقبال",
+    "availableToReceive": "متاح للاستقبال",
+    "onlineWaitingForOrders": "أنت الآن في وضع الاتصال، بانتظار طلباتك القادمة.",
+    "stopReceiving": "إيقاف الاستقبال",
+    "home": "الرئيسية",
+    "orders": "الطلبات",
+    "myAccount": "حسابي",
+    "search": "بحث",
+    "todayOrders": "طلبات اليوم",
+    "scheduledOrders": "طلبات مجدولة",
+    "today": "اليوم"
 }

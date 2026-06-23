@@ -105,5 +105,20 @@
     "accountUnderReview": "Your account is under review, and we will notify you once it is approved and ready for activation.",
     "todayEarnings": "Today's Earnings",
     "completedOrders": "Completed Orders",
-    "outOf18Planned": "out of 18 planned"
+    "outOf18Planned": "out of 18 planned",
+    "wallet": "Wallet",
+    "withdrawBalance": "Withdraw Balance",
+    "unavailableForWork": "Unavailable for work",
+    "activateStatusToReceiveOrders": "Activate your status to receive new delivery orders in your area.",
+    "readyToReceive": "Ready to receive",
+    "availableToReceive": "Available to receive",
+    "onlineWaitingForOrders": "You are online, waiting for upcoming orders.",
+    "stopReceiving": "Stop receiving",
+    "home": "Home",
+    "orders": "Orders",
+    "myAccount": "My Account",
+    "search": "Search",
+    "todayOrders": "Today's Orders",
+    "scheduledOrders": "Scheduled Orders",
+    "today": "Today"
 }

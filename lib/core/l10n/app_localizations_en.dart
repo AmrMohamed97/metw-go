@@ -344,4 +344,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get outOf18Planned => 'out of 18 planned';
+
+  @override
+  String get wallet => 'Wallet';
+
+  @override
+  String get withdrawBalance => 'Withdraw Balance';
+
+  @override
+  String get unavailableForWork => 'Unavailable for work';
+
+  @override
+  String get activateStatusToReceiveOrders =>
+      'Activate your status to receive new delivery orders in your area.';
+
+  @override
+  String get readyToReceive => 'Ready to receive';
+
+  @override
+  String get availableToReceive => 'Available to receive';
+
+  @override
+  String get onlineWaitingForOrders =>
+      'You are online, waiting for upcoming orders.';
+
+  @override
+  String get stopReceiving => 'Stop receiving';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get orders => 'Orders';
+
+  @override
+  String get myAccount => 'My Account';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get todayOrders => 'Today\'s Orders';
+
+  @override
+  String get scheduledOrders => 'Scheduled Orders';
+
+  @override
+  String get today => 'Today';
 }

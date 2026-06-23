@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 
@@ -12,7 +13,11 @@ class SearchView extends StatelessWidget {
       crossAxisAlignment: .start,
       children: [
         Expanded(
-          child: CustomTextField(hintText: "بحث", radius: 64, isFixed: false),
+          child: CustomTextField(
+            hintText: AppLocalizations.of(context)!.search,
+            radius: 64,
+            isFixed: false,
+          ),
         ),
         6.horizontalSpace,
         Container(

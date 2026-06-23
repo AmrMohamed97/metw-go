@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 
 class HomeWalletView extends StatelessWidget {
@@ -41,7 +42,7 @@ class HomeWalletView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "المحفظة",
+                AppLocalizations.of(context)!.wallet,
                 style: AppTextStyle.medium12(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.onSurface),
@@ -56,7 +57,7 @@ class HomeWalletView extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            "سحب الرصيد",
+            AppLocalizations.of(context)!.withdrawBalance,
             style: AppTextStyle.medium14(
               context,
             ).copyWith(color: Theme.of(context).colorScheme.tertiary),
