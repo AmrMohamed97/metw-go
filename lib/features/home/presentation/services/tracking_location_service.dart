@@ -96,6 +96,23 @@ class TrackingLocationService {
       );
     }
 
+    // Update status to online immediately to reflect in UI/DB right away
+    try {
+      Position? lastPosition = await Geolocator.getLastKnownPosition();
+      if (lastPosition != null) {
+        await _updateLocationInRealtimeDatabase(driverId, lastPosition, 'online');
+      } else {
+        await _database.ref('drivers').child(driverId).update({
+          'status': 'online',
+        });
+      }
+    } catch (e) {
+      debugPrint('Error setting initial online status: $e');
+      await _database.ref('drivers').child(driverId).update({
+        'status': 'online',
+      });
+    }
+
     _positionStreamSubscription =
         Geolocator.getPositionStream(locationSettings: locationSettings).listen(
           (Position position) {

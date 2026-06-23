@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
-import 'package:metw_go/features/home/presentation/services/location_service.dart';
-import 'package:permission_handler/permission_handler.dart' as ph;
+import 'package:metw_go/features/home/presentation/services/tracking_location_service.dart';
 
 class HomePageOfflineStatusCard extends StatelessWidget {
   const HomePageOfflineStatusCard({super.key});
@@ -95,9 +92,10 @@ class HomePageOfflineStatusCard extends StatelessWidget {
                   //   await ph.openAppSettings();
                   //   // return;
                   // }
-                  if (context.mounted) {
-                    context.read<AppCubit>().trackDriver();
-                  }
+                  // if (context.mounted) {
+                  //   context.read<AppCubit>().trackDriver();
+                  // }
+                  TrackingLocationService().startTracking(driverId: '9');
                 },
                 // fixedSize: false,
                 height: 35,

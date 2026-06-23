@@ -9,12 +9,12 @@ import 'package:metw_go/features/home/presentation/services/tracking_location_se
 class AppCubit extends Cubit<AppState> {
   final AppRepo _appRepo;
   AppCubit(this._appRepo) : super(AppInitial());
-  void trackDriver() {
-    TrackingLocationService().startTracking(
-      driverId: '9', //CacheHelper.getUserData()?.id.toString() ?? '',
-      // driverName: "محمد احمد", //CacheHelper.getUserData()?.name ?? '',
-    );
-  }
+  // void trackDriver() {
+  //   TrackingLocationService().startTracking(
+  //     driverId: '9', //CacheHelper.getUserData()?.id.toString() ?? '',
+  //     // driverName: "محمد احمد", //CacheHelper.getUserData()?.name ?? '',
+  //   );
+  // }
 
   Future<void> logout() async {
     emit(ApplogoutLoadingState());
