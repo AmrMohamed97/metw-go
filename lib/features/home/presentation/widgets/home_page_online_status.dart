@@ -34,7 +34,7 @@ class HomePageOnlineStatusCard extends StatelessWidget {
                 "متاح للاستقبال",
                 style: AppTextStyle.regular14(
                   context,
-                ).copyWith(color: Colors.white),
+                ).copyWith(color: Theme.of(context).colorScheme.surface),
               ),
               const Spacer(),
               Container(
