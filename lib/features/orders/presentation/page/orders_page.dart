@@ -26,9 +26,10 @@ class OrdersPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 children: [
-                  8.verticalSpace,
+                  // 8.verticalSpace,
                   // Search Bar
                   SearchView(),
+                  8.verticalSpace,
                   // Filter Chips
                   FilterView(),
                   20.verticalSpace,

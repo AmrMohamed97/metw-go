@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:metw_go/core/widgets/order_item.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_state.dart';
-import 'package:metw_go/core/widgets/order_item.dart';
 
 class OrdersListView extends StatelessWidget {
   const OrdersListView({super.key});
@@ -15,14 +15,17 @@ class OrdersListView extends StatelessWidget {
         return Expanded(
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) => OrderItem(
-              orderId: "#MET-8842",
-              distance: "4.2 كم",
-              isUrgent: true,
-              isTodayOrders: cubit.isTodayOrders,
-              pickup: "مطعم شواية الخليج - طريق التخصصي",
-              delivery: "حي النخيل - شارع الأمير سعود",
-              // borderColor: MyColors.secondaryColor,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.only(bottom: 12.0),
+              child: OrderItem(
+                orderId: "#MET-8842",
+                distance: "4.2 كم",
+                isUrgent: true,
+                isTodayOrders: cubit.isTodayOrders,
+                pickup: "مطعم شواية الخليج - طريق التخصصي",
+                delivery: "حي النخيل - شارع الأمير سعود",
+                // borderColor: MyColors.secondaryColor,
+              ),
             ),
           ),
         );
