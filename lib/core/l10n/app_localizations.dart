@@ -721,6 +721,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your account is under review, and we will notify you once it is approved and ready for activation.'**
   String get accountUnderReview;
+
+  /// No description provided for @todayEarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Earnings'**
+  String get todayEarnings;
+
+  /// No description provided for @completedOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed Orders'**
+  String get completedOrders;
+
+  /// No description provided for @outOf18Planned.
+  ///
+  /// In en, this message translates to:
+  /// **'out of 18 planned'**
+  String get outOf18Planned;
 }
 
 class _AppLocalizationsDelegate

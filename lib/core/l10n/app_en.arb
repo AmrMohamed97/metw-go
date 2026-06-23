@@ -102,5 +102,8 @@
     "enterCodeDesc": "Enter the 4-digit code we just sent to\n+2010*******000",
     "resendCode": "Resend code",
     "thanksForJoining": "Thank you for joining us",
-    "accountUnderReview": "Your account is under review, and we will notify you once it is approved and ready for activation."
+    "accountUnderReview": "Your account is under review, and we will notify you once it is approved and ready for activation.",
+    "todayEarnings": "Today's Earnings",
+    "completedOrders": "Completed Orders",
+    "outOf18Planned": "out of 18 planned"
 }

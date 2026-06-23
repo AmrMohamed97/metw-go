@@ -332,4 +332,13 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get accountUnderReview =>
       'حسابك قيد المراجعة، وسنبلغك بمجرد الموافقة عليه وجاهزيته للتفعيل.';
+
+  @override
+  String get todayEarnings => 'أرباح اليوم';
+
+  @override
+  String get completedOrders => 'الطلبات المكتملة';
+
+  @override
+  String get outOf18Planned => 'من أصل 18 مخطط';
 }

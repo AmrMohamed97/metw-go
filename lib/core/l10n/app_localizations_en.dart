@@ -335,4 +335,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get accountUnderReview =>
       'Your account is under review, and we will notify you once it is approved and ready for activation.';
+
+  @override
+  String get todayEarnings => 'Today\'s Earnings';
+
+  @override
+  String get completedOrders => 'Completed Orders';
+
+  @override
+  String get outOf18Planned => 'out of 18 planned';
 }

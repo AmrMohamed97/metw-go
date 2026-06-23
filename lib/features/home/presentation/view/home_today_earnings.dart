@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 
 class HomeTodayEarnings extends StatelessWidget {
@@ -34,7 +35,7 @@ class HomeTodayEarnings extends StatelessWidget {
               mainAxisAlignment: .center,
               children: [
                 Text(
-                  "أرباح اليوم",
+                  AppLocalizations.of(context)!.todayEarnings,
                   style: AppTextStyle.regular12(
                     context,
                   ).copyWith(color: Theme.of(context).colorScheme.tertiary),
@@ -71,7 +72,7 @@ class HomeTodayEarnings extends StatelessWidget {
               mainAxisAlignment: .center,
               children: [
                 Text(
-                  "الطلبات المكتملة",
+                  AppLocalizations.of(context)!.completedOrders,
                   style: AppTextStyle.regular12(
                     context,
                   ).copyWith(color: Theme.of(context).colorScheme.tertiary),
@@ -85,7 +86,7 @@ class HomeTodayEarnings extends StatelessWidget {
                 ),
                 // SizedBox(height: 2),
                 Text(
-                  "من أصل 18 مخطط",
+                  AppLocalizations.of(context)!.outOf18Planned,
                   style: AppTextStyle.regular12(
                     context,
                   ).copyWith(color: Theme.of(context).colorScheme.onSurface),
