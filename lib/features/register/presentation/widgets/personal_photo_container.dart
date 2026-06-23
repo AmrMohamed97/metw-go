@@ -48,7 +48,7 @@ class PersonalPhotoContainer extends StatelessWidget {
                         children: [
                           Image.file(imageFile!, fit: BoxFit.cover),
                           Container(
-                            color: Colors.black.withOpacity(0.4),
+                            color: Colors.black.withValues(alpha: 0.4),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

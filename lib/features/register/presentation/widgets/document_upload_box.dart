@@ -51,7 +51,7 @@ class DocumentUploadBox extends StatelessWidget {
                         children: [
                           Image.file(imageFile!, fit: BoxFit.cover),
                           Container(
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withValues(alpha: 0.3),
                             child: Center(
                               child: Container(
                                 padding: EdgeInsets.all(8.r),
