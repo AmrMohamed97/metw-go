@@ -62,7 +62,7 @@ class TrackingLocationService {
     }
 
     // Stop existing stream if any
-    await stopTracking(driverId);
+    // await stopTracking(driverId);
 
     LocationSettings locationSettings;
 

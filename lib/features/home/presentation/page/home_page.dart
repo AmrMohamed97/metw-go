@@ -1,85 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/di/dependency_injection.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/order_item.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
+import 'package:metw_go/features/home/presentation/manager/home_cubit.dart';
+import 'package:metw_go/features/home/presentation/manager/home_state.dart';
 import 'package:metw_go/features/home/presentation/view/home_today_earnings.dart';
 import 'package:metw_go/features/home/presentation/view/home_wallet_view.dart';
 import 'package:metw_go/features/home/presentation/widgets/home_page_app_bar.dart';
-import 'package:metw_go/features/home/presentation/widgets/home_page_status_card.dart';
+import 'package:metw_go/features/home/presentation/widgets/home_page_offline_status_card.dart';
+import 'package:metw_go/features/home/presentation/widgets/home_page_online_status.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ScreenWrapper(
-      body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-          physics: const BouncingScrollPhysics(),
-          children: [
-            // Top Bar
-            HomeAppBar(),
-            20.verticalSpace,
-            // Purple Status Card
-            HomePageStatusCard(),
-            16.verticalSpace,
-            // Today's Earnings and Completed Orders Row
-            HomeTodayEarnings(),
-            12.verticalSpace,
-            // Wallet Card
-            HomeWalletView(),
-            20.verticalSpace,
-            Image.asset(AppImages.offline),
-            // Upcoming Orders Header
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "طلبات قادمة",
-                  style: AppTextStyle.medium16(
-                    context,
-                  ).copyWith(color: Theme.of(context).colorScheme.tertiary),
-                ),
-                Text(
-                  "عرض الكل",
-                  style: AppTextStyle.medium14(
-                    context,
-                  ).copyWith(color: Theme.of(context).colorScheme.primary),
-                ),
-              ],
-            ),
-            16.verticalSpace,
+    return BlocProvider(
+      create: (context) => getIt<HomeCubit>(),
+      child: ScreenWrapper(
+        body: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            final cubit = context.read<HomeCubit>();
+            return SafeArea(
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  // Top Bar
+                  HomeAppBar(),
+                  20.verticalSpace,
+                  // Purple Status Card
+                  cubit.status == 'offline'
+                      ? HomePageOfflineStatusCard()
+                      : HomePageOnlineStatusCard(),
+                  16.verticalSpace,
+                  // Today's Earnings and Completed Orders Row
+                  HomeTodayEarnings(),
+                  12.verticalSpace,
+                  // Wallet Card
+                  HomeWalletView(),
+                  20.verticalSpace,
+                  cubit.status == 'offline'
+                      ? Image.asset(AppImages.offline)
+                      // Upcoming Orders Header
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "طلبات قادمة",
+                              style: AppTextStyle.medium16(context).copyWith(
+                                color: Theme.of(context).colorScheme.tertiary,
+                              ),
+                            ),
+                            Text(
+                              "عرض الكل",
+                              style: AppTextStyle.medium14(context).copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                  16.verticalSpace,
 
-            // Active Order
-            const OrderItem(
-              orderId: "#MET-8842",
-              distance: "4.2 كم",
-              isUrgent: true,
-              pickup: "مطعم شواية الخليج - طريق التخصصي",
-              delivery: "حي النخيل - شارع الأمير سعود",
-              isTodayOrders: true,
-            ),
-            16.verticalSpace,
+                  // Active Order
+                  const OrderItem(
+                    orderId: "#MET-8842",
+                    distance: "4.2 كم",
+                    isUrgent: true,
+                    pickup: "مطعم شواية الخليج - طريق التخصصي",
+                    delivery: "حي النخيل - شارع الأمير سعود",
+                    isTodayOrders: true,
+                  ),
+                  16.verticalSpace,
 
-            // Small Order Item 1
-            _buildSmallOrderItem(
-              context: context,
-              orderId: "#MET-8845",
-              showArrow: true,
-            ),
-            16.verticalSpace,
+                  // Small Order Item 1
+                  _buildSmallOrderItem(
+                    context: context,
+                    orderId: "#MET-8845",
+                    showArrow: true,
+                  ),
+                  16.verticalSpace,
 
-            // Small Order Item 2
-            _buildSmallOrderItem(
-              context: context,
-              orderId: "#MET-8845",
-              showSwipeAction: true,
-            ),
-            40.verticalSpace,
-          ],
+                  // Small Order Item 2
+                  _buildSmallOrderItem(
+                    context: context,
+                    orderId: "#MET-8845",
+                    showSwipeAction: true,
+                  ),
+                  40.verticalSpace,
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

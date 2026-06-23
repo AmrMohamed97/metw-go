@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
-import 'package:metw_go/features/home/presentation/services/location_service.dart';
-import 'package:permission_handler/permission_handler.dart' as ph;
+import 'package:metw_go/features/home/presentation/services/tracking_location_service.dart';
 
-class HomePageStatusCard extends StatelessWidget {
-  const HomePageStatusCard({super.key});
+class HomePageOnlineStatusCard extends StatelessWidget {
+  const HomePageOnlineStatusCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,23 +79,8 @@ class HomePageStatusCard extends StatelessWidget {
               16.horizontalSpace,
               CustomButton(
                 text: "إيقاف الاستقبال",
-                onPressed: () async {
-                  final locationService = LocationService();
-                  bool serviceEnabled =
-                      await locationService.checkAndRequestLocationService();
-                  if (!serviceEnabled) {
-                    await ph.openAppSettings();
-                    // return;
-                  }
-                  bool permissionGranted =
-                      await locationService.checkAndRequestPermission();
-                  if (!permissionGranted) {
-                    await ph.openAppSettings();
-                    // return;
-                  }
-                  if (context.mounted) {
-                    context.read<AppCubit>().trackDriver();
-                  }
+                onPressed: () {
+                  TrackingLocationService().stopTracking('9');
                 },
                 // fixedSize: false,
                 height: 35,
