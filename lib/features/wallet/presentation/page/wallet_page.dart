@@ -20,13 +20,13 @@ class WalletPage extends StatelessWidget {
         centerTitle: true,
         canPob: false,
       ),
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverToBoxAdapter(
-            child: SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              sliver: Column(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
                 children: [
                   // 16.verticalSpace,
                   BalanceCard(),
@@ -36,29 +36,33 @@ class WalletPage extends StatelessWidget {
                   WalletChartView(),
                   24.verticalSpace,
                   ViewAllWidget(),
+                  8.verticalSpace,
                 ],
               ),
             ),
-          ),
-          SliverList.builder(
-            itemBuilder: (context, index) => TransactionItem(
-              title: "أرباح توصيل - #1245",
-              date: "اليوم، 02:30 م",
-              amount: "+45.00 ج.م",
-              icon: index == 1
-                  ? Icons.credit_card_outlined
-                  : index == 2
-                  ? Icons.card_giftcard
-                  : Icons.add_circle_outline,
-              iconColor: index == 1
-                  ? MyColors.primaryColor
-                  : index == 2
-                  ? MyColors.secondaryColor
-                  : MyColors.green,
+            SliverList.builder(
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: TransactionItem(
+                  title: "أرباح توصيل - #1245",
+                  date: "اليوم، 02:30 م",
+                  amount: "+45.00 ج.م",
+                  icon: index == 1
+                      ? Icons.credit_card_outlined
+                      : index == 2
+                      ? Icons.card_giftcard
+                      : Icons.add_circle_outline,
+                  iconColor: index == 1
+                      ? MyColors.primaryColor
+                      : index == 2
+                      ? MyColors.secondaryColor
+                      : MyColors.green,
+                ),
+              ),
             ),
-          ),
-          32.verticalSpace,
-        ],
+            SliverToBoxAdapter(child: 32.verticalSpace),
+          ],
+        ),
       ),
     );
   }
