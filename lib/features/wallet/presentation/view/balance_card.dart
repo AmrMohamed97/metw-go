@@ -12,7 +12,7 @@ class BalanceCard extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
         gradient: const LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
