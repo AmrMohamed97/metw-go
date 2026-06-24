@@ -12,4 +12,5 @@ class AppRoutes {
   static const String commingSoonPage = '/commingSoonPage';
   static const String mainView = '/mainView';
   static const String historyPage = '/historyPage';
+  static const String completeOrderPage = '/completeOrderPage';
 }

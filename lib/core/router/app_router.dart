@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
 import 'package:metw_go/features/comming_soon/comming_soon_page.dart';
+import 'package:metw_go/features/complete_order_details/presentation/page/complete_order_page.dart';
 import 'package:metw_go/features/forget_password/presentation/manager/forget_password_cubit.dart';
 import 'package:metw_go/features/forget_password/presentation/page/change_password_page.dart';
 import 'package:metw_go/features/forget_password/presentation/page/forget_password_page.dart';
@@ -122,6 +123,11 @@ class AppRouter {
         path: AppRoutes.historyPage,
         name: AppRoutes.historyPage,
         builder: (context, state) => const HistoryPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.completeOrderPage,
+        name: AppRoutes.completeOrderPage,
+        builder: (context, state) => const CompleteOrderPage(),
       ),
 
       // ========== onbording ==========

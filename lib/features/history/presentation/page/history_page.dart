@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/history/presentation/view/history_search_view.dart';
@@ -40,6 +42,7 @@ class HistoryPage extends StatelessWidget {
                     dateLabel: l10n.deliveredAt,
                     dateValue: l10n.mockDate1,
                     fare: l10n.mockFare1,
+                    onPressed: () => context.push(AppRoutes.completeOrderPage),
                   ),
                   16.verticalSpace,
                   CancelledCard(
@@ -56,6 +59,7 @@ class HistoryPage extends StatelessWidget {
                     dateLabel: l10n.dateTime,
                     dateValue: l10n.mockDate3,
                     fare: l10n.mockFare3,
+                    onPressed: () => context.push(AppRoutes.completeOrderPage),
                   ),
                   32.verticalSpace,
                 ],

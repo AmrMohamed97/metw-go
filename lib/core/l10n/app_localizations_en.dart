@@ -583,4 +583,94 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mockFare3 => '25.00 EGP';
+
+  @override
+  String get immediateDeliveryOnePoint => 'Immediate Delivery | One Point';
+
+  @override
+  String get electronicPayment => 'Electronic Payment';
+
+  @override
+  String get orderNumber => 'Order Number';
+
+  @override
+  String get pickupPoint => 'Pickup Point';
+
+  @override
+  String get point1 => 'Point 1';
+
+  @override
+  String get customerRating => 'Customer Rating';
+
+  @override
+  String get profitDetails => 'Profit Details';
+
+  @override
+  String get netProfit => 'Net Profit';
+
+  @override
+  String get orderPrice => 'Order Price';
+
+  @override
+  String get commission => 'Commission';
+
+  @override
+  String get timeline => 'Timeline';
+
+  @override
+  String get orderAccepted => 'Order Accepted';
+
+  @override
+  String get received => 'Received';
+
+  @override
+  String get delivered => 'Delivered';
+
+  @override
+  String get deliveryProof => 'Delivery Proof';
+
+  @override
+  String get mockOrderNumber2 => '#MG-982341';
+
+  @override
+  String get mockBakeryName => 'Lavender French Bakery';
+
+  @override
+  String get mockCustomerName => 'Sara Ali';
+
+  @override
+  String get mockCustomerAddress => 'Al Narjis Dist, Riyadh';
+
+  @override
+  String get mockReviewText => '\"Fast and excellent service\"';
+
+  @override
+  String get mockNetProfit => '24.50';
+
+  @override
+  String get mockOrderPriceVal => '120.00';
+
+  @override
+  String get mockFareVal => '150.00';
+
+  @override
+  String get mockCommissionVal => '50.00';
+
+  @override
+  String get mockTime1 => '12:45 PM';
+
+  @override
+  String get mockDesc1 => 'Al Shorfa Restaurant';
+
+  @override
+  String get mockTime2 => '01:10 PM';
+
+  @override
+  String get mockDesc2 => 'On the way to customer';
+
+  @override
+  String get mockTime3 => '01:35 PM';
+
+  @override
+  String get mockDesc3 => 'Al Yasmin Dist';
 }

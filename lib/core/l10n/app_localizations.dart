@@ -1213,6 +1213,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'25.00 EGP'**
   String get mockFare3;
+
+  /// No description provided for @immediateDeliveryOnePoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Immediate Delivery | One Point'**
+  String get immediateDeliveryOnePoint;
+
+  /// No description provided for @electronicPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Electronic Payment'**
+  String get electronicPayment;
+
+  /// No description provided for @orderNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Number'**
+  String get orderNumber;
+
+  /// No description provided for @pickupPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup Point'**
+  String get pickupPoint;
+
+  /// No description provided for @point1.
+  ///
+  /// In en, this message translates to:
+  /// **'Point 1'**
+  String get point1;
+
+  /// No description provided for @customerRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer Rating'**
+  String get customerRating;
+
+  /// No description provided for @profitDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit Details'**
+  String get profitDetails;
+
+  /// No description provided for @netProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Net Profit'**
+  String get netProfit;
+
+  /// No description provided for @orderPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Price'**
+  String get orderPrice;
+
+  /// No description provided for @commission.
+  ///
+  /// In en, this message translates to:
+  /// **'Commission'**
+  String get commission;
+
+  /// No description provided for @timeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Timeline'**
+  String get timeline;
+
+  /// No description provided for @orderAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Accepted'**
+  String get orderAccepted;
+
+  /// No description provided for @received.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get received;
+
+  /// No description provided for @delivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get delivered;
+
+  /// No description provided for @deliveryProof.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Proof'**
+  String get deliveryProof;
+
+  /// No description provided for @mockOrderNumber2.
+  ///
+  /// In en, this message translates to:
+  /// **'#MG-982341'**
+  String get mockOrderNumber2;
+
+  /// No description provided for @mockBakeryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Lavender French Bakery'**
+  String get mockBakeryName;
+
+  /// No description provided for @mockCustomerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Sara Ali'**
+  String get mockCustomerName;
+
+  /// No description provided for @mockCustomerAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Narjis Dist, Riyadh'**
+  String get mockCustomerAddress;
+
+  /// No description provided for @mockReviewText.
+  ///
+  /// In en, this message translates to:
+  /// **'\"Fast and excellent service\"'**
+  String get mockReviewText;
+
+  /// No description provided for @mockNetProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'24.50'**
+  String get mockNetProfit;
+
+  /// No description provided for @mockOrderPriceVal.
+  ///
+  /// In en, this message translates to:
+  /// **'120.00'**
+  String get mockOrderPriceVal;
+
+  /// No description provided for @mockFareVal.
+  ///
+  /// In en, this message translates to:
+  /// **'150.00'**
+  String get mockFareVal;
+
+  /// No description provided for @mockCommissionVal.
+  ///
+  /// In en, this message translates to:
+  /// **'50.00'**
+  String get mockCommissionVal;
+
+  /// No description provided for @mockTime1.
+  ///
+  /// In en, this message translates to:
+  /// **'12:45 PM'**
+  String get mockTime1;
+
+  /// No description provided for @mockDesc1.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Shorfa Restaurant'**
+  String get mockDesc1;
+
+  /// No description provided for @mockTime2.
+  ///
+  /// In en, this message translates to:
+  /// **'01:10 PM'**
+  String get mockTime2;
+
+  /// No description provided for @mockDesc2.
+  ///
+  /// In en, this message translates to:
+  /// **'On the way to customer'**
+  String get mockDesc2;
+
+  /// No description provided for @mockTime3.
+  ///
+  /// In en, this message translates to:
+  /// **'01:35 PM'**
+  String get mockTime3;
+
+  /// No description provided for @mockDesc3.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Yasmin Dist'**
+  String get mockDesc3;
 }
 
 class _AppLocalizationsDelegate

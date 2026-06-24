@@ -1,11 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 
 class HistoryItem extends StatelessWidget {
-  const HistoryItem({super.key,
-  required this.borderColor,
+  const HistoryItem({
+    super.key,
+    required this.borderColor,
     required this.statusText,
     required this.statusColor,
     required this.orderId,
@@ -13,17 +15,18 @@ class HistoryItem extends StatelessWidget {
     required this.dateLabel,
     required this.dateValue,
     required this.fare,
-    required this.showReceiptButton,
+    required this.showReceiptButton, this.onPressed,
   });
   final Color borderColor;
-    final String statusText;
-    final Color statusColor;
-    final String orderId;
-    final String merchant;
-    final String dateLabel;
-    final String dateValue;
-    final String fare;
-    final bool showReceiptButton;
+  final String statusText;
+  final Color statusColor;
+  final String orderId;
+  final String merchant;
+  final String dateLabel;
+  final String dateValue;
+  final String fare;
+  final bool showReceiptButton;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +38,7 @@ class HistoryItem extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.shadow.withValues(alpha:0.05),
+            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -54,9 +57,9 @@ class HistoryItem extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.orderId,
-                      style: AppTextStyle.regular12(
-                        context,
-                      ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                      style: AppTextStyle.regular12(context).copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                     Text(
                       orderId,
@@ -72,7 +75,7 @@ class HistoryItem extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: statusColor.withValues(alpha:0.1),
+                    color: statusColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
@@ -113,9 +116,9 @@ class HistoryItem extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.merchant,
-                      style: AppTextStyle.regular12(
-                        context,
-                      ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                      style: AppTextStyle.regular12(context).copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                     Text(
                       merchant,
@@ -142,9 +145,9 @@ class HistoryItem extends StatelessWidget {
                   children: [
                     Text(
                       dateLabel,
-                      style: AppTextStyle.regular12(
-                        context,
-                      ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                      style: AppTextStyle.regular12(context).copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                     Text(
                       dateValue,
@@ -157,7 +160,12 @@ class HistoryItem extends StatelessWidget {
               ],
             ),
             16.verticalSpace,
-            Divider(color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha:0.5), height: 1),
+            Divider(
+              color: Theme.of(
+                context,
+              ).colorScheme.surfaceTint.withValues(alpha: 0.5),
+              height: 1,
+            ),
             16.verticalSpace,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -168,9 +176,9 @@ class HistoryItem extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.fare,
-                      style: AppTextStyle.regular12(
-                        context,
-                      ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                      style: AppTextStyle.regular12(context).copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -198,20 +206,25 @@ class HistoryItem extends StatelessWidget {
                   ],
                 ),
                 if (showReceiptButton)
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.outline,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      AppLocalizations.of(context)!.viewReceipt,
-                      style: AppTextStyle.regular12(
-                        context,
-                      ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                  CupertinoButton(
+                    padding: EdgeInsets.all(0),
+                    minimumSize: Size.zero,
+                    onPressed: onPressed,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.outline,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        AppLocalizations.of(context)!.viewReceipt,
+                        style: AppTextStyle.regular12(context).copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
                     ),
                   ),
               ],

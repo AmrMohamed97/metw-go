@@ -580,4 +580,94 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get mockFare3 => '25.00 ج.م';
+
+  @override
+  String get immediateDeliveryOnePoint => 'توصيل فوري | نقطة واحدة';
+
+  @override
+  String get electronicPayment => 'دفع إلكتروني';
+
+  @override
+  String get orderNumber => 'رقم الطلب';
+
+  @override
+  String get pickupPoint => 'نقطة الاستلام';
+
+  @override
+  String get point1 => 'النقطة 1';
+
+  @override
+  String get customerRating => 'تقييم العميل';
+
+  @override
+  String get profitDetails => 'تفاصيل الأرباح';
+
+  @override
+  String get netProfit => 'صافي الربح';
+
+  @override
+  String get orderPrice => 'سعر الطلب';
+
+  @override
+  String get commission => 'عمولة';
+
+  @override
+  String get timeline => 'الجدول الزمني';
+
+  @override
+  String get orderAccepted => 'تم قبول الطلب';
+
+  @override
+  String get received => 'تم الاستلام';
+
+  @override
+  String get delivered => 'تم التسليم';
+
+  @override
+  String get deliveryProof => 'إثبات التسليم';
+
+  @override
+  String get mockOrderNumber2 => '#MG-982341';
+
+  @override
+  String get mockBakeryName => 'مخبز لافندر الفرنسي';
+
+  @override
+  String get mockCustomerName => 'سارة علي';
+
+  @override
+  String get mockCustomerAddress => 'حي النرجس، الرياض';
+
+  @override
+  String get mockReviewText => '\"خدمة سريعة وممتازة\"';
+
+  @override
+  String get mockNetProfit => '24.50';
+
+  @override
+  String get mockOrderPriceVal => '120.00';
+
+  @override
+  String get mockFareVal => '150.00';
+
+  @override
+  String get mockCommissionVal => '50.00';
+
+  @override
+  String get mockTime1 => '12:45 م';
+
+  @override
+  String get mockDesc1 => 'مطعم الشرفة';
+
+  @override
+  String get mockTime2 => '01:10 م';
+
+  @override
+  String get mockDesc2 => 'في الطريق للعميل';
+
+  @override
+  String get mockTime3 => '01:35 م';
+
+  @override
+  String get mockDesc3 => 'حي الياسمين';
 }

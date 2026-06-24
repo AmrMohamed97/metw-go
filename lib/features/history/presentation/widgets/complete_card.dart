@@ -11,12 +11,14 @@ class CompleteCard extends StatelessWidget {
     required this.dateLabel,
     required this.dateValue,
     required this.fare,
+    this.onPressed
   });
   final String orderId;
   final String merchant;
   final String dateLabel;
   final String dateValue;
   final String fare;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return HistoryItem(
@@ -29,6 +31,7 @@ class CompleteCard extends StatelessWidget {
       dateValue: dateValue,
       fare: fare,
       showReceiptButton: true,
+      onPressed: onPressed,
     );
   }
 }
