@@ -24,16 +24,16 @@ class OrdersPage extends StatelessWidget {
           return ScreenWrapper(
             appBar: CustomAppBar(title: AppLocalizations.of(context)!.orders),
             body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Column(
                 children: [
                   // 8.verticalSpace,
                   // Search Bar
                   SearchView(),
-                  8.verticalSpace,
+                  10.verticalSpace,
                   // Filter Chips
                   FilterView(),
-                  20.verticalSpace,
+                  25.verticalSpace,
                   // Orders List
                   OrdersListView(),
                 ],
