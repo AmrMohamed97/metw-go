@@ -1,73 +1,65 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/order_item.dart';
 
 class HomeOrdersView extends StatelessWidget {
-  const HomeOrdersView({
-    super.key,
-  });
+  const HomeOrdersView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-        crossAxisAlignment: .start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "طلبات قادمة",
-                style: AppTextStyle.medium16(context)
-                    .copyWith(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.tertiary,
-                    ),
-              ),
-              Text(
-                "عرض الكل",
-                style: AppTextStyle.medium14(context)
-                    .copyWith(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.primary,
-                    ),
-              ),
-            ],
-          ),
-          16.verticalSpace,
+      crossAxisAlignment: .start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "طلبات قادمة",
+              style: AppTextStyle.medium16(
+                context,
+              ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+            ),
+            Text(
+              "عرض الكل",
+              style: AppTextStyle.medium14(
+                context,
+              ).copyWith(color: Theme.of(context).colorScheme.primary),
+            ),
+          ],
+        ),
+        14.verticalSpace,
 
-                  // Active Order
-                  const OrderItem(
-                    orderId: "#MET-8842",
-                    distance: "4.2 كم",
-                    isUrgent: true,
-                    pickup: "مطعم شواية الخليج - طريق التخصصي",
-                    delivery: "حي النخيل - شارع الأمير سعود",
-                    isTodayOrders: true,
-                  ),
-                  16.verticalSpace,
+        // Active Order
+        const OrderItem(
+          orderId: "#MET-8842",
+          distance: "4.2 كم",
+          isUrgent: true,
+          pickup: "مطعم شواية الخليج - طريق التخصصي",
+          delivery: "حي النخيل - شارع الأمير سعود",
+          isTodayOrders: true,
+        ),
+        16.verticalSpace,
 
-                  // Small Order Item 1
-                  _buildSmallOrderItem(
-                    context: context,
-                    orderId: "#MET-8845",
-                    showArrow: true,
-                  ),
-                  16.verticalSpace,
+        // Small Order Item 1
+        _buildSmallOrderItem(
+          context: context,
+          orderId: "#MET-8845",
+          showArrow: true,
+        ),
+        16.verticalSpace,
 
-                  // Small Order Item 2
-                  _buildSmallOrderItem(
-                    context: context,
-                    orderId: "#MET-8845",
-                    showSwipeAction: true,
-                  ),
-        ],
-      );
+        // Small Order Item 2
+        _buildSmallOrderItem(
+          context: context,
+          orderId: "#MET-8845",
+          showSwipeAction: true,
+        ),
+      ],
+    );
   }
-    Widget _buildSmallOrderItem({
+
+  Widget _buildSmallOrderItem({
     required BuildContext context,
     required String orderId,
     bool showArrow = false,

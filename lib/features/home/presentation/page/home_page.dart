@@ -36,13 +36,13 @@ class HomePage extends StatelessWidget {
                   cubit.status == 'offline'
                       ? HomePageOfflineStatusCard()
                       : HomePageOnlineStatusCard(),
-                  16.verticalSpace,
+                  14.verticalSpace,
                   // Today's Earnings and Completed Orders Row
                   HomeTodayEarnings(),
                   12.verticalSpace,
                   // Wallet Card
                   HomeWalletView(),
-                  20.verticalSpace,
+                  24.verticalSpace,
                   cubit.status == 'offline'
                       ? Image.asset(AppImages.offline)
                       // Upcoming Orders Header
