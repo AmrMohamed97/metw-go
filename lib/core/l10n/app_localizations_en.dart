@@ -445,4 +445,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewAll => 'View All';
+
+  @override
+  String get myProfile => 'My Profile';
+
+  @override
+  String get ahmedMohamed => 'Ahmed Mohamed';
+
+  @override
+  String get delegateIdMock => 'CP-8842#';
+
+  @override
+  String get ratingMock => '4.0';
+
+  @override
+  String get totalEarnings => 'Total Earnings';
+
+  @override
+  String get earningsValueMock => '15,420 EGP';
+
+  @override
+  String get totalOrders => 'Total Orders';
+
+  @override
+  String get totalOrdersValueMock => '1,248';
+
+  @override
+  String get completedOrdersValueMock => '1,210';
+
+  @override
+  String get personalData => 'Personal Data';
+
+  @override
+  String get documents => 'Documents';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get notificationSettings => 'Notification Settings';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get supportAndHelp => 'Support and Help';
+
+  @override
+  String get contactUs => 'Contact Us';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get faq => 'FAQ';
+
+  @override
+  String get logout => 'Logout';
 }

@@ -9,11 +9,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.centerTitle,
     this.canPob = true,
+    this.actions,
   });
   final void Function()? popPress;
   final String? title;
   final bool? centerTitle;
   final bool canPob;
+  final List<Widget>? actions;
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 
@@ -22,6 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: title == null ? null : Text(title!),
       centerTitle: centerTitle,
+      actions: actions,
       automaticallyImplyLeading: canPob ,
       leading: canPob
           ? CupertinoButton(

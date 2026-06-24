@@ -442,4 +442,70 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get viewAll => 'عرض الكل';
+
+  @override
+  String get myProfile => 'ملفي الشخصي';
+
+  @override
+  String get ahmedMohamed => 'أحمد محمد';
+
+  @override
+  String get delegateIdMock => 'CP-8842#';
+
+  @override
+  String get ratingMock => '4.0';
+
+  @override
+  String get totalEarnings => 'إجمالي الأرباح';
+
+  @override
+  String get earningsValueMock => '15,420 ج.م';
+
+  @override
+  String get totalOrders => 'إجمالي الطلبات';
+
+  @override
+  String get totalOrdersValueMock => '1,248';
+
+  @override
+  String get completedOrdersValueMock => '1,210';
+
+  @override
+  String get personalData => 'البيانات الشخصية';
+
+  @override
+  String get documents => 'المستندات';
+
+  @override
+  String get settings => 'الإعدادات';
+
+  @override
+  String get notificationSettings => 'إعدادات التنبيهات';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get darkMode => 'الوضع الليلي';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get supportAndHelp => 'الدعم والمساندة';
+
+  @override
+  String get contactUs => 'تواصل معنا';
+
+  @override
+  String get privacyPolicy => 'سياسة الخصوصية';
+
+  @override
+  String get faq => 'الأسئلة الشائعة';
+
+  @override
+  String get logout => 'تسجيل الخروج';
 }

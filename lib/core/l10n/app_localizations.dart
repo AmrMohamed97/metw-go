@@ -937,6 +937,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View All'**
   String get viewAll;
+
+  /// No description provided for @myProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'My Profile'**
+  String get myProfile;
+
+  /// No description provided for @ahmedMohamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Ahmed Mohamed'**
+  String get ahmedMohamed;
+
+  /// No description provided for @delegateIdMock.
+  ///
+  /// In en, this message translates to:
+  /// **'CP-8842#'**
+  String get delegateIdMock;
+
+  /// No description provided for @ratingMock.
+  ///
+  /// In en, this message translates to:
+  /// **'4.0'**
+  String get ratingMock;
+
+  /// No description provided for @totalEarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Earnings'**
+  String get totalEarnings;
+
+  /// No description provided for @earningsValueMock.
+  ///
+  /// In en, this message translates to:
+  /// **'15,420 EGP'**
+  String get earningsValueMock;
+
+  /// No description provided for @totalOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Orders'**
+  String get totalOrders;
+
+  /// No description provided for @totalOrdersValueMock.
+  ///
+  /// In en, this message translates to:
+  /// **'1,248'**
+  String get totalOrdersValueMock;
+
+  /// No description provided for @completedOrdersValueMock.
+  ///
+  /// In en, this message translates to:
+  /// **'1,210'**
+  String get completedOrdersValueMock;
+
+  /// No description provided for @personalData.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Data'**
+  String get personalData;
+
+  /// No description provided for @documents.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents'**
+  String get documents;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @notificationSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Settings'**
+  String get notificationSettings;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// No description provided for @supportAndHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Support and Help'**
+  String get supportAndHelp;
+
+  /// No description provided for @contactUs.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Us'**
+  String get contactUs;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @faq.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get faq;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
 }
 
 class _AppLocalizationsDelegate
