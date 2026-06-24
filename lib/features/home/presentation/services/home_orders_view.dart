@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/order_item.dart';
+import 'package:metw_go/core/widgets/view_all_widgets.dart';
 
 class HomeOrdersView extends StatelessWidget {
   const HomeOrdersView({super.key});
@@ -11,23 +12,7 @@ class HomeOrdersView extends StatelessWidget {
     return Column(
       crossAxisAlignment: .start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "طلبات قادمة",
-              style: AppTextStyle.medium16(
-                context,
-              ).copyWith(color: Theme.of(context).colorScheme.tertiary),
-            ),
-            Text(
-              "عرض الكل",
-              style: AppTextStyle.medium14(
-                context,
-              ).copyWith(color: Theme.of(context).colorScheme.primary),
-            ),
-          ],
-        ),
+        ViewAllWidget(),
         14.verticalSpace,
 
         // Active Order
@@ -139,3 +124,5 @@ class HomeOrdersView extends StatelessWidget {
     );
   }
 }
+
+
