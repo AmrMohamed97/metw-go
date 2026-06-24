@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
@@ -15,8 +16,8 @@ class WalletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenWrapper(
-      appBar: const CustomAppBar(
-        title: "المحفظة",
+      appBar: CustomAppBar(
+        title: AppLocalizations.of(context)!.wallet,
         centerTitle: true,
         canPob: false,
       ),
@@ -44,9 +45,9 @@ class WalletPage extends StatelessWidget {
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
                 child: TransactionItem(
-                  title: "أرباح توصيل - #1245",
-                  date: "اليوم، 02:30 م",
-                  amount: "+45.00 ج.م",
+                  title: AppLocalizations.of(context)!.deliveryProfitsMock,
+                  date: AppLocalizations.of(context)!.todayTimeMock,
+                  amount: AppLocalizations.of(context)!.amountMock,
                   icon: index == 1
                       ? Icons.credit_card_outlined
                       : index == 2

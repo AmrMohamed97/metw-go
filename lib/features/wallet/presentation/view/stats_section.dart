@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
@@ -13,11 +14,11 @@ class StatsSection extends StatelessWidget {
         Expanded(
           child: _buildStatCard(
             context,
-            title: "اليوم",
-            value: "145.00 ج.م",
+            title: AppLocalizations.of(context)!.today,
+            value: AppLocalizations.of(context)!.statsAmountMock,
             icon: Icons.trending_up,
             iconColor: MyColors.green,
-            subtitle: "12%+",
+            subtitle: AppLocalizations.of(context)!.statsPercentageMock,
             subtitleColor: MyColors.green,
             borderColor: Theme.of(context).colorScheme.secondary,
           ),
@@ -26,11 +27,11 @@ class StatsSection extends StatelessWidget {
         Expanded(
           child: _buildStatCard(
             context,
-            title: "الطلبات",
-            value: "12 طلب",
+            title: AppLocalizations.of(context)!.orders,
+            value: AppLocalizations.of(context)!.statsOrdersCountMock,
             icon: Icons.local_shipping_outlined,
             iconColor: MyColors.textColor,
-            subtitle: "مكتمل",
+            subtitle: AppLocalizations.of(context)!.completed,
             subtitleColor: MyColors.grey,
             borderColor: Theme.of(context).colorScheme.primary,
           ),

@@ -391,4 +391,58 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get today => 'Today';
+
+  @override
+  String get deliveryProfitsMock => 'Delivery profits - #1245';
+
+  @override
+  String get todayTimeMock => 'Today, 02:30 PM';
+
+  @override
+  String get amountMock => '+45.00 EGP';
+
+  @override
+  String get statsAmountMock => '145.00 EGP';
+
+  @override
+  String get statsPercentageMock => '12%+';
+
+  @override
+  String get statsOrdersCountMock => '12 orders';
+
+  @override
+  String get completed => 'Completed';
+
+  @override
+  String get weekPerformance => 'Week Performance';
+
+  @override
+  String get totalAmountMock => 'Total: 3.4 EGP';
+
+  @override
+  String get fridayInitial => 'F';
+
+  @override
+  String get thursdayInitial => 'T';
+
+  @override
+  String get wednesdayInitial => 'W';
+
+  @override
+  String get tuesdayInitial => 'T';
+
+  @override
+  String get mondayInitial => 'M';
+
+  @override
+  String get sundayInitial => 'S';
+
+  @override
+  String get saturdayInitial => 'S';
+
+  @override
+  String get upcomingOrders => 'Upcoming Orders';
+
+  @override
+  String get viewAll => 'View All';
 }

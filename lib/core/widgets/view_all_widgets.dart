@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 
 class ViewAllWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class ViewAllWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "طلبات قادمة",
+          AppLocalizations.of(context)!.upcomingOrders,
           style: AppTextStyle.medium16(
             context,
           ).copyWith(color: Theme.of(context).colorScheme.tertiary),
@@ -21,7 +22,7 @@ class ViewAllWidget extends StatelessWidget {
           padding: EdgeInsets.all(0),
           onPressed: onPressed,
           child: Text(
-            "عرض الكل",
+            AppLocalizations.of(context)!.viewAll,
             style: AppTextStyle.medium14(
               context,
             ).copyWith(color: Theme.of(context).colorScheme.primary),

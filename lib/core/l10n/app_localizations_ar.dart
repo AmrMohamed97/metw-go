@@ -388,4 +388,58 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get today => 'اليوم';
+
+  @override
+  String get deliveryProfitsMock => 'أرباح توصيل - #1245';
+
+  @override
+  String get todayTimeMock => 'اليوم، 02:30 م';
+
+  @override
+  String get amountMock => '+45.00 ج.م';
+
+  @override
+  String get statsAmountMock => '145.00 ج.م';
+
+  @override
+  String get statsPercentageMock => '12%+';
+
+  @override
+  String get statsOrdersCountMock => '12 طلب';
+
+  @override
+  String get completed => 'مكتمل';
+
+  @override
+  String get weekPerformance => 'أداء الأسبوع';
+
+  @override
+  String get totalAmountMock => 'المجموع: 3,4 ج.م';
+
+  @override
+  String get fridayInitial => 'ج';
+
+  @override
+  String get thursdayInitial => 'خ';
+
+  @override
+  String get wednesdayInitial => 'ر';
+
+  @override
+  String get tuesdayInitial => 'ث';
+
+  @override
+  String get mondayInitial => 'ن';
+
+  @override
+  String get sundayInitial => 'ح';
+
+  @override
+  String get saturdayInitial => 'س';
+
+  @override
+  String get upcomingOrders => 'طلبات قادمة';
+
+  @override
+  String get viewAll => 'عرض الكل';
 }

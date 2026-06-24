@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
@@ -28,13 +29,13 @@ class WalletChartView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "أداء الأسبوع",
+                AppLocalizations.of(context)!.weekPerformance,
                 style: AppTextStyle.regular16(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.tertiary),
               ),
               Text(
-                "المجموع: 3,4 ج.م",
+                AppLocalizations.of(context)!.totalAmountMock,
                 style: AppTextStyle.regular14(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.onSurface),
@@ -61,25 +62,25 @@ class WalletChartView extends StatelessWidget {
                         String text;
                         switch (value.toInt()) {
                           case 0:
-                            text = 'ج';
+                            text = AppLocalizations.of(context)!.fridayInitial;
                             break;
                           case 1:
-                            text = 'خ';
+                            text = AppLocalizations.of(context)!.thursdayInitial;
                             break;
                           case 2:
-                            text = 'ر';
+                            text = AppLocalizations.of(context)!.wednesdayInitial;
                             break;
                           case 3:
-                            text = 'ث';
+                            text = AppLocalizations.of(context)!.tuesdayInitial;
                             break;
                           case 4:
-                            text = 'ن';
+                            text = AppLocalizations.of(context)!.mondayInitial;
                             break;
                           case 5:
-                            text = 'ح';
+                            text = AppLocalizations.of(context)!.sundayInitial;
                             break;
                           case 6:
-                            text = 'س';
+                            text = AppLocalizations.of(context)!.saturdayInitial;
                             break;
                           default:
                             text = '';

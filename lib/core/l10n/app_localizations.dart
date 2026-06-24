@@ -829,6 +829,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Today'**
   String get today;
+
+  /// No description provided for @deliveryProfitsMock.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery profits - #1245'**
+  String get deliveryProfitsMock;
+
+  /// No description provided for @todayTimeMock.
+  ///
+  /// In en, this message translates to:
+  /// **'Today, 02:30 PM'**
+  String get todayTimeMock;
+
+  /// No description provided for @amountMock.
+  ///
+  /// In en, this message translates to:
+  /// **'+45.00 EGP'**
+  String get amountMock;
+
+  /// No description provided for @statsAmountMock.
+  ///
+  /// In en, this message translates to:
+  /// **'145.00 EGP'**
+  String get statsAmountMock;
+
+  /// No description provided for @statsPercentageMock.
+  ///
+  /// In en, this message translates to:
+  /// **'12%+'**
+  String get statsPercentageMock;
+
+  /// No description provided for @statsOrdersCountMock.
+  ///
+  /// In en, this message translates to:
+  /// **'12 orders'**
+  String get statsOrdersCountMock;
+
+  /// No description provided for @completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completed;
+
+  /// No description provided for @weekPerformance.
+  ///
+  /// In en, this message translates to:
+  /// **'Week Performance'**
+  String get weekPerformance;
+
+  /// No description provided for @totalAmountMock.
+  ///
+  /// In en, this message translates to:
+  /// **'Total: 3.4 EGP'**
+  String get totalAmountMock;
+
+  /// No description provided for @fridayInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'F'**
+  String get fridayInitial;
+
+  /// No description provided for @thursdayInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'T'**
+  String get thursdayInitial;
+
+  /// No description provided for @wednesdayInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'W'**
+  String get wednesdayInitial;
+
+  /// No description provided for @tuesdayInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'T'**
+  String get tuesdayInitial;
+
+  /// No description provided for @mondayInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'M'**
+  String get mondayInitial;
+
+  /// No description provided for @sundayInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'S'**
+  String get sundayInitial;
+
+  /// No description provided for @saturdayInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'S'**
+  String get saturdayInitial;
+
+  /// No description provided for @upcomingOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming Orders'**
+  String get upcomingOrders;
+
+  /// No description provided for @viewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get viewAll;
 }
 
 class _AppLocalizationsDelegate
