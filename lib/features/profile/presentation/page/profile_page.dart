@@ -25,6 +25,7 @@ class ProfilePage extends StatelessWidget {
         builder: (context, state) {
           return ScreenWrapper(
             appBar: CustomAppBar(
+              canPob: false,
               title: AppLocalizations.of(context)!.myProfile,
               centerTitle: true,
               actions: [

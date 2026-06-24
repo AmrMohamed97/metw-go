@@ -22,7 +22,10 @@ class OrdersPage extends StatelessWidget {
         builder: (context, state) {
           final cubit = context.read<OrdersCubit>();
           return ScreenWrapper(
-            appBar: CustomAppBar(title: AppLocalizations.of(context)!.orders),
+            appBar: CustomAppBar(
+              canPob: false,
+              title: AppLocalizations.of(context)!.orders,
+            ),
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: Column(
