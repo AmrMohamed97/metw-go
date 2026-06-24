@@ -11,4 +11,5 @@ class AppRoutes {
   static const String forgetPasswordPage = '/forgetPasswordPage';
   static const String commingSoonPage = '/commingSoonPage';
   static const String mainView = '/mainView';
+  static const String historyPage = '/historyPage';
 }

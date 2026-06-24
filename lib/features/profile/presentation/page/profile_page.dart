@@ -13,6 +13,7 @@ import 'package:metw_go/features/profile/presentation/view/profile_header.dart';
 import 'package:metw_go/features/profile/presentation/view/profile_stats_row.dart';
 import 'package:metw_go/features/profile/presentation/view/setting_section.dart';
 import 'package:metw_go/features/profile/presentation/view/support_section.dart';
+import 'package:metw_go/features/profile/presentation/widgets/history_icon_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -29,20 +30,7 @@ class ProfilePage extends StatelessWidget {
               title: AppLocalizations.of(context)!.myProfile,
               centerTitle: true,
               actions: [
-                Container(
-                  margin: EdgeInsetsDirectional.only(end: 16),
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  child: const Icon(
-                    Icons.history,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                ),
+                HistoryIconWidget(),
               ],
             ),
             body: SingleChildScrollView(
