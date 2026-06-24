@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 
@@ -23,7 +23,7 @@ class StatsSection extends StatelessWidget {
             borderColor: Theme.of(context).colorScheme.secondary,
           ),
         ),
-        16.horizontalSpace,
+        10.horizontalSpace,
         Expanded(
           child: _buildStatCard(
             context,
@@ -54,7 +54,7 @@ class StatsSection extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),

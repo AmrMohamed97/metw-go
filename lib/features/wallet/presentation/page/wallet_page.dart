@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
@@ -22,7 +22,7 @@ class WalletPage extends StatelessWidget {
         canPob: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [

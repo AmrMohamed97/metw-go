@@ -1069,6 +1069,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get logout;
+
+  /// No description provided for @history.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @completedTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completedTab;
+
+  /// No description provided for @cancelledTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get cancelledTab;
+
+  /// No description provided for @orderId.
+  ///
+  /// In en, this message translates to:
+  /// **'Order ID'**
+  String get orderId;
+
+  /// No description provided for @merchant.
+  ///
+  /// In en, this message translates to:
+  /// **'Merchant'**
+  String get merchant;
+
+  /// No description provided for @deliveredAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered at'**
+  String get deliveredAt;
+
+  /// No description provided for @viewReceipt.
+  ///
+  /// In en, this message translates to:
+  /// **'View Receipt'**
+  String get viewReceipt;
+
+  /// No description provided for @fare.
+  ///
+  /// In en, this message translates to:
+  /// **'Fare'**
+  String get fare;
+
+  /// No description provided for @cancelledStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get cancelledStatus;
+
+  /// No description provided for @cancellationDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancellation Date'**
+  String get cancellationDate;
+
+  /// No description provided for @dateTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Date and Time'**
+  String get dateTime;
+
+  /// No description provided for @mockOrderId1.
+  ///
+  /// In en, this message translates to:
+  /// **'#MG-88285'**
+  String get mockOrderId1;
+
+  /// No description provided for @mockMerchant1.
+  ///
+  /// In en, this message translates to:
+  /// **'Burger King - Al Muruj'**
+  String get mockMerchant1;
+
+  /// No description provided for @mockDate1.
+  ///
+  /// In en, this message translates to:
+  /// **'Today, 12:15 PM'**
+  String get mockDate1;
+
+  /// No description provided for @mockFare1.
+  ///
+  /// In en, this message translates to:
+  /// **'18.00 EGP'**
+  String get mockFare1;
+
+  /// No description provided for @mockOrderId2.
+  ///
+  /// In en, this message translates to:
+  /// **'#MG-88270'**
+  String get mockOrderId2;
+
+  /// No description provided for @mockMerchant2.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Dawaa Pharmacy'**
+  String get mockMerchant2;
+
+  /// No description provided for @mockDate2.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday, 09:30 PM'**
+  String get mockDate2;
+
+  /// No description provided for @mockFare2.
+  ///
+  /// In en, this message translates to:
+  /// **'00.00 EGP'**
+  String get mockFare2;
+
+  /// No description provided for @mockOrderId3.
+  ///
+  /// In en, this message translates to:
+  /// **'#MG-88291'**
+  String get mockOrderId3;
+
+  /// No description provided for @mockMerchant3.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Mamlaka Sweets'**
+  String get mockMerchant3;
+
+  /// No description provided for @mockDate3.
+  ///
+  /// In en, this message translates to:
+  /// **'Today, 02:45 PM'**
+  String get mockDate3;
+
+  /// No description provided for @mockFare3.
+  ///
+  /// In en, this message translates to:
+  /// **'25.00 EGP'**
+  String get mockFare3;
 }
 
 class _AppLocalizationsDelegate

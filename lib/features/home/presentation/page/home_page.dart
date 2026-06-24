@@ -26,12 +26,13 @@ class HomePage extends StatelessWidget {
             final cubit = context.read<HomeCubit>();
             return SafeArea(
               child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                padding: EdgeInsets.symmetric(horizontal: 12),
                 physics: const BouncingScrollPhysics(),
                 children: [
+                  8.verticalSpace,
                   // Top Bar
                   HomeAppBar(),
-                  20.verticalSpace,
+                  12.verticalSpace,
                   // Purple Status Card
                   cubit.status == 'offline'
                       ? HomePageOfflineStatusCard()

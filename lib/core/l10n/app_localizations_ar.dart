@@ -508,4 +508,76 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logout => 'تسجيل الخروج';
+
+  @override
+  String get history => 'السجل';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get completedTab => 'المكتملة';
+
+  @override
+  String get cancelledTab => 'الملغاة';
+
+  @override
+  String get orderId => 'معرف الطلب';
+
+  @override
+  String get merchant => 'التاجر';
+
+  @override
+  String get deliveredAt => 'تم التوصيل في';
+
+  @override
+  String get viewReceipt => 'عرض الايصال';
+
+  @override
+  String get fare => 'الاجرة';
+
+  @override
+  String get cancelledStatus => 'ملغي';
+
+  @override
+  String get cancellationDate => 'تاريخ الإلغاء';
+
+  @override
+  String get dateTime => 'التاريخ والوقت';
+
+  @override
+  String get mockOrderId1 => '#MG-88285';
+
+  @override
+  String get mockMerchant1 => 'برجر كينج - المروج';
+
+  @override
+  String get mockDate1 => 'اليوم، 12:15 م';
+
+  @override
+  String get mockFare1 => '18.00 ج.م';
+
+  @override
+  String get mockOrderId2 => '#MG-88270';
+
+  @override
+  String get mockMerchant2 => 'صيدلية الدواء';
+
+  @override
+  String get mockDate2 => 'أمس، 09:30 م';
+
+  @override
+  String get mockFare2 => '00.00 ج.م';
+
+  @override
+  String get mockOrderId3 => '#MG-88291';
+
+  @override
+  String get mockMerchant3 => 'حلويات المملكة';
+
+  @override
+  String get mockDate3 => 'اليوم، 02:45 م';
+
+  @override
+  String get mockFare3 => '25.00 ج.م';
 }

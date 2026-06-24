@@ -511,4 +511,76 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logout => 'Logout';
+
+  @override
+  String get history => 'History';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get completedTab => 'Completed';
+
+  @override
+  String get cancelledTab => 'Cancelled';
+
+  @override
+  String get orderId => 'Order ID';
+
+  @override
+  String get merchant => 'Merchant';
+
+  @override
+  String get deliveredAt => 'Delivered at';
+
+  @override
+  String get viewReceipt => 'View Receipt';
+
+  @override
+  String get fare => 'Fare';
+
+  @override
+  String get cancelledStatus => 'Cancelled';
+
+  @override
+  String get cancellationDate => 'Cancellation Date';
+
+  @override
+  String get dateTime => 'Date and Time';
+
+  @override
+  String get mockOrderId1 => '#MG-88285';
+
+  @override
+  String get mockMerchant1 => 'Burger King - Al Muruj';
+
+  @override
+  String get mockDate1 => 'Today, 12:15 PM';
+
+  @override
+  String get mockFare1 => '18.00 EGP';
+
+  @override
+  String get mockOrderId2 => '#MG-88270';
+
+  @override
+  String get mockMerchant2 => 'Al Dawaa Pharmacy';
+
+  @override
+  String get mockDate2 => 'Yesterday, 09:30 PM';
+
+  @override
+  String get mockFare2 => '00.00 EGP';
+
+  @override
+  String get mockOrderId3 => '#MG-88291';
+
+  @override
+  String get mockMerchant3 => 'Al Mamlaka Sweets';
+
+  @override
+  String get mockDate3 => 'Today, 02:45 PM';
+
+  @override
+  String get mockFare3 => '25.00 EGP';
 }
