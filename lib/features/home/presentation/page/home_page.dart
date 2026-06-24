@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
                   12.verticalSpace,
                   // Wallet Card
                   HomeWalletView(),
-                  24.verticalSpace,
+                  30.verticalSpace,
                   cubit.status == 'offline'
                       ? Image.asset(AppImages.offline)
                       // Upcoming Orders Header

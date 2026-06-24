@@ -13,7 +13,7 @@ class HomeOrdersView extends StatelessWidget {
       crossAxisAlignment: .start,
       children: [
         ViewAllWidget(),
-        14.verticalSpace,
+        12.verticalSpace,
 
         // Active Order
         const OrderItem(
@@ -124,5 +124,3 @@ class HomeOrdersView extends StatelessWidget {
     );
   }
 }
-
-
