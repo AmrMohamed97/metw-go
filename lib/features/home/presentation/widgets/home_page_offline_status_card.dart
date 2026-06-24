@@ -11,10 +11,10 @@ class HomePageOfflineStatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
               ),
             ],
           ),
-          4.verticalSpace,
+          6.verticalSpace,
           Row(
             children: [
               Expanded(
