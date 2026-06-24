@@ -21,11 +21,11 @@ class TransactionItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
+            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.02),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
