@@ -55,12 +55,12 @@ class _HistoryPageState extends State<HistoryPage> {
                 16.verticalSpace,
                 _buildCancelledCard(
                   context,
-                  l10n,
-                  orderId: l10n.mockOrderId2,
-                  merchant: l10n.mockMerchant2,
-                  dateLabel: l10n.cancellationDate,
-                  dateValue: l10n.mockDate2,
-                  fare: l10n.mockFare2,
+                  AppLocalizations.of(context)!,
+                  orderId: AppLocalizations.of(context)!.mockOrderId2,
+                  merchant: AppLocalizations.of(context)!.mockMerchant2,
+                  dateLabel: AppLocalizations.of(context)!.cancellationDate,
+                  dateValue: AppLocalizations.of(context)!.mockDate2,
+                  fare: AppLocalizations.of(context)!.mockFare2,
                 ),
                 16.verticalSpace,
                 _buildCompletedCard(
@@ -84,16 +84,6 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget _buildSearchBar(BuildContext context, AppLocalizations l10n) {
     return Row(
       children: [
-        Container(
-          width: 48.w,
-          height: 48.w,
-          decoration: const BoxDecoration(
-            color: MyColors.primaryColor,
-            shape: BoxShape.circle,
-          ),
-          child: Icon(Icons.search, color: Colors.white, size: 24.sp),
-        ),
-        12.horizontalSpace,
         Expanded(
           child: Container(
             height: 48.w,
@@ -105,9 +95,21 @@ class _HistoryPageState extends State<HistoryPage> {
             alignment: AlignmentDirectional.centerStart,
             child: Text(
               l10n.search,
-              style: AppTextStyle.regular14(context).copyWith(color: MyColors.grey),
+              style: AppTextStyle.regular14(
+                context,
+              ).copyWith(color: MyColors.grey),
             ),
           ),
+        ),
+        12.horizontalSpace,
+        Container(
+          width: 48.w,
+          height: 48.w,
+          decoration: const BoxDecoration(
+            color: MyColors.primaryColor,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(Icons.search, color: Colors.white, size: 24.sp),
         ),
       ],
     );
@@ -115,13 +117,13 @@ class _HistoryPageState extends State<HistoryPage> {
 
   Widget _buildTabs(BuildContext context, AppLocalizations l10n) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      // mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        _buildTab(context, l10n.cancelledTab, 2),
+        _buildTab(context, l10n.all, 0),
         8.horizontalSpace,
         _buildTab(context, l10n.completedTab, 1),
         8.horizontalSpace,
-        _buildTab(context, l10n.all, 0),
+        _buildTab(context, l10n.cancelledTab, 2),
       ],
     );
   }
@@ -142,9 +144,9 @@ class _HistoryPageState extends State<HistoryPage> {
         ),
         child: Text(
           title,
-          style: AppTextStyle.medium14(context).copyWith(
-            color: isSelected ? Colors.white : MyColors.grey,
-          ),
+          style: AppTextStyle.medium14(
+            context,
+          ).copyWith(color: isSelected ? Colors.white : MyColors.grey),
         ),
       ),
     );
@@ -239,16 +241,23 @@ class _HistoryPageState extends State<HistoryPage> {
                   children: [
                     Text(
                       l10n.orderId,
-                      style: AppTextStyle.regular12(context).copyWith(color: MyColors.grey),
+                      style: AppTextStyle.regular12(
+                        context,
+                      ).copyWith(color: MyColors.grey),
                     ),
                     Text(
                       orderId,
-                      style: AppTextStyle.medium14(context).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                      style: AppTextStyle.medium14(
+                        context,
+                      ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                     ),
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: statusColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(16),
@@ -258,7 +267,9 @@ class _HistoryPageState extends State<HistoryPage> {
                     children: [
                       Text(
                         statusText,
-                        style: AppTextStyle.medium12(context).copyWith(color: statusColor),
+                        style: AppTextStyle.medium12(
+                          context,
+                        ).copyWith(color: statusColor),
                       ),
                       4.horizontalSpace,
                       Container(
@@ -278,18 +289,26 @@ class _HistoryPageState extends State<HistoryPage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.storefront_outlined, color: MyColors.grey, size: 20.sp),
+                Icon(
+                  Icons.storefront_outlined,
+                  color: MyColors.grey,
+                  size: 20.sp,
+                ),
                 12.horizontalSpace,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       l10n.merchant,
-                      style: AppTextStyle.regular12(context).copyWith(color: MyColors.grey),
+                      style: AppTextStyle.regular12(
+                        context,
+                      ).copyWith(color: MyColors.grey),
                     ),
                     Text(
                       merchant,
-                      style: AppTextStyle.medium14(context).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                      style: AppTextStyle.medium14(
+                        context,
+                      ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                     ),
                   ],
                 ),
@@ -299,18 +318,26 @@ class _HistoryPageState extends State<HistoryPage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.calendar_today_outlined, color: MyColors.grey, size: 20.sp),
+                Icon(
+                  Icons.calendar_today_outlined,
+                  color: MyColors.grey,
+                  size: 20.sp,
+                ),
                 12.horizontalSpace,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       dateLabel,
-                      style: AppTextStyle.regular12(context).copyWith(color: MyColors.grey),
+                      style: AppTextStyle.regular12(
+                        context,
+                      ).copyWith(color: MyColors.grey),
                     ),
                     Text(
                       dateValue,
-                      style: AppTextStyle.medium14(context).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                      style: AppTextStyle.medium14(
+                        context,
+                      ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                     ),
                   ],
                 ),
@@ -328,21 +355,29 @@ class _HistoryPageState extends State<HistoryPage> {
                   children: [
                     Text(
                       l10n.fare,
-                      style: AppTextStyle.regular12(context).copyWith(color: MyColors.grey),
+                      style: AppTextStyle.regular12(
+                        context,
+                      ).copyWith(color: MyColors.grey),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
                           fare.split(' ')[0],
-                          style: AppTextStyle.bold20(context).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                          style: AppTextStyle.bold20(context).copyWith(
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
                         ),
                         4.horizontalSpace,
                         Padding(
                           padding: const EdgeInsets.only(bottom: 2.0),
                           child: Text(
-                            fare.split(' ').length > 1 ? fare.split(' ')[1] : '',
-                            style: AppTextStyle.regular12(context).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                            fare.split(' ').length > 1
+                                ? fare.split(' ')[1]
+                                : '',
+                            style: AppTextStyle.regular12(context).copyWith(
+                              color: Theme.of(context).colorScheme.tertiary,
+                            ),
                           ),
                         ),
                       ],
@@ -351,14 +386,19 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
                 if (showReceiptButton)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: MyColors.greyFill,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       l10n.viewReceipt,
-                      style: AppTextStyle.regular12(context).copyWith(color: MyColors.grey),
+                      style: AppTextStyle.regular12(
+                        context,
+                      ).copyWith(color: MyColors.grey),
                     ),
                   ),
               ],
