@@ -13,4 +13,5 @@ class AppRoutes {
   static const String mainView = '/mainView';
   static const String historyPage = '/historyPage';
   static const String completeOrderPage = '/completeOrderPage';
+  static const String orderDetailsPage = '/orderDetailsPage';
 }

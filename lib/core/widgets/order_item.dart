@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
@@ -12,7 +13,7 @@ class OrderItem extends StatelessWidget {
     required this.pickup,
     required this.delivery,
     this.deliveryLabel = "التسليم إلى:",
-    this.isTodayOrders = false,
+    this.isTodayOrders = false, this.onDetailsPressed,
     // required this.borderColor,
   });
   final String orderId;
@@ -21,6 +22,7 @@ class OrderItem extends StatelessWidget {
   final String pickup;
   final String delivery;
   final String deliveryLabel;
+  final void Function()? onDetailsPressed;
   // final Color borderColor;
 
   @override
@@ -212,20 +214,25 @@ class OrderItem extends StatelessWidget {
                 12.horizontalSpace,
                 Expanded(
                   flex: 1,
-                  child: Container(
-                    height: 46,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.surfaceTint,
+                  child: CupertinoButton(
+                    padding: EdgeInsets.all(0),
+                    minimumSize: Size.zero,
+                    onPressed: onDetailsPressed,
+                    child: Container(
+                      height: 46,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.surfaceTint,
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "تفاصيل",
-                        style: AppTextStyle.medium14(context).copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
+                      child: Center(
+                        child: Text(
+                          "تفاصيل",
+                          style: AppTextStyle.medium14(context).copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                         ),
                       ),
                     ),

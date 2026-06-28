@@ -10,6 +10,7 @@ import 'package:metw_go/features/history/presentation/page/history_page.dart';
 import 'package:metw_go/features/login/presentation/manager/login_cubit.dart';
 import 'package:metw_go/features/login/presentation/page/login_page.dart';
 import 'package:metw_go/features/main_view/main_view.dart';
+import 'package:metw_go/features/order_details/presentation/order_details_page.dart';
 import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart';
 import 'package:metw_go/features/otp/presentation/page/otp_page.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
@@ -128,6 +129,11 @@ class AppRouter {
         path: AppRoutes.completeOrderPage,
         name: AppRoutes.completeOrderPage,
         builder: (context, state) => const CompleteOrderPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.orderDetailsPage,
+        name: AppRoutes.orderDetailsPage,
+        builder: (context, state) => const OrderDetailsPage(),
       ),
 
       // ========== onbording ==========
