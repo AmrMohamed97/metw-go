@@ -15,4 +15,5 @@ class AppRoutes {
   static const String orderDetailsPage = '/orderDetailsPage';
   static const String personalInfoPage = '/personalInfoPage';
   static const String delegateInfoPage = '/delegateInfoPage';
+  static const String vehiclePage = '/vehiclePage';
 }

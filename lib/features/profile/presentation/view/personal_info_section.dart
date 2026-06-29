@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
@@ -7,10 +6,7 @@ import 'package:metw_go/features/profile/presentation/widgets/custom_section.dar
 import 'package:metw_go/features/profile/presentation/widgets/profile_item.dart';
 
 class PersonalInfoSection extends StatelessWidget {
-  const PersonalInfoSection({
-    super.key,
-  });
-
+  const PersonalInfoSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +16,17 @@ class PersonalInfoSection extends StatelessWidget {
         ProfileItem(
           icon: Icons.person_outline,
           title: AppLocalizations.of(context)!.personalData,
-          onPressed: ()=> context.push(AppRoutes.personalInfoPage),
+          onPressed: () => context.push(AppRoutes.personalInfoPage),
         ),
-        ProfileItem(icon: Icons.language, title: AppLocalizations.of(context)!.delegateInfo,
-        onPressed: ()=>context.push(AppRoutes.delegateInfoPage),
+        ProfileItem(
+          icon: Icons.language,
+          title: AppLocalizations.of(context)!.delegateInfo,
+          onPressed: () => context.push(AppRoutes.delegateInfoPage),
         ),
         ProfileItem(
           icon: Icons.directions_car_outlined,
           title: AppLocalizations.of(context)!.vehicleData,
+          onPressed: () => context.push(AppRoutes.vehiclePage),
         ),
         ProfileItem(
           icon: Icons.location_on_outlined,
