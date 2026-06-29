@@ -31,6 +31,7 @@ class PersonalInfoSection extends StatelessWidget {
         ProfileItem(
           icon: Icons.location_on_outlined,
           title: AppLocalizations.of(context)!.serviceAreas,
+          onPressed: () => context.push(AppRoutes.serviceAreasPage),
         ),
         ProfileItem(
           icon: Icons.description_outlined,

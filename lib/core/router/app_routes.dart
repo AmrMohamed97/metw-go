@@ -16,4 +16,5 @@ class AppRoutes {
   static const String personalInfoPage = '/personalInfoPage';
   static const String delegateInfoPage = '/delegateInfoPage';
   static const String vehiclePage = '/vehiclePage';
+  static const String serviceAreasPage = '/serviceAreasPage';
 }

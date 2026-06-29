@@ -19,6 +19,8 @@ import 'package:metw_go/features/personal_info/presentation/manager/personal_inf
 import 'package:metw_go/features/personal_info/presentation/page/personal_info_page.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/page/register_page.dart';
+import 'package:metw_go/features/service_areas/presentation/manager/service_areas_cubit.dart';
+import 'package:metw_go/features/service_areas/presentation/page/service_areas_page.dart';
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_cubit.dart';
 import 'package:metw_go/features/vehicle_data/presentation/page/vehicle_page.dart';
 
@@ -163,6 +165,14 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<VehicleCubit>(),
           child: const VehiclePage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.serviceAreasPage,
+        name: AppRoutes.serviceAreasPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<ServiceAreasCubit>(),
+          child: const ServiceAreasPage(),
         ),
       ),
 
