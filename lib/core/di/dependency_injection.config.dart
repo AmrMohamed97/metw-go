@@ -20,6 +20,8 @@ import 'package:metw_go/core/network/dio/dio_factory.dart' as _i611;
 import 'package:metw_go/core/network/dio/dio_interceptor.dart' as _i402;
 import 'package:metw_go/core/repo/app_repo.dart' as _i444;
 import 'package:metw_go/core/repo/app_repo_impl.dart' as _i837;
+import 'package:metw_go/features/documents/presentation/manager/documents_cubit.dart'
+    as _i91;
 import 'package:metw_go/features/driver_info/presentation/manager/delegate_info_cubit.dart'
     as _i203;
 import 'package:metw_go/features/home/presentation/manager/home_cubit.dart'
@@ -53,6 +55,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.prefs,
       preResolve: true,
     );
+    gh.factory<_i91.DocumentsCubit>(() => _i91.DocumentsCubit());
     gh.factory<_i203.DelegateInfoCubit>(() => _i203.DelegateInfoCubit());
     gh.factory<_i171.HomeCubit>(() => _i171.HomeCubit());
     gh.factory<_i563.LoginCubit>(() => _i563.LoginCubit());
