@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 
-class OrderDetailsPage extends StatelessWidget {
+class OrderDetailsPage extends StatefulWidget {
   const OrderDetailsPage({super.key});
 
   @override
+  State<OrderDetailsPage> createState() => _OrderDetailsPageState();
+}
+
+class _OrderDetailsPageState extends State<OrderDetailsPage> {
+
+  @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: MyColors.white,
-      appBar: const CustomAppBar(
-        title: 'الطلبات',
+      appBar: CustomAppBar(
+        title: l10n.orders,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -37,7 +45,7 @@ class OrderDetailsPage extends StatelessWidget {
                       Icon(Icons.bolt, color: MyColors.white, size: 20.r),
                       SizedBox(width: 8.w),
                       Text(
-                        'توصيل فوري  |  نقطة واحدة',
+                        l10n.immediateDeliveryOnePoint,
                         style: AppTextStyle.medium14(context).copyWith(color: MyColors.white),
                       ),
                     ],
@@ -69,8 +77,8 @@ class OrderDetailsPage extends StatelessWidget {
             
             // Pickup Location
             _LocationCard(
-              title: 'نقطة الاستلام',
-              subtitle: 'مخبز لافندر الفرنسي',
+              title: l10n.pickupPoint,
+              subtitle: l10n.mockBakeryName,
               icon: Icons.storefront_outlined,
               iconColor: MyColors.primaryColor,
               iconBgColor: MyColors.primaryColor.withOpacity(0.1),
@@ -79,8 +87,8 @@ class OrderDetailsPage extends StatelessWidget {
             
             // Dropoff Location
             _LocationCard(
-              title: 'نقطة التسليم',
-              subtitle: 'حي النرجس، الرياض',
+              title: l10n.dropoffPoint,
+              subtitle: l10n.mockCustomerAddress,
               icon: Icons.person_outline,
               iconColor: MyColors.secondaryColor,
               iconBgColor: MyColors.secondaryColor.withOpacity(0.1),
@@ -104,7 +112,7 @@ class OrderDetailsPage extends StatelessWidget {
                       Icon(Icons.inventory_2_outlined, color: MyColors.primaryColor, size: 24.r),
                       SizedBox(width: 8.w),
                       Text(
-                        'تفاصيل الشحنة',
+                        l10n.shipmentDetails,
                         style: AppTextStyle.bold16(context),
                       ),
                     ],
@@ -112,24 +120,24 @@ class OrderDetailsPage extends StatelessWidget {
                   SizedBox(height: 16.h),
                   _buildDetailRow(
                     context,
-                    title: 'محتوى الطلب',
+                    title: l10n.orderContent,
                     value: 'علبة معجنات مشكلة + عصير',
                   ),
                   _buildDetailRow(
                     context,
-                    title: 'الوزن التقريبي',
+                    title: l10n.approximateWeight,
                     value: '5 كجم تقريباً',
                   ),
                   _buildDetailRow(
                     context,
-                    title: 'طريقة الدفع',
-                    value: 'الدفع عند الاستلام (كاش)',
+                    title: l10n.paymentMethod,
+                    value: l10n.cashOnDelivery,
                     valueColor: MyColors.primaryColor,
                     icon: Icon(Icons.money, color: MyColors.primaryColor, size: 20.r),
                   ),
                   _buildDetailRow(
                     context,
-                    title: 'إجمالي قيمة الطلب',
+                    title: l10n.totalOrderValue,
                     value: '145.00 ج.م',
                   ),
                   SizedBox(height: 16.h),
@@ -137,7 +145,7 @@ class OrderDetailsPage extends StatelessWidget {
                   SizedBox(height: 16.h),
                   _buildDetailRow(
                     context,
-                    title: 'الاجرة',
+                    title: l10n.fare,
                     value: '100 ج.م',
                     valueColor: MyColors.primaryColor,
                     isBold: true,
@@ -161,7 +169,7 @@ class OrderDetailsPage extends StatelessWidget {
                   SizedBox(width: 12.w),
                   Expanded(
                     child: Text(
-                      'يرجى التأكد من استلام الفاتورة الورقية من التاجر عند الاستلام.',
+                      l10n.receiptConfirmationNote,
                       style: AppTextStyle.regular14(context),
                     ),
                   ),
@@ -172,7 +180,7 @@ class OrderDetailsPage extends StatelessWidget {
             
             // Buttons
             CustomButton(
-              text: 'قبول الطلب',
+              text: l10n.acceptOrder,
               onPressed: () {},
               isMax: true,
               backgroundColor: MyColors.primaryColor,
@@ -180,9 +188,9 @@ class OrderDetailsPage extends StatelessWidget {
             ),
             SizedBox(height: 16.h),
             TextButton(
-              onPressed: () {},
+              onPressed: () => _showRejectBottomSheet(context),
               child: Text(
-                'رفض الطلب',
+                l10n.rejectOrder,
                 style: AppTextStyle.medium16(context).copyWith(color: MyColors.textColor),
               ),
             ),
@@ -190,6 +198,19 @@ class OrderDetailsPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showRejectBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      transitionAnimationController: AnimationController(
+        vsync: Navigator.of(context),
+        duration: const Duration(milliseconds: 450),
+      ),
+      builder: (ctx) => const _RejectBottomSheet(),
     );
   }
 
@@ -351,3 +372,186 @@ class DashedDivider extends StatelessWidget {
     );
   }
 }
+
+// ─── Reject Bottom Sheet ───────────────────────────────────────────────────
+
+class _RejectReason {
+  final String label;
+  final IconData icon;
+
+  const _RejectReason({required this.label, required this.icon});
+}
+
+class _RejectBottomSheet extends StatefulWidget {
+  const _RejectBottomSheet();
+
+  @override
+  State<_RejectBottomSheet> createState() => _RejectBottomSheetState();
+}
+
+class _RejectBottomSheetState extends State<_RejectBottomSheet>
+    with SingleTickerProviderStateMixin {
+
+  int _selectedIndex = 0;
+
+  List<_RejectReason> _buildReasons(AppLocalizations l10n) => [
+    _RejectReason(label: l10n.locationTooFar, icon: Icons.location_on_outlined),
+    _RejectReason(label: l10n.packageTooHeavy, icon: Icons.shopping_bag_outlined),
+    _RejectReason(label: l10n.vehicleIssue, icon: Icons.no_drinks_outlined),
+    _RejectReason(label: l10n.personalBreak, icon: Icons.coffee_outlined),
+    _RejectReason(label: l10n.other, icon: Icons.more_horiz),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final reasons = _buildReasons(l10n);
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Container(
+        decoration: BoxDecoration(
+          color: MyColors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+        ),
+        padding: EdgeInsets.only(
+          left: 20.w,
+          right: 20.w,
+          top: 12.h,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 24.h,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Drag Handle
+            Container(
+              width: 48.w,
+              height: 4.h,
+              decoration: BoxDecoration(
+                color: MyColors.greyLight,
+                borderRadius: BorderRadius.circular(100.r),
+              ),
+            ),
+            SizedBox(height: 24.h),
+
+            // Title
+            Text(
+              l10n.rejectionReason,
+              style: AppTextStyle.bold20(context),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 8.h),
+
+            // Subtitle
+            Text(
+              l10n.selectRejectionReason,
+              style: AppTextStyle.regular14(context)
+                  .copyWith(color: MyColors.grey),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 24.h),
+
+            // Reason Options
+            ...List.generate(reasons.length, (index) {
+              final reason = reasons[index];
+              final isSelected = _selectedIndex == index;
+              return GestureDetector(
+                onTap: () => setState(() => _selectedIndex = index),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.easeInOut,
+                  margin: EdgeInsets.only(bottom: 12.h),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 16.w, vertical: 14.h),
+                  decoration: BoxDecoration(
+                    color: MyColors.white,
+                    borderRadius: BorderRadius.circular(14.r),
+                    border: Border.all(
+                      color: isSelected
+                          ? MyColors.secondaryColor.withOpacity(0.4)
+                          : MyColors.greyLight,
+                      width: isSelected ? 1.5 : 1,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      // Radio indicator
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 250),
+                        width: 24.r,
+                        height: 24.r,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: isSelected
+                              ? MyColors.secondaryColor
+                              : Colors.transparent,
+                          border: Border.all(
+                            color: isSelected
+                                ? MyColors.secondaryColor
+                                : MyColors.greyLight,
+                            width: 2,
+                          ),
+                        ),
+                        child: isSelected
+                            ? Icon(Icons.circle,
+                                size: 10.r, color: MyColors.white)
+                            : null,
+                      ),
+                      SizedBox(width: 14.w),
+
+                      // Label
+                      Expanded(
+                        child: Text(
+                          reason.label,
+                          style: AppTextStyle.medium14(context),
+                        ),
+                      ),
+
+                      // Icon Badge
+                      Container(
+                        padding: EdgeInsets.all(10.r),
+                        decoration: BoxDecoration(
+                          color: MyColors.greyFill,
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Icon(
+                          reason.icon,
+                          size: 22.r,
+                          color: MyColors.textColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+
+            SizedBox(height: 16.h),
+
+            // Confirm button
+            CustomButton(
+              text: l10n.confirmRejection,
+              onPressed: () {
+                Navigator.of(context).pop();
+                // TODO: handle rejection with reasons[_selectedIndex].label
+              },
+              isMax: true,
+              backgroundColor: MyColors.primaryColor,
+              textColor: MyColors.white,
+            ),
+            SizedBox(height: 12.h),
+
+            // Cancel text
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                l10n.cancel,
+                style: AppTextStyle.medium16(context)
+                    .copyWith(color: MyColors.textColor),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

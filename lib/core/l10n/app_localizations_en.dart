@@ -673,4 +673,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mockDesc3 => 'Al Yasmin Dist';
+
+  @override
+  String get dropoffPoint => 'Dropoff Point';
+
+  @override
+  String get shipmentDetails => 'Shipment Details';
+
+  @override
+  String get orderContent => 'Order Content';
+
+  @override
+  String get approximateWeight => 'Approximate Weight';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get cashOnDelivery => 'Cash on Delivery';
+
+  @override
+  String get totalOrderValue => 'Total Order Value';
+
+  @override
+  String get receiptConfirmationNote =>
+      'Please ensure to receive the paper invoice from the merchant upon pickup.';
+
+  @override
+  String get acceptOrder => 'Accept Order';
+
+  @override
+  String get rejectOrder => 'Reject Order';
+
+  @override
+  String get rejectionReason => 'Rejection Reason';
+
+  @override
+  String get selectRejectionReason =>
+      'Please select a reason for rejecting this order';
+
+  @override
+  String get locationTooFar => 'Location is too far';
+
+  @override
+  String get packageTooHeavy => 'Package is too heavy';
+
+  @override
+  String get vehicleIssue => 'Vehicle issue';
+
+  @override
+  String get personalBreak => 'Personal break';
+
+  @override
+  String get other => 'Other';
+
+  @override
+  String get confirmRejection => 'Confirm Rejection';
+
+  @override
+  String get cancel => 'Cancel';
 }

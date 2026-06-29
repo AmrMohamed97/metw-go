@@ -670,4 +670,62 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get mockDesc3 => 'حي الياسمين';
+
+  @override
+  String get dropoffPoint => 'نقطة التسليم';
+
+  @override
+  String get shipmentDetails => 'تفاصيل الشحنة';
+
+  @override
+  String get orderContent => 'محتوى الطلب';
+
+  @override
+  String get approximateWeight => 'الوزن التقريبي';
+
+  @override
+  String get paymentMethod => 'طريقة الدفع';
+
+  @override
+  String get cashOnDelivery => 'الدفع عند الاستلام (كاش)';
+
+  @override
+  String get totalOrderValue => 'إجمالي قيمة الطلب';
+
+  @override
+  String get receiptConfirmationNote =>
+      'يرجى التأكد من استلام الفاتورة الورقية من التاجر عند الاستلام.';
+
+  @override
+  String get acceptOrder => 'قبول الطلب';
+
+  @override
+  String get rejectOrder => 'رفض الطلب';
+
+  @override
+  String get rejectionReason => 'سبب الرفض';
+
+  @override
+  String get selectRejectionReason => 'يرجى تحديد سبب رفضك لهذا الطلب';
+
+  @override
+  String get locationTooFar => 'الموقع بعيد جداً';
+
+  @override
+  String get packageTooHeavy => 'الطرد ثقيل جداً';
+
+  @override
+  String get vehicleIssue => 'مشكلة في المركبة';
+
+  @override
+  String get personalBreak => 'استراحة شخصية';
+
+  @override
+  String get other => 'أخرى';
+
+  @override
+  String get confirmRejection => 'تأكيد الرفض';
+
+  @override
+  String get cancel => 'إلغاء';
 }

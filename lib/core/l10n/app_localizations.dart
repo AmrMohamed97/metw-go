@@ -1393,6 +1393,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Al Yasmin Dist'**
   String get mockDesc3;
+
+  /// No description provided for @dropoffPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Dropoff Point'**
+  String get dropoffPoint;
+
+  /// No description provided for @shipmentDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment Details'**
+  String get shipmentDetails;
+
+  /// No description provided for @orderContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Content'**
+  String get orderContent;
+
+  /// No description provided for @approximateWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Approximate Weight'**
+  String get approximateWeight;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get paymentMethod;
+
+  /// No description provided for @cashOnDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash on Delivery'**
+  String get cashOnDelivery;
+
+  /// No description provided for @totalOrderValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Order Value'**
+  String get totalOrderValue;
+
+  /// No description provided for @receiptConfirmationNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Please ensure to receive the paper invoice from the merchant upon pickup.'**
+  String get receiptConfirmationNote;
+
+  /// No description provided for @acceptOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept Order'**
+  String get acceptOrder;
+
+  /// No description provided for @rejectOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject Order'**
+  String get rejectOrder;
+
+  /// No description provided for @rejectionReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejection Reason'**
+  String get rejectionReason;
+
+  /// No description provided for @selectRejectionReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a reason for rejecting this order'**
+  String get selectRejectionReason;
+
+  /// No description provided for @locationTooFar.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is too far'**
+  String get locationTooFar;
+
+  /// No description provided for @packageTooHeavy.
+  ///
+  /// In en, this message translates to:
+  /// **'Package is too heavy'**
+  String get packageTooHeavy;
+
+  /// No description provided for @vehicleIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle issue'**
+  String get vehicleIssue;
+
+  /// No description provided for @personalBreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal break'**
+  String get personalBreak;
+
+  /// No description provided for @other.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get other;
+
+  /// No description provided for @confirmRejection.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Rejection'**
+  String get confirmRejection;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
 }
 
 class _AppLocalizationsDelegate
