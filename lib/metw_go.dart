@@ -29,6 +29,10 @@ class MetwGo extends StatelessWidget {
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: context.read<AppCubit>().currentLocale,
                 theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                themeMode: context.read<AppCubit>().isDarkMode
+                    ? ThemeMode.dark
+                    : ThemeMode.light,
                 routerConfig: AppRouter.router,
                 debugShowCheckedModeBanner: false,
                 // builder: (context, child) {

@@ -4,6 +4,8 @@ class AppInitial extends AppState {}
 
 class ChangeLanguageState extends AppState {}
 
+class ChangeThemeState extends AppState {}
+
 class ApplogoutLoadingState extends AppState {}
 
 class ApplogoutLogoutSuccessState extends AppState {}

@@ -97,8 +97,8 @@ class SettingSection extends StatelessWidget {
                   icon: Icons.dark_mode_outlined,
                   title: AppLocalizations.of(context)!.darkMode,
                   trailing: CupertinoSwitch(
-                    value: false,
-                    onChanged: (v) {},
+                    value: appCubit.isDarkMode,
+                    onChanged: (v) => appCubit.toggleTheme(v),
                     activeTrackColor: Theme.of(context).colorScheme.primary,
                   ),
                 ),

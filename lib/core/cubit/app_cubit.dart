@@ -12,10 +12,16 @@ class AppCubit extends Cubit<AppState> {
   AppCubit(this._appRepo) : super(AppInitial());
 
   Locale currentLocale = const Locale('ar');
+  bool isDarkMode = false;
 
   void changeLanguage(Locale locale) {
     currentLocale = locale;
     emit(ChangeLanguageState());
+  }
+
+  void toggleTheme(bool value) {
+    isDarkMode = value;
+    emit(ChangeThemeState());
   }
 
   // void trackDriver() {
