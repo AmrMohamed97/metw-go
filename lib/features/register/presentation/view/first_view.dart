@@ -29,6 +29,8 @@ class FirstView extends StatefulWidget {
 
 class _FirstViewState extends State<FirstView> {
   bool _shouldAnimate = false;
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   void initState() {
@@ -192,6 +194,20 @@ class _FirstViewState extends State<FirstView> {
                       hintText: '...............',
                       controller: cubit.passwordController,
                       validator: (val) => passwordValidator(context, val),
+                      obscureText: _obscurePassword,
+                      suffixIcon: GestureDetector(
+                        onTap: () => setState(() => _obscurePassword = !_obscurePassword),
+                        child: Padding(
+                          padding: EdgeInsets.all(12.r),
+                          child: Image.asset(
+                            _obscurePassword
+                                ? AppImages.lockClosed
+                                : AppImages.lockOpened,
+                            width: 20.r,
+                            height: 20.r,
+                          ),
+                        ),
+                      ),
                     ),
                     // 16.verticalSpace,
                     FieldTitle(
@@ -203,6 +219,20 @@ class _FirstViewState extends State<FirstView> {
                       controller: cubit.confirmPasswordController,
                       validator: (val) =>
                           confirmPasswordValidator(context, val),
+                      obscureText: _obscureConfirmPassword,
+                      suffixIcon: GestureDetector(
+                        onTap: () => setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
+                        child: Padding(
+                          padding: EdgeInsets.all(12.r),
+                          child: Image.asset(
+                            _obscureConfirmPassword
+                                ? AppImages.lockClosed
+                                : AppImages.lockOpened,
+                            width: 20.r,
+                            height: 20.r,
+                          ),
+                        ),
+                      ),
                     ),
                     18.verticalSpace,
                     Row(
