@@ -37,6 +37,7 @@ class PersonalInfoSection extends StatelessWidget {
           icon: Icons.description_outlined,
           title: AppLocalizations.of(context)!.documents,
           isLast: true,
+          onPressed: () => context.push(AppRoutes.documentsPage),
         ),
       ],
     );

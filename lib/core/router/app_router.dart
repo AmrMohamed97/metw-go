@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
 import 'package:metw_go/features/comming_soon/comming_soon_page.dart';
 import 'package:metw_go/features/complete_order_details/presentation/page/complete_order_page.dart';
+import 'package:metw_go/features/documents/presentation/manager/documents_cubit.dart';
+import 'package:metw_go/features/documents/presentation/page/documents_page.dart';
 import 'package:metw_go/features/driver_info/presentation/manager/delegate_info_cubit.dart';
 import 'package:metw_go/features/driver_info/presentation/page/delegate_info_page.dart';
 import 'package:metw_go/features/forget_password/presentation/manager/forget_password_cubit.dart';
@@ -173,6 +175,14 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<ServiceAreasCubit>(),
           child: const ServiceAreasPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.documentsPage,
+        name: AppRoutes.documentsPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<DocumentsCubit>(),
+          child: const DocumentsPage(),
         ),
       ),
 
