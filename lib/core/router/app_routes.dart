@@ -14,4 +14,5 @@ class AppRoutes {
   static const String historyPage = '/historyPage';
   static const String completeOrderPage = '/completeOrderPage';
   static const String orderDetailsPage = '/orderDetailsPage';
+  static const String personalInfoPage = '/personalInfoPage';
 }

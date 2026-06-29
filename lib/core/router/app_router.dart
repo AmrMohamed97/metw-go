@@ -13,6 +13,8 @@ import 'package:metw_go/features/main_view/main_view.dart';
 import 'package:metw_go/features/order_details/presentation/order_details_page.dart';
 import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart';
 import 'package:metw_go/features/otp/presentation/page/otp_page.dart';
+import 'package:metw_go/features/personal_info/presentation/manager/personal_info_cubit.dart';
+import 'package:metw_go/features/personal_info/presentation/page/personal_info_page.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/page/register_page.dart';
 
@@ -20,7 +22,7 @@ import 'app_routes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.register,
+    initialLocation: AppRoutes.personalInfoPage,
     // redirect: (context, state) async {
     //   final String currentPath = state.matchedLocation;
 
@@ -70,11 +72,11 @@ class AppRouter {
         path: AppRoutes.otp,
         name: AppRoutes.otp,
         builder: (context, state) {
-          bool? fromLogin=state.extra as bool?;
+          bool? fromLogin = state.extra as bool?;
           return BlocProvider(
-          create: (context) => getIt<OtpCubit>(),
-          child:   OtpPage(fromLogin: fromLogin??false,),
-        );
+            create: (context) => getIt<OtpCubit>(),
+            child: OtpPage(fromLogin: fromLogin ?? false),
+          );
         },
       ),
       GoRoute(
@@ -134,6 +136,14 @@ class AppRouter {
         path: AppRoutes.orderDetailsPage,
         name: AppRoutes.orderDetailsPage,
         builder: (context, state) => const OrderDetailsPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.personalInfoPage,
+        name: AppRoutes.personalInfoPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<PersonalInfoCubit>(),
+          child: const PersonalInfoPage(),
+        ),
       ),
 
       // ========== onbording ==========

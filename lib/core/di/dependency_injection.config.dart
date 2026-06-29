@@ -26,6 +26,8 @@ import 'package:metw_go/features/login/presentation/manager/login_cubit.dart'
     as _i563;
 import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart'
     as _i364;
+import 'package:metw_go/features/personal_info/presentation/manager/personal_info_cubit.dart'
+    as _i87;
 import 'package:metw_go/features/profile/presentation/manager/profile_cubit.dart'
     as _i197;
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart'
@@ -48,6 +50,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i171.HomeCubit>(() => _i171.HomeCubit());
     gh.factory<_i563.LoginCubit>(() => _i563.LoginCubit());
     gh.factory<_i364.OrdersCubit>(() => _i364.OrdersCubit());
+    gh.factory<_i87.PersonalInfoCubit>(() => _i87.PersonalInfoCubit());
     gh.factory<_i197.ProfileCubit>(() => _i197.ProfileCubit());
     gh.factory<_i1006.RegisterCubit>(() => _i1006.RegisterCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
