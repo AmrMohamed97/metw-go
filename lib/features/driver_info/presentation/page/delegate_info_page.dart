@@ -15,7 +15,6 @@ import 'package:metw_go/features/driver_info/presentation/widgets/delegate_info_
 import 'package:metw_go/features/driver_info/presentation/widgets/delegate_page_work_classification.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 
-
 class DelegateInfoPage extends StatelessWidget {
   const DelegateInfoPage({super.key});
 
@@ -23,81 +22,70 @@ class DelegateInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenWrapper(
       appBar: CustomAppBar(title: 'معلومات المندوب'),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: CustomButton(
+          isMax: true,
+          text: 'حفظ',
+          onPressed: () {
+            // cubit.secondViewPress(context);
+          },
+        ),
+      ),
       body: BlocBuilder<DelegateInfoCubit, DelegateInfoState>(
         builder: (context, state) {
           final cubit = context.read<DelegateInfoCubit>();
-          return Form(
-            key: cubit.secondViewFormKey,
-            child: AnimatedColumn(
-              children: [
-                50.verticalSpace,
-
-                // 16.verticalSpace,
-                // Text(
-                //   AppLocalizations.of(context)!.delegateInfo,
-                //   style: AppTextStyle.medium16(
-                //     context,
-                //   ).copyWith(color: Theme.of(context).primaryColor),
-                // ),
-                // 3.verticalSpace,
-                // Text(
-                //   AppLocalizations.of(context)!.startCreatingProfile,
-                //   style: AppTextStyle.medium14(
-                //     context,
-                //   ).copyWith(color: Theme.of(context).colorScheme.onSurface),
-                // ),
-                24.verticalSpace,
-                FieldTitle(title: AppLocalizations.of(context)!.delegateType),
-                12.verticalSpace,
-                const DelegateInfoPageSelector(),
-                if (!cubit.isIndependentDelegate) ...[
-                  16.verticalSpace,
-                  FieldTitle(
-                    title: AppLocalizations.of(context)!.warehouseNumber,
-                  ),
-                  4.verticalSpace,
-                  CustomTextField(
-                    hintText: AppLocalizations.of(
-                      context,
-                    )!.chooseWarehouseNumber,
-                    suffixIcon: const Icon(Icons.keyboard_arrow_down),
-                    readOnly: true,
-                    // Add a tap handler if needed to open a bottom sheet
-                    // But we also need validator as requested
-                    validator: (value) {
-                      if (!cubit.isIndependentDelegate &&
-                          cubit.selectedWarehouse == null) {
-                        return AppLocalizations.of(context)!.errChooseWarehouse;
-                      }
-                      return null;
-                    },
-                  ),
-                ],
-                if (cubit.isIndependentDelegate) 24.verticalSpace,
-                FieldTitle(
-                  title: AppLocalizations.of(context)!.workClassification,
-                ),
-                3.verticalSpace,
-                Text(
-                  AppLocalizations.of(context)!.chooseMultipleClassifications,
-                  style: AppTextStyle.regular12(
-                    context,
-                  ).copyWith(color: Colors.grey.shade500),
-                ),
-                12.verticalSpace,
-                const DelegatePageWorkClassification(),
-
-                34.verticalSpace,
-                CustomButton(
-                      horizontalPadding: 40,
-                      text: 'حفظ',
-                      onPressed: () {
-                        // cubit.secondViewPress(context);
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Form(
+              key: cubit.secondViewFormKey,
+              child: AnimatedColumn(
+                children: [
+                  24.verticalSpace,
+                  FieldTitle(title: AppLocalizations.of(context)!.delegateType),
+                  12.verticalSpace,
+                  const DelegateInfoPageSelector(),
+                  if (!cubit.isIndependentDelegate) ...[
+                    16.verticalSpace,
+                    FieldTitle(
+                      title: AppLocalizations.of(context)!.warehouseNumber,
+                    ),
+                    4.verticalSpace,
+                    CustomTextField(
+                      hintText: AppLocalizations.of(
+                        context,
+                      )!.chooseWarehouseNumber,
+                      suffixIcon: const Icon(Icons.keyboard_arrow_down),
+                      readOnly: true,
+                      // Add a tap handler if needed to open a bottom sheet
+                      // But we also need validator as requested
+                      validator: (value) {
+                        if (!cubit.isIndependentDelegate &&
+                            cubit.selectedWarehouse == null) {
+                          return AppLocalizations.of(
+                            context,
+                          )!.errChooseWarehouse;
+                        }
+                        return null;
                       },
                     ),
-                20.verticalSpace,
-                const ViewInsetsSpace(),
-              ],
+                  ],
+                  if (cubit.isIndependentDelegate) 24.verticalSpace,
+                  FieldTitle(
+                    title: AppLocalizations.of(context)!.workClassification,
+                  ),
+                  3.verticalSpace,
+                  Text(
+                    AppLocalizations.of(context)!.chooseMultipleClassifications,
+                    style: AppTextStyle.regular12(
+                      context,
+                    ).copyWith(color: Colors.grey.shade500),
+                  ),
+                  12.verticalSpace,
+                  const DelegatePageWorkClassification(),
+                  const ViewInsetsSpace(),
+                ],
+              ),
             ),
           );
         },
