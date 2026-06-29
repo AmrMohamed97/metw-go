@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/widgets/order_item.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_state.dart';
@@ -24,6 +26,8 @@ class OrdersListView extends StatelessWidget {
                 isTodayOrders: cubit.isTodayOrders,
                 pickup: "مطعم شواية الخليج - طريق التخصصي",
                 delivery: "حي النخيل - شارع الأمير سعود",
+                onDetailsPressed: () =>
+                    context.push(AppRoutes.orderDetailsPage),
                 // borderColor: MyColors.secondaryColor,
               ),
             ),

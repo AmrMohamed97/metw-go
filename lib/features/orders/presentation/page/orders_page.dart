@@ -20,7 +20,7 @@ class OrdersPage extends StatelessWidget {
       create: (context) => getIt<OrdersCubit>(),
       child: BlocBuilder<OrdersCubit, OrdersState>(
         builder: (context, state) {
-          final cubit = context.read<OrdersCubit>();
+          // final cubit = context.read<OrdersCubit>();
           return ScreenWrapper(
             appBar: CustomAppBar(
               canPob: false,
