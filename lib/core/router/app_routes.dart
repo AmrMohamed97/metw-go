@@ -1,6 +1,5 @@
 // ==========================================
-// app_routes.dart - Route paths constants
-// ==========================================
+
 
 class AppRoutes {
   // Auth routes
@@ -15,4 +14,5 @@ class AppRoutes {
   static const String completeOrderPage = '/completeOrderPage';
   static const String orderDetailsPage = '/orderDetailsPage';
   static const String personalInfoPage = '/personalInfoPage';
+  static const String delegateInfoPage = '/delegateInfoPage';
 }

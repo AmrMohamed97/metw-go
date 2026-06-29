@@ -22,7 +22,9 @@ class PersonalInfoSection extends StatelessWidget {
           title: AppLocalizations.of(context)!.personalData,
           onPressed: ()=> context.push(AppRoutes.personalInfoPage),
         ),
-        ProfileItem(icon: Icons.language, title: AppLocalizations.of(context)!.delegateInfo),
+        ProfileItem(icon: Icons.language, title: AppLocalizations.of(context)!.delegateInfo,
+        onPressed: ()=>context.push(AppRoutes.delegateInfoPage),
+        ),
         ProfileItem(
           icon: Icons.directions_car_outlined,
           title: AppLocalizations.of(context)!.vehicleData,
