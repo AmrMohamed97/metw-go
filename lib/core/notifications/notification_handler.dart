@@ -7,6 +7,35 @@ import 'local_notification_service.dart';
 class NotificationHandler {
   static FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
   static String? fcmToken = '';
+  static bool _notificationsEnabled = true;
+
+  static bool get notificationsEnabled => _notificationsEnabled;
+
+  /// Enables notifications by requesting a new FCM token.
+  static Future<void> enableNotifications() async {
+    try {
+      if (Platform.isIOS) {
+        await firebaseMessaging.getAPNSToken();
+      }
+      fcmToken = await firebaseMessaging.getToken();
+      _notificationsEnabled = true;
+      log('Notifications enabled. FCM Token: $fcmToken');
+    } catch (e) {
+      log('Error enabling notifications: $e');
+    }
+  }
+
+  /// Disables notifications by deleting the FCM token.
+  static Future<void> disableNotifications() async {
+    try {
+      await firebaseMessaging.deleteToken();
+      fcmToken = null;
+      _notificationsEnabled = false;
+      log('Notifications disabled. FCM token deleted.');
+    } catch (e) {
+      log('Error disabling notifications: $e');
+    }
+  }
 
   static Future init() async {
     await firebaseMessaging.requestPermission(

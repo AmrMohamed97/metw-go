@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
@@ -9,6 +10,14 @@ import 'package:metw_go/features/home/presentation/services/tracking_location_se
 class AppCubit extends Cubit<AppState> {
   final AppRepo _appRepo;
   AppCubit(this._appRepo) : super(AppInitial());
+
+  Locale currentLocale = const Locale('ar');
+
+  void changeLanguage(Locale locale) {
+    currentLocale = locale;
+    emit(ChangeLanguageState());
+  }
+
   // void trackDriver() {
   //   TrackingLocationService().startTracking(
   //     driverId: '9', //CacheHelper.getUserData()?.id.toString() ?? '',

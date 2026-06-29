@@ -27,7 +27,7 @@ class MetwGo extends StatelessWidget {
                 title: 'Metw Go',
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
-                locale: const Locale('ar'),
+                locale: context.read<AppCubit>().currentLocale,
                 theme: AppTheme.lightTheme,
                 routerConfig: AppRouter.router,
                 debugShowCheckedModeBanner: false,
