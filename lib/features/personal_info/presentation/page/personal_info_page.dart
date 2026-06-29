@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -134,19 +135,17 @@ class PersonalInfoPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        FieldTitle(
-                          title: AppLocalizations.of(context)!.detailedAddress,
-                        ),
-                        Row(
-                          children: [
-                            Image.asset(AppImages.locationIcon),
-                            4.horizontalSpace,
-                            FieldTitle(
-                              title: AppLocalizations.of(
-                                context,
-                              )!.cityNeighborhoodStreet,
+                        FieldTitle(title: "تغيير كلمة المرور"),
+                        CupertinoButton(
+                          padding: EdgeInsets.all(0),
+                          minimumSize: Size.zero,
+                          onPressed: () {},
+                          child: Text(
+                            'تغيير',
+                            style: AppTextStyle.medium14(context).copyWith(
+                              color: Theme.of(context).colorScheme.primary,
                             ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
@@ -202,9 +201,7 @@ class PersonalInfoPage extends StatelessWidget {
                       ),
                     ),
                     // 16.verticalSpace,
-                    FieldTitle(
-                      title:'كلمة المرور الجديدة',
-                    ),
+                    FieldTitle(title: 'كلمة المرور الجديدة'),
                     4.verticalSpace,
                     CustomTextField(
                       hintText: '...............',
