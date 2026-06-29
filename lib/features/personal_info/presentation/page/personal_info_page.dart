@@ -36,19 +36,19 @@ class PersonalInfoPage extends StatelessWidget {
                   revealOnScroll: true,
                   children: [
                     // 16.verticalSpace,
-                    Text(
-                      AppLocalizations.of(context)!.personalInfo,
-                      style: AppTextStyle.medium16(
-                        context,
-                      ).copyWith(color: Theme.of(context).primaryColor),
-                    ),
-                    3.verticalSpace,
-                    Text(
-                      AppLocalizations.of(context)!.startCreatingProfile,
-                      style: AppTextStyle.medium14(context).copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
+                    // Text(
+                    //   AppLocalizations.of(context)!.personalInfo,
+                    //   style: AppTextStyle.medium16(
+                    //     context,
+                    //   ).copyWith(color: Theme.of(context).primaryColor),
+                    // ),
+                    // 3.verticalSpace,
+                    // Text(
+                    //   AppLocalizations.of(context)!.startCreatingProfile,
+                    //   style: AppTextStyle.medium14(context).copyWith(
+                    //     color: Theme.of(context).colorScheme.onSurface,
+                    //   ),
+                    // ),
                     24.verticalSpace,
                     Row(
                       spacing: 14,
@@ -131,7 +131,12 @@ class PersonalInfoPage extends StatelessWidget {
                     ),
                     // 16.verticalSpace,
                     PersonalInfoGenderSelector(),
-                    16.verticalSpace,
+                    20.verticalSpace,
+                    Divider(
+                      height: 16,
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
+                    20.verticalSpace,
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
@@ -139,7 +144,7 @@ class PersonalInfoPage extends StatelessWidget {
                         CupertinoButton(
                           padding: EdgeInsets.all(0),
                           minimumSize: Size.zero,
-                          onPressed: () {},
+                          onPressed: () => cubit.togglePasswordFields(),
                           child: Text(
                             'تغيير',
                             style: AppTextStyle.medium14(context).copyWith(
@@ -150,80 +155,90 @@ class PersonalInfoPage extends StatelessWidget {
                       ],
                     ),
                     4.verticalSpace,
-                    CustomTextField(
-                      minLine: 2,
-                      hintText: AppLocalizations.of(context)!.addressHintText,
-                      controller: cubit.addressController,
-                      validator: (val) => addressValidator(context, val),
-                    ),
-                    16.verticalSpace,
-                    FieldTitle(title: 'كلمة المرور الحالية'),
-                    4.verticalSpace,
-                    CustomTextField(
-                      hintText: '...............',
-                      controller: cubit.currentPasswordController,
-                      validator: (val) => passwordValidator(context, val),
-                      obscureText: cubit.currentObscurePassword,
-                      suffixIcon: GestureDetector(
-                        onTap: () => cubit.changecurrentObscurePassword(),
-                        child: Padding(
-                          padding: EdgeInsets.all(12.r),
-                          child: Image.asset(
-                            cubit.obscurePassword
-                                ? AppImages.lockClosed
-                                : AppImages.lockOpened,
-                            width: 20.r,
-                            height: 20.r,
-                          ),
+                    AnimatedSize(
+                      duration: const Duration(milliseconds: 350),
+                      curve: Curves.easeInOut,
+                      child: Visibility(
+                        visible: cubit.showPasswordFields,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            16.verticalSpace,
+                            FieldTitle(title: 'كلمة المرور الحالية'),
+                            4.verticalSpace,
+                            CustomTextField(
+                              hintText: '...............',
+                              controller: cubit.currentPasswordController,
+                              validator: (val) =>
+                                  passwordValidator(context, val),
+                              obscureText: cubit.currentObscurePassword,
+                              suffixIcon: GestureDetector(
+                                onTap: () =>
+                                    cubit.changecurrentObscurePassword(),
+                                child: Padding(
+                                  padding: EdgeInsets.all(12.r),
+                                  child: Image.asset(
+                                    cubit.currentObscurePassword
+                                        ? AppImages.lockClosed
+                                        : AppImages.lockOpened,
+                                    width: 20.r,
+                                    height: 20.r,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            16.verticalSpace,
+                            FieldTitle(title: 'كلمة المرور الجديدة'),
+                            4.verticalSpace,
+                            CustomTextField(
+                              hintText: '...............',
+                              controller: cubit.passwordController,
+                              validator: (val) =>
+                                  passwordValidator(context, val),
+                              obscureText: cubit.obscurePassword,
+                              suffixIcon: GestureDetector(
+                                onTap: () => cubit.changeObscurePassword(),
+                                child: Padding(
+                                  padding: EdgeInsets.all(12.r),
+                                  child: Image.asset(
+                                    cubit.obscurePassword
+                                        ? AppImages.lockClosed
+                                        : AppImages.lockOpened,
+                                    width: 20.r,
+                                    height: 20.r,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            16.verticalSpace,
+                            FieldTitle(title: 'تأكيد كلمة المرور الجديدة'),
+                            4.verticalSpace,
+                            CustomTextField(
+                              hintText: '...............',
+                              controller: cubit.confirmPasswordController,
+                              validator: (val) =>
+                                  confirmPasswordValidator(context, val),
+                              obscureText: cubit.obscureConfirmPassword,
+                              suffixIcon: GestureDetector(
+                                onTap: () =>
+                                    cubit.changeConfirmObscurePassword(),
+                                child: Padding(
+                                  padding: EdgeInsets.all(12.r),
+                                  child: Image.asset(
+                                    cubit.obscureConfirmPassword
+                                        ? AppImages.lockClosed
+                                        : AppImages.lockOpened,
+                                    width: 20.r,
+                                    height: 20.r,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    16.verticalSpace,
-                    FieldTitle(title: 'كلمة المرور الجديدة'),
-                    4.verticalSpace,
-                    CustomTextField(
-                      hintText: '...............',
-                      controller: cubit.passwordController,
-                      validator: (val) => passwordValidator(context, val),
-                      obscureText: cubit.obscurePassword,
-                      suffixIcon: GestureDetector(
-                        onTap: () => cubit.changeObscurePassword(),
-                        child: Padding(
-                          padding: EdgeInsets.all(12.r),
-                          child: Image.asset(
-                            cubit.obscurePassword
-                                ? AppImages.lockClosed
-                                : AppImages.lockOpened,
-                            width: 20.r,
-                            height: 20.r,
-                          ),
-                        ),
-                      ),
-                    ),
-                    // 16.verticalSpace,
-                    FieldTitle(title: 'كلمة المرور الجديدة'),
-                    4.verticalSpace,
-                    CustomTextField(
-                      hintText: '...............',
-                      controller: cubit.confirmPasswordController,
-                      validator: (val) =>
-                          confirmPasswordValidator(context, val),
-                      obscureText: cubit.obscureConfirmPassword,
-                      suffixIcon: GestureDetector(
-                        onTap: () => cubit.changeConfirmObscurePassword(),
-                        child: Padding(
-                          padding: EdgeInsets.all(12.r),
-                          child: Image.asset(
-                            cubit.obscureConfirmPassword
-                                ? AppImages.lockClosed
-                                : AppImages.lockOpened,
-                            width: 20.r,
-                            height: 20.r,
-                          ),
-                        ),
-                      ),
-                    ),
-                    18.verticalSpace,
+                    25.verticalSpace,
                     CustomButton(
                       isMax: true,
                       text: 'حفظ',

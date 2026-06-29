@@ -21,11 +21,18 @@ class PersonalInfoCubit extends Cubit<PersonalInfoState> {
   TextEditingController secondPhoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController boarnDateController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+  // TextEditingController addressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController currentPasswordController = TextEditingController();
   
+
+  bool showPasswordFields = false;
+
+  void togglePasswordFields() {
+    showPasswordFields = !showPasswordFields;
+    emit(ChangeOpsecureState());
+  }
 
   bool currentObscurePassword = true;
   bool obscurePassword = true;
