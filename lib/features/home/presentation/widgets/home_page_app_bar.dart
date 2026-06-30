@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
-import 'package:metw_go/core/theme/my_colors.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({super.key});
@@ -118,31 +120,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ],
               ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Icon(
-                    Icons.notifications_none_rounded,
-                    color: Theme.of(context).colorScheme.tertiary,
-                    size: 24.sp,
-                  ),
-                  PositionedDirectional(
-                    top: 10.w,
-                    end: 10.w,
-                    child: Container(
-                      width: 10.w,
-                      height: 10.w,
-                      decoration: BoxDecoration(
-                        color: MyColors.red,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.surface,
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              child: CupertinoButton(
+                padding: EdgeInsets.all(0),
+                minimumSize: Size.zero,
+                onPressed: () => context.push(AppRoutes.notificationPage),
+                child: Icon(
+                  Icons.notifications_none_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                  size: 24.sp,
+                ),
               ),
             ),
           ],

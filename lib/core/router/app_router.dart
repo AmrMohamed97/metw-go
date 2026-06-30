@@ -14,6 +14,8 @@ import 'package:metw_go/features/history/presentation/page/history_page.dart';
 import 'package:metw_go/features/login/presentation/manager/login_cubit.dart';
 import 'package:metw_go/features/login/presentation/page/login_page.dart';
 import 'package:metw_go/features/main_view/main_view.dart';
+import 'package:metw_go/features/notification/presentation/manager/notification_cubit.dart';
+import 'package:metw_go/features/notification/presentation/page/notification_page.dart';
 import 'package:metw_go/features/order_details/presentation/order_details_page.dart';
 import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart';
 import 'package:metw_go/features/otp/presentation/page/otp_page.dart';
@@ -183,6 +185,14 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<DocumentsCubit>(),
           child: const DocumentsPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.notificationPage,
+        name: AppRoutes.notificationPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<NotificationCubit>(),
+          child: const NotificationPage(),
         ),
       ),
 
