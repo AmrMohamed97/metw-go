@@ -29,9 +29,7 @@ class ProfilePage extends StatelessWidget {
               canPob: false,
               title: AppLocalizations.of(context)!.myProfile,
               centerTitle: true,
-              actions: [
-                HistoryIconWidget(),
-              ],
+              actions: [HistoryIconWidget()],
             ),
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -52,7 +50,7 @@ class ProfilePage extends StatelessWidget {
                   SupportSection(),
                   24.verticalSpace,
                   LogoutView(),
-                  32.verticalSpace,
+                  100.verticalSpace,
                 ],
               ),
             ),
