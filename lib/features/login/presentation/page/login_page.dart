@@ -11,6 +11,7 @@ import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
+import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/features/login/presentation/manager/login_cubit.dart';
 import 'package:metw_go/features/login/presentation/manager/login_state.dart';
 import 'package:metw_go/features/login/presentation/widgets/login_app_bar.dart';
@@ -84,13 +85,20 @@ class LoginPage extends StatelessWidget {
                               CustomTextField(
                                 controller: cubit.passwordController,
                                 hintText: "...............",
-                                obscureText: true,
+                                obscureText: cubit.obscurePassword,
                                 radius: 16.r,
-                                suffixIcon: Icon(
-                                  Icons.lock_outline,
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.onSurface,
+                                suffixIcon: GestureDetector(
+                                  onTap: () => cubit.toggleObscurePassword(),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(12.r),
+                                    child: Image.asset(
+                                      cubit.obscurePassword
+                                          ? AppImages.lockClosed
+                                          : AppImages.lockOpened,
+                                      width: 20.r,
+                                      height: 20.r,
+                                    ),
+                                  ),
                                 ),
                                 isFixed: false,
                               ),

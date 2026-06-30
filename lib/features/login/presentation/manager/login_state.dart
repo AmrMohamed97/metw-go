@@ -10,3 +10,5 @@ class LoginFailure extends LoginState {
   final String message;
   LoginFailure(this.message);
 }
+
+class ChangeObscureState extends LoginState {}

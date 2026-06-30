@@ -9,5 +9,11 @@ class LoginCubit extends Cubit<LoginState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  
+
+  bool obscurePassword = true;
+
+  void toggleObscurePassword() {
+    obscurePassword = !obscurePassword;
+    emit(ChangeObscureState());
+  }
 }

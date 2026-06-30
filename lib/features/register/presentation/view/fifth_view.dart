@@ -13,6 +13,7 @@ import 'package:metw_go/features/register/presentation/manager/register_cubit.da
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
 import 'package:metw_go/features/register/presentation/widgets/custom_steper.dart';
 import 'package:metw_go/features/register/presentation/widgets/document_upload_box.dart';
+import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';
 import 'package:metw_go/features/register/presentation/widgets/personal_photo_container.dart';
 import 'package:metw_go/features/register/presentation/widgets/pic_image_bottom_sheet.dart';
@@ -55,9 +56,9 @@ class FifthView extends StatelessWidget {
                   24.verticalSpace,
 
                   // Personal Photo
-                  Text(
-                    AppLocalizations.of(context)!.personalPhoto,
-                    style: AppTextStyle.medium14(context),
+                  FieldTitle(
+                    title: AppLocalizations.of(context)!.personalPhoto,
+                    // style: AppTextStyle.medium14(context),
                   ),
                   12.verticalSpace,
                   PersonalPhotoContainer(
@@ -80,9 +81,9 @@ class FifthView extends StatelessWidget {
                   24.verticalSpace,
 
                   // National ID
-                  Text(
-                    AppLocalizations.of(context)!.nationalId,
-                    style: AppTextStyle.medium14(context),
+                  FieldTitle(
+                    title: AppLocalizations.of(context)!.nationalId,
+                    // style: AppTextStyle.medium14(context),
                   ),
                   12.verticalSpace,
                   Row(
@@ -115,11 +116,10 @@ class FifthView extends StatelessWidget {
                     ],
                   ),
                   24.verticalSpace,
-
                   // Driving License
-                  Text(
-                    AppLocalizations.of(context)!.drivingLicense,
-                    style: AppTextStyle.medium14(context),
+                  FieldTitle(
+                    title: AppLocalizations.of(context)!.drivingLicense,
+                    // style: AppTextStyle.medium14(context),
                   ),
                   12.verticalSpace,
                   Row(
@@ -154,9 +154,9 @@ class FifthView extends StatelessWidget {
                   24.verticalSpace,
 
                   // Vehicle License
-                  Text(
-                    AppLocalizations.of(context)!.vehicleLicense,
-                    style: AppTextStyle.medium14(context),
+                  FieldTitle(
+                    title: AppLocalizations.of(context)!.vehicleLicense,
+                    // style: AppTextStyle.medium14(context),
                   ),
                   12.verticalSpace,
                   Row(
@@ -189,7 +189,6 @@ class FifthView extends StatelessWidget {
                     ],
                   ),
                   40.verticalSpace,
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

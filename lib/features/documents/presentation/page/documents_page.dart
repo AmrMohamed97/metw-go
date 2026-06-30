@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
-import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/animated_column.dart';
@@ -13,6 +12,7 @@ import 'package:metw_go/features/documents/presentation/manager/documents_cubit.
 import 'package:metw_go/features/documents/presentation/manager/documents_state.dart';
 import 'package:metw_go/features/documents/presentation/widgets/documents_bottom_sheet.dart';
 import 'package:metw_go/features/register/presentation/widgets/document_upload_box.dart';
+import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 import 'package:metw_go/features/register/presentation/widgets/personal_photo_container.dart';
 
 class DocumentsPage extends StatelessWidget {
@@ -39,9 +39,9 @@ class DocumentsPage extends StatelessWidget {
                 children: [
                   24.verticalSpace,
                   // Personal Photo
-                  Text(
-                    AppLocalizations.of(context)!.personalPhoto,
-                    style: AppTextStyle.medium14(context),
+                  FieldTitle(
+                    title: AppLocalizations.of(context)!.personalPhoto,
+                    // style: AppTextStyle.medium14(context),
                   ),
                   12.verticalSpace,
                   PersonalPhotoContainer(
@@ -64,9 +64,9 @@ class DocumentsPage extends StatelessWidget {
                   24.verticalSpace,
 
                   // National ID
-                  Text(
-                    AppLocalizations.of(context)!.nationalId,
-                    style: AppTextStyle.medium14(context),
+                  FieldTitle(
+                    title: AppLocalizations.of(context)!.nationalId,
+                    // style: AppTextStyle.medium14(context),
                   ),
                   12.verticalSpace,
                   Row(
@@ -101,9 +101,9 @@ class DocumentsPage extends StatelessWidget {
                   24.verticalSpace,
 
                   // Driving License
-                  Text(
-                    AppLocalizations.of(context)!.drivingLicense,
-                    style: AppTextStyle.medium14(context),
+                  FieldTitle(
+                    title: AppLocalizations.of(context)!.drivingLicense,
+                    // style: AppTextStyle.medium14(context),
                   ),
                   12.verticalSpace,
                   Row(
@@ -138,9 +138,9 @@ class DocumentsPage extends StatelessWidget {
                   24.verticalSpace,
 
                   // Vehicle License
-                  Text(
-                    AppLocalizations.of(context)!.vehicleLicense,
-                    style: AppTextStyle.medium14(context),
+                  FieldTitle(
+                    title: AppLocalizations.of(context)!.vehicleLicense,
+                    // style: AppTextStyle.medium14(context),
                   ),
                   12.verticalSpace,
                   Row(
