@@ -105,19 +105,22 @@ class _NextPageState extends State<NextPage> with WidgetsBindingObserver {
   }
 
   void nextPage() async {
+    if (!mounted) return;
     final locationService = LocationService();
     bool serviceEnabled = await locationService.checkAndRequestLocationService();
+    if (!mounted) return;
     if (!serviceEnabled) {
       await ph.openAppSettings();
       return;
     }
     bool permissionGranted = await locationService.checkAndRequestPermission();
+    if (!mounted) return;
     if (!permissionGranted) {
       await ph.openAppSettings();
       return;
     }
     TrackingLocationService().startTracking(driverId: '9');
-    if (context.mounted) {
+    if (mounted) {
       context.go(AppRoutes.mainView);
     }
   }

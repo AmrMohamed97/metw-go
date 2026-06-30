@@ -46,7 +46,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   Locale currentLocale = const Locale('ar');
-  bool isDarkMode = false;
+  bool isDarkMode = true;
 
   void changeLanguage(Locale locale) {
     currentLocale = locale;
