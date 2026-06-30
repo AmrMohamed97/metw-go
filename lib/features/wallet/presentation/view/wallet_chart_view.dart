@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 
@@ -13,7 +13,7 @@ class WalletChartView extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
@@ -65,10 +65,14 @@ class WalletChartView extends StatelessWidget {
                             text = AppLocalizations.of(context)!.fridayInitial;
                             break;
                           case 1:
-                            text = AppLocalizations.of(context)!.thursdayInitial;
+                            text = AppLocalizations.of(
+                              context,
+                            )!.thursdayInitial;
                             break;
                           case 2:
-                            text = AppLocalizations.of(context)!.wednesdayInitial;
+                            text = AppLocalizations.of(
+                              context,
+                            )!.wednesdayInitial;
                             break;
                           case 3:
                             text = AppLocalizations.of(context)!.tuesdayInitial;
@@ -80,7 +84,9 @@ class WalletChartView extends StatelessWidget {
                             text = AppLocalizations.of(context)!.sundayInitial;
                             break;
                           case 6:
-                            text = AppLocalizations.of(context)!.saturdayInitial;
+                            text = AppLocalizations.of(
+                              context,
+                            )!.saturdayInitial;
                             break;
                           default:
                             text = '';

@@ -29,6 +29,7 @@ class _MainViewState extends State<MainView> {
     ];
 
     return Scaffold(
+      extendBody: true,
       backgroundColor: Theme.of(context).colorScheme.outline,
       body: pages[_currentIndex],
       bottomNavigationBar: CustomBottomNavBar(

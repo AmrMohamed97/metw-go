@@ -52,14 +52,14 @@ Widget _buildTab(
       duration: const Duration(milliseconds: 300),
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: isSelected ? MyColors.primaryColor : MyColors.greyFill,
+        color: isSelected ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.outline,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
         text,
         style: AppTextStyle.medium14(
           context,
-        ).copyWith(color: isSelected ? Colors.white : MyColors.grey),
+        ).copyWith(color: isSelected ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.onSurface),
       ),
     ),
   );
@@ -69,17 +69,17 @@ Widget _buildDatePicker(BuildContext context) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     decoration: BoxDecoration(
-      color: MyColors.greyFill,
+      color: Theme.of(context).colorScheme.outline,
       borderRadius: BorderRadius.circular(20),
     ),
     child: Row(
       children: [
         Text(
           AppLocalizations.of(context)!.today,
-          style: AppTextStyle.medium14(context).copyWith(color: MyColors.grey),
+          style: AppTextStyle.medium14(context).copyWith(color: Theme.of(context).colorScheme.onSurface),
         ),
         SizedBox(width: 8),
-        Icon(Icons.calendar_today_outlined, size: 16, color: MyColors.grey),
+        Icon(Icons.calendar_today_outlined, size: 16, color: Theme.of(context).colorScheme.onSurface),
       ],
     ),
   );
