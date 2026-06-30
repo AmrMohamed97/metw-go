@@ -7,6 +7,8 @@ import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/features/profile/presentation/manager/profile_cubit.dart';
 import 'package:metw_go/features/profile/presentation/manager/profile_state.dart';
+import 'package:animated_theme_switcher/animated_theme_switcher.dart';
+import 'package:metw_go/core/theme/app_theme.dart';
 import 'package:metw_go/features/profile/presentation/widgets/custom_section.dart';
 import 'package:metw_go/features/profile/presentation/widgets/profile_item.dart';
 
@@ -101,13 +103,21 @@ class SettingSection extends StatelessWidget {
                     onPressed: () => _showLanguageMenu(itemContext, appCubit),
                   ),
                 ),
-                ProfileItem(
-                  icon: Icons.dark_mode_outlined,
-                  title: AppLocalizations.of(context)!.darkMode,
-                  trailing: CupertinoSwitch(
-                    value: appCubit.isDarkMode,
-                    onChanged: (v) => appCubit.toggleTheme(v),
-                    activeTrackColor: Theme.of(context).colorScheme.primary,
+                ThemeSwitcher(
+                  builder: (switcherContext) => ProfileItem(
+                    icon: Icons.dark_mode_outlined,
+                    title: AppLocalizations.of(context)!.darkMode,
+                    trailing: CupertinoSwitch(
+                      value: appCubit.isDarkMode,
+                      onChanged: (v) {
+                        appCubit.toggleTheme(v);
+                        ThemeSwitcher.of(switcherContext).changeTheme(
+                          theme: v ? AppTheme.darkTheme : AppTheme.lightTheme,
+                          isReversed: !v,
+                        );
+                      },
+                      activeTrackColor: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
                 ProfileItem(
