@@ -25,6 +25,7 @@ import 'package:metw_go/features/register/presentation/manager/register_cubit.da
 import 'package:metw_go/features/register/presentation/page/register_page.dart';
 import 'package:metw_go/features/service_areas/presentation/manager/service_areas_cubit.dart';
 import 'package:metw_go/features/service_areas/presentation/page/service_areas_page.dart';
+import 'package:metw_go/features/splash_screen/splash_screen.dart';
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_cubit.dart';
 import 'package:metw_go/features/vehicle_data/presentation/page/vehicle_page.dart';
 
@@ -32,7 +33,7 @@ import 'app_routes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.mainView,
+    initialLocation: AppRoutes.splashScreen,
     // redirect: (context, state) async {
     //   final String currentPath = state.matchedLocation;
 
@@ -78,6 +79,13 @@ class AppRouter {
     //   }
     // },
     routes: [
+      GoRoute(
+        path: AppRoutes.splashScreen,
+        name: AppRoutes.splashScreen,
+        builder: (context, state) {
+          return SplashScreen();
+        },
+      ),
       GoRoute(
         path: AppRoutes.otp,
         name: AppRoutes.otp,

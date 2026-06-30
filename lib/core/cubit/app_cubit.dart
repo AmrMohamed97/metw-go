@@ -13,8 +13,8 @@ import 'package:metw_go/features/home/presentation/services/tracking_location_se
 @injectable
 class AppCubit extends Cubit<AppState> {
   final AppRepo _appRepo;
-  AppCubit(this._appRepo) : super(AppInitial()){
-    realTime(9);
+  AppCubit(this._appRepo) : super(AppInitial()) {
+    // realTime(9);
   }
 
   String status = 'offline';
@@ -24,13 +24,18 @@ class AppCubit extends Cubit<AppState> {
   Future<void> realTime(int driverId) async {
     // Listen to the specific driver's status
     final statusRef = _database.ref('drivers/$driverId/status');
-
-    _statusSubscription = statusRef.onValue.listen((event) {
-      if (event.snapshot.value != null) {
-        status = event.snapshot.value.toString();
-        emit(HomeStatusChanged(status));
-      }
-    });
+    emit(HomeStatusLoading());
+    try {
+      _statusSubscription?.cancel();
+      _statusSubscription = statusRef.onValue.listen((event) {
+        if (event.snapshot.value != null) {
+          status = event.snapshot.value.toString();
+          emit(HomeStatusChanged(status));
+        }
+      });
+    } catch (e) {
+      emit(HomeStatusError(e.toString()));
+    }
   }
 
   @override

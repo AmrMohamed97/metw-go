@@ -19,4 +19,5 @@ class AppRoutes {
   static const String serviceAreasPage = '/serviceAreasPage';
   static const String documentsPage = '/documentsPage';
   static const String notificationPage = '/notificationPage';
+  static const String splashScreen = '/splashScreen';
 }
