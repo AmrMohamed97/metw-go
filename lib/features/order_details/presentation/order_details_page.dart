@@ -21,7 +21,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: CustomAppBar(title: l10n.orders, centerTitle: true),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(12),
         child: Column(
           children: [
             // Top Row (Status & Timer)
@@ -43,14 +43,14 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                     children: [
                       Icon(
                         Icons.bolt,
-                        color: Theme.of(context).colorScheme.surface,
+                        color: Theme.of(context).colorScheme.tertiary,
                         size: 20.r,
                       ),
                       SizedBox(width: 8.w),
                       Text(
                         l10n.immediateDeliveryOnePoint,
                         style: AppTextStyle.medium14(context).copyWith(
-                          color: Theme.of(context).colorScheme.surface,
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
                     ],
@@ -78,7 +78,12 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                         size: 20.r,
                       ),
                       SizedBox(width: 8.w),
-                      Text('02:30 د', style: AppTextStyle.medium14(context)),
+                      Text(
+                        '02:30 د',
+                        style: AppTextStyle.medium14(context).copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -130,7 +135,9 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                       SizedBox(width: 8.w),
                       Text(
                         l10n.shipmentDetails,
-                        style: AppTextStyle.bold16(context),
+                        style: AppTextStyle.medium16(context).copyWith(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
                       ),
                     ],
                   ),
@@ -197,7 +204,9 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                   Expanded(
                     child: Text(
                       l10n.receiptConfirmationNote,
-                      style: AppTextStyle.regular14(context),
+                      style: AppTextStyle.regular14(context).copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                   ),
                 ],
@@ -260,7 +269,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             title,
             style: AppTextStyle.regular14(
               context,
-            ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+            ).copyWith(color: Theme.of(context).colorScheme.tertiary),
           ),
           Row(
             children: [
@@ -270,11 +279,13 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 style: isBold
                     ? AppTextStyle.bold16(context).copyWith(
                         color:
-                            valueColor ?? Theme.of(context).colorScheme.shadow,
+                            valueColor ??
+                            Theme.of(context).colorScheme.onSurface,
                       )
                     : AppTextStyle.medium14(context).copyWith(
                         color:
-                            valueColor ?? Theme.of(context).colorScheme.shadow,
+                            valueColor ??
+                            Theme.of(context).colorScheme.onSurface,
                       ),
               ),
             ],
@@ -350,7 +361,12 @@ class _LocationCard extends StatelessWidget {
                     ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                   ),
                   SizedBox(height: 4.h),
-                  Text(subtitle, style: AppTextStyle.medium14(context)),
+                  Text(
+                    subtitle,
+                    style: AppTextStyle.medium14(
+                      context,
+                    ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                  ),
                 ],
               ),
             ),
@@ -472,7 +488,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet>
             // Title
             Text(
               l10n.rejectionReason,
-              style: AppTextStyle.bold20(context),
+              style: AppTextStyle.bold20(
+                context,
+              ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 8.h),
@@ -546,7 +564,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet>
                       Expanded(
                         child: Text(
                           reason.label,
-                          style: AppTextStyle.medium14(context),
+                          style: AppTextStyle.medium14(context).copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                         ),
                       ),
 
@@ -576,7 +596,6 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet>
               text: l10n.confirmRejection,
               onPressed: () {
                 Navigator.of(context).pop();
-                // TODO: handle rejection with reasons[_selectedIndex].label
               },
               isMax: true,
               backgroundColor: MyColors.primaryColor,
