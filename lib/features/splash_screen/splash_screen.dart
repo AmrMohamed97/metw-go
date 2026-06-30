@@ -30,37 +30,39 @@ class _SplashScreenState extends State<SplashScreen> {
       builder: (context, state) {
         final appCubit = context.read<AppCubit>();
         return ScreenWrapper(
-          body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Spacer(),
-                Image.asset(AppImages.logo, width: 180.w)
-                    .animate(onPlay: (controller) => controller.repeat())
-                    .shimmer(
-                      duration: 1800.ms,
-                      color: Colors.white.withValues(alpha: 0.5),
-                    )
-                    .pulse(duration: 1800.ms, curve: Curves.easeInOut),
-                CustomErrorWidget(errorMessage: "state.error"),
-                //--------------------------------------------------------------------------
-                //       state is HomeStatusError
-                // ? CustomErrorWidget(errorMessage: state.error)
-                // :state is HomeStatusLoading
-                // ?SizedBox()
-                // :appCubit.status=='offline'
-                // ?//navigate to mainview
-                // : ,//open location start tracking then navigate to base view
-                const Spacer(),
-                SpinKitThreeBounce(
-                  color: Theme.of(context).primaryColor,
-                  size: 28.sp,
+          body: state is HomeStatusError
+              ? CustomErrorWidget(
+                  errorMessage: state.error,
+                  onPressed: () => appCubit.realTime(9),
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Spacer(),
+                      Image.asset(AppImages.logo, width: 180.w)
+                          .animate(onPlay: (controller) => controller.repeat())
+                          .shimmer(
+                            duration: 1800.ms,
+                            color: Colors.white.withValues(alpha: 0.5),
+                          )
+                          .pulse(duration: 1800.ms, curve: Curves.easeInOut),
+                      //--------------------------------------------------------------------------
+                       state is HomeStatusLoading
+                      ?SizedBox()
+                      :appCubit.status=='offline'
+                      ?//navigate to mainview
+                      : ,//open location start tracking then navigate to base view
+                      const Spacer(),
+                      SpinKitThreeBounce(
+                        color: Theme.of(context).primaryColor,
+                        size: 28.sp,
+                      ),
+                      30.verticalSpace,
+                    ],
+                  ),
                 ),
-                30.verticalSpace,
-              ],
-            ),
-          ),
         );
       },
     );

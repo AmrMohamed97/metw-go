@@ -26,6 +26,7 @@ class AppCubit extends Cubit<AppState> {
     final statusRef = _database.ref('drivers/$driverId/status');
     emit(HomeStatusLoading());
     try {
+      // throw Exception('kkkkk');
       _statusSubscription?.cancel();
       _statusSubscription = statusRef.onValue.listen((event) {
         if (event.snapshot.value != null) {
