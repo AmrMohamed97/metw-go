@@ -35,7 +35,7 @@ class HomePageOnlineStatusCard extends StatelessWidget {
                 AppLocalizations.of(context)!.availableToReceive,
                 style: AppTextStyle.regular14(
                   context,
-                ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                ).copyWith(color: Color(0xFFEAEAEA)),
               ),
               const Spacer(),
               Container(
@@ -50,7 +50,7 @@ class HomePageOnlineStatusCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.access_time,
-                      color: Theme.of(context).colorScheme.tertiary,
+                      color: Color(0xFFEAEAEA),
                       size: 16.sp,
                     ),
                     SizedBox(width: 8),
@@ -58,7 +58,7 @@ class HomePageOnlineStatusCard extends StatelessWidget {
                       "02:45:14",
                       style: AppTextStyle.regular14(
                         context,
-                      ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                      ).copyWith(color: Color(0xFFEAEAEA)),
                     ),
                   ],
                 ),
@@ -71,10 +71,9 @@ class HomePageOnlineStatusCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   AppLocalizations.of(context)!.onlineWaitingForOrders,
-                  style: AppTextStyle.regular12(context).copyWith(
-                    color: Theme.of(context).colorScheme.tertiary,
-                    height: 1.5,
-                  ),
+                  style: AppTextStyle.regular12(
+                    context,
+                  ).copyWith(color: Color(0xFFEAEAEA), height: 1.5),
                 ),
               ),
               16.horizontalSpace,
