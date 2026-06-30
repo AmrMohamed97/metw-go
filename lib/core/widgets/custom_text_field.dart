@@ -75,7 +75,7 @@ class CustomTextField extends StatelessWidget {
       height: isFixed == true ? 75.h : null,
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        onTapOutside: (event) => FocusScope.of(context).unfocus(),
+        // onTapOutside: (event) => FocusScope.of(context).unfocus(),
         // onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
         enabled: enabled,
         textAlign: textAlign ?? TextAlign.start,

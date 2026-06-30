@@ -40,7 +40,7 @@ class ScreenWrapper extends StatelessWidget {
       canPop: onWillPop ?? true,
       onPopInvoked: onPopInvoked,
       child: GestureDetector(
-        // onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: MediaQuery(
           data: MediaQuery.of(
             context,
@@ -55,41 +55,41 @@ class ScreenWrapper extends StatelessWidget {
             floatingActionButton: floatingActionButton,
             extendBodyBehindAppBar: extendBodyBehindAppBar ?? false,
             resizeToAvoidBottomInset: resizeToAvoidBottomInset ?? false,
-            body: 
-            // applyAnnotation!? 
+            body:
+                // applyAnnotation!?
                 AnnotatedRegion(
-                    value: const SystemUiOverlayStyle(
-                      statusBarBrightness: Brightness.light,
-                      statusBarIconBrightness: Brightness.dark,
-                    ),
-                    child: SafeArea(
-                      top: topSafeArea ?? false,
-                      left: false,
-                      bottom: false,
-                      right: false,
-                      child: body,
-                    ),
-                  )
-                // : Stack(
-                //     fit: StackFit.expand,
-                //     children: [
-                //       backgroundImage != null
-                //           ? Container(
-                //               height: double.infinity,
-                //               width: double.infinity,
-                //               foregroundDecoration: BoxDecoration(
-                //                 color: Colors.white.withValues(
-                //                   alpha: opacity ?? 0.8,
-                //                 ),
-                //               ),
+                  value: const SystemUiOverlayStyle(
+                    statusBarBrightness: Brightness.light,
+                    statusBarIconBrightness: Brightness.dark,
+                  ),
+                  child: SafeArea(
+                    top: topSafeArea ?? false,
+                    left: false,
+                    bottom: false,
+                    right: false,
+                    child: body,
+                  ),
+                ),
+            // : Stack(
+            //     fit: StackFit.expand,
+            //     children: [
+            //       backgroundImage != null
+            //           ? Container(
+            //               height: double.infinity,
+            //               width: double.infinity,
+            //               foregroundDecoration: BoxDecoration(
+            //                 color: Colors.white.withValues(
+            //                   alpha: opacity ?? 0.8,
+            //                 ),
+            //               ),
 
-                //               decoration: BoxDecoration(image: backgroundImage),
-                //             )
-                //           : const SizedBox(),
+            //               decoration: BoxDecoration(image: backgroundImage),
+            //             )
+            //           : const SizedBox(),
 
-                //       body,
-                //     ],
-                //   ),
+            //       body,
+            //     ],
+            //   ),
           ),
         ),
       ),
