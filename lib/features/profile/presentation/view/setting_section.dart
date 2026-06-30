@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/features/profile/presentation/manager/profile_cubit.dart';
 import 'package:metw_go/features/profile/presentation/manager/profile_state.dart';
 import 'package:metw_go/features/profile/presentation/widgets/custom_section.dart';
@@ -14,16 +15,21 @@ class SettingSection extends StatelessWidget {
     super.key,
   });
 
-  void _showLanguageMenu(BuildContext context, AppCubit appCubit) {
+  void _showLanguageMenu(BuildContext itemContext, AppCubit appCubit) {
     final isArabic = appCubit.currentLocale.languageCode == 'ar';
-    showMenu<Locale>(
-      context: context,
-      position: RelativeRect.fromLTRB(
-        MediaQuery.of(context).size.width - 160,
-        kToolbarHeight * 4,
-        16,
-        0,
+    final RenderBox button = itemContext.findRenderObject() as RenderBox;
+    final RenderBox overlay =
+        Navigator.of(itemContext).overlay!.context.findRenderObject() as RenderBox;
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        button.localToGlobal(button.size.topLeft(Offset.zero), ancestor: overlay),
+        button.localToGlobal(button.size.bottomRight(Offset.zero), ancestor: overlay),
       ),
+      Offset.zero & overlay.size,
+    );
+    showMenu<Locale>(
+      context: itemContext,
+      position: position,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       items: [
         PopupMenuItem(
@@ -36,7 +42,7 @@ class SettingSection extends StatelessWidget {
                 Icon(
                   Icons.check,
                   size: 18,
-                  color: Theme.of(context).colorScheme.primary,
+                  color:  MyColors.primaryColor,
                 ),
             ],
           ),
@@ -51,7 +57,7 @@ class SettingSection extends StatelessWidget {
                 Icon(
                   Icons.check,
                   size: 18,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: MyColors.primaryColor,
                 ),
             ],
           ),
@@ -87,11 +93,13 @@ class SettingSection extends StatelessWidget {
                     activeTrackColor: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                ProfileItem(
-                  icon: Icons.language,
-                  title: AppLocalizations.of(context)!.language,
-                  trailingText: isArabic ? 'العربية' : 'English',
-                  onPressed: () => _showLanguageMenu(context, appCubit),
+                Builder(
+                  builder: (itemContext) => ProfileItem(
+                    icon: Icons.language,
+                    title: AppLocalizations.of(context)!.language,
+                    trailingText: isArabic ? 'العربية' : 'English',
+                    onPressed: () => _showLanguageMenu(itemContext, appCubit),
+                  ),
                 ),
                 ProfileItem(
                   icon: Icons.dark_mode_outlined,
