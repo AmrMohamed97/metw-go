@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
+import 'package:metw_go/features/home/presentation/services/location_service.dart';
 import 'package:metw_go/features/home/presentation/services/tracking_location_service.dart';
+import 'package:permission_handler/permission_handler.dart' as ph;
 
 class HomePageOfflineStatusCard extends StatelessWidget {
   const HomePageOfflineStatusCard({super.key});
@@ -80,19 +82,19 @@ class HomePageOfflineStatusCard extends StatelessWidget {
               CustomButton(
                 text: AppLocalizations.of(context)!.readyToReceive,
                 onPressed: () async {
-                  // final locationService = LocationService();
-                  // bool serviceEnabled = await locationService
-                  //     .checkAndRequestLocationService();
-                  // if (!serviceEnabled) {
-                  //   await ph.openAppSettings();
-                  //   // return;
-                  // }
-                  // bool permissionGranted = await locationService
-                  //     .checkAndRequestPermission();
-                  // if (!permissionGranted) {
-                  //   await ph.openAppSettings();
-                  //   // return;
-                  // }
+                  final locationService = LocationService();
+                  bool serviceEnabled = await locationService
+                      .checkAndRequestLocationService();
+                  if (!serviceEnabled) {
+                    await ph.openAppSettings();
+                    // return;
+                  }
+                  bool permissionGranted = await locationService
+                      .checkAndRequestPermission();
+                  if (!permissionGranted) {
+                    await ph.openAppSettings();
+                    // return;
+                  }
                   // if (context.mounted) {
                   //   context.read<AppCubit>().trackDriver();
                   // }
