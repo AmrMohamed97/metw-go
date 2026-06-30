@@ -60,7 +60,7 @@ class _OtpTimerState extends State<OtpTimer> {
             "00:${_seconds.toString().padLeft(2, '0')}",
             style: AppTextStyle.medium16(
               context,
-            ).copyWith(color: MyColors.secondaryColor),
+            ).copyWith(color: Theme.of(context).colorScheme.secondary),
           ),
         ),
         AnimatedSwitcher(

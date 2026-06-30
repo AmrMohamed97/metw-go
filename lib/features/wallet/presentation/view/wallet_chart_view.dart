@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
-import 'package:metw_go/core/theme/my_colors.dart';
 
 class WalletChartView extends StatelessWidget {
   const WalletChartView({super.key});
@@ -115,9 +114,9 @@ class WalletChartView extends StatelessWidget {
                 barGroups: [
                   _makeBar(0, 40, Theme.of(context).colorScheme.outline),
                   _makeBar(1, 50, Theme.of(context).colorScheme.outline),
-                  _makeBar(2, 90, MyColors.purpleLight),
+                  _makeBar(2, 90, Theme.of(context).colorScheme.surfaceDim),
                   _makeBar(3, 50, Theme.of(context).colorScheme.outline),
-                  _makeBar(4, 80, MyColors.secondaryColor),
+                  _makeBar(4, 80, Theme.of(context).colorScheme.secondary),
                   _makeBar(5, 60, Theme.of(context).colorScheme.outline),
                   _makeBar(6, 40, Theme.of(context).colorScheme.outline),
                 ],

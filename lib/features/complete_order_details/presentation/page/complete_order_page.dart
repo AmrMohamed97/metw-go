@@ -68,7 +68,7 @@ class CompleteOrderPage extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: MyColors.secondaryColor,
+            color: Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
@@ -140,7 +140,7 @@ class CompleteOrderPage extends StatelessWidget {
                 l10n.orderNumber,
                 style: AppTextStyle.regular12(
                   context,
-                ).copyWith(color: MyColors.grey),
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
               Text(
                 l10n.mockOrderNumber2,
@@ -153,14 +153,14 @@ class CompleteOrderPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: MyColors.secondaryColor.withOpacity(0.1),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Text(
               l10n.electronicPayment,
               style: AppTextStyle.medium12(
                 context,
-              ).copyWith(color: MyColors.secondaryColor),
+              ).copyWith(color: Theme.of(context).colorScheme.secondary),
             ),
           ),
         ],
@@ -185,8 +185,8 @@ class CompleteOrderPage extends StatelessWidget {
           title: "${l10n.point1}: ${l10n.mockCustomerName}",
           subtitle: l10n.mockCustomerAddress,
           icon: Icons.location_on_outlined,
-          iconColor: MyColors.secondaryColor,
-          borderColor: MyColors.secondaryColor,
+          iconColor: Theme.of(context).colorScheme.secondary,
+          borderColor: Theme.of(context).colorScheme.secondary,
         ),
       ],
     );
@@ -235,7 +235,7 @@ class CompleteOrderPage extends StatelessWidget {
                   title,
                   style: AppTextStyle.regular12(
                     context,
-                  ).copyWith(color: MyColors.grey),
+                  ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                 ),
                 Text(
                   subtitle,
@@ -247,15 +247,19 @@ class CompleteOrderPage extends StatelessWidget {
             ),
           ),
           12.horizontalSpace,
-          _buildActionButton(Icons.chat_bubble_outline, MyColors.green,context),
+          _buildActionButton(
+            Icons.chat_bubble_outline,
+            MyColors.green,
+            context,
+          ),
           8.horizontalSpace,
-          _buildActionButton(Icons.call_outlined, MyColors.red,context),
+          _buildActionButton(Icons.call_outlined, MyColors.red, context),
         ],
       ),
     );
   }
 
-  Widget _buildActionButton(IconData icon, Color iconColor,context) {
+  Widget _buildActionButton(IconData icon, Color iconColor, context) {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -293,7 +297,7 @@ class CompleteOrderPage extends StatelessWidget {
                 l10n.customerRating,
                 style: AppTextStyle.regular12(
                   context,
-                ).copyWith(color: MyColors.grey),
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
               4.verticalSpace,
               Row(
@@ -321,7 +325,7 @@ class CompleteOrderPage extends StatelessWidget {
             l10n.mockReviewText,
             style: AppTextStyle.regular12(
               context,
-            ).copyWith(color: MyColors.grey),
+            ).copyWith(color: Theme.of(context).colorScheme.onSurface),
           ),
         ],
       ),
@@ -357,7 +361,7 @@ class CompleteOrderPage extends StatelessWidget {
                     l10n.netProfit,
                     style: AppTextStyle.regular12(
                       context,
-                    ).copyWith(color: MyColors.grey),
+                    ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -464,7 +468,7 @@ class CompleteOrderPage extends StatelessWidget {
             title,
             style: AppTextStyle.regular12(
               context,
-            ).copyWith(color: MyColors.grey),
+            ).copyWith(color: Theme.of(context).colorScheme.onSurface),
             textAlign: TextAlign.center,
           ),
           4.verticalSpace,
@@ -503,7 +507,7 @@ class CompleteOrderPage extends StatelessWidget {
           title: l10n.orderAccepted,
           subtitle: "${l10n.mockTime1} - ${l10n.mockDesc1}",
           icon: Icons.check,
-          iconColor: MyColors.secondaryColor,
+          iconColor: Theme.of(context).colorScheme.secondary,
           isLast: false,
         ),
         _buildTimelineStep(
@@ -511,7 +515,7 @@ class CompleteOrderPage extends StatelessWidget {
           title: l10n.received,
           subtitle: "${l10n.mockTime2} - ${l10n.mockDesc2}",
           icon: Icons.local_shipping_outlined,
-          iconColor: MyColors.secondaryColor,
+          iconColor: Theme.of(context).colorScheme.secondary,
           isLast: false,
         ),
         _buildTimelineStep(
@@ -552,7 +556,9 @@ class CompleteOrderPage extends StatelessWidget {
               Container(
                 width: 2.w,
                 height: 32.h,
-                color: MyColors.greyLight.withOpacity(0.5),
+                color: Theme.of(
+                  context,
+                ).colorScheme.surfaceTint.withOpacity(0.5),
               ),
           ],
         ),
@@ -565,7 +571,7 @@ class CompleteOrderPage extends StatelessWidget {
                 title,
                 style: AppTextStyle.regular12(
                   context,
-                ).copyWith(color: MyColors.grey),
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
               4.verticalSpace,
               Text(

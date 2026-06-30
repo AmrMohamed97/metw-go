@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:metw_go/core/theme/my_colors.dart';
 
 abstract class DateHelper {
   static Future<DateTime?> pickDateTime(BuildContext context) async {
@@ -14,11 +13,13 @@ abstract class DateHelper {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.light(
-              primary: MyColors.secondaryColor, // header color
+              primary: Theme.of(context).colorScheme.secondary, // header color
               onPrimary: Colors.white, // header text
               surface: Colors.grey.shade900, // background color
               onSurface: Colors.white,
-              secondary: MyColors.secondaryColor, // calendar text color
+              secondary: Theme.of(
+                context,
+              ).colorScheme.secondary, // calendar text color
             ),
             dialogTheme: DialogThemeData(backgroundColor: Colors.grey.shade900),
           ),
@@ -50,7 +51,7 @@ abstract class DateHelper {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.light(
-              primary: MyColors.secondaryColor, // header color
+              primary: Theme.of(context).colorScheme.secondary, // header color
               onPrimary: Colors.white, // header text
               surface: Colors.grey.shade900, // background color
               onSurface: Colors.white, // calendar text color

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
-import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 
 class CustomErrorWidget extends StatelessWidget {
@@ -57,7 +56,7 @@ class CustomErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final errorColor = iconColor ?? theme.colorScheme.error;
-    final bgColor = backgroundColor ?? MyColors.grey;
+    final bgColor = backgroundColor ?? Theme.of(context).colorScheme.onSurface;
 
     final defaultPadding =
         padding ??

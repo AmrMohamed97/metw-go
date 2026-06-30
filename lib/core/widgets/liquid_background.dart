@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../theme/my_colors.dart';
 
 class LiquidBackground extends StatelessWidget {
@@ -15,7 +16,7 @@ class LiquidBackground extends StatelessWidget {
           child: Stack(
             children: [
               // Base dark background
-              Container(color: MyColors.grey),
+              Container(color: Theme.of(context).colorScheme.onSurface),
               // Ambient Background Gradient 1
               Positioned.fill(
                 child: Container(
@@ -39,7 +40,9 @@ class LiquidBackground extends StatelessWidget {
                       center: const Alignment(0.8, 0.8),
                       radius: 1.5,
                       colors: [
-                        MyColors.secondaryColor.withValues(alpha: 0.1),
+                        Theme.of(
+                          context,
+                        ).colorScheme.secondary.withValues(alpha: 0.1),
                         Colors.transparent,
                       ],
                     ),

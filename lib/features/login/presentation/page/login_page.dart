@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
-        final cubit=context.read<LoginCubit>();
+        final cubit = context.read<LoginCubit>();
         return ScreenWrapper(
           backGroundColor: Theme.of(context).colorScheme.surfaceDim,
           body: CustomScrollView(
@@ -33,106 +33,127 @@ class LoginPage extends StatelessWidget {
                 body: Form(
                   key: cubit.formKey,
                   child: Column(
-                    children: [
-                      20.verticalSpace,
-                      Center(
-                        child: Text(
-                          AppLocalizations.of(context)!.login,
-                          style: AppTextStyle.bold20(context).copyWith(
-                            color: MyColors.primaryColor,
-                            // fontSize: 28.sp,
-                          ),
-                        ),
-                      ),
-                      40.verticalSpace,
-                      Align(
-                        alignment: AlignmentDirectional.centerStart,
-                        child: Text(
-                          AppLocalizations.of(context)!.phoneNumber,
-                          style: AppTextStyle.medium16(
-                            context,
-                          ).copyWith(color: MyColors.textColor),
-                        ),
-                      ),
-                      4.verticalSpace,
-                      CustomTextField(
-                        controller: cubit.phoneController,
-                        hintText: "+966 5X XXX XXXX",
-                        radius: 16.r,
-                        textInputType: TextInputType.phone,
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.end,
-                      ),
-                      // 20.verticalSpace,
-                      Align(
-                        alignment: AlignmentDirectional.centerStart,
-                        child: Text(
-                          AppLocalizations.of(context)!.password,
-                          style: AppTextStyle.medium16(
-                            context,
-                          ).copyWith(color: MyColors.textColor),
-                        ),
-                      ),
-                      4.verticalSpace,
-                      CustomTextField(
-                        controller: cubit.passwordController,
-                        hintText: "...............",
-                        obscureText: true,
-                        radius: 16.r,
-                        suffixIcon: const Icon(
-                          Icons.lock_outline,
-                          color: MyColors.grey,
-                        ),
-                        isFixed: false,
-                      ),
-                      12.verticalSpace,
-                      Align(
-                        alignment: AlignmentDirectional.centerEnd,
-                        child: InkWell(
-                          onTap: () =>context.push(AppRoutes.forgetPasswordPage),
-                          child: Text(
-                            AppLocalizations.of(context)!.forgotPassword,
-                            style: AppTextStyle.regular14(
-                              context,
-                            ).copyWith(color: MyColors.primaryColor),
-                          ),
-                        ),
-                      ),
-                      90.verticalSpace,
-                      CustomButton(
-                        text: AppLocalizations.of(context)!.login,
-                        // textColor: MyColors.white,
-                        onPressed: () {},
-                        isMax: true,
-                        // radius: 20.r,
-                        // height: 56.h,
-                      ),
-                      24.verticalSpace,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.dontHaveAccount,
-                            style: AppTextStyle.medium14(
-                              context,
-                            ).copyWith(color: MyColors.textColor),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              context.go(AppRoutes.register);
-                            },
-                            child: Text(
-                              AppLocalizations.of(context)!.signUp,
-                              style: AppTextStyle.medium14(
-                                context,
-                              ).copyWith(color: MyColors.primaryColor),
-                            ),
-                          ),
-                        ],
-                      ),
-                      20.verticalSpace,
-                      const ViewInsetsSpace(),
-                    ].animate(interval: 50.ms).fade(duration: 500.ms).slideY(begin: 0.05, end: 0),
+                    children:
+                        [
+                              20.verticalSpace,
+                              Center(
+                                child: Text(
+                                  AppLocalizations.of(context)!.login,
+                                  style: AppTextStyle.bold20(context).copyWith(
+                                    color: MyColors.primaryColor,
+                                    // fontSize: 28.sp,
+                                  ),
+                                ),
+                              ),
+                              40.verticalSpace,
+                              Align(
+                                alignment: AlignmentDirectional.centerStart,
+                                child: Text(
+                                  AppLocalizations.of(context)!.phoneNumber,
+                                  style: AppTextStyle.medium16(context)
+                                      .copyWith(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.tertiary,
+                                      ),
+                                ),
+                              ),
+                              4.verticalSpace,
+                              CustomTextField(
+                                controller: cubit.phoneController,
+                                hintText: "+966 5X XXX XXXX",
+                                radius: 16.r,
+                                textInputType: TextInputType.phone,
+                                textDirection: TextDirection.ltr,
+                                textAlign: TextAlign.end,
+                              ),
+                              // 20.verticalSpace,
+                              Align(
+                                alignment: AlignmentDirectional.centerStart,
+                                child: Text(
+                                  AppLocalizations.of(context)!.password,
+                                  style: AppTextStyle.medium16(context)
+                                      .copyWith(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.tertiary,
+                                      ),
+                                ),
+                              ),
+                              4.verticalSpace,
+                              CustomTextField(
+                                controller: cubit.passwordController,
+                                hintText: "...............",
+                                obscureText: true,
+                                radius: 16.r,
+                                suffixIcon: Icon(
+                                  Icons.lock_outline,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
+                                ),
+                                isFixed: false,
+                              ),
+                              12.verticalSpace,
+                              Align(
+                                alignment: AlignmentDirectional.centerEnd,
+                                child: InkWell(
+                                  onTap: () => context.push(
+                                    AppRoutes.forgetPasswordPage,
+                                  ),
+                                  child: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.forgotPassword,
+                                    style: AppTextStyle.regular14(
+                                      context,
+                                    ).copyWith(color: MyColors.primaryColor),
+                                  ),
+                                ),
+                              ),
+                              90.verticalSpace,
+                              CustomButton(
+                                text: AppLocalizations.of(context)!.login,
+                                // textColor: Theme.of(context).colorScheme.surface,
+                                onPressed: () {},
+                                isMax: true,
+                                // radius: 20.r,
+                                // height: 56.h,
+                              ),
+                              24.verticalSpace,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.dontHaveAccount,
+                                    style: AppTextStyle.medium14(context)
+                                        .copyWith(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.tertiary,
+                                        ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      context.go(AppRoutes.register);
+                                    },
+                                    child: Text(
+                                      AppLocalizations.of(context)!.signUp,
+                                      style: AppTextStyle.medium14(
+                                        context,
+                                      ).copyWith(color: MyColors.primaryColor),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              20.verticalSpace,
+                              const ViewInsetsSpace(),
+                            ]
+                            .animate(interval: 50.ms)
+                            .fade(duration: 500.ms)
+                            .slideY(begin: 0.05, end: 0),
                   ),
                 ),
               ),

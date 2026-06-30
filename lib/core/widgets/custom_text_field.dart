@@ -94,7 +94,7 @@ class CustomTextField extends StatelessWidget {
                   hintStyle ??
                   Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontSize: 12.sp,
-                    color: hintColor ?? MyColors.grey,
+                    color: hintColor ?? Theme.of(context).colorScheme.onSurface,
                   ),
               errorBorder: outLineBorder(borderColor: MyColors.red),
               border: outLineBorder(),

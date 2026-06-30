@@ -56,7 +56,7 @@ class WalletPage extends StatelessWidget {
                   iconColor: index == 1
                       ? MyColors.primaryColor
                       : index == 2
-                      ? MyColors.secondaryColor
+                      ? Theme.of(context).colorScheme.secondary
                       : MyColors.green,
                 ),
               ),
@@ -95,6 +95,6 @@ class WalletPage extends StatelessWidget {
         //   "12 أكتوبر، 2023",
         //   "+150.00 ج.م",
         //   Icons.card_giftcard,
-        //   MyColors.secondaryColor,
+        //   Theme.of(context).colorScheme.secondary,
         // ),
    

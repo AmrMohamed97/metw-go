@@ -13,10 +13,13 @@ class BalanceCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        gradient: const LinearGradient(
+        gradient:   LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
-          colors: [MyColors.secondaryColor, MyColors.primaryColor],
+          colors: [
+            Theme.of(context).colorScheme.secondary,
+            MyColors.primaryColor,
+          ],
         ),
       ),
       child: Column(

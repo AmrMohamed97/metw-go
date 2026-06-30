@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
+
 // import 'package:motion_toast/motion_toast.dart';
 
 import '../theme/app_text_style.dart';
@@ -19,7 +20,7 @@ class UiHelper {
   //   final successColor = MyColors.green;
   //   final errorColor = MyColors.red;
   //   final warningColor =Colors.yellow;
-  //   final infoColor = MyColors.white;
+  //   final infoColor = Theme.of(context).colorScheme.surface;
 
   //   switch (type) {
   //     case MotionToastType.success:
@@ -92,7 +93,7 @@ class UiHelper {
 
   static BoxShadow shadow(BuildContext context) {
     return BoxShadow(
-      color: MyColors.black.withValues(alpha: 0.3),
+      color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.3),
       spreadRadius: -2,
       blurRadius: 15,
       offset: const Offset(0, 4),
@@ -100,9 +101,9 @@ class UiHelper {
   }
 
   // Glass effect shadow for premium look
-  static BoxShadow glassShadow() {
+  static BoxShadow glassShadow(BuildContext context) {
     return BoxShadow(
-      color: MyColors.grey.withValues(alpha: 0.1),
+      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
       spreadRadius: 0,
       blurRadius: 20,
       offset: const Offset(0, 8),

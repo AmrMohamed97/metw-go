@@ -28,7 +28,7 @@ class OrdersListView extends StatelessWidget {
                 delivery: "حي النخيل - شارع الأمير سعود",
                 onDetailsPressed: () =>
                     context.push(AppRoutes.orderDetailsPage),
-                // borderColor: MyColors.secondaryColor,
+                // borderColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),
