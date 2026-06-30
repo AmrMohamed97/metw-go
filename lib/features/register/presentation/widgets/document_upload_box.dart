@@ -31,14 +31,14 @@ class DocumentUploadBox extends StatelessWidget {
         options: RoundedRectDottedBorderOptions(
           radius: Radius.circular(24.r),
           dashPattern: const [8, 4],
-          color: Colors.grey.shade400,
+          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
           strokeWidth: 1.5,
         ),
         child: Container(
           height: 120.h,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(24.r),
           ),
           child: isLoading
@@ -51,12 +51,12 @@ class DocumentUploadBox extends StatelessWidget {
                         children: [
                           Image.file(imageFile!, fit: BoxFit.cover),
                           Container(
-                            color: Colors.black.withValues(alpha: 0.3),
+                            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.3),
                             child: Center(
                               child: Container(
                                 padding: EdgeInsets.all(8.r),
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
+                                decoration:   BoxDecoration(
+                                  color: Theme.of(context).colorScheme.surface,
                                   shape: BoxShape.circle,
                                 ),
                                 child: Icon(
@@ -77,13 +77,13 @@ class DocumentUploadBox extends StatelessWidget {
                           iconPath,
                           width: 32.w,
                           height: 32.h,
-                          color: Colors.grey.shade600,
+                          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
                         ),
                         16.verticalSpace,
                         Text(
                           title,
                           style: AppTextStyle.regular12(context).copyWith(
-                            color: Colors.grey.shade600,
+                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
                           ),
                           textAlign: TextAlign.center,
                         ),
