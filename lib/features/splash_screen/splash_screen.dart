@@ -79,9 +79,10 @@ class NextPage extends StatefulWidget {
   State<NextPage> createState() => _NextPageState();
 }
 
-class _NextPageState extends State<NextPage> {
+class _NextPageState extends State<NextPage> with WidgetsBindingObserver {
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     if (BlocProvider.of<AppCubit>(context).status == 'offline') {
       context.go(AppRoutes.mainView);
     } else {
@@ -90,21 +91,35 @@ class _NextPageState extends State<NextPage> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      nextPage();
+    }
+  }
+
   void nextPage() async {
     final locationService = LocationService();
-    bool serviceEnabled = await locationService
-        .checkAndRequestLocationService();
+    bool serviceEnabled = await locationService.checkAndRequestLocationService();
     if (!serviceEnabled) {
       await ph.openAppSettings();
-      // return;
+      return;
     }
     bool permissionGranted = await locationService.checkAndRequestPermission();
     if (!permissionGranted) {
       await ph.openAppSettings();
-      // return;
+      return;
     }
     TrackingLocationService().startTracking(driverId: '9');
-    context.go(AppRoutes.mainView);
+    if (context.mounted) {
+      context.go(AppRoutes.mainView);
+    }
   }
 
   @override
