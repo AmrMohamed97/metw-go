@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<LoginCubit>();
         return ScreenWrapper(
-          backGroundColor: Theme.of(context).colorScheme.surfaceDim,
+          backGroundColor: MyColors.purpleLight,
           body: CustomScrollView(
             slivers: [
               const LoginAppBar(),
@@ -115,7 +115,9 @@ class LoginPage extends StatelessWidget {
                               CustomButton(
                                 text: AppLocalizations.of(context)!.login,
                                 // textColor: Theme.of(context).colorScheme.surface,
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.push(AppRoutes.splashScreen);
+                                },
                                 isMax: true,
                                 // radius: 20.r,
                                 // height: 56.h,
