@@ -247,19 +247,19 @@ class CompleteOrderPage extends StatelessWidget {
             ),
           ),
           12.horizontalSpace,
-          _buildActionButton(Icons.chat_bubble_outline, MyColors.green),
+          _buildActionButton(Icons.chat_bubble_outline, MyColors.green,context),
           8.horizontalSpace,
-          _buildActionButton(Icons.call_outlined, MyColors.red),
+          _buildActionButton(Icons.call_outlined, MyColors.red,context),
         ],
       ),
     );
   }
 
-  Widget _buildActionButton(IconData icon, Color iconColor) {
+  Widget _buildActionButton(IconData icon, Color iconColor,context) {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: MyColors.greyFill,
+        color: Theme.of(context).colorScheme.outline,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Icon(icon, color: iconColor, size: 20.sp),

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
@@ -52,7 +53,7 @@ class _OtpTimerState extends State<OtpTimer> {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
           decoration: BoxDecoration(
-            color: MyColors.greyFill,
+            color: Theme.of(context).colorScheme.outline,
             borderRadius: BorderRadius.circular(30),
           ),
           child: Text(

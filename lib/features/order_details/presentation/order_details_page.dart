@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
-import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
+import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 
@@ -14,16 +14,12 @@ class OrderDetailsPage extends StatefulWidget {
 }
 
 class _OrderDetailsPageState extends State<OrderDetailsPage> {
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: MyColors.white,
-      appBar: CustomAppBar(
-        title: l10n.orders,
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(title: l10n.orders, centerTitle: true),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -34,7 +30,10 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               children: [
                 // Status (Right side in RTL)
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 8.h,
+                  ),
                   decoration: BoxDecoration(
                     color: MyColors.secondaryColor,
                     borderRadius: BorderRadius.circular(20.r),
@@ -46,14 +45,19 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                       SizedBox(width: 8.w),
                       Text(
                         l10n.immediateDeliveryOnePoint,
-                        style: AppTextStyle.medium14(context).copyWith(color: MyColors.white),
+                        style: AppTextStyle.medium14(
+                          context,
+                        ).copyWith(color: MyColors.white),
                       ),
                     ],
                   ),
                 ),
                 // Timer (Left side in RTL)
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 8.h,
+                  ),
                   decoration: BoxDecoration(
                     color: MyColors.white,
                     borderRadius: BorderRadius.circular(20.r),
@@ -62,19 +66,20 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.pie_chart_outline, color: MyColors.primaryColor, size: 20.r),
-                      SizedBox(width: 8.w),
-                      Text(
-                        '02:30 د',
-                        style: AppTextStyle.medium14(context),
+                      Icon(
+                        Icons.pie_chart_outline,
+                        color: MyColors.primaryColor,
+                        size: 20.r,
                       ),
+                      SizedBox(width: 8.w),
+                      Text('02:30 د', style: AppTextStyle.medium14(context)),
                     ],
                   ),
                 ),
               ],
             ),
             SizedBox(height: 24.h),
-            
+
             // Pickup Location
             _LocationCard(
               title: l10n.pickupPoint,
@@ -84,7 +89,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               iconBgColor: MyColors.primaryColor.withOpacity(0.1),
               borderColor: MyColors.primaryColor,
             ),
-            
+
             // Dropoff Location
             _LocationCard(
               title: l10n.dropoffPoint,
@@ -95,7 +100,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               borderColor: MyColors.secondaryColor,
             ),
             SizedBox(height: 16.h),
-            
+
             // Shipment Details Card
             Container(
               padding: EdgeInsets.all(16.w),
@@ -109,7 +114,11 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.inventory_2_outlined, color: MyColors.primaryColor, size: 24.r),
+                      Icon(
+                        Icons.inventory_2_outlined,
+                        color: MyColors.primaryColor,
+                        size: 24.r,
+                      ),
                       SizedBox(width: 8.w),
                       Text(
                         l10n.shipmentDetails,
@@ -133,7 +142,11 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                     title: l10n.paymentMethod,
                     value: l10n.cashOnDelivery,
                     valueColor: MyColors.primaryColor,
-                    icon: Icon(Icons.money, color: MyColors.primaryColor, size: 20.r),
+                    icon: Icon(
+                      Icons.money,
+                      color: MyColors.primaryColor,
+                      size: 20.r,
+                    ),
                   ),
                   _buildDetailRow(
                     context,
@@ -154,18 +167,22 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               ),
             ),
             SizedBox(height: 24.h),
-            
+
             // Information Box
             Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                color: MyColors.greyFill,
+                color: Theme.of(context).colorScheme.outline,
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.info_outline, color: MyColors.textColor, size: 24.r),
+                  Icon(
+                    Icons.info_outline,
+                    color: MyColors.textColor,
+                    size: 24.r,
+                  ),
                   SizedBox(width: 12.w),
                   Expanded(
                     child: Text(
@@ -177,7 +194,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               ),
             ),
             SizedBox(height: 32.h),
-            
+
             // Buttons
             CustomButton(
               text: l10n.acceptOrder,
@@ -191,7 +208,9 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               onPressed: () => _showRejectBottomSheet(context),
               child: Text(
                 l10n.rejectOrder,
-                style: AppTextStyle.medium16(context).copyWith(color: MyColors.textColor),
+                style: AppTextStyle.medium16(
+                  context,
+                ).copyWith(color: MyColors.textColor),
               ),
             ),
             SizedBox(height: 24.h),
@@ -227,18 +246,26 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: AppTextStyle.regular14(context).copyWith(color: MyColors.grey)),
+          Text(
+            title,
+            style: AppTextStyle.regular14(
+              context,
+            ).copyWith(color: MyColors.grey),
+          ),
           Row(
             children: [
-              if (icon != null) ...[
-                icon,
-                SizedBox(width: 8.w),
-              ],
+              if (icon != null) ...[icon, SizedBox(width: 8.w)],
               Text(
                 value,
-                style: isBold 
-                    ? AppTextStyle.bold16(context).copyWith(color: valueColor ?? Theme.of(context).colorScheme.shadow)
-                    : AppTextStyle.medium14(context).copyWith(color: valueColor ?? Theme.of(context).colorScheme.shadow),
+                style: isBold
+                    ? AppTextStyle.bold16(context).copyWith(
+                        color:
+                            valueColor ?? Theme.of(context).colorScheme.shadow,
+                      )
+                    : AppTextStyle.medium14(context).copyWith(
+                        color:
+                            valueColor ?? Theme.of(context).colorScheme.shadow,
+                      ),
               ),
             ],
           ),
@@ -307,14 +334,13 @@ class _LocationCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    title, 
-                    style: AppTextStyle.regular12(context).copyWith(color: MyColors.grey),
+                    title,
+                    style: AppTextStyle.regular12(
+                      context,
+                    ).copyWith(color: MyColors.grey),
                   ),
                   SizedBox(height: 4.h),
-                  Text(
-                    subtitle, 
-                    style: AppTextStyle.medium14(context),
-                  ),
+                  Text(subtitle, style: AppTextStyle.medium14(context)),
                 ],
               ),
             ),
@@ -362,9 +388,7 @@ class DashedDivider extends StatelessWidget {
             return SizedBox(
               width: dashWidth,
               height: dashHeight,
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: color),
-              ),
+              child: DecoratedBox(decoration: BoxDecoration(color: color)),
             );
           }),
         );
@@ -391,12 +415,14 @@ class _RejectBottomSheet extends StatefulWidget {
 
 class _RejectBottomSheetState extends State<_RejectBottomSheet>
     with SingleTickerProviderStateMixin {
-
   int _selectedIndex = 0;
 
   List<_RejectReason> _buildReasons(AppLocalizations l10n) => [
     _RejectReason(label: l10n.locationTooFar, icon: Icons.location_on_outlined),
-    _RejectReason(label: l10n.packageTooHeavy, icon: Icons.shopping_bag_outlined),
+    _RejectReason(
+      label: l10n.packageTooHeavy,
+      icon: Icons.shopping_bag_outlined,
+    ),
     _RejectReason(label: l10n.vehicleIssue, icon: Icons.no_drinks_outlined),
     _RejectReason(label: l10n.personalBreak, icon: Icons.coffee_outlined),
     _RejectReason(label: l10n.other, icon: Icons.more_horiz),
@@ -444,8 +470,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet>
             // Subtitle
             Text(
               l10n.selectRejectionReason,
-              style: AppTextStyle.regular14(context)
-                  .copyWith(color: MyColors.grey),
+              style: AppTextStyle.regular14(
+                context,
+              ).copyWith(color: MyColors.grey),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 24.h),
@@ -461,7 +488,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet>
                   curve: Curves.easeInOut,
                   margin: EdgeInsets.only(bottom: 12.h),
                   padding: EdgeInsets.symmetric(
-                      horizontal: 16.w, vertical: 14.h),
+                    horizontal: 16.w,
+                    vertical: 14.h,
+                  ),
                   decoration: BoxDecoration(
                     color: MyColors.white,
                     borderRadius: BorderRadius.circular(14.r),
@@ -492,8 +521,11 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet>
                           ),
                         ),
                         child: isSelected
-                            ? Icon(Icons.circle,
-                                size: 10.r, color: MyColors.white)
+                            ? Icon(
+                                Icons.circle,
+                                size: 10.r,
+                                color: MyColors.white,
+                              )
                             : null,
                       ),
                       SizedBox(width: 14.w),
@@ -510,7 +542,7 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet>
                       Container(
                         padding: EdgeInsets.all(10.r),
                         decoration: BoxDecoration(
-                          color: MyColors.greyFill,
+                          color: Theme.of(context).colorScheme.outline,
                           borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Icon(
@@ -545,8 +577,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet>
               onPressed: () => Navigator.of(context).pop(),
               child: Text(
                 l10n.cancel,
-                style: AppTextStyle.medium16(context)
-                    .copyWith(color: MyColors.textColor),
+                style: AppTextStyle.medium16(
+                  context,
+                ).copyWith(color: MyColors.textColor),
               ),
             ),
           ],
@@ -554,4 +587,4 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet>
       ),
     );
   }
-}
+}

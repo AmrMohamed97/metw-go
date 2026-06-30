@@ -6,7 +6,7 @@ import 'package:metw_go/core/theme/my_colors.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
-    this.isFixed=true ,
+    this.isFixed = true,
     this.hintText,
     this.textInputType,
     this.controller,
@@ -72,7 +72,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: isFixed == true ? 75.h : null ,
+      height: isFixed == true ? 75.h : null,
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
@@ -101,7 +101,9 @@ class CustomTextField extends StatelessWidget {
               focusedBorder: outLineBorder(),
               enabledBorder: outLineBorder(),
               filled: filled ?? true,
-              fillColor: filledColor ?? MyColors.greyFill, // Color(0xffF5F5F5),
+              fillColor:
+                  filledColor ??
+                  Theme.of(context).colorScheme.outline, // Color(0xffF5F5F5),
               isDense: true,
               contentPadding: EdgeInsets.symmetric(
                 vertical: verticalPadding ?? 14.h,
