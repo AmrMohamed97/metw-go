@@ -36,7 +36,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
                 AppLocalizations.of(context)!.unavailableForWork,
                 style: AppTextStyle.regular14(
                   context,
-                ).copyWith(color: Theme.of(context).colorScheme.surface),
+                ).copyWith(color: Theme.of(context).colorScheme.tertiary),
               ),
               const Spacer(),
               Container(
@@ -51,7 +51,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.access_time,
-                      color: Theme.of(context).colorScheme.surface,
+                      color: Theme.of(context).colorScheme.tertiary,
                       size: 16.sp,
                     ),
                     SizedBox(width: 8),
@@ -59,7 +59,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
                       "00:00:00",
                       style: AppTextStyle.regular14(
                         context,
-                      ).copyWith(color: Theme.of(context).colorScheme.surface),
+                      ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                     ),
                   ],
                 ),
@@ -73,7 +73,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
                 child: Text(
                   AppLocalizations.of(context)!.activateStatusToReceiveOrders,
                   style: AppTextStyle.regular12(context).copyWith(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.tertiary,
                     height: 1.5,
                   ),
                 ),
