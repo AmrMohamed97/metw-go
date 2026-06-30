@@ -70,7 +70,7 @@ class TrackingLocationService {
       locationSettings = AndroidSettings(
         accuracy: LocationAccuracy.bestForNavigation,
         distanceFilter: 10,
-        forceLocationManager: true,
+        forceLocationManager: false,
         intervalDuration: const Duration(seconds: 10),
         foregroundNotificationConfig: const ForegroundNotificationConfig(
           notificationText: "يتم تحديث موقعك الآن لضمان وصول الطلبات بدقة",

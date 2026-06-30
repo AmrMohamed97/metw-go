@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/cubit/app_cubit.dart';
+import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
@@ -25,32 +27,37 @@ class HomePage extends StatelessWidget {
           builder: (context, state) {
             final cubit = context.read<HomeCubit>();
             return SafeArea(
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  8.verticalSpace,
-                  // Top Bar
-                  HomeAppBar(),
-                  12.verticalSpace,
-                  // Purple Status Card
-                  cubit.status == 'offline'
-                      ? HomePageOfflineStatusCard()
-                      : HomePageOnlineStatusCard(),
-                  14.verticalSpace,
-                  // Today's Earnings and Completed Orders Row
-                  HomeTodayEarnings(),
-                  12.verticalSpace,
-                  // Wallet Card
-                  HomeWalletView(),
-                  30.verticalSpace,
-                  cubit.status == 'offline'
-                      ? Image.asset(AppImages.offline)
-                      // Upcoming Orders Header
-                      : HomeOrdersView(),
+              child: BlocBuilder<AppCubit, AppState>(
+                builder: (context, appState) {
+                  final appCubit = context.read<AppCubit>();
+                  return ListView(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      8.verticalSpace,
+                      // Top Bar
+                      HomeAppBar(),
+                      12.verticalSpace,
+                      // Purple Status Card
+                      appCubit.status == 'offline'
+                          ? HomePageOfflineStatusCard()
+                          : HomePageOnlineStatusCard(),
+                      14.verticalSpace,
+                      // Today's Earnings and Completed Orders Row
+                      HomeTodayEarnings(),
+                      12.verticalSpace,
+                      // Wallet Card
+                      HomeWalletView(),
+                      30.verticalSpace,
+                      appCubit.status == 'offline'
+                          ? Image.asset(AppImages.offline)
+                          // Upcoming Orders Header
+                          : HomeOrdersView(),
 
-                  40.verticalSpace,
-                ],
+                      40.verticalSpace,
+                    ],
+                  );
+                },
               ),
             );
           },

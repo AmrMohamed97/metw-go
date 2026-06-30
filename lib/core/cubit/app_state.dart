@@ -2,6 +2,11 @@ abstract class AppState {}
 
 class AppInitial extends AppState {}
 
+class HomeStatusChanged extends AppState {
+  final String status;
+  HomeStatusChanged(this.status);
+}
+
 class ChangeLanguageState extends AppState {}
 
 class ChangeThemeState extends AppState {}
