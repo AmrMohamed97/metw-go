@@ -66,6 +66,29 @@
 			<string>UIInterfaceOrientationLandscapeLeft</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
+		<key>CADisableMinimumFrameDurationOnPhone</key>
+		<true/>
+		<key>UIApplicationSupportsIndirectInputEvents</key>
+		<true/>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<!-- نحتاج الوصول إلى موقعك لتتبع حالة التوصيل وتقديم خدمة أفضل -->
+		<string>We need access to your location to track the delivery status and provide accurate arrival estimates.</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<!-- نحتاج الوصول إلى موقعك حتى في الخلفية لتتبع حالة التوصيل وضمان وصول الطلب بدقة -->
+		<string>We need access to your location even in the background to ensure real-time tracking during delivery for better service.</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<!-- نحتاج الوصول إلى موقعك حتى في الخلفية لتتبع حالة التوصيل وضمان وصول الطلب بدقة -->
+		<string>We need access to your location even in the background to ensure real-time tracking during delivery for better service.</string>
+		<!--  هو بمثابة "إذن رسمي" تطلبه من نظام التشغيل iOS للسماح للتطبيق بالقيام بمهام محددة في الخلفية (Background). بدون هذا الجزء، سيقوم النظام بإيقاف نشاط التطبيق تماماً بمجرد خروجك منه أو قفل الشاشة -->
+		<key>UIBackgroundModes</key>
+		<array>
+			<!--  يخبر النظام أن هذا التطبيق لديه "صلاحية العمل في الخلفية" لاستقبال تحديثات الموقع.
+ماذا يحدث لو حذفته؟ بمجرد أن يخرج السائق من التطبيق أو يغلق شاشة الآيفون، سيتوقف إرسال إحداثيات الموقع فوراً، ولن تستطيع العيادة رؤية مكانه على الخريطة حتى يفتح التطبيق مرة أخرى. -->
+			<string>location</string>
+			<!--  سمح للتطبيق "بالاستيقاظ" في الخلفية عند وصول إشعار (Push Notification) من Firebase مثلاً.
+أهميته لتطبيقك:يضمن وصول إشعارات الطلبات الجديدة للسائق بسرعة عالية.يسمح للتطبيق بمعالجة البيانات القادمة مع الإشعار (Silent Notifications) لتحديث حالة معينة في التطبيق قبل أن يفتحه المستخدم. -->
+			<string>remote-notification</string>
+		</array>
 		<key>UIStatusBarHidden</key>
 		<false/>
 	</dict>
