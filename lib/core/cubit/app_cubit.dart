@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' as ui;
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -46,16 +47,22 @@ class AppCubit extends Cubit<AppState> {
     return super.close();
   }
 
-  Locale currentLocale = const Locale('ar');
-  bool isDarkMode = CacheHelper.getData(key: AppConstant.kTheme) ?? false;
+  Locale currentLocale = Locale(
+    CacheHelper.getData(key: AppConstant.lang) ??
+        ui.PlatformDispatcher.instance.locale.languageCode,
+  );
+  bool isDarkMode = CacheHelper.getData(key: AppConstant.kTheme) ??
+      (ui.PlatformDispatcher.instance.platformBrightness == ui.Brightness.dark);
 
   void changeLanguage(Locale locale) {
     currentLocale = locale;
+    CacheHelper.saveData(key: AppConstant.lang, value: locale.languageCode);
     emit(ChangeLanguageState());
   }
 
   void toggleTheme(bool value) {
     isDarkMode = value;
+    CacheHelper.saveData(key: AppConstant.kTheme, value: value);
     emit(ChangeThemeState());
   }
 
