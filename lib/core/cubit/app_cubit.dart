@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:metw_go/core/const/app_const.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/repo/app_repo.dart';
 import 'package:metw_go/core/utils/cache_helper.dart';
@@ -46,7 +47,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   Locale currentLocale = const Locale('ar');
-  bool isDarkMode = true;
+  bool isDarkMode = CacheHelper.getData(key: AppConstant.kTheme) ?? false;
 
   void changeLanguage(Locale locale) {
     currentLocale = locale;
