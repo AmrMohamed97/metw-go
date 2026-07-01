@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 
@@ -25,7 +26,7 @@ class BalanceCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "الرصيد المتاح",
+            AppLocalizations.of(context)!.availableBalance,
             style: AppTextStyle.regular14(
               context,
             ).copyWith(color: Colors.white.withValues(alpha: 0.9)),
@@ -44,7 +45,7 @@ class BalanceCard extends StatelessWidget {
               ),
               4.horizontalSpace,
               Text(
-                "ج.م",
+                AppLocalizations.of(context)!.egp,
                 style: AppTextStyle.medium14(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.surface),
@@ -76,7 +77,7 @@ class BalanceCard extends StatelessWidget {
                     ),
                     8.horizontalSpace,
                     Text(
-                      "سحب الأرباح",
+                      AppLocalizations.of(context)!.withdrawProfits,
                       style: AppTextStyle.medium14(context).copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

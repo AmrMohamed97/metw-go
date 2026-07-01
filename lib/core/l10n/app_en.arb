@@ -234,5 +234,14 @@
     "personalBreak": "Personal break",
     "other": "Other",
     "confirmRejection": "Confirm Rejection",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "availableBalance": "Available Balance",
+    "withdrawProfits": "Withdraw Profits",
+    "egp": "EGP",
+    "deliveryTo": "Delivery to:",
+    "urgent": "Urgent",
+    "pickupFrom": "Pickup from:",
+    "startOrder": "Start Order",
+    "mockDuration": "2 Days - 03:25 Hours",
+    "details": "Details"
 }

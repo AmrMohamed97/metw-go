@@ -732,4 +732,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get availableBalance => 'Available Balance';
+
+  @override
+  String get withdrawProfits => 'Withdraw Profits';
+
+  @override
+  String get egp => 'EGP';
+
+  @override
+  String get deliveryTo => 'Delivery to:';
+
+  @override
+  String get urgent => 'Urgent';
+
+  @override
+  String get pickupFrom => 'Pickup from:';
+
+  @override
+  String get startOrder => 'Start Order';
+
+  @override
+  String get mockDuration => '2 Days - 03:25 Hours';
+
+  @override
+  String get details => 'Details';
 }

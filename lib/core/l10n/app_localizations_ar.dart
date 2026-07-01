@@ -728,4 +728,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cancel => 'إلغاء';
+
+  @override
+  String get availableBalance => 'الرصيد المتاح';
+
+  @override
+  String get withdrawProfits => 'سحب الأرباح';
+
+  @override
+  String get egp => 'ج.م';
+
+  @override
+  String get deliveryTo => 'التسليم إلى:';
+
+  @override
+  String get urgent => 'عاجل';
+
+  @override
+  String get pickupFrom => 'الاستلام من:';
+
+  @override
+  String get startOrder => 'بدء الطلب';
+
+  @override
+  String get mockDuration => '2 يوم - 03:25 ساعة';
+
+  @override
+  String get details => 'تفاصيل';
 }

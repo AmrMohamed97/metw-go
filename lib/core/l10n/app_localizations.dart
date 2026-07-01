@@ -1507,6 +1507,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
+
+  /// No description provided for @availableBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Balance'**
+  String get availableBalance;
+
+  /// No description provided for @withdrawProfits.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdraw Profits'**
+  String get withdrawProfits;
+
+  /// No description provided for @egp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get egp;
+
+  /// No description provided for @deliveryTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery to:'**
+  String get deliveryTo;
+
+  /// No description provided for @urgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get urgent;
+
+  /// No description provided for @pickupFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup from:'**
+  String get pickupFrom;
+
+  /// No description provided for @startOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Order'**
+  String get startOrder;
+
+  /// No description provided for @mockDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'2 Days - 03:25 Hours'**
+  String get mockDuration;
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
 }
 
 class _AppLocalizationsDelegate

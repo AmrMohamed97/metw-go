@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 
@@ -12,7 +13,7 @@ class OrderItem extends StatelessWidget {
     required this.isUrgent,
     required this.pickup,
     required this.delivery,
-    this.deliveryLabel = "التسليم إلى:",
+    this.deliveryLabel,
     this.isTodayOrders = false, this.onDetailsPressed,
     // required this.borderColor,
   });
@@ -21,7 +22,7 @@ class OrderItem extends StatelessWidget {
   final bool isUrgent, isTodayOrders;
   final String pickup;
   final String delivery;
-  final String deliveryLabel;
+  final String? deliveryLabel;
   final void Function()? onDetailsPressed;
   // final Color borderColor;
 
@@ -72,7 +73,7 @@ class OrderItem extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      "عاجل",
+                      AppLocalizations.of(context)!.urgent,
                       style: AppTextStyle.medium14(context).copyWith(
                         color: Theme.of(context).colorScheme.primary,
                         fontSize: 12.sp,
@@ -140,7 +141,7 @@ class OrderItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "الاستلام من:",
+                        AppLocalizations.of(context)!.pickupFrom,
                         style: AppTextStyle.medium14(context).copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                           fontSize: 12.sp,
@@ -155,7 +156,7 @@ class OrderItem extends StatelessWidget {
                       ),
                       SizedBox(height: 16),
                       Text(
-                        deliveryLabel,
+                        deliveryLabel ?? AppLocalizations.of(context)!.deliveryTo,
                         style: AppTextStyle.medium14(context).copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                           fontSize: 12.sp,
@@ -181,7 +182,7 @@ class OrderItem extends StatelessWidget {
                 if (isTodayOrders)
                   Expanded(
                     flex: 2,
-                    child: CustomButton(text: "بدء الطلب", onPressed: () {}),
+                    child: CustomButton(text: AppLocalizations.of(context)!.startOrder, onPressed: () {}),
                   )
                 else
                   Expanded(
@@ -196,7 +197,7 @@ class OrderItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "2 يوم - 03:25 ساعة",
+                            AppLocalizations.of(context)!.mockDuration,
                             style: AppTextStyle.medium14(context).copyWith(
                               color: Theme.of(context).colorScheme.onSurface,
                             ),
@@ -229,7 +230,7 @@ class OrderItem extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "تفاصيل",
+                          AppLocalizations.of(context)!.details,
                           style: AppTextStyle.medium14(context).copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),

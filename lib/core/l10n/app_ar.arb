@@ -234,5 +234,14 @@
     "personalBreak": "استراحة شخصية",
     "other": "أخرى",
     "confirmRejection": "تأكيد الرفض",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "availableBalance": "الرصيد المتاح",
+    "withdrawProfits": "سحب الأرباح",
+    "egp": "ج.م",
+    "deliveryTo": "التسليم إلى:",
+    "urgent": "عاجل",
+    "pickupFrom": "الاستلام من:",
+    "startOrder": "بدء الطلب",
+    "mockDuration": "2 يوم - 03:25 ساعة",
+    "details": "تفاصيل"
 }
