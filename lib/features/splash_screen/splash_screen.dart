@@ -85,7 +85,11 @@ class _NextPageState extends State<NextPage> with WidgetsBindingObserver {
   void initState() {
     WidgetsBinding.instance.addObserver(this);
     if (BlocProvider.of<AppCubit>(context).status == 'offline') {
-      context.go(AppRoutes.mainView);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          context.go(AppRoutes.mainView);
+        }
+      });
     } else {
       nextPage();
     }
