@@ -50,6 +50,17 @@ import FirebaseDatabase
           locationManager?.pausesLocationUpdatesAutomatically = false
           locationManager?.showsBackgroundLocationIndicator = true
       }
+      
+      // Update status immediately to online
+      Database.database().reference().child("drivers").child(driverId).child("status").setValue("online")
+      if let location = locationManager?.location {
+          let locationMap: [String: Any] = [
+              "lat": location.coordinate.latitude,
+              "lng": location.coordinate.longitude
+          ]
+          Database.database().reference().child("drivers").child(driverId).child("location").setValue(locationMap)
+      }
+      
       locationManager?.requestAlwaysAuthorization()
       locationManager?.startUpdatingLocation()
   }

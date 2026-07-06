@@ -65,6 +65,19 @@ class LocationTrackingService : Service() {
             driverId = id
             val notification = createNotification()
             startForeground(NOTIFICATION_ID, notification)
+            
+            // Update status immediately to online
+            database.reference.child("drivers").child(id).child("status").setValue("online")
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    val locationMap = mapOf(
+                        "lat" to location.latitude,
+                        "lng" to location.longitude
+                    )
+                    database.reference.child("drivers").child(id).child("location").setValue(locationMap)
+                }
+            }
+            
             startLocationUpdates()
         } else {
             stopSelf()
