@@ -12,7 +12,7 @@ import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/custom_error_widget.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/home/presentation/services/location_service.dart';
-import 'package:metw_go/features/home/presentation/services/tracking_location_service.dart';
+import 'package:metw_go/features/home/presentation/services/native_tracking_service.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
 
 class SplashScreen extends StatefulWidget {
@@ -121,7 +121,7 @@ class _NextPageState extends State<NextPage> with WidgetsBindingObserver {
       await ph.openAppSettings();
       return;
     }
-    TrackingLocationService().startTracking(driverId: '9');
+    NativeTrackingService().startNativeTracking('9');
     if (mounted) {
       context.go(AppRoutes.mainView);
     }

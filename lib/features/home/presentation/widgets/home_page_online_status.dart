@@ -4,7 +4,7 @@ import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
-import 'package:metw_go/features/home/presentation/services/tracking_location_service.dart';
+import 'package:metw_go/features/home/presentation/services/native_tracking_service.dart';
 
 class HomePageOnlineStatusCard extends StatelessWidget {
   const HomePageOnlineStatusCard({super.key});
@@ -80,7 +80,7 @@ class HomePageOnlineStatusCard extends StatelessWidget {
               CustomButton(
                 text: AppLocalizations.of(context)!.stopReceiving,
                 onPressed: () {
-                  TrackingLocationService().stopTracking('9');
+                  NativeTrackingService().stopNativeTracking();
                 },
                 // fixedSize: false,
                 height: 35,

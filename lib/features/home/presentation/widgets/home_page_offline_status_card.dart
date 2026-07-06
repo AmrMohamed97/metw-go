@@ -4,7 +4,7 @@ import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/features/home/presentation/services/location_service.dart';
-import 'package:metw_go/features/home/presentation/services/tracking_location_service.dart';
+import 'package:metw_go/features/home/presentation/services/native_tracking_service.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
 
 class HomePageOfflineStatusCard extends StatelessWidget {
@@ -97,7 +97,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
                   // if (context.mounted) {
                   //   context.read<AppCubit>().trackDriver();
                   // }
-                  TrackingLocationService().startTracking(driverId: '9');
+                  NativeTrackingService().startNativeTracking('9');
                 },
                 // fixedSize: false,
                 height: 35,
