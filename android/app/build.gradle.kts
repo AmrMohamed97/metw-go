@@ -50,6 +50,7 @@ flutter {
 
 dependencies {
     implementation("com.google.android.gms:play-services-location:21.3.0")
-    implementation("com.google.firebase:firebase-database-ktx")
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation("com.google.firebase:firebase-database")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
