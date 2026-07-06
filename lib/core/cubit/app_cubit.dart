@@ -10,7 +10,7 @@ import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/repo/app_repo.dart';
 import 'package:metw_go/core/utils/cache_helper.dart';
 import 'package:metw_go/features/home/presentation/services/firebase_rtdb_helper.dart';
-import 'package:metw_go/features/home/presentation/services/tracking_location_service.dart';
+// import 'package:metw_go/features/homer/presentation/services/tracking_location_service.dart';
 
 @injectable
 class AppCubit extends Cubit<AppState> {
@@ -79,9 +79,9 @@ class AppCubit extends Cubit<AppState> {
     result.fold((failure) => emit(ApplogoutErrorState(failure.message)), (
       response,
     ) {
-      TrackingLocationService().stopTracking(
-        CacheHelper.getUserData()?.id.toString() ?? '',
-      );
+      // TrackingLocationService().stopTracking(
+      //   CacheHelper.getUserData()?.id.toString() ?? '',
+      // );
       CacheHelper.clearAll();
       emit(ApplogoutLogoutSuccessState());
     });

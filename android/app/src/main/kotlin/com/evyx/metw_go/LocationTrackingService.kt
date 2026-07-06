@@ -19,7 +19,7 @@ class LocationTrackingService : Service() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
-    private val database = FirebaseDatabase.getInstance()
+    private val database = FirebaseDatabase.getInstance("https://new-lasco-default-rtdb.asia-southeast1.firebasedatabase.app")
     private var driverId: String? = null
 
     companion object {

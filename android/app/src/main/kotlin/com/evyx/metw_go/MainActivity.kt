@@ -6,6 +6,7 @@ import android.os.Build
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import androidx.core.content.edit
 
 class MainActivity : FlutterActivity() {
     private val CHANNEL = "com.metw_go/location_tracking"
@@ -19,7 +20,7 @@ class MainActivity : FlutterActivity() {
                     if (driverId != null) {
                         // Save to SharedPreferences for BootReceiver
                         val prefs = getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
-                        prefs.edit().putString("flutter.driverId", driverId).apply()
+                        prefs.edit { putString("flutter.driverId", driverId) }
 
                         // Start Service
                         val serviceIntent = Intent(this, LocationTrackingService::class.java).apply {
@@ -38,7 +39,7 @@ class MainActivity : FlutterActivity() {
                 "stopTracking" -> {
                     // Clear SharedPreferences
                     val prefs = getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
-                    prefs.edit().remove("flutter.driverId").apply()
+                    prefs.edit { remove("flutter.driverId") }
 
                     // Stop Service
                     val serviceIntent = Intent(this, LocationTrackingService::class.java)

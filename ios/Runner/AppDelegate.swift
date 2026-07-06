@@ -52,13 +52,13 @@ import FirebaseDatabase
       }
       
       // Update status immediately to online
-      Database.database().reference().child("drivers").child(driverId).child("status").setValue("online")
+      Database.database(url: "https://new-lasco-default-rtdb.asia-southeast1.firebasedatabase.app").reference().child("drivers").child(driverId).child("status").setValue("online")
       if let location = locationManager?.location {
           let locationMap: [String: Any] = [
               "lat": location.coordinate.latitude,
               "lng": location.coordinate.longitude
           ]
-          Database.database().reference().child("drivers").child(driverId).child("location").setValue(locationMap)
+          Database.database(url: "https://new-lasco-default-rtdb.asia-southeast1.firebasedatabase.app").reference().child("drivers").child(driverId).child("location").setValue(locationMap)
       }
       
       locationManager?.requestAlwaysAuthorization()
@@ -68,7 +68,7 @@ import FirebaseDatabase
   private func stopTracking() {
       locationManager?.stopUpdatingLocation()
       if let id = self.driverId {
-          Database.database().reference().child("drivers").child(id).child("status").setValue("offline")
+          Database.database(url: "https://new-lasco-default-rtdb.asia-southeast1.firebasedatabase.app").reference().child("drivers").child(id).child("status").setValue("offline")
       }
       self.driverId = nil
   }
@@ -84,7 +84,7 @@ import FirebaseDatabase
           "status": "online"
       ]
       
-      Database.database().reference().child("drivers").child(id).updateChildValues(updates)
+      Database.database(url: "https://new-lasco-default-rtdb.asia-southeast1.firebasedatabase.app").reference().child("drivers").child(id).updateChildValues(updates)
   }
 
   func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
