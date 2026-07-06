@@ -58,10 +58,11 @@ class _SplashScreenState extends State<SplashScreen> {
                           ? SizedBox()
                           : NextPage(), //open location start tracking then navigate to base view
                       const Spacer(),
-                      SpinKitThreeBounce(
-                        color: Theme.of(context).primaryColor,
-                        size: 28.sp,
-                      ),
+                      if (state is! HomeStatusError)
+                        SpinKitThreeBounce(
+                          color: Theme.of(context).primaryColor,
+                          size: 28.sp,
+                        ),
                       30.verticalSpace,
                     ],
                   ),
@@ -107,7 +108,8 @@ class _NextPageState extends State<NextPage> with WidgetsBindingObserver {
   void nextPage() async {
     if (!mounted) return;
     final locationService = LocationService();
-    bool serviceEnabled = await locationService.checkAndRequestLocationService();
+    bool serviceEnabled = await locationService
+        .checkAndRequestLocationService();
     if (!mounted) return;
     if (!serviceEnabled) {
       await ph.openAppSettings();
