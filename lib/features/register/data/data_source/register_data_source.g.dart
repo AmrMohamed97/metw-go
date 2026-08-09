@@ -32,7 +32,7 @@ class _RegisterDataSource implements RegisterDataSource {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'register/step-1',
+            'auth/register/step-1',
             queryParameters: queryParameters,
             data: _data,
           )

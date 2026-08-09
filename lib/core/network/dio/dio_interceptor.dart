@@ -41,6 +41,7 @@ class CustomInterceptor implements Interceptor {
     log("Requesting: ${options.path} with token: $token with ");
     log("Full URL: ${options.baseUrl}${options.path}");
     options.headers.addAll({
+      'Accept': 'application/json',
       'Authorization': 'Bearer $token',
       'lang': '${sharedPreferences.getString(AppConstant.langKey)}',
     });
