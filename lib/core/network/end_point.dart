@@ -7,7 +7,7 @@ abstract class EndPoints {
   //  Auth
   static const String loginUrl = 'auth/login';
   static const String logoutUrl = 'auth/logout';
-  static const String registerUrl = 'register/step-1';
+  static const String registerUrl = 'auth/register/step-1';
   static const String confirmPhoneUrl = 'Authentication/ConfirmPhone';
 
   static const String allDriverOrdersUrl = 'delivery/orders/all';
