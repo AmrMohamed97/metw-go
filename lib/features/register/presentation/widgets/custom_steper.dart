@@ -5,23 +5,23 @@ import 'package:metw_go/features/register/presentation/manager/register_state.da
 import 'package:step_progress/step_progress.dart';
 
 class CustomSteper extends StatelessWidget {
-  const CustomSteper({super.key});
-
+  const CustomSteper({super.key, required this.currentStep});
+  final int currentStep;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
-        final cubit = context.read<RegisterCubit>();
+        // final cubit = context.read<RegisterCubit>();
         return StepProgress(
-          currentStep: cubit.currentPage,
-          totalSteps: cubit.pages.length,
+          currentStep: currentStep,
+          totalSteps: 4,
 
           visibilityOptions: StepProgressVisibilityOptions.lineOnly,
           // controller: cubit.stepProgressController,
           highlightOptions:
               StepProgressHighlightOptions.highlightCompletedLines,
           onStepChanged: (currentIndex) {
-            cubit.changePage(currentIndex);
+            // cubit.changePage(currentIndex);
           },
           // onStepLineTapped: (index) {
           //   debugPrint('onStepLineTapped: $index');

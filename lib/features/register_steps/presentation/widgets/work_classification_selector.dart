@@ -4,17 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
-import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
-import 'package:metw_go/features/register/presentation/manager/register_state.dart';
+import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_cubit.dart';
+import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_state.dart';
 
 class WorkClassificationSelector extends StatelessWidget {
   const WorkClassificationSelector({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegisterCubit, RegisterState>(
+    return BlocBuilder<FirstStepCubit, FirstStepState>(
       builder: (context, state) {
-        final cubit = context.read<RegisterCubit>();
+        final cubit = context.read<FirstStepCubit>();
         return Column(
           spacing: 12.h,
           children: [

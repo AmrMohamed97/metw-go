@@ -20,14 +20,14 @@ import 'package:metw_go/features/register/presentation/widgets/first_view_app_ba
 import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';
 import 'package:metw_go/features/register/presentation/widgets/gender_selecor.dart';
 
-class FirstView extends StatefulWidget {
-  const FirstView({super.key});
+class RegisterBody extends StatefulWidget {
+  const RegisterBody({super.key});
 
   @override
-  State<FirstView> createState() => _FirstViewState();
+  State<RegisterBody> createState() => _RegisterBodyState();
 }
 
-class _FirstViewState extends State<FirstView> {
+class _RegisterBodyState extends State<RegisterBody> {
   bool _shouldAnimate = false;
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
@@ -62,7 +62,7 @@ class _FirstViewState extends State<FirstView> {
                         start: 16.0,
                         end: 60,
                       ),
-                      child: CustomSteper(),
+                      child: CustomSteper(currentStep: 1),
                     ),
                     // 16.verticalSpace,
                     Text(
@@ -196,7 +196,9 @@ class _FirstViewState extends State<FirstView> {
                       validator: (val) => passwordValidator(context, val),
                       obscureText: _obscurePassword,
                       suffixIcon: GestureDetector(
-                        onTap: () => setState(() => _obscurePassword = !_obscurePassword),
+                        onTap: () => setState(
+                          () => _obscurePassword = !_obscurePassword,
+                        ),
                         child: Padding(
                           padding: EdgeInsets.all(12.r),
                           child: Image.asset(
@@ -221,7 +223,10 @@ class _FirstViewState extends State<FirstView> {
                           confirmPasswordValidator(context, val),
                       obscureText: _obscureConfirmPassword,
                       suffixIcon: GestureDetector(
-                        onTap: () => setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
+                        onTap: () => setState(
+                          () => _obscureConfirmPassword =
+                              !_obscureConfirmPassword,
+                        ),
                         child: Padding(
                           padding: EdgeInsets.all(12.r),
                           child: Image.asset(
@@ -286,7 +291,7 @@ class _FirstViewState extends State<FirstView> {
                         Expanded(
                           child: CustomButton(
                             text: AppLocalizations.of(context)!.next,
-                            onPressed: () => cubit.firstViewPress(),
+                            onPressed: () {}, // cubit.firstViewPress(),
                           ),
                         ),
                         20.verticalSpace,

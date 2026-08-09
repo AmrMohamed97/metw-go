@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
+import 'package:metw_go/features/register/presentation/view/register_body.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -11,19 +12,18 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
-        final cubit = context.read<RegisterCubit>();
+        // final cubit = context.read<RegisterCubit>();
         return ScreenWrapper(
-          backGroundColor: cubit.currentPage == 0
-              ? Theme.of(context).colorScheme.scrim
-              : null,
-          body: PageView.builder(
-            controller: cubit.pageController,
-            onPageChanged: (value) {
-              cubit.changePage(value);
-            },
-            itemCount: cubit.pages.length,
-            itemBuilder: (context, index) => cubit.pages[index],
-          ),
+          backGroundColor: Theme.of(context).colorScheme.scrim,
+          body: RegisterBody(),
+          //   PageView.builder(
+          //     controller: cubit.pageController,
+          //     onPageChanged: (value) {
+          //       cubit.changePage(value);
+          //     },
+          //     itemCount: cubit.pages.length,
+          //     itemBuilder: (context, index) => cubit.pages[index],
+          //   ),
         );
       },
     );

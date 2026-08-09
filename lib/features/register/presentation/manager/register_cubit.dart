@@ -6,11 +6,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/core/widgets/image_mixin.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
-import 'package:metw_go/features/register/presentation/view/fifth_view.dart';
-import 'package:metw_go/features/register/presentation/view/first_view.dart';
-import 'package:metw_go/features/register/presentation/view/fourth_view.dart';
-import 'package:metw_go/features/register/presentation/view/second_view.dart';
-import 'package:metw_go/features/register/presentation/view/third_view.dart';
+// import 'package:metw_go/features/register/presentation/view/fifth_view.dart';
+// import 'package:metw_go/features/register/presentation/view/first_view.dart';
+// import 'package:metw_go/features/register/presentation/view/fourth_view.dart';
+// import 'package:metw_go/features/register/presentation/view/second_view.dart';
+// import 'package:metw_go/features/register/presentation/view/third_view.dart';
 
 @injectable
 class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
@@ -18,31 +18,31 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
 
   /// global data in register
   //----------------------------------------------------------------------------
-  PageController pageController = PageController();
-  int currentPage = 0;
+  // PageController pageController = PageController();
+  // int currentPage = 0;
 
-  void changePage(int index) {
-    if (currentPage == index) return;
-    currentPage = index;
-    if (pageController.hasClients && pageController.page?.round() != index) {
-      pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    }
-    emit(ChangePageSuccess()); // هنا StepProgress هيتحدث تلقائيًا
-  }
+  // void changePage(int index) {
+  //   if (currentPage == index) return;
+  //   currentPage = index;
+  //   if (pageController.hasClients && pageController.page?.round() != index) {
+  //     pageController.animateToPage(
+  //       index,
+  //       duration: const Duration(milliseconds: 300),
+  //       curve: Curves.easeInOut,
+  //     );
+  //   }
+  //   emit(ChangePageSuccess()); // هنا StepProgress هيتحدث تلقائيًا
+  // }
 
-  List<Widget> pages = [
-    FirstView(),
-    SecondView(),
-    ThirdView(),
-    FourthView(),
-    FifthView(),
-  ];
+  // List<Widget> pages = [
+  //   FirstView(),
+  //   SecondView(),
+  //   ThirdView(),
+  //   FourthView(),
+  //   FifthView(),
+  // ];
 
-  /// first view data
+  /// Register Body
   //----------------------------------------------------------------------------
   bool isFirstViewAnimated = false;
   bool isMale = true;
@@ -62,45 +62,45 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
   TextEditingController addressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  void firstViewPress() {
-    changePage(1);
+  // void firstViewPress() {
+  //   changePage(1);
     // if (firstViewFormKey.currentState?.validate() == true) {
     //   changePage(1);
     // }
-  }
+  // }
 
-  /// second view data
-  //----------------------------------------------------------------------------
-  final secondViewFormKey = GlobalKey<FormState>();
-  bool isIndependentDelegate = true;
-  String? selectedWarehouse;
+  // /// second view data
+  // //----------------------------------------------------------------------------
+  // final secondViewFormKey = GlobalKey<FormState>();
+  // bool isIndependentDelegate = true;
+  // String? selectedWarehouse;
 
-  void changeDelegateType(bool isIndependent) {
-    isIndependentDelegate = isIndependent;
-    emit(ChangeDelegateTypeSuccess());
-  }
+  // void changeDelegateType(bool isIndependent) {
+  //   isIndependentDelegate = isIndependent;
+  //   emit(ChangeDelegateTypeSuccess());
+  // }
 
-  bool isDeliveryDelegate = false;
-  bool isShippingDelegate = false;
-  bool isBusDriver = false;
+  // bool isDeliveryDelegate = false;
+  // bool isShippingDelegate = false;
+  // bool isBusDriver = false;
 
-  void toggleDeliveryDelegate(bool value) {
-    isDeliveryDelegate = value;
-    emit(ChangeWorkClassificationSuccess());
-  }
+  // void toggleDeliveryDelegate(bool value) {
+  //   isDeliveryDelegate = value;
+  //   emit(ChangeWorkClassificationSuccess());
+  // }
 
-  void toggleShippingDelegate(bool value) {
-    isShippingDelegate = value;
-    emit(ChangeWorkClassificationSuccess());
-  }
+  // void toggleShippingDelegate(bool value) {
+  //   isShippingDelegate = value;
+  //   emit(ChangeWorkClassificationSuccess());
+  // }
 
-  void toggleBusDriver(bool value) {
-    isBusDriver = value;
-    emit(ChangeWorkClassificationSuccess());
-  }
+  // void toggleBusDriver(bool value) {
+  //   isBusDriver = value;
+  //   emit(ChangeWorkClassificationSuccess());
+  // }
 
-  void secondViewPress(BuildContext context) {
-    changePage(2);
+  // void secondViewPress(BuildContext context) {
+    // changePage(2);
     // First, check if form fields (like warehouse dropdown) are valid
     // if (secondViewFormKey.currentState?.validate() == true) {
     //   // Validate work classification
@@ -118,30 +118,30 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
     //   }
     //   changePage(2);
     // }
-  }
+  // }
 
   /// thired view data
   //----------------------------------------------------------------------------
-  final thirdViewFormKey = GlobalKey<FormState>();
-  String? selectedTransportMethod;
-  TextEditingController maxWeightController = TextEditingController();
-  TextEditingController maxVolumeController = TextEditingController();
-  TextEditingController plateNumberController = TextEditingController();
-  File? vehicleImage;
+  // final thirdViewFormKey = GlobalKey<FormState>();
+  // String? selectedTransportMethod;
+  // TextEditingController maxWeightController = TextEditingController();
+  // TextEditingController maxVolumeController = TextEditingController();
+  // TextEditingController plateNumberController = TextEditingController();
+  // File? vehicleImage;
 
-  Future<void> pickVehicleImage(ImageSource source) async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: source);
-    if (image != null) {
-      emit(PickVehicleImageLoading());
-      vehicleImage = await compress(targetImage: File(image.path));
-      // vehicleImagePath = image.path;
-      emit(PickVehicleImageSuccess());
-    }
-  }
+  // Future<void> pickVehicleImage(ImageSource source) async {
+  //   final ImagePicker picker = ImagePicker();
+  //   final XFile? image = await picker.pickImage(source: source);
+  //   if (image != null) {
+  //     emit(PickVehicleImageLoading());
+  //     vehicleImage = await compress(targetImage: File(image.path));
+  //     // vehicleImagePath = image.path;
+  //     emit(PickVehicleImageSuccess());
+  //   }
+  // }
 
-  void thirdViewPress(BuildContext context) {
-    changePage(3);
+  // void thirdViewPress(BuildContext context) {
+  //   changePage(3);
     // if (thirdViewFormKey.currentState?.validate() == true) {
     //   if (vehicleImage == null) {
     //     ScaffoldMessenger.of(context).showSnackBar(
@@ -155,105 +155,105 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
     //   }
     //   changePage(3);
     // }
-  }
+  // }
 
   /// fourth view data
   //----------------------------------------------------------------------------
-  final GlobalKey<FormState> fourthViewFormKey = GlobalKey<FormState>();
-  List<String> selectedGovernorates = ['القاهرة', 'الجيزة'];
-  List<String> selectedCities = ['مدينة نصر', 'مصر الجديدة'];
-  bool isRuralServiceEnabled = false;
+  // final GlobalKey<FormState> fourthViewFormKey = GlobalKey<FormState>();
+  // List<String> selectedGovernorates = ['القاهرة', 'الجيزة'];
+  // List<String> selectedCities = ['مدينة نصر', 'مصر الجديدة'];
+  // bool isRuralServiceEnabled = false;
 
-  void toggleRuralService(bool value) {
-    isRuralServiceEnabled = value;
-    emit(ChangeRuralServiceState());
-  }
+  // void toggleRuralService(bool value) {
+  //   isRuralServiceEnabled = value;
+  //   emit(ChangeRuralServiceState());
+  // }
 
-  void removeGovernorate(String governorate) {
-    selectedGovernorates.remove(governorate);
-    emit(RemoveGovernorateState());
-  }
+  // void removeGovernorate(String governorate) {
+  //   selectedGovernorates.remove(governorate);
+  //   emit(RemoveGovernorateState());
+  // }
 
-  void removeCity(String city) {
-    selectedCities.remove(city);
-    emit(RemoveCityState());
-  }
+  // void removeCity(String city) {
+  //   selectedCities.remove(city);
+  //   emit(RemoveCityState());
+  // }
 
-  void fourthViewPress(BuildContext context) {
-    if (fourthViewFormKey.currentState!.validate()) {
-      if (selectedGovernorates.isEmpty || selectedCities.isEmpty) {
-        // Maybe show a toast or error
-        return;
-      }
-      changePage(4); // Move to fifth view
-    }
-  }
+  // void fourthViewPress(BuildContext context) {
+  //   if (fourthViewFormKey.currentState!.validate()) {
+  //     if (selectedGovernorates.isEmpty || selectedCities.isEmpty) {
+  //       // Maybe show a toast or error
+  //       return;
+  //     }
+  //     changePage(4); // Move to fifth view
+  //   }
+  // }
 
   /// fifth view data
   //----------------------------------------------------------------------------
-  File? personalPhoto;
-  File? nationalIdFront;
-  File? nationalIdBack;
-  File? drivingLicenseFront;
-  File? drivingLicenseBack;
-  File? vehicleLicenseFront;
-  File? vehicleLicenseBack;
+  // File? personalPhoto;
+  // File? nationalIdFront;
+  // File? nationalIdBack;
+  // File? drivingLicenseFront;
+  // File? drivingLicenseBack;
+  // File? vehicleLicenseFront;
+  // File? vehicleLicenseBack;
 
-  String? currentlyLoadingDoc;
+  // String? currentlyLoadingDoc;
 
-  Future<void> pickPersonalPhoto(ImageSource source) async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: source);
-    if (image != null) {
-      currentlyLoadingDoc = 'personalPhoto';
-      emit(PickDocumentImageLoading());
-      personalPhoto = await compress(targetImage: File(image.path));
-      currentlyLoadingDoc = null;
-      emit(PickDocumentImageSuccess());
-    }
-  }
+  // Future<void> pickPersonalPhoto(ImageSource source) async {
+  //   final ImagePicker picker = ImagePicker();
+  //   final XFile? image = await picker.pickImage(source: source);
+  //   if (image != null) {
+  //     currentlyLoadingDoc = 'personalPhoto';
+  //     emit(PickDocumentImageLoading());
+  //     personalPhoto = await compress(targetImage: File(image.path));
+  //     currentlyLoadingDoc = null;
+  //     emit(PickDocumentImageSuccess());
+  //   }
+  // }
 
-  Future<void> pickDocumentPhoto({
-    required String docType,
-    required bool isFront,
-  }) async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(
-      source: ImageSource.camera,
-    ); // Forced to camera
-    if (image != null) {
-      currentlyLoadingDoc = '${docType}_${isFront ? 'front' : 'back'}';
-      emit(PickDocumentImageLoading());
-      final compressed = await compress(targetImage: File(image.path));
+  // Future<void> pickDocumentPhoto({
+  //   required String docType,
+  //   required bool isFront,
+  // }) async {
+  //   final ImagePicker picker = ImagePicker();
+  //   final XFile? image = await picker.pickImage(
+  //     source: ImageSource.camera,
+  //   ); // Forced to camera
+  //   if (image != null) {
+  //     currentlyLoadingDoc = '${docType}_${isFront ? 'front' : 'back'}';
+  //     emit(PickDocumentImageLoading());
+  //     final compressed = await compress(targetImage: File(image.path));
 
-      switch (docType) {
-        case 'nationalId':
-          isFront ? nationalIdFront = compressed : nationalIdBack = compressed;
-          break;
-        case 'drivingLicense':
-          isFront
-              ? drivingLicenseFront = compressed
-              : drivingLicenseBack = compressed;
-          break;
-        case 'vehicleLicense':
-          isFront
-              ? vehicleLicenseFront = compressed
-              : vehicleLicenseBack = compressed;
-          break;
-      }
-      currentlyLoadingDoc = null;
-      emit(PickDocumentImageSuccess());
-    }
-  }
+  //     switch (docType) {
+  //       case 'nationalId':
+  //         isFront ? nationalIdFront = compressed : nationalIdBack = compressed;
+  //         break;
+  //       case 'drivingLicense':
+  //         isFront
+  //             ? drivingLicenseFront = compressed
+  //             : drivingLicenseBack = compressed;
+  //         break;
+  //       case 'vehicleLicense':
+  //         isFront
+  //             ? vehicleLicenseFront = compressed
+  //             : vehicleLicenseBack = compressed;
+  //         break;
+  //     }
+  //     currentlyLoadingDoc = null;
+  //     emit(PickDocumentImageSuccess());
+  //   }
+  // }
 
-  void fifthViewPress(BuildContext context) {
-    // Validate if all images are picked
-    // Move to next step or submit
-  }
+  // void fifthViewPress(BuildContext context) {
+  //   // Validate if all images are picked
+  //   // Move to next step or submit
+  // }
 
   @override
   Future<void> close() {
-    pageController.dispose();
+    // pageController.dispose();
     // stepProgressController.dispose();
     return super.close();
   }
