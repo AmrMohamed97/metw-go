@@ -1,3 +1,5 @@
+import 'package:metw_go/features/register/data/models/register_out_model/register_out_model.dart';
+
 abstract class RegisterState {}
 
 class RegisterInitial extends RegisterState {}
@@ -6,11 +8,19 @@ class RegisterInitial extends RegisterState {}
 
 class ChangeGenderSuccess extends RegisterState {}
 
-// class ChangeDelegateTypeSuccess extends RegisterState {}
+class RegisterLoading extends RegisterState {}
 
-// class ChangeWorkClassificationSuccess extends RegisterState {}
+class RegisterFailure extends RegisterState {
+  final String message;
 
-// class PickVehicleImageSuccess extends RegisterState {}
+  RegisterFailure(this.message);
+}
+
+class RegisterSuccess extends RegisterState {
+  final RegisterOutModel registerOutModel;
+
+  RegisterSuccess(this.registerOutModel);
+}
 // class PickVehicleImageLoading extends RegisterState {}
 
 // class ChangeRuralServiceState extends RegisterState {}

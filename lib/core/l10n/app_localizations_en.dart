@@ -375,9 +375,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get home => 'Home';
 
   @override
-  String get orders => 'Orders';
-
-  @override
   String get myAccount => 'My Account';
 
   @override
@@ -585,6 +582,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mockFare3 => '25.00 EGP';
 
   @override
+  String get orders => 'Orders';
+
+  @override
   String get immediateDeliveryOnePoint => 'Immediate Delivery | One Point';
 
   @override
@@ -759,4 +759,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get details => 'Details';
+
+  @override
+  String get register => 'Information saved successfully';
 }

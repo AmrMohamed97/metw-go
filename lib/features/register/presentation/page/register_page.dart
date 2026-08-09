@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
@@ -10,20 +14,25 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegisterCubit, RegisterState>(
+    return BlocConsumer<RegisterCubit, RegisterState>(
+      listener: (context, state) {
+        if (state is RegisterSuccess) {
+          showToast(
+            context,
+            message:
+                state.registerOutModel.message ??
+                AppLocalizations.of(context)!.register,
+            state: ToastStates.success,
+          );
+          context.go(AppRoutes.login);
+        }
+      },
       builder: (context, state) {
         // final cubit = context.read<RegisterCubit>();
         return ScreenWrapper(
           backGroundColor: Theme.of(context).colorScheme.scrim,
           body: RegisterBody(),
-          //   PageView.builder(
-          //     controller: cubit.pageController,
-          //     onPageChanged: (value) {
-          //       cubit.changePage(value);
-          //     },
-          //     itemCount: cubit.pages.length,
-          //     itemBuilder: (context, index) => cubit.pages[index],
-          //   ),
+          
         );
       },
     );

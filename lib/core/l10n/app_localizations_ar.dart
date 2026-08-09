@@ -372,9 +372,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get home => 'الرئيسية';
 
   @override
-  String get orders => 'الطلبات';
-
-  @override
   String get myAccount => 'حسابي';
 
   @override
@@ -582,6 +579,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get mockFare3 => '25.00 ج.م';
 
   @override
+  String get orders => 'الطلبات';
+
+  @override
   String get immediateDeliveryOnePoint => 'توصيل فوري | نقطة واحدة';
 
   @override
@@ -755,4 +755,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get details => 'تفاصيل';
+
+  @override
+  String get register => 'تم حفظ المعلومات الشخصية';
 }

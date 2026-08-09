@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_data_source.dart';
+part of 'register_data_source.dart';
 
 // dart format off
 
@@ -10,10 +10,8 @@ part of 'app_data_source.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter,avoid_unused_constructor_parameters,unreachable_from_main,avoid_redundant_argument_values
 
-class _AppDataSource implements AppDataSource {
-  _AppDataSource(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://lasco.evyx.lol/api/metwgo/';
-  }
+class _RegisterDataSource implements RegisterDataSource {
+  _RegisterDataSource(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -22,25 +20,28 @@ class _AppDataSource implements AppDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<EmptyDataResponse> logout() async {
+  Future<RegisterOutModel> createUser(
+    RegisterInputModel createUserModel,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<EmptyDataResponse>(
+    final _data = <String, dynamic>{};
+    _data.addAll(createUserModel.toJson());
+    final _options = _setStreamType<RegisterOutModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'auth/logout',
+            'register/step-1',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late EmptyDataResponse _value;
+    late RegisterOutModel _value;
     try {
-      _value = EmptyDataResponse.fromJson(_result.data!);
+      _value = RegisterOutModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

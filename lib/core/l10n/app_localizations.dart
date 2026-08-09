@@ -794,12 +794,6 @@ abstract class AppLocalizations {
   /// **'Home'**
   String get home;
 
-  /// No description provided for @orders.
-  ///
-  /// In en, this message translates to:
-  /// **'Orders'**
-  String get orders;
-
   /// No description provided for @myAccount.
   ///
   /// In en, this message translates to:
@@ -1214,6 +1208,12 @@ abstract class AppLocalizations {
   /// **'25.00 EGP'**
   String get mockFare3;
 
+  /// No description provided for @orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get orders;
+
   /// No description provided for @immediateDeliveryOnePoint.
   ///
   /// In en, this message translates to:
@@ -1561,6 +1561,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Details'**
   String get details;
+
+  /// No description provided for @register.
+  ///
+  /// In en, this message translates to:
+  /// **'Information saved successfully'**
+  String get register;
 }
 
 class _AppLocalizationsDelegate

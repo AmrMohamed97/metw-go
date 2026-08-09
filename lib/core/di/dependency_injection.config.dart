@@ -36,6 +36,12 @@ import 'package:metw_go/features/personal_info/presentation/manager/personal_inf
     as _i87;
 import 'package:metw_go/features/profile/presentation/manager/profile_cubit.dart'
     as _i197;
+import 'package:metw_go/features/register/data/data_source/register_data_source.dart'
+    as _i961;
+import 'package:metw_go/features/register/data/repo/register_repo.dart'
+    as _i617;
+import 'package:metw_go/features/register/data/repo/register_repo_implement.dart'
+    as _i142;
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart'
     as _i1006;
 import 'package:metw_go/features/service_areas/presentation/manager/service_areas_cubit.dart'
@@ -65,7 +71,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i364.OrdersCubit>(() => _i364.OrdersCubit());
     gh.factory<_i87.PersonalInfoCubit>(() => _i87.PersonalInfoCubit());
     gh.factory<_i197.ProfileCubit>(() => _i197.ProfileCubit());
-    gh.factory<_i1006.RegisterCubit>(() => _i1006.RegisterCubit());
     gh.factory<_i661.ServiceAreasCubit>(() => _i661.ServiceAreasCubit());
     gh.factory<_i192.VehicleCubit>(() => _i192.VehicleCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
@@ -82,8 +87,17 @@ extension GetItInjectableX on _i174.GetIt {
       () => dioFactory.getDio(gh<_i402.CustomInterceptor>()),
     );
     gh.factory<_i863.AppDataSource>(() => _i863.AppDataSource(gh<_i361.Dio>()));
+    gh.factory<_i961.RegisterDataSource>(
+      () => _i961.RegisterDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i444.AppRepo>(
       () => _i837.AppRepoImpl(gh<_i863.AppDataSource>()),
+    );
+    gh.factory<_i617.RegisterRepo>(
+      () => _i142.RegisterRepoImplement(gh<_i961.RegisterDataSource>()),
+    );
+    gh.factory<_i1006.RegisterCubit>(
+      () => _i1006.RegisterCubit(gh<_i617.RegisterRepo>()),
     );
     gh.factory<_i405.AppCubit>(() => _i405.AppCubit(gh<_i444.AppRepo>()));
     return this;

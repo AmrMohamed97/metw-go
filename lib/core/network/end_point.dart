@@ -1,5 +1,5 @@
 abstract class EndPoints {
-  static const String baseUrl = "https://jazaer.progmaker.com/api/v2/";
+  static const String baseUrl = "https://lasco.evyx.lol/api/metwgo/";
   // static const String baseUrl = "https://photo.progmaker.com/api/v1/";
   // static const String baseImageUrl = '${baseUrl}uploads/';
   // static const String baseFileUrl = '${baseUrl}uploads/files/';
@@ -7,7 +7,7 @@ abstract class EndPoints {
   //  Auth
   static const String loginUrl = 'auth/login';
   static const String logoutUrl = 'auth/logout';
-  static const String doctorSignUpUrl = 'auth/doctor/register';
+  static const String registerUrl = 'register/step-1';
   static const String confirmPhoneUrl = 'Authentication/ConfirmPhone';
 
   static const String allDriverOrdersUrl = 'delivery/orders/all';

@@ -115,7 +115,6 @@
     "onlineWaitingForOrders": "You are online, waiting for upcoming orders.",
     "stopReceiving": "Stop receiving",
     "home": "Home",
-    "orders": "Orders",
     "myAccount": "My Account",
     "search": "Search",
     "todayOrders": "Today's Orders",
@@ -243,5 +242,7 @@
     "pickupFrom": "Pickup from:",
     "startOrder": "Start Order",
     "mockDuration": "2 Days - 03:25 Hours",
-    "details": "Details"
+    "details": "Details",
+    "register": "Information saved successfully"
+
 }

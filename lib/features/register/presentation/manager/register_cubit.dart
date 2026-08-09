@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/core/widgets/image_mixin.dart';
+import 'package:metw_go/features/register/data/models/register_input_model/register_input_model.dart';
+import 'package:metw_go/features/register/data/repo/register_repo.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
 // import 'package:metw_go/features/register/presentation/view/fifth_view.dart';
 // import 'package:metw_go/features/register/presentation/view/first_view.dart';
@@ -11,8 +13,8 @@ import 'package:metw_go/features/register/presentation/manager/register_state.da
 
 @injectable
 class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
-  RegisterCubit() : super(RegisterInitial());
-
+  RegisterCubit(this.registerRepo) : super(RegisterInitial());
+  final RegisterRepo registerRepo;
   /// global data in register
   //----------------------------------------------------------------------------
   // PageController pageController = PageController();
@@ -51,6 +53,7 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
 
   final firstViewFormKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
+  TextEditingController fatherNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController firstPhoneController = TextEditingController();
   TextEditingController secondPhoneController = TextEditingController();
@@ -59,12 +62,29 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
   TextEditingController addressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  // void firstViewPress() {
-  //   changePage(1);
-  // if (firstViewFormKey.currentState?.validate() == true) {
-  //   changePage(1);
-  // }
-  // }
+  
+  Future<void> register() async {
+    if (firstViewFormKey.currentState?.validate() == true) {
+      emit(RegisterLoading());
+      final createUserModel = RegisterInputModel(
+        firstName: firstNameController.text,
+        fatherName: fatherNameController.text,
+        lastName: lastNameController.text,
+        phone: firstPhoneController.text,
+        secondaryPhone: secondPhoneController.text,
+        email: emailController.text,
+        birthDate: boarnDateController.text,
+        addressDetails: addressController.text,
+        password: passwordController.text,
+        gender: isMale ? 'male' : 'female',
+      );
+      final result = await registerRepo.createUser(createUserModel);
+      result.fold(
+        (failure) => emit(RegisterFailure(failure.message)),
+        (registerOutModel) => emit(RegisterSuccess(registerOutModel)),
+      );
+    }
+  }
 
   // /// second view data
   // //----------------------------------------------------------------------------

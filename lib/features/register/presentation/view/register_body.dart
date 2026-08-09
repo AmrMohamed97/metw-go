@@ -14,7 +14,6 @@ import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
-import 'package:metw_go/features/register/presentation/widgets/custom_steper.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 import 'package:metw_go/features/register/presentation/widgets/first_view_app_bar.dart';
 import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';
@@ -57,13 +56,13 @@ class _RegisterBodyState extends State<RegisterBody> {
                 child: AnimatedColumn(
                   revealOnScroll: true,
                   children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        start: 16.0,
-                        end: 60,
-                      ),
-                      child: CustomSteper(currentStep: 1),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsetsDirectional.only(
+                    //     start: 16.0,
+                    //     end: 60,
+                    //   ),
+                    //   // child: CustomSteper(currentStep: 0),
+                    // ),
                     // 16.verticalSpace,
                     Text(
                       AppLocalizations.of(context)!.personalInfo,
@@ -291,7 +290,9 @@ class _RegisterBodyState extends State<RegisterBody> {
                         Expanded(
                           child: CustomButton(
                             text: AppLocalizations.of(context)!.next,
-                            onPressed: () {}, // cubit.firstViewPress(),
+                            onPressed: () {
+                              cubit.register();
+                            }, // cubit.firstViewPress(),
                           ),
                         ),
                         20.verticalSpace,

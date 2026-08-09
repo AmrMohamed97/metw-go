@@ -185,7 +185,6 @@
     "mockMerchant3": "حلويات المملكة",
     "mockDate3": "اليوم، 02:45 م",
     "mockFare3": "25.00 ج.م",
-    "orders": "الطلبات",
     "immediateDeliveryOnePoint": "توصيل فوري | نقطة واحدة",
     "electronicPayment": "دفع إلكتروني",
     "orderNumber": "رقم الطلب",
@@ -243,5 +242,6 @@
     "pickupFrom": "الاستلام من:",
     "startOrder": "بدء الطلب",
     "mockDuration": "2 يوم - 03:25 ساعة",
-    "details": "تفاصيل"
+    "details": "تفاصيل",
+    "register": "تم حفظ المعلومات الشخصية"
 }
