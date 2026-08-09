@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -165,9 +166,22 @@ class _RegisterBodyState extends State<RegisterBody> {
                     FieldTitle(title: AppLocalizations.of(context)!.birthDate),
                     4.verticalSpace,
                     CustomTextField(
-                      hintText: 'mm/dd/yyyy',
+                      hintText: 'yyyy-MM-dd',
                       controller: cubit.boarnDateController,
                       validator: (val) => boarnDateValidator(context, val),
+                      readOnly: true,
+                      onTap: () async {
+                        final picked = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now().subtract(const Duration(days: 365 * 18)),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        );
+                        if (picked != null) {
+                          cubit.boarnDateController.text =
+                              DateFormat('yyyy-MM-dd').format(picked);
+                        }
+                      },
                     ),
                     // 16.verticalSpace,
                     GenderSelector(),
