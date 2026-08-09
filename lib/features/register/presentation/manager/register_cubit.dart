@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/core/widgets/image_mixin.dart';
 import 'package:metw_go/features/register/presentation/manager/register_state.dart';
@@ -64,9 +61,9 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
   TextEditingController confirmPasswordController = TextEditingController();
   // void firstViewPress() {
   //   changePage(1);
-    // if (firstViewFormKey.currentState?.validate() == true) {
-    //   changePage(1);
-    // }
+  // if (firstViewFormKey.currentState?.validate() == true) {
+  //   changePage(1);
+  // }
   // }
 
   // /// second view data
@@ -100,24 +97,24 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
   // }
 
   // void secondViewPress(BuildContext context) {
-    // changePage(2);
-    // First, check if form fields (like warehouse dropdown) are valid
-    // if (secondViewFormKey.currentState?.validate() == true) {
-    //   // Validate work classification
-    //   if (!isDeliveryDelegate && !isShippingDelegate && !isBusDriver) {
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       SnackBar(
-    //         content: Text(
-    //           AppLocalizations.of(context)!.errChooseWorkClassification,
-    //         ),
-    //         backgroundColor: Colors.red,
-    //         behavior: SnackBarBehavior.floating,
-    //       ),
-    //     );
-    //     return;
-    //   }
-    //   changePage(2);
-    // }
+  // changePage(2);
+  // First, check if form fields (like warehouse dropdown) are valid
+  // if (secondViewFormKey.currentState?.validate() == true) {
+  //   // Validate work classification
+  //   if (!isDeliveryDelegate && !isShippingDelegate && !isBusDriver) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text(
+  //           AppLocalizations.of(context)!.errChooseWorkClassification,
+  //         ),
+  //         backgroundColor: Colors.red,
+  //         behavior: SnackBarBehavior.floating,
+  //       ),
+  //     );
+  //     return;
+  //   }
+  //   changePage(2);
+  // }
   // }
 
   /// thired view data
@@ -142,19 +139,19 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
 
   // void thirdViewPress(BuildContext context) {
   //   changePage(3);
-    // if (thirdViewFormKey.currentState?.validate() == true) {
-    //   if (vehicleImage == null) {
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       SnackBar(
-    //         content: Text(AppLocalizations.of(context)!.errUploadVehicleImage),
-    //         backgroundColor: Colors.red,
-    //         behavior: SnackBarBehavior.floating,
-    //       ),
-    //     );
-    //     return;
-    //   }
-    //   changePage(3);
-    // }
+  // if (thirdViewFormKey.currentState?.validate() == true) {
+  //   if (vehicleImage == null) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text(AppLocalizations.of(context)!.errUploadVehicleImage),
+  //         backgroundColor: Colors.red,
+  //         behavior: SnackBarBehavior.floating,
+  //       ),
+  //     );
+  //     return;
+  //   }
+  //   changePage(3);
+  // }
   // }
 
   /// fourth view data

@@ -18,6 +18,7 @@ class MetwGo extends StatelessWidget {
       designSize: const Size(375, 812), // Standard iOS design size
       minTextAdapt: true,
       splitScreenMode: true,
+      ensureScreenSize: true,
       builder: (context, child) {
         return BlocProvider(
           create: (context) => getIt<AppCubit>(),

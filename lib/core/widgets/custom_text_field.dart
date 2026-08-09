@@ -72,7 +72,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: isFixed == true ? 75.h : null,
+      height: isFixed == true ? (75.h > 0 ? 75.h : 75.0) : null,
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         // onTapOutside: (event) => FocusScope.of(context).unfocus(),
@@ -93,7 +93,7 @@ class CustomTextField extends StatelessWidget {
               hintStyle:
                   hintStyle ??
                   Theme.of(context).textTheme.titleMedium!.copyWith(
-                    fontSize: 12.sp,
+                    fontSize: 12.sp > 0 ? 12.sp : 12.0,
                     color: hintColor ?? Theme.of(context).colorScheme.onSurface,
                   ),
               errorBorder: outLineBorder(borderColor: MyColors.red),
@@ -131,7 +131,7 @@ class CustomTextField extends StatelessWidget {
         style:
             textStyle ??
             Theme.of(context).textTheme.titleSmall!.copyWith(
-              fontSize: 14.sp,
+              fontSize: 14.sp > 0 ? 14.sp : 14.0,
               // color: Colors.black,
             ),
       ),
