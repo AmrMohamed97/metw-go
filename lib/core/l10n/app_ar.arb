@@ -21,6 +21,7 @@
     "confirmPassword": "تأكيد كلمة المرور",
     "alreadyHaveAccount": "لديك حساب الفعل؟",
     "login": "تسجيل الدخول",
+    "loginSuccessful": "تم تسجيل الدخول بنجاح",
     "next": "التالى",
     "errEnterFirstName": "الرجاء إدخال الاسم الأول",
     "errEnterFatherName": "الرجاء إدخال اسم الأب",

@@ -7,11 +7,12 @@ import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
+import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
-import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/features/login/presentation/manager/login_cubit.dart';
 import 'package:metw_go/features/login/presentation/manager/login_state.dart';
 import 'package:metw_go/features/login/presentation/widgets/login_app_bar.dart';
@@ -22,7 +23,21 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state is LoginSuccess) {
+          // Handle login success
+          context.push(AppRoutes.splashScreen);
+          showToast(
+            context,
+            message: AppLocalizations.of(context)!.loginSuccessful,
+            state: ToastStates.success,
+          );
+        } else if (state is LoginFailure) {
+          // Handle login failure
+          showToast(context, message: state.message, state: ToastStates.error);
+        }
+      },
       builder: (context, state) {
         final cubit = context.read<LoginCubit>();
         return ScreenWrapper(
@@ -121,10 +136,12 @@ class LoginPage extends StatelessWidget {
                               ),
                               90.verticalSpace,
                               CustomButton(
+                                loading: state is LoginLoading,
                                 text: AppLocalizations.of(context)!.login,
                                 // textColor: Theme.of(context).colorScheme.surface,
                                 onPressed: () {
-                                  context.push(AppRoutes.splashScreen);
+                                  // context.push(AppRoutes.splashScreen);
+                                  cubit.login();
                                 },
                                 isMax: true,
                                 // radius: 20.r,

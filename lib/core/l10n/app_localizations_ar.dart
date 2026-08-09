@@ -77,6 +77,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل الدخول';
 
   @override
+  String get loginSuccessful => 'تم تسجيل الدخول بنجاح';
+
+  @override
   String get next => 'التالى';
 
   @override

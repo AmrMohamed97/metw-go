@@ -230,6 +230,12 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get login;
 
+  /// No description provided for @loginSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Login successful'**
+  String get loginSuccessful;
+
   /// No description provided for @next.
   ///
   /// In en, this message translates to:

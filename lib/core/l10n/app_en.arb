@@ -21,6 +21,7 @@
     "confirmPassword": "Confirm Password",
     "alreadyHaveAccount": "Already have an account?",
     "login": "Login",
+    "loginSuccessful": "Login successful",
     "next": "Next",
     "errEnterFirstName": "Please enter your first name",
     "errEnterFatherName": "Please enter your father's name",

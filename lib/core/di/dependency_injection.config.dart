@@ -26,6 +26,10 @@ import 'package:metw_go/features/driver_info/presentation/manager/delegate_info_
     as _i203;
 import 'package:metw_go/features/home/presentation/manager/home_cubit.dart'
     as _i171;
+import 'package:metw_go/features/login/data/data_source/login_data_source.dart'
+    as _i101;
+import 'package:metw_go/features/login/data/repo/login_repo.dart' as _i540;
+import 'package:metw_go/features/login/data/repo/login_repo_impl.dart' as _i770;
 import 'package:metw_go/features/login/presentation/manager/login_cubit.dart'
     as _i563;
 import 'package:metw_go/features/notification/presentation/manager/notification_cubit.dart'
@@ -66,7 +70,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i91.DocumentsCubit>(() => _i91.DocumentsCubit());
     gh.factory<_i203.DelegateInfoCubit>(() => _i203.DelegateInfoCubit());
     gh.factory<_i171.HomeCubit>(() => _i171.HomeCubit());
-    gh.factory<_i563.LoginCubit>(() => _i563.LoginCubit());
     gh.factory<_i364.NotificationCubit>(() => _i364.NotificationCubit());
     gh.factory<_i364.OrdersCubit>(() => _i364.OrdersCubit());
     gh.factory<_i87.PersonalInfoCubit>(() => _i87.PersonalInfoCubit());
@@ -87,12 +90,19 @@ extension GetItInjectableX on _i174.GetIt {
       () => dioFactory.getDio(gh<_i402.CustomInterceptor>()),
     );
     gh.factory<_i863.AppDataSource>(() => _i863.AppDataSource(gh<_i361.Dio>()));
+    gh.factory<_i101.LoginDataSource>(
+      () => _i101.LoginDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i961.RegisterDataSource>(
       () => _i961.RegisterDataSource(gh<_i361.Dio>()),
+    );
+    gh.factory<_i540.LoginRepo>(
+      () => _i770.LoginRepoImpl(loginDataSource: gh<_i101.LoginDataSource>()),
     );
     gh.factory<_i444.AppRepo>(
       () => _i837.AppRepoImpl(gh<_i863.AppDataSource>()),
     );
+    gh.factory<_i563.LoginCubit>(() => _i563.LoginCubit(gh<_i540.LoginRepo>()));
     gh.factory<_i617.RegisterRepo>(
       () => _i142.RegisterRepoImplement(gh<_i961.RegisterDataSource>()),
     );
