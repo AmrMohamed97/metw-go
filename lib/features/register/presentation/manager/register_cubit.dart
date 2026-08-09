@@ -76,6 +76,7 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
         birthDate: boarnDateController.text,
         addressDetails: addressController.text,
         password: passwordController.text,
+        passwordConfirmation: confirmPasswordController.text,
         gender: isMale ? 'male' : 'female',
       );
       final result = await registerRepo.createUser(createUserModel);

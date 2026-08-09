@@ -105,21 +105,33 @@ class _RegisterBodyState extends State<RegisterBody> {
                             crossAxisAlignment: .start,
                             children: [
                               FieldTitle(
-                                title: AppLocalizations.of(context)!.lastName,
+                                title: AppLocalizations.of(context)!.fatherName,
                               ),
                               4.verticalSpace,
                               CustomTextField(
                                 hintText: AppLocalizations.of(
                                   context,
-                                )!.exampleMohamed,
-                                controller: cubit.lastNameController,
+                                )!.exampleFather,
+                                controller: cubit.fatherNameController,
                                 validator: (val) =>
-                                    lastNameValidator(context, val),
+                                    fatherNameValidator(context, val),
                               ),
                             ],
                           ),
                         ),
                       ],
+                    ),
+                    FieldTitle(
+                      title: AppLocalizations.of(context)!.lastName,
+                    ),
+                    4.verticalSpace,
+                    CustomTextField(
+                      hintText: AppLocalizations.of(
+                        context,
+                      )!.exampleMohamed,
+                      controller: cubit.lastNameController,
+                      validator: (val) =>
+                          lastNameValidator(context, val),
                     ),
                     // 16.verticalSpace,
                     FieldTitle(
@@ -289,6 +301,7 @@ class _RegisterBodyState extends State<RegisterBody> {
                         12.horizontalSpace,
                         Expanded(
                           child: CustomButton(
+                            loading: state is RegisterLoading,
                             text: AppLocalizations.of(context)!.next,
                             onPressed: () {
                               cubit.register();

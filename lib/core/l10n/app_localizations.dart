@@ -140,6 +140,18 @@ abstract class AppLocalizations {
   /// **'Example: Ahmed'**
   String get exampleAhmed;
 
+  /// No description provided for @fatherName.
+  ///
+  /// In en, this message translates to:
+  /// **'Father Name'**
+  String get fatherName;
+
+  /// No description provided for @exampleFather.
+  ///
+  /// In en, this message translates to:
+  /// **'Example: Ali'**
+  String get exampleFather;
+
   /// No description provided for @lastName.
   ///
   /// In en, this message translates to:
@@ -229,6 +241,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter your first name'**
   String get errEnterFirstName;
+
+  /// No description provided for @errEnterFatherName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your father\'s name'**
+  String get errEnterFatherName;
 
   /// No description provided for @errEnterLastName.
   ///

@@ -7,6 +7,12 @@ String? firstNameValidator(BuildContext context, String? value) {
   }
   return null;
 }
+String? fatherNameValidator(BuildContext context, String? value) {
+  if (value == null || value.isEmpty) {
+    return AppLocalizations.of(context)!.errEnterFatherName;
+  }
+  return null;
+}
 String? lastNameValidator(BuildContext context, String? value) {
   if (value == null || value.isEmpty) {
     return AppLocalizations.of(context)!.errEnterLastName;

@@ -26,13 +26,15 @@ class RegisterPage extends StatelessWidget {
           );
           context.go(AppRoutes.login);
         }
+        if (state is RegisterFailure) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        }
       },
       builder: (context, state) {
         // final cubit = context.read<RegisterCubit>();
         return ScreenWrapper(
           backGroundColor: Theme.of(context).colorScheme.scrim,
           body: RegisterBody(),
-          
         );
       },
     );

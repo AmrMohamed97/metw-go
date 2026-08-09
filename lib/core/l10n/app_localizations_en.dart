@@ -31,6 +31,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exampleAhmed => 'Example: Ahmed';
 
   @override
+  String get fatherName => 'Father Name';
+
+  @override
+  String get exampleFather => 'Example: Ali';
+
+  @override
   String get lastName => 'Last Name';
 
   @override
@@ -75,6 +81,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errEnterFirstName => 'Please enter your first name';
+
+  @override
+  String get errEnterFatherName => 'Please enter your father\'s name';
 
   @override
   String get errEnterLastName => 'Please enter your last name';
