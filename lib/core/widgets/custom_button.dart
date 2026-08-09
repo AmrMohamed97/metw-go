@@ -43,17 +43,17 @@ class CustomButton extends StatelessWidget {
           ),
           backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
           minimumSize: Size(
-            loading ? 64 : (isMax ? double.infinity : 0),
-            loading ? 64 : (fixedSize ? height ?? 46.h : 0),
+            loading ? 46 : (isMax ? double.infinity : 0),
+            loading ? 46 : (fixedSize ? height ?? 46.h : 0),
           ),
           maximumSize: Size(
-            loading ? 64 : double.infinity,
-            loading ? 64 : (fixedSize ? height ?? 46.h : double.infinity),
+            loading ? 46 : double.infinity,
+            loading ? 46 : (fixedSize ? height ?? 46.h : double.infinity),
           ),
         ),
         onPressed: loading ? () {} : onPressed,
         child: loading
-            ? const LoadingWidget(color: Colors.white, loadingSize: 50)
+            ? const LoadingWidget(color: Colors.white, loadingSize: 25)
             : Text(
                 text,
                 style: AppTextStyle.medium14(context).copyWith(
