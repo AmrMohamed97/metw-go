@@ -8,6 +8,9 @@ abstract class EndPoints {
   static const String loginUrl = 'auth/login';
   static const String logoutUrl = 'auth/logout';
   static const String registerUrl = 'auth/register/step-1';
+  static const String forgotPasswordSendOtpUrl = 'auth/forgot-password/send-otp';
+  static const String verifyOtpUrl = 'auth/otp/verify';
+  static const String resendOtpUrl = 'auth/otp/resend';
   static const String confirmPhoneUrl = 'Authentication/ConfirmPhone';
 
   static const String allDriverOrdersUrl = 'delivery/orders/all';

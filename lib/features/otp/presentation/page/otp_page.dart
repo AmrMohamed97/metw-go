@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
@@ -7,19 +8,48 @@ import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
+import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart';
+import 'package:metw_go/features/otp/presentation/manager/otp_state.dart';
 import 'package:metw_go/features/otp/presentation/widgets/otp_fields.dart';
 import 'package:metw_go/features/otp/presentation/widgets/otp_timer.dart';
 
-class OtpPage extends StatelessWidget {
-  const OtpPage({super.key, this.fromLogin = false});
+class OtpPage extends StatefulWidget {
+  const OtpPage({super.key, this.fromLogin = false, this.phone = ''});
   final bool fromLogin;
+  final String phone;
+
+  @override
+  State<OtpPage> createState() => _OtpPageState();
+}
+
+class _OtpPageState extends State<OtpPage> {
+  String _otpCode = '';
+
   @override
   Widget build(BuildContext context) {
-    return ScreenWrapper(
-      appBar: CustomAppBar(
-        popPress:fromLogin?null: () => context.go(AppRoutes.login),
-      ),
+    return BlocConsumer<OtpCubit, OtpState>(
+      listener: (context, state) {
+        if (state is VerifyOtpSuccessState) {
+          showToast(context, message: state.verifyOtpOutModel.message ?? '', state: ToastStates.success);
+          widget.fromLogin
+              ? context.pushReplacement(AppRoutes.changePasswordPage)
+              : context.pushReplacement(AppRoutes.commingSoonPage);
+        } else if (state is VerifyOtpErrorState) {
+          showToast(context, message: state.error, state: ToastStates.error);
+        } else if (state is ResendOtpSuccessState) {
+          showToast(context, message: state.resendOtpOutModel.message ?? '', state: ToastStates.success);
+        } else if (state is ResendOtpErrorState) {
+          showToast(context, message: state.error, state: ToastStates.error);
+        }
+      },
+      builder: (context, state) {
+        final cubit = context.read<OtpCubit>();
+        return ScreenWrapper(
+          appBar: CustomAppBar(
+            popPress: widget.fromLogin ? null : () => context.go(AppRoutes.login),
+          ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -45,26 +75,27 @@ class OtpPage extends StatelessWidget {
               textDirection: TextDirection.ltr,
               child: OtpFields(
                 onCompleted: (value) {
-                  // context.read<OtpCubit>().verifyOtp(
-                  //   VerifyOtpRequest(
-                  //     otp: value,
-                  //     userId: userId,
-                  //   ),
-                  // );
-                  // context.push(widget.nextPage, extra: true);
+                  _otpCode = value;
                 },
               ),
             ),
             SizedBox(height: 48.h),
-            const OtpTimer(),
+            OtpTimer(
+              onResend: () {
+                cubit.resendOtp(widget.phone);
+              },
+            ),
             // const Spacer(),
             Spacer(),
             CustomButton(
+              loading: state is VerifyOtpLoadingState,
               text: AppLocalizations.of(context)!.confirm,
               onPressed: () {
-                fromLogin
-                    ? context.pushReplacement(AppRoutes.changePasswordPage)
-                    : context.pushReplacement(AppRoutes.commingSoonPage);
+                if (_otpCode.length == 4) {
+                  cubit.verifyOtp(widget.phone, _otpCode);
+                } else {
+                  showToast(context, message: 'Please enter a valid OTP', state: ToastStates.error);
+                }
               },
               isMax: true,
             ),
@@ -75,6 +106,8 @@ class OtpPage extends StatelessWidget {
            .scale(begin: const Offset(0.95, 0.95), end: const Offset(1, 1), duration: 700.ms, curve: Curves.easeOutCubic),
         ),
       ),
+    );
+      },
     );
   }
 }

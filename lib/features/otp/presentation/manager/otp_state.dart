@@ -1,12 +1,30 @@
+import 'package:metw_go/features/otp/data/models/resend_otp_out_model.dart';
+import 'package:metw_go/features/otp/data/models/verify_otp_out_model.dart';
+
 abstract class OtpState {}
 
 class InitialOtpState extends OtpState {}
 
-class OtpLoadingState extends OtpState {}
+class VerifyOtpLoadingState extends OtpState {}
 
-class OtpSuccessState extends OtpState {}
+class VerifyOtpSuccessState extends OtpState {
+  final VerifyOtpOutModel verifyOtpOutModel;
+  VerifyOtpSuccessState(this.verifyOtpOutModel);
+}
 
-class OtpErrorState extends OtpState {
+class VerifyOtpErrorState extends OtpState {
   final String error;
-  OtpErrorState({required this.error});
+  VerifyOtpErrorState({required this.error});
+}
+
+class ResendOtpLoadingState extends OtpState {}
+
+class ResendOtpSuccessState extends OtpState {
+  final ResendOtpOutModel resendOtpOutModel;
+  ResendOtpSuccessState(this.resendOtpOutModel);
+}
+
+class ResendOtpErrorState extends OtpState {
+  final String error;
+  ResendOtpErrorState({required this.error});
 }

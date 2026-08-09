@@ -24,6 +24,14 @@ import 'package:metw_go/features/documents/presentation/manager/documents_cubit.
     as _i91;
 import 'package:metw_go/features/driver_info/presentation/manager/delegate_info_cubit.dart'
     as _i203;
+import 'package:metw_go/features/forget_password/data/data_source/forget_password_data_source.dart'
+    as _i904;
+import 'package:metw_go/features/forget_password/data/repo/forget_password_repo.dart'
+    as _i778;
+import 'package:metw_go/features/forget_password/data/repo/forget_password_repo_implement.dart'
+    as _i718;
+import 'package:metw_go/features/forget_password/presentation/manager/forget_password_cubit.dart'
+    as _i37;
 import 'package:metw_go/features/home/presentation/manager/home_cubit.dart'
     as _i171;
 import 'package:metw_go/features/login/data/data_source/login_data_source.dart'
@@ -36,6 +44,13 @@ import 'package:metw_go/features/notification/presentation/manager/notification_
     as _i364;
 import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart'
     as _i364;
+import 'package:metw_go/features/otp/data/data_source/otp_data_source.dart'
+    as _i50;
+import 'package:metw_go/features/otp/data/repo/otp_repo.dart' as _i72;
+import 'package:metw_go/features/otp/data/repo/otp_repo_implement.dart'
+    as _i794;
+import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart'
+    as _i859;
 import 'package:metw_go/features/personal_info/presentation/manager/personal_info_cubit.dart'
     as _i87;
 import 'package:metw_go/features/profile/presentation/manager/profile_cubit.dart'
@@ -90,9 +105,13 @@ extension GetItInjectableX on _i174.GetIt {
       () => dioFactory.getDio(gh<_i402.CustomInterceptor>()),
     );
     gh.factory<_i863.AppDataSource>(() => _i863.AppDataSource(gh<_i361.Dio>()));
+    gh.factory<_i904.ForgetPasswordDataSource>(
+      () => _i904.ForgetPasswordDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i101.LoginDataSource>(
       () => _i101.LoginDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i50.OtpDataSource>(() => _i50.OtpDataSource(gh<_i361.Dio>()));
     gh.factory<_i961.RegisterDataSource>(
       () => _i961.RegisterDataSource(gh<_i361.Dio>()),
     );
@@ -102,6 +121,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i444.AppRepo>(
       () => _i837.AppRepoImpl(gh<_i863.AppDataSource>()),
     );
+    gh.factory<_i778.ForgetPasswordRepo>(
+      () => _i718.ForgetPasswordRepoImplement(
+        gh<_i904.ForgetPasswordDataSource>(),
+      ),
+    );
     gh.factory<_i563.LoginCubit>(() => _i563.LoginCubit(gh<_i540.LoginRepo>()));
     gh.factory<_i617.RegisterRepo>(
       () => _i142.RegisterRepoImplement(gh<_i961.RegisterDataSource>()),
@@ -109,7 +133,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1006.RegisterCubit>(
       () => _i1006.RegisterCubit(gh<_i617.RegisterRepo>()),
     );
+    gh.factory<_i72.OtpRepo>(
+      () => _i794.OtpRepoImplement(gh<_i50.OtpDataSource>()),
+    );
     gh.factory<_i405.AppCubit>(() => _i405.AppCubit(gh<_i444.AppRepo>()));
+    gh.factory<_i37.ForgetPasswordCubit>(
+      () => _i37.ForgetPasswordCubit(gh<_i778.ForgetPasswordRepo>()),
+    );
+    gh.factory<_i859.OtpCubit>(() => _i859.OtpCubit(gh<_i72.OtpRepo>()));
     return this;
   }
 }

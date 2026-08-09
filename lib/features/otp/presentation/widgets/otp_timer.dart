@@ -6,7 +6,8 @@ import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 
 class OtpTimer extends StatefulWidget {
-  const OtpTimer({super.key});
+  const OtpTimer({super.key, this.onResend});
+  final VoidCallback? onResend;
 
   @override
   State<OtpTimer> createState() => _OtpTimerState();
@@ -70,7 +71,10 @@ class _OtpTimerState extends State<OtpTimer> {
                   padding: const EdgeInsets.only(top: 16),
                   child: InkWell(
                     key: const ValueKey('resend'),
-                    onTap: _startTimer,
+                    onTap: () {
+                      _startTimer();
+                      widget.onResend?.call();
+                    },
                     child: Text(
                       AppLocalizations.of(context)!.resendCode,
                       style: AppTextStyle.medium14(context).copyWith(
