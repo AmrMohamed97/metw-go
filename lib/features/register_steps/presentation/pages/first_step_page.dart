@@ -9,6 +9,7 @@ import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_steper.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/register/presentation/widgets/ads_widgets.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
@@ -22,7 +23,21 @@ class FirstStepPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FirstStepCubit, FirstStepState>(
+    return BlocConsumer<FirstStepCubit, FirstStepState>(
+      listener: (context, state) {
+        if (state is SubmitFirstStepSuccess) {
+          showToast(
+            context,
+            message: AppLocalizations.of(context)!.savedSuccessfully,
+            state: ToastStates.success,
+          );
+          context.go(AppRoutes.secondStepPage);
+        } else if (state is SubmitFirstStepFailure) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        } else if (state is GetWarehousesFailure) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        }
+      },
       builder: (context, state) {
         final cubit = context.read<FirstStepCubit>();
         return ScreenWrapper(
@@ -74,13 +89,41 @@ class FirstStepPage extends StatelessWidget {
                           ),
                           4.verticalSpace,
                           CustomTextField(
-                            hintText: AppLocalizations.of(
-                              context,
-                            )!.chooseWarehouseNumber,
+                            hintText:
+                                cubit.selectedWarehouse?.name ??
+                                AppLocalizations.of(
+                                  context,
+                                )!.chooseWarehouseNumber,
                             suffixIcon: const Icon(Icons.keyboard_arrow_down),
                             readOnly: true,
-                            // Add a tap handler if needed to open a bottom sheet
-                            // But we also need validator as requested
+                            onTap: () {
+                              if (cubit.warehouses.isNotEmpty) {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return SafeArea(
+                                      child: ListView.builder(
+                                        itemCount: cubit.warehouses.length,
+                                        itemBuilder: (context, index) {
+                                          final warehouse =
+                                              cubit.warehouses[index];
+                                          return ListTile(
+                                            title: Text(warehouse.name ?? ''),
+                                            subtitle: Text(
+                                              warehouse.accountNumber ?? '',
+                                            ),
+                                            onTap: () {
+                                              cubit.selectWarehouse(warehouse);
+                                              Navigator.pop(context);
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                );
+                              }
+                            },
                             validator: (value) {
                               if (!cubit.isIndependentDelegate &&
                                   cubit.selectedWarehouse == null) {
@@ -128,15 +171,32 @@ class FirstStepPage extends StatelessWidget {
                                   size: 18.sp,
                                   color: Colors.grey.shade600,
                                 ),
-                                onPressed: () =>context.go(AppRoutes.login) , // cubit.changePage(0),
+                                onPressed: () => context.go(
+                                  AppRoutes.login,
+                                ), // cubit.changePage(0),
                               ),
                             ),
                             // 12.horizontalSpace,
                             CustomButton(
-                              horizontalPadding: 40,
+                              loading: state is SubmitFirstStepLoading,
+                              horizontalPadding: state is SubmitFirstStepLoading
+                                  ? null
+                                  : 40,
                               text: AppLocalizations.of(context)!.next,
-                              onPressed:
-                                  () {}, // cubit.secondViewPress(context),
+                              onPressed: () {
+                                if (cubit.isIndependentDelegate &&
+                                    cubit.selectedTransportTypes.isEmpty) {
+                                  showToast(
+                                    context,
+                                    message: AppLocalizations.of(
+                                      context,
+                                    )!.errChooseWorkClassification,
+                                    state: ToastStates.error,
+                                  );
+                                  return;
+                                }
+                                cubit.submitFirstStep();
+                              },
                             ),
                           ],
                         ),

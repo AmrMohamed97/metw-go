@@ -63,6 +63,12 @@ import 'package:metw_go/features/register/data/repo/register_repo_implement.dart
     as _i142;
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart'
     as _i1006;
+import 'package:metw_go/features/register_steps/data/data_source/first_step_data_source.dart'
+    as _i655;
+import 'package:metw_go/features/register_steps/data/repo/first_step_repo.dart'
+    as _i305;
+import 'package:metw_go/features/register_steps/data/repo/first_step_repo_impl.dart'
+    as _i29;
 import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_cubit.dart'
     as _i212;
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_cubit.dart'
@@ -97,7 +103,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i364.OrdersCubit>(() => _i364.OrdersCubit());
     gh.factory<_i87.PersonalInfoCubit>(() => _i87.PersonalInfoCubit());
     gh.factory<_i197.ProfileCubit>(() => _i197.ProfileCubit());
-    gh.factory<_i212.FirstStepCubit>(() => _i212.FirstStepCubit());
     gh.factory<_i449.FourthStepCubit>(() => _i449.FourthStepCubit());
     gh.factory<_i333.SecondStepCubit>(() => _i333.SecondStepCubit());
     gh.factory<_i273.ThirdStepCubit>(() => _i273.ThirdStepCubit());
@@ -127,11 +132,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i961.RegisterDataSource>(
       () => _i961.RegisterDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i655.FirstStepDataSource>(
+      () => _i655.FirstStepDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i540.LoginRepo>(
       () => _i770.LoginRepoImpl(loginDataSource: gh<_i101.LoginDataSource>()),
     );
+    gh.factory<_i305.FirstStepRepo>(
+      () => _i29.FirstStepRepoImpl(gh<_i655.FirstStepDataSource>()),
+    );
     gh.factory<_i444.AppRepo>(
       () => _i837.AppRepoImpl(gh<_i863.AppDataSource>()),
+    );
+    gh.factory<_i212.FirstStepCubit>(
+      () => _i212.FirstStepCubit(gh<_i305.FirstStepRepo>()),
     );
     gh.factory<_i778.ForgetPasswordRepo>(
       () => _i718.ForgetPasswordRepoImplement(

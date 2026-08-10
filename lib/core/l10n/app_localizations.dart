@@ -488,6 +488,12 @@ abstract class AppLocalizations {
   /// **'Ensure the data is entered accurately, as it will be matched with the official documents you will upload in the next step.'**
   String get vehicleDataWarning;
 
+  /// No description provided for @savedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved successfully'**
+  String get savedSuccessfully;
+
   /// No description provided for @errChooseTransportMethod.
   ///
   /// In en, this message translates to:

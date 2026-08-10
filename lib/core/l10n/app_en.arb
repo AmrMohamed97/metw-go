@@ -64,6 +64,7 @@
     "uploadVehicleImage": "Upload Vehicle Image",
     "uploadVehicleImageDesc": "Max 5 MB JPG, PNG",
     "vehicleDataWarning": "Ensure the data is entered accurately, as it will be matched with the official documents you will upload in the next step.",
+    "savedSuccessfully": "Saved successfully",
     "errChooseTransportMethod": "Please choose transportation method",
     "errEnterMaxWeight": "Please enter max weight",
     "errEnterMaxVolume": "Please enter max volume",

@@ -224,7 +224,9 @@ class AppRouter {
         path: AppRoutes.firstStepPage,
         name: AppRoutes.firstStepPage,
         builder: (context, state) => BlocProvider(
-          create: (context) => getIt<FirstStepCubit>(),
+          create: (context) => getIt<FirstStepCubit>()
+            ..getWarehouses()
+            ..getTransportTypes(),
           child: const FirstStepPage(),
         ),
       ),

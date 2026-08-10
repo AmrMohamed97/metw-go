@@ -213,6 +213,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Ensure the data is entered accurately, as it will be matched with the official documents you will upload in the next step.';
 
   @override
+  String get savedSuccessfully => 'Saved successfully';
+
+  @override
   String get errChooseTransportMethod => 'Please choose transportation method';
 
   @override

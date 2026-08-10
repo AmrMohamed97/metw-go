@@ -64,6 +64,7 @@
     "uploadVehicleImage": "تحميل صورة المركبة",
     "uploadVehicleImageDesc": "بحد أقصى 5 ميجا بايت JPG, PNG",
     "vehicleDataWarning": "تأكد من إدخال البيانات بدقة، حيث سيتم مطابقتها مع المستندات الرسمية التي ستقوم برفعها في الخطوة القادمة.",
+    "savedSuccessfully": "تم الحفظ بنجاح",
     "errChooseTransportMethod": "الرجاء اختيار وسيلة النقل",
     "errEnterMaxWeight": "الرجاء إدخال أقصى وزن",
     "errEnterMaxVolume": "الرجاء إدخال أقصى حجم",

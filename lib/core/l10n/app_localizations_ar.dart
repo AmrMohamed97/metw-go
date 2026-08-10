@@ -211,6 +211,9 @@ class AppLocalizationsAr extends AppLocalizations {
       'تأكد من إدخال البيانات بدقة، حيث سيتم مطابقتها مع المستندات الرسمية التي ستقوم برفعها في الخطوة القادمة.';
 
   @override
+  String get savedSuccessfully => 'تم الحفظ بنجاح';
+
+  @override
   String get errChooseTransportMethod => 'الرجاء اختيار وسيلة النقل';
 
   @override
