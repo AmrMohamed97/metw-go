@@ -11,6 +11,7 @@ abstract class EndPoints {
   static const String forgotPasswordSendOtpUrl = 'auth/forgot-password/send-otp';
   static const String verifyOtpUrl = 'auth/otp/verify';
   static const String resendOtpUrl = 'auth/otp/resend';
+  static const String changePasswordUrl = 'auth/password/change';
   static const String confirmPhoneUrl = 'Authentication/ConfirmPhone';
 
   static const String allDriverOrdersUrl = 'delivery/orders/all';

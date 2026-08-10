@@ -725,8 +725,8 @@ abstract class AppLocalizations {
   /// No description provided for @enterCodeDesc.
   ///
   /// In en, this message translates to:
-  /// **'Enter the 4-digit code we just sent to\n+2010*******000'**
-  String get enterCodeDesc;
+  /// **'Enter the 4-digit code we just sent to\n{phone}'**
+  String enterCodeDesc(String phone);
 
   /// No description provided for @resendCode.
   ///

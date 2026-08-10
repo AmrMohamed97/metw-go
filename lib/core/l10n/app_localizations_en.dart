@@ -335,8 +335,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterCode => 'Enter the code';
 
   @override
-  String get enterCodeDesc =>
-      'Enter the 4-digit code we just sent to\n+2010*******000';
+  String enterCodeDesc(String phone) {
+    return 'Enter the 4-digit code we just sent to\n$phone';
+  }
 
   @override
   String get resendCode => 'Resend code';

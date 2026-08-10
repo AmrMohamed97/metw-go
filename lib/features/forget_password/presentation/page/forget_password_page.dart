@@ -30,7 +30,7 @@ class ForgetPasswordPage extends StatelessWidget {
           );
           context.pushReplacement(
             AppRoutes.otp,
-            extra: {'fromLogin': true, 'phone': context.read<ForgetPasswordCubit>().phoneController.text},
+            extra: ( true , context.read<ForgetPasswordCubit>().phoneController.text),
           );
         } else if (state is ForgetPasswordFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
@@ -76,13 +76,15 @@ class ForgetPasswordPage extends StatelessWidget {
                           controller: cubit.phoneController,
                         ),
                         Spacer(flex: 1),
-                        CustomButton(
-                          loading: state is ForgetPasswordLoading,
-                          text: AppLocalizations.of(context)!.sendVerificationCode,
-                          onPressed: () {
-                            cubit.sendOtp();
-                          },
-                          isMax: true,
+                        Center(
+                          child: CustomButton(
+                            loading: state is ForgetPasswordLoading,
+                            text: AppLocalizations.of(context)!.sendVerificationCode,
+                            onPressed: () {
+                              cubit.sendOtp();
+                            },
+                            isMax: true,
+                          ),
                         ),
                     Spacer(flex: 2),
                     // ViewInsetsSpace(),

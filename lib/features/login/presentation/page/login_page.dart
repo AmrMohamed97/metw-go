@@ -100,8 +100,8 @@ class LoginPage extends StatelessWidget {
                               CustomTextField(
                                 controller: cubit.passwordController,
                                 hintText: "...............",
-                                obscureText: cubit.obscurePassword,
                                 radius: 16.r,
+                                obscureText: cubit.obscurePassword,
                                 suffixIcon: GestureDetector(
                                   onTap: () => cubit.toggleObscurePassword(),
                                   child: Padding(

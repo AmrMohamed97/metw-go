@@ -90,15 +90,16 @@ class AppRouter {
         path: AppRoutes.otp,
         name: AppRoutes.otp,
         builder: (context, state) {
-          final extra = state.extra;
-          bool fromLogin = false;
-          String phone = '';
-          if (extra is bool) {
-            fromLogin = extra;
-          } else if (extra is Map<String, dynamic>) {
-            fromLogin = extra['fromLogin'] ?? false;
-            phone = extra['phone'] ?? '';
-          }
+          // final extra = state.extra;
+          final arg = state.extra as (bool, String);
+          bool fromLogin = arg.$1;
+          String phone = arg.$2;
+          // if (extra is bool) {
+          //   fromLogin = extra;
+          // } else if (extra is Map<String, dynamic>) {
+          //   fromLogin = extra['fromLogin'] ?? false;
+          //   phone = extra['phone'] ?? '';
+          // }
           return BlocProvider(
             create: (context) => getIt<OtpCubit>(),
             child: OtpPage(fromLogin: fromLogin, phone: phone),
