@@ -12,7 +12,7 @@ import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 import 'package:metw_go/features/register/presentation/widgets/image_upload_container.dart';
-import 'package:metw_go/features/register/presentation/widgets/pic_image_bottom_sheet.dart';
+import 'package:metw_go/core/widgets/pic_image_bottom_sheet.dart';
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_cubit.dart';
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_state.dart';
 

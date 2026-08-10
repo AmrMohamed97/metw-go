@@ -29,128 +29,131 @@ class ThirdStepPage extends StatelessWidget {
         return ScreenWrapper(
           body: CustomScrollView(
             slivers: [
-              FirstViewBody(
-                body: Form(
+              SliverToBoxAdapter(
+                child: Form(
                   key: cubit.thirdStepFormKey,
-                  child: AnimatedColumn(
-                    children: [
-                      50.verticalSpace,
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(end: 32),
-                        child: const CustomSteper(currentStep: 4),
-                      ),
-                      25.verticalSpace,
-                      Text(
-                        AppLocalizations.of(context)!.serviceAreas,
-                        style: AppTextStyle.medium16(
-                          context,
-                        ).copyWith(color: Theme.of(context).primaryColor),
-                      ),
-                      // 4.verticalSpace,
-                      Text(
-                        AppLocalizations.of(context)!.serviceAreasDesc,
-                        style: AppTextStyle.regular14(
-                          context,
-                        ).copyWith(color: Colors.grey.shade400),
-                      ),
-                      16.verticalSpace,
-                      FieldTitle(
-                        title: AppLocalizations.of(context)!.chooseGovernorates,
-                      ),
-                      4.verticalSpace,
-                      CustomTextField(
-                        hintText: AppLocalizations.of(context)!.governorates,
-                        isFixed: false,
-                        readOnly: true,
-                        suffixIcon: const Icon(Icons.keyboard_arrow_down),
-                        onTap: () {},
-                      ),
-                      8.verticalSpace,
-                      if (cubit.selectedGovernorates.isNotEmpty) ...[
-                        // 16.verticalSpace,
-                        Wrap(
-                          spacing: 8.w,
-                          runSpacing: 8.h,
-                          children: cubit.selectedGovernorates.map((gov) {
-                            return RemovableChip(
-                              label: gov,
-                              onRemove: () => cubit.removeGovernorate(gov),
-                            );
-                          }).toList(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      children: [
+                        50.verticalSpace,
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(end: 32),
+                          child: const CustomSteper(currentStep: 4),
                         ),
-                      ],
-                      16.verticalSpace,
-                      FieldTitle(
-                        title: AppLocalizations.of(context)!.citiesTitle,
-                      ),
-                      4.verticalSpace,
-                      CustomTextField(
-                        hintText: AppLocalizations.of(context)!.cities,
-                        readOnly: true,
-                        suffixIcon: const Icon(Icons.keyboard_arrow_down),
-                        onTap: () {},
-                        isFixed: false,
-                      ),
-                      8.verticalSpace,
-                      if (cubit.selectedCities.isNotEmpty) ...[
-                        // 16.verticalSpace,
-                        Wrap(
-                          spacing: 8.w,
-                          runSpacing: 8.h,
-                          children: cubit.selectedCities.map((city) {
-                            return RemovableChip(
-                              label: city,
-                              onRemove: () => cubit.removeCity(city),
-                            );
-                          }).toList(),
+                        25.verticalSpace,
+                        Text(
+                          AppLocalizations.of(context)!.serviceAreas,
+                          style: AppTextStyle.medium16(
+                            context,
+                          ).copyWith(color: Theme.of(context).primaryColor),
                         ),
-                      ],
-                      32.verticalSpace,
-                      RuralServiceToggle(
-                        title: AppLocalizations.of(
-                          context,
-                        )!.activateRuralService,
-                        subtitle: AppLocalizations.of(
-                          context,
-                        )!.ruralServiceDesc,
-                        value: cubit.isRuralServiceEnabled,
-                        onChanged: cubit.toggleRuralService,
-                      ),
-                      24.verticalSpace,
-                      InfoBanner(
-                        text: AppLocalizations.of(context)!.ruralServiceWarning,
-                        iconPath: AppImages.warningIcon,
-                      ),
-                      40.verticalSpace,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 46.h,
-                            width: 46.h,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.outline,
-                              borderRadius: BorderRadius.circular(8.r),
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.arrow_back_ios_new,
-                                size: 18.sp,
-                                color: Colors.grey.shade600,
-                              ),
-                              onPressed: () {}, // cubit.changePage(2),
-                            ),
-                          ),
-                          CustomButton(
-                            horizontalPadding: 40,
-                            text: AppLocalizations.of(context)!.next,
-                            onPressed: () {}, // cubit.fourthViewPress(context),
+                        // 4.verticalSpace,
+                        Text(
+                          AppLocalizations.of(context)!.serviceAreasDesc,
+                          style: AppTextStyle.regular14(
+                            context,
+                          ).copyWith(color: Colors.grey.shade400),
+                        ),
+                        16.verticalSpace,
+                        FieldTitle(
+                          title: AppLocalizations.of(context)!.chooseGovernorates,
+                        ),
+                        4.verticalSpace,
+                        CustomTextField(
+                          hintText: AppLocalizations.of(context)!.governorates,
+                          isFixed: false,
+                          readOnly: true,
+                          suffixIcon: const Icon(Icons.keyboard_arrow_down),
+                          onTap: () {},
+                        ),
+                        8.verticalSpace,
+                        if (cubit.selectedGovernorates.isNotEmpty) ...[
+                          // 16.verticalSpace,
+                          Wrap(
+                            spacing: 8.w,
+                            runSpacing: 8.h,
+                            children: cubit.selectedGovernorates.map((gov) {
+                              return RemovableChip(
+                                label: gov,
+                                onRemove: () => cubit.removeGovernorate(gov),
+                              );
+                            }).toList(),
                           ),
                         ],
-                      ),
-                      20.verticalSpace,
-                      const ViewInsetsSpace(),
-                    ],
+                        16.verticalSpace,
+                        FieldTitle(
+                          title: AppLocalizations.of(context)!.citiesTitle,
+                        ),
+                        4.verticalSpace,
+                        CustomTextField(
+                          hintText: AppLocalizations.of(context)!.cities,
+                          readOnly: true,
+                          suffixIcon: const Icon(Icons.keyboard_arrow_down),
+                          onTap: () {},
+                          isFixed: false,
+                        ),
+                        8.verticalSpace,
+                        if (cubit.selectedCities.isNotEmpty) ...[
+                          // 16.verticalSpace,
+                          Wrap(
+                            spacing: 8.w,
+                            runSpacing: 8.h,
+                            children: cubit.selectedCities.map((city) {
+                              return RemovableChip(
+                                label: city,
+                                onRemove: () => cubit.removeCity(city),
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                        32.verticalSpace,
+                        RuralServiceToggle(
+                          title: AppLocalizations.of(
+                            context,
+                          )!.activateRuralService,
+                          subtitle: AppLocalizations.of(
+                            context,
+                          )!.ruralServiceDesc,
+                          value: cubit.isRuralServiceEnabled,
+                          onChanged: cubit.toggleRuralService,
+                        ),
+                        24.verticalSpace,
+                        InfoBanner(
+                          text: AppLocalizations.of(context)!.ruralServiceWarning,
+                          iconPath: AppImages.warningIcon,
+                        ),
+                        40.verticalSpace,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 46.h,
+                              width: 46.h,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.outline,
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back_ios_new,
+                                  size: 18.sp,
+                                  color: Colors.grey.shade600,
+                                ),
+                                onPressed: () {}, // cubit.changePage(2),
+                              ),
+                            ),
+                            CustomButton(
+                              horizontalPadding: 40,
+                              text: AppLocalizations.of(context)!.next,
+                              onPressed: () {}, // cubit.fourthViewPress(context),
+                            ),
+                          ],
+                        ),
+                        20.verticalSpace,
+                        const ViewInsetsSpace(),
+                      ],
+                    ),
                   ),
                 ),
               ),
