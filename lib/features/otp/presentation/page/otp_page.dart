@@ -97,13 +97,18 @@ class _OtpPageState extends State<OtpPage> {
                           ),
                         ),
                         SizedBox(height: 48.h),
-                        Directionality(
-                          textDirection: TextDirection.ltr,
-                          child: OtpFields(
-                            onCompleted: (value) {
-                              _otpCode = value;
-                            },
-                          ),
+                        Row(
+                          mainAxisAlignment: .center,
+                          children: [
+                            Directionality(
+                              textDirection: TextDirection.ltr,
+                              child: OtpFields(
+                                onCompleted: (value) {
+                                  _otpCode = value;
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 48.h),
                         OtpTimer(
