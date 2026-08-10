@@ -40,8 +40,10 @@ class ChangePasswordPage extends StatelessWidget {
           appBar: CustomAppBar(),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: .start,
+            child: Form(
+              key: cubit.changePasswordFormKey,
+              child: Column(
+                crossAxisAlignment: .start,
               mainAxisAlignment: .center,
               children:
                   [
@@ -86,6 +88,12 @@ class ChangePasswordPage extends StatelessWidget {
                               ),
                             ),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!.errEnterPassword;
+                            }
+                            return null;
+                          },
                         ),
                         FieldTitle(
                           title: AppLocalizations.of(context)!.confirmPassword,
@@ -108,6 +116,12 @@ class ChangePasswordPage extends StatelessWidget {
                               ),
                             ),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!.errEnterConfirmPassword;
+                            }
+                            return null;
+                          },
                         ),
                         Spacer(flex: 1),
                         Center(
@@ -126,6 +140,7 @@ class ChangePasswordPage extends StatelessWidget {
                       .animate(interval: 50.ms)
                       .fade(duration: 500.ms)
                       .slideY(begin: 0.05, end: 0),
+              ),
             ),
           ),
         );

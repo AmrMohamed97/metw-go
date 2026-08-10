@@ -16,6 +16,9 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
+  final GlobalKey<FormState> sendOtpFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> changePasswordFormKey = GlobalKey<FormState>();
+
     bool obscurePassword = true;
     bool confirmObscurePassword = true;
 
@@ -29,25 +32,29 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   }
 
   Future<void> sendOtp() async {
-    emit(ForgetPasswordLoading());
-    final inputModel = ForgetPasswordInputModel(phone: phoneController.text);
-    final result = await forgetPasswordRepo.sendOtp(inputModel);
-    result.fold(
-      (failure) => emit(ForgetPasswordFailure(failure.message)),
-      (successModel) => emit(ForgetPasswordSuccess(successModel)),
-    );
+    if (sendOtpFormKey.currentState!.validate()) {
+      emit(ForgetPasswordLoading());
+      final inputModel = ForgetPasswordInputModel(phone: phoneController.text);
+      final result = await forgetPasswordRepo.sendOtp(inputModel);
+      result.fold(
+        (failure) => emit(ForgetPasswordFailure(failure.message)),
+        (successModel) => emit(ForgetPasswordSuccess(successModel)),
+      );
+    }
   }
 
   Future<void> changePassword() async {
-    emit(ChangePasswordLoading());
-    final inputModel = ChangePasswordInputModel(
-      password: passwordController.text,
-      passwordConfirmation: confirmPasswordController.text,
-    );
-    final result = await forgetPasswordRepo.changePassword(inputModel);
-    result.fold(
-      (failure) => emit(ChangePasswordFailure(failure.message)),
-      (successModel) => emit(ChangePasswordSuccess(successModel)),
-    );
+    if (changePasswordFormKey.currentState!.validate()) {
+      emit(ChangePasswordLoading());
+      final inputModel = ChangePasswordInputModel(
+        password: passwordController.text,
+        passwordConfirmation: confirmPasswordController.text,
+      );
+      final result = await forgetPasswordRepo.changePassword(inputModel);
+      result.fold(
+        (failure) => emit(ChangePasswordFailure(failure.message)),
+        (successModel) => emit(ChangePasswordSuccess(successModel)),
+      );
+    }
   }
 }

@@ -75,14 +75,20 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               4.verticalSpace,
-                              CustomTextField(
-                                controller: cubit.phoneController,
-                                hintText: "+966 5X XXX XXXX",
-                                radius: 16.r,
-                                textInputType: TextInputType.phone,
-                                textDirection: TextDirection.ltr,
-                                textAlign: TextAlign.end,
-                              ),
+                                CustomTextField(
+                                  controller: cubit.phoneController,
+                                  hintText: "+966 5X XXX XXXX",
+                                  radius: 16.r,
+                                  textInputType: TextInputType.phone,
+                                  textDirection: TextDirection.ltr,
+                                  textAlign: TextAlign.end,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return AppLocalizations.of(context)!.errEnterFirstPhone;
+                                    }
+                                    return null;
+                                  },
+                                ),
                               // 20.verticalSpace,
                               Align(
                                 alignment: AlignmentDirectional.centerStart,
@@ -97,26 +103,32 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               4.verticalSpace,
-                              CustomTextField(
-                                controller: cubit.passwordController,
-                                hintText: "...............",
-                                radius: 16.r,
-                                obscureText: cubit.obscurePassword,
-                                suffixIcon: GestureDetector(
-                                  onTap: () => cubit.toggleObscurePassword(),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(12.r),
-                                    child: Image.asset(
-                                      cubit.obscurePassword
-                                          ? AppImages.lockClosed
-                                          : AppImages.lockOpened,
-                                      width: 20.r,
-                                      height: 20.r,
+                                CustomTextField(
+                                  controller: cubit.passwordController,
+                                  hintText: "...............",
+                                  radius: 16.r,
+                                  obscureText: cubit.obscurePassword,
+                                  suffixIcon: GestureDetector(
+                                    onTap: () => cubit.toggleObscurePassword(),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(12.r),
+                                      child: Image.asset(
+                                        cubit.obscurePassword
+                                            ? AppImages.lockClosed
+                                            : AppImages.lockOpened,
+                                        width: 20.r,
+                                        height: 20.r,
+                                      ),
                                     ),
                                   ),
+                                  isFixed: false,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return AppLocalizations.of(context)!.errEnterPassword;
+                                    }
+                                    return null;
+                                  },
                                 ),
-                                isFixed: false,
-                              ),
                               12.verticalSpace,
                               Align(
                                 alignment: AlignmentDirectional.centerEnd,
