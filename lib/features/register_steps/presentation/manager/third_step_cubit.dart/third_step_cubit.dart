@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/third_step_cubit.dart/third_step_state.dart';
 
+@injectable
 class ThirdStepCubit extends Cubit<ThirdStepState> {
   ThirdStepCubit() : super(ThirdStepInitial());
 

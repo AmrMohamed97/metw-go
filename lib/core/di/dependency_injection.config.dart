@@ -63,6 +63,14 @@ import 'package:metw_go/features/register/data/repo/register_repo_implement.dart
     as _i142;
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart'
     as _i1006;
+import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_cubit.dart'
+    as _i212;
+import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_cubit.dart'
+    as _i449;
+import 'package:metw_go/features/register_steps/presentation/manager/second_step_cubit.dart/second_step_cubit.dart'
+    as _i333;
+import 'package:metw_go/features/register_steps/presentation/manager/third_step_cubit.dart/third_step_cubit.dart'
+    as _i273;
 import 'package:metw_go/features/service_areas/presentation/manager/service_areas_cubit.dart'
     as _i661;
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_cubit.dart'
@@ -89,6 +97,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i364.OrdersCubit>(() => _i364.OrdersCubit());
     gh.factory<_i87.PersonalInfoCubit>(() => _i87.PersonalInfoCubit());
     gh.factory<_i197.ProfileCubit>(() => _i197.ProfileCubit());
+    gh.factory<_i212.FirstStepCubit>(() => _i212.FirstStepCubit());
+    gh.factory<_i449.FourthStepCubit>(() => _i449.FourthStepCubit());
+    gh.factory<_i333.SecondStepCubit>(() => _i333.SecondStepCubit());
+    gh.factory<_i273.ThirdStepCubit>(() => _i273.ThirdStepCubit());
     gh.factory<_i661.ServiceAreasCubit>(() => _i661.ServiceAreasCubit());
     gh.factory<_i192.VehicleCubit>(() => _i192.VehicleCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(

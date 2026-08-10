@@ -9,7 +9,7 @@ import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/register/presentation/widgets/ads_widgets.dart';
-import 'package:metw_go/features/register/presentation/widgets/custom_steper.dart';
+import 'package:metw_go/core/widgets/custom_steper.dart';
 import 'package:metw_go/features/register_steps/presentation/widgets/delegate_type_selector.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';

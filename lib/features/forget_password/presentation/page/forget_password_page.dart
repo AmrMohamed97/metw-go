@@ -30,7 +30,7 @@ class ForgetPasswordPage extends StatelessWidget {
           );
           context.pushReplacement(
             AppRoutes.otp,
-            extra: ( true , context.read<ForgetPasswordCubit>().phoneController.text),
+            extra: ( false , context.read<ForgetPasswordCubit>().phoneController.text),
           );
         } else if (state is ForgetPasswordFailure) {
           showToast(context, message: state.message, state: ToastStates.error);

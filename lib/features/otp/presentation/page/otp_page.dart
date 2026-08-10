@@ -31,7 +31,7 @@ class _OtpPageState extends State<OtpPage> {
 
   String _obscurePhone(String phone) {
     if (phone.length < 8) return phone;
-    int start = (phone.length - 6) ~/ 2;
+    int start = 3 ; //(phone.length - 6) ~/ 2;
     int end = start + 6;
     return phone.replaceRange(start, end, '******');
   }
@@ -51,8 +51,8 @@ class _OtpPageState extends State<OtpPage> {
             state: ToastStates.success,
           );
           widget.fromLogin
-              ? context.pushReplacement(AppRoutes.changePasswordPage)
-              : context.pushReplacement(AppRoutes.commingSoonPage);
+              ? context.pushReplacement(AppRoutes.firstStepPage)
+              : context.pushReplacement(AppRoutes.changePasswordPage);
         } else if (state is VerifyOtpErrorState) {
           showToast(context, message: state.error, state: ToastStates.error);
         } else if (state is ResendOtpSuccessState) {

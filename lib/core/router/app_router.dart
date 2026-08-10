@@ -23,6 +23,14 @@ import 'package:metw_go/features/personal_info/presentation/manager/personal_inf
 import 'package:metw_go/features/personal_info/presentation/page/personal_info_page.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/page/register_page.dart';
+import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_cubit.dart';
+import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_cubit.dart';
+import 'package:metw_go/features/register_steps/presentation/manager/second_step_cubit.dart/second_step_cubit.dart';
+import 'package:metw_go/features/register_steps/presentation/manager/third_step_cubit.dart/third_step_cubit.dart';
+import 'package:metw_go/features/register_steps/presentation/pages/first_step_page.dart';
+import 'package:metw_go/features/register_steps/presentation/pages/fourth_step_page.dart';
+import 'package:metw_go/features/register_steps/presentation/pages/second_step_page.dart';
+import 'package:metw_go/features/register_steps/presentation/pages/third_step_page.dart';
 import 'package:metw_go/features/service_areas/presentation/manager/service_areas_cubit.dart';
 import 'package:metw_go/features/service_areas/presentation/page/service_areas_page.dart';
 import 'package:metw_go/features/splash_screen/splash_screen.dart';
@@ -210,6 +218,38 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<NotificationCubit>(),
           child: const NotificationPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.firstStepPage,
+        name: AppRoutes.firstStepPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<FirstStepCubit>(),
+          child: const FirstStepPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.secondStepPage,
+        name: AppRoutes.secondStepPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<SecondStepCubit>(),
+          child: const SecondStepPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.thirdStepPage,
+        name: AppRoutes.thirdStepPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<ThirdStepCubit>(),
+          child: const ThirdStepPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.fourthStepPage,
+        name: AppRoutes.fourthStepPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<FourthStepCubit>(),
+          child: const FourthStepPage(),
         ),
       ),
 

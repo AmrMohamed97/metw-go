@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_state.dart';
 
+@injectable
 class FirstStepCubit extends Cubit<FirstStepState>{
   FirstStepCubit():super(FirstStepInitial());
   /// second view data

@@ -11,6 +11,12 @@ class Data {
 	String? status;
 	@JsonKey(name: 'next_action') 
 	String? nextAction;
+	@JsonKey(name: 'is_verified') 
+	bool? isVerified;
+	@JsonKey(name: 'verification_type') 
+	String? verificationType;
+	@JsonKey(name: 'masked_phone') 
+	String? maskedPhone;
 	@JsonKey(name: 'next_screen') 
 	String? nextScreen;
 	@JsonKey(name: 'access_token') 
@@ -25,6 +31,9 @@ class Data {
 		this.code, 
 		this.status, 
 		this.nextAction, 
+		this.isVerified,
+		this.verificationType,
+		this.maskedPhone,
 		this.nextScreen, 
 		this.accessToken, 
 		this.tokenType, 

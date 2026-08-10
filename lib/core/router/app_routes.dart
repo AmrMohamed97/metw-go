@@ -20,4 +20,8 @@ class AppRoutes {
   static const String documentsPage = '/documentsPage';
   static const String notificationPage = '/notificationPage';
   static const String splashScreen = '/splashScreen';
+  static const String firstStepPage = '/firstStepPage';
+  static const String secondStepPage = '/secondStepPage';
+  static const String thirdStepPage = '/thirdStepPage';
+  static const String fourthStepPage = '/fourthStepPage';
 }

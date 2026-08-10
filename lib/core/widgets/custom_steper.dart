@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
-import 'package:metw_go/features/register/presentation/manager/register_state.dart';
 import 'package:step_progress/step_progress.dart';
 
 class CustomSteper extends StatelessWidget {
@@ -9,10 +6,7 @@ class CustomSteper extends StatelessWidget {
   final int currentStep;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegisterCubit, RegisterState>(
-      builder: (context, state) {
-        // final cubit = context.read<RegisterCubit>();
-        return StepProgress(
+    return StepProgress(
           currentStep: currentStep,
           totalSteps: 4,
 
@@ -36,7 +30,5 @@ class CustomSteper extends StatelessWidget {
             ),
           ),
         );
-      },
-    );
   }
 }
