@@ -7,7 +7,6 @@ import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/utils/view_insets_space.dart';
-import 'package:metw_go/core/widgets/animated_column.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 // import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
@@ -15,7 +14,6 @@ import 'package:metw_go/core/widgets/screen_wrapper.dart';
 // import 'package:metw_go/features/register/presentation/widgets/custom_steper.dart';
 import 'package:metw_go/features/register/presentation/widgets/document_upload_box.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
-import 'package:metw_go/features/register/presentation/widgets/first_view_body.dart';
 import 'package:metw_go/features/register/presentation/widgets/personal_photo_container.dart';
 import 'package:metw_go/core/widgets/pic_image_bottom_sheet.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_cubit.dart';
@@ -40,6 +38,7 @@ class FourthStepPage extends StatelessWidget {
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
+                    crossAxisAlignment: .start,
                     children: [
                       50.verticalSpace,
                       Padding(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
@@ -33,6 +35,7 @@ class FirstStepPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
+                      crossAxisAlignment: .start,
                       children: [
                         50.verticalSpace,
                         Padding(
@@ -125,7 +128,7 @@ class FirstStepPage extends StatelessWidget {
                                   size: 18.sp,
                                   color: Colors.grey.shade600,
                                 ),
-                                onPressed: () {}, // cubit.changePage(0),
+                                onPressed: () =>context.go(AppRoutes.login) , // cubit.changePage(0),
                               ),
                             ),
                             // 12.horizontalSpace,

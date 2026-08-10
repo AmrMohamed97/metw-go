@@ -23,7 +23,7 @@ class RuralServiceToggle extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
           BoxShadow(
