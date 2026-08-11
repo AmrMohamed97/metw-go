@@ -28,18 +28,18 @@ class FirstStepRepoImpl implements FirstStepRepo {
     }
   }
 
-  @override
-  Future<Either<Failure, TransportTypeListResponse>> getTransportTypes() async {
-    try {
-      final response = await dataSource.getTransportTypes();
-      return Right(response);
-    } catch (e) {
-      if (e is DioException) {
-        return Left(ServerFailure.fromDioError(e));
-      }
-      return Left(ServerFailure(e.toString()));
-    }
-  }
+  // @override
+  // Future<Either<Failure, TransportTypeListResponse>> getTransportTypes() async {
+  //   try {
+  //     final response = await dataSource.getTransportTypes();
+  //     return Right(response);
+  //   } catch (e) {
+  //     if (e is DioException) {
+  //       return Left(ServerFailure.fromDioError(e));
+  //     }
+  //     return Left(ServerFailure(e.toString()));
+  //   }
+  // }
 
   @override
   Future<Either<Failure, FirstStepOutModel>> submitFirstStep(

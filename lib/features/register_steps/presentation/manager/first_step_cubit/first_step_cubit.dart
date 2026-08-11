@@ -18,34 +18,34 @@ class FirstStepCubit extends Cubit<FirstStepState> {
   bool isIndependentDelegate = true;
   WarehouseModel? selectedWarehouse;
   List<WarehouseModel> warehouses = [];
-  List<TransportTypeModel> transportTypes = [];
-  List<TransportTypeModel> selectedTransportTypes = [];
+  // List<String> transportTypes = [];
+  // List<String> selectedTransportTypes = [];
 
   void changeDelegateType(bool isIndependent) {
     isIndependentDelegate = isIndependent;
     emit(ChangeDelegateTypeSuccess());
   }
 
-  void toggleTransportType(TransportTypeModel type) {
-    if (selectedTransportTypes.contains(type)) {
-      selectedTransportTypes.remove(type);
-    } else {
-      selectedTransportTypes.add(type);
-    }
-    emit(ChangeWorkClassificationSuccess());
-  }
+  // void toggleTransportType(TransportTypeModel type) {
+  //   if (selectedTransportTypes.contains(type)) {
+  //     selectedTransportTypes.remove(type);
+  //   } else {
+  //     selectedTransportTypes.add(type);
+  //   }
+  //   emit(ChangeWorkClassificationSuccess());
+  // }
 
-  Future<void> getTransportTypes() async {
-    emit(GetTransportTypesLoading());
-    final result = await firstStepRepo.getTransportTypes();
-    result.fold(
-      (failure) => emit(GetTransportTypesFailure(failure.message)),
-      (response) {
-        transportTypes = response.data ?? [];
-        emit(GetTransportTypesSuccess());
-      },
-    );
-  }
+  // Future<void> getTransportTypes() async {
+  //   emit(GetTransportTypesLoading());
+  //   final result = await firstStepRepo.getTransportTypes();
+  //   result.fold(
+  //     (failure) => emit(GetTransportTypesFailure(failure.message)),
+  //     (response) {
+  //       transportTypes = response.data ?? [];
+  //       emit(GetTransportTypesSuccess());
+  //     },
+  //   );
+  // }
 
   Future<void> getWarehouses() async {
     emit(GetWarehousesLoading());
@@ -64,26 +64,26 @@ class FirstStepCubit extends Cubit<FirstStepState> {
   }
 
   Future<void> submitFirstStep() async {
-    bool hasSelectedWorkTypes = selectedTransportTypes.isNotEmpty;
+    // bool hasSelectedWorkTypes = selectedTransportTypes.isNotEmpty;
     bool hasSelectedWarehouse = selectedWarehouse != null;
     
-    if (firstStepFormKey.currentState!.validate() && 
-        (isIndependentDelegate ? hasSelectedWorkTypes : hasSelectedWorkTypes&&hasSelectedWarehouse)) {
-      emit(SubmitFirstStepLoading());
+    // if (firstStepFormKey.currentState!.validate() && 
+    //     (isIndependentDelegate ? hasSelectedWorkTypes : hasSelectedWorkTypes&&hasSelectedWarehouse)) {
+    //   emit(SubmitFirstStepLoading());
 
-      final input = FirstStepInputModel(
-        courierType: isIndependentDelegate ? 'freelance' : 'warehouse',
-        warehouseId: isIndependentDelegate ? null : selectedWarehouse?.id,
-        workTypes: isIndependentDelegate 
-            ? selectedTransportTypes.map((t) => t.name!).toList() 
-            : null,
-      );
+    //   final input = FirstStepInputModel(
+    //     courierType: isIndependentDelegate ? 'freelance' : 'warehouse',
+    //     warehouseId: isIndependentDelegate ? null : selectedWarehouse?.id,
+    //     workTypes: isIndependentDelegate 
+    //         ? selectedTransportTypes.map((t) => t.name!).toList() 
+    //         : null,
+    //   );
 
-      final result = await firstStepRepo.submitFirstStep(input);
-      result.fold(
-        (failure) => emit(SubmitFirstStepFailure(failure.message)),
-        (successModel) => emit(SubmitFirstStepSuccess()),
-      );
-    }
+    //   final result = await firstStepRepo.submitFirstStep(input);
+    //   result.fold(
+    //     (failure) => emit(SubmitFirstStepFailure(failure.message)),
+    //     (successModel) => emit(SubmitFirstStepSuccess()),
+    //   );
+    // }
   }
 }

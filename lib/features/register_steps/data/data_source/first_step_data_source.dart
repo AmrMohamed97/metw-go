@@ -18,8 +18,8 @@ abstract class FirstStepDataSource {
   @GET(EndPoints.warehouses)
   Future<WarehouseListResponse> getWarehouses();
 
-  @GET(EndPoints.transportTypes)
-  Future<TransportTypeListResponse> getTransportTypes();
+  // @GET(EndPoints.transportTypes)
+  // Future<TransportTypeListResponse> getTransportTypes();
 
   @POST(EndPoints.registerStep2)
   Future<FirstStepOutModel> submitFirstStep(

@@ -41,7 +41,7 @@ import 'app_routes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.thirdStepPage,
+    initialLocation: AppRoutes.firstStepPage,
     // redirect: (context, state) async {
     //   final String currentPath = state.matchedLocation;
 
@@ -225,8 +225,8 @@ class AppRouter {
         name: AppRoutes.firstStepPage,
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<FirstStepCubit>()
-            ..getWarehouses()
-            ..getTransportTypes(),
+            ..getWarehouses(),
+            // ..getTransportTypes(),
           child: const FirstStepPage(),
         ),
       ),
