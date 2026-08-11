@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_steper.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
-import 'package:metw_go/core/widgets/pic_image_bottom_sheet.dart';
 import 'package:metw_go/core/widgets/custom_toast.dart';
+import 'package:metw_go/core/widgets/pic_image_bottom_sheet.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 import 'package:metw_go/features/register/presentation/widgets/image_upload_container.dart';
@@ -80,19 +80,23 @@ class SecondStepPage extends StatelessWidget {
                         ),
                         4.verticalSpace,
                         CustomTextField(
-                          hintText: cubit.selectedTransportType?.name ?? AppLocalizations.of(
-                            context,
-                          )!.chooseTransportMethod,
-                          suffixIcon: state is GetTransportTypesLoading 
-                            ? const SizedBox(
+                          hintText:
+                              cubit.selectedTransportType?.name ??
+                              AppLocalizations.of(
+                                context,
+                              )!.chooseTransportMethod,
+                          suffixIcon: state is GetTransportTypesLoading
+                              ? const SizedBox(
                                   width: 20,
                                   height: 20,
                                   child: Padding(
                                     padding: EdgeInsets.all(12.0),
-                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
                                   ),
                                 )
-                            : const Icon(Icons.keyboard_arrow_down),
+                              : const Icon(Icons.keyboard_arrow_down),
                           readOnly: true,
                           onTap: () {
                             if (cubit.transportTypes.isNotEmpty) {
@@ -101,7 +105,9 @@ class SecondStepPage extends StatelessWidget {
                           },
                           validator: (value) {
                             if (cubit.selectedTransportType == null) {
-                              return AppLocalizations.of(context)!.errChooseWorkClassification; // Or a specific error
+                              return AppLocalizations.of(
+                                context,
+                              )!.errChooseWorkClassification; // Or a specific error
                             }
                             return null;
                           },
@@ -154,6 +160,7 @@ class SecondStepPage extends StatelessWidget {
                                       context,
                                     )!.maxVolumeHint,
                                     controller: cubit.maxVolumeController,
+                                    readOnly: true,
                                     textInputType: TextInputType.number,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -262,7 +269,8 @@ class SecondStepPage extends StatelessWidget {
                             ),
                             CustomButton(
                               loading: state is SubmitSecondStepLoading,
-                              horizontalPadding: state is SubmitSecondStepLoading ? null : 40,
+                              horizontalPadding:
+                                  state is SubmitSecondStepLoading ? null : 40,
                               text: AppLocalizations.of(context)!.next,
                               onPressed: () => cubit.submitSecondStep(),
                             ),
@@ -282,7 +290,10 @@ class SecondStepPage extends StatelessWidget {
     );
   }
 
-  void _showTransportTypeBottomSheet(BuildContext context, SecondStepCubit cubit) {
+  void _showTransportTypeBottomSheet(
+    BuildContext context,
+    SecondStepCubit cubit,
+  ) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -300,7 +311,10 @@ class SecondStepPage extends StatelessWidget {
             builder: (context, state) {
               return SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8.0,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -322,10 +336,12 @@ class SecondStepPage extends StatelessWidget {
                         child: ListView.separated(
                           shrinkWrap: true,
                           itemCount: cubit.transportTypes.length,
-                          separatorBuilder: (context, index) => 12.verticalSpace,
+                          separatorBuilder: (context, index) =>
+                              12.verticalSpace,
                           itemBuilder: (context, index) {
                             final type = cubit.transportTypes[index];
-                            final isSelected = cubit.selectedTransportType?.id == type.id;
+                            final isSelected =
+                                cubit.selectedTransportType?.id == type.id;
                             return InkWell(
                               onTap: () {
                                 cubit.changeTransportType(type);
@@ -343,18 +359,26 @@ class SecondStepPage extends StatelessWidget {
                                     width: isSelected ? 1.5 : 1,
                                   ),
                                   color: isSelected
-                                      ? Theme.of(context).primaryColor.withOpacity(0.05)
+                                      ? Theme.of(
+                                          context,
+                                        ).primaryColor.withOpacity(0.05)
                                       : Colors.transparent,
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       child: Text(
                                         type.name ?? '',
-                                        style: AppTextStyle.medium16(context).copyWith(
-                                          color: isSelected ? Theme.of(context).primaryColor : null,
-                                        ),
+                                        style: AppTextStyle.medium16(context)
+                                            .copyWith(
+                                              color: isSelected
+                                                  ? Theme.of(
+                                                      context,
+                                                    ).primaryColor
+                                                  : null,
+                                            ),
                                       ),
                                     ),
                                     if (isSelected)

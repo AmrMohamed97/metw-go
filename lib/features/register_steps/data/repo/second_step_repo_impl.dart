@@ -3,7 +3,10 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:metw_go/core/const/app_const.dart';
 import 'package:metw_go/core/error/failure.dart';
+import 'package:metw_go/core/models/auth_model/auth_model.dart';
+import 'package:metw_go/core/utils/cache_helper.dart';
 import 'package:metw_go/features/register_steps/data/data_source/second_step_data_source.dart';
 import 'package:metw_go/features/register_steps/data/models/first_step_out_model.dart';
 import 'package:metw_go/features/register_steps/data/models/transport_type_model.dart';
@@ -39,6 +42,17 @@ class SecondStepRepoImpl implements SecondStepRepo {
         transportTypeId,
         plateNumber,
         vehicleImage,
+      );
+      CacheHelper.setSecuerString(
+        key: AppConstant.accessToken,
+        value: response.data?.registrationToken ?? '',
+      );
+      CacheHelper.saveAuthData(
+        AuthModel(
+          status: "incomplete",
+          isVerified: true,
+          currentStep: response.data?.currentStep,
+        ),
       );
       return Right(response);
     } catch (e) {

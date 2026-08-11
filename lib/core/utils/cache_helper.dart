@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:metw_go/core/const/app_const.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
+import 'package:metw_go/core/models/auth_model/auth_model.dart';
 import 'package:metw_go/core/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,11 +16,32 @@ class CacheHelper {
   //   //     CacheHelper.saveData(key: SharedPreferencesKeys.lang, value: "ar");
   // }
 
-  static Future<void> saveUserData(UserModel userModel) async {
-    final userDataString = const JsonEncoder().convert(userModel.toJson());
+  static Future<void> saveAuthData(AuthModel authModel) async {
+    final userDataString = const JsonEncoder().convert(authModel.toJson());
     await getIt<SharedPreferences>().setString(
       AppConstant.userData,
       userDataString,
+    );
+    // await getIt<SharedPreferences>().setInt(PrefsKeys.roleId, userData.roleId);
+  }
+
+  static AuthModel? getauthData() {
+    final authDataString = getIt<SharedPreferences>().getString(
+      AppConstant.authData,
+    );
+    if (authDataString == null) {
+      return null;
+    }
+    final authData = AuthModel.fromJson(jsonDecode(authDataString));
+    return authData;
+  }
+
+  
+  static Future<void> saveAuthModel(UserModel userModel) async {
+    final authDataString = const JsonEncoder().convert(userModel.toJson());
+    await getIt<SharedPreferences>().setString(
+      AppConstant.authData,
+      authDataString,
     );
     // await getIt<SharedPreferences>().setInt(PrefsKeys.roleId, userData.roleId);
   }

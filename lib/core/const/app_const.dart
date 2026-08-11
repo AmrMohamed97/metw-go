@@ -22,6 +22,7 @@ abstract class AppConstant {
   static const String editPasswordUrl = 'update_password';
 
   static const String userData = "userData";
+  static const String authData = "authData";
 
   static const String langKey = "lang";
 }

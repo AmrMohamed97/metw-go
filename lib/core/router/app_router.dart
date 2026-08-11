@@ -41,7 +41,7 @@ import 'app_routes.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.fourthStepPage,
+    initialLocation: AppRoutes.login,
     // redirect: (context, state) async {
     //   final String currentPath = state.matchedLocation;
 

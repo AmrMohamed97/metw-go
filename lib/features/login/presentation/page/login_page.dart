@@ -28,15 +28,45 @@ class LoginPage extends StatelessWidget {
         if (state is LoginSuccess) {
           // Handle login success
           // context.push(AppRoutes.splashScreen);
-          context.go(
-            AppRoutes.otp,
-            extra: (true, context.read<LoginCubit>().phoneController.text),
-          );
           showToast(
             context,
             message: AppLocalizations.of(context)!.loginSuccessful,
             state: ToastStates.success,
           );
+          if (state.loginOutModel?.data?.isVerified == false) {
+            context.go(
+              AppRoutes.otp,
+              extra: (true, context.read<LoginCubit>().phoneController.text),
+            );
+          } else if (state
+                  .loginOutModel
+                  ?.data
+                  ?.registrationProgress
+                  ?.currentStep ==
+              2) {
+            context.go(AppRoutes.firstStepPage);
+          } else if (state
+                  .loginOutModel
+                  ?.data
+                  ?.registrationProgress
+                  ?.currentStep ==
+              3) {
+            context.go(AppRoutes.secondStepPage);
+          } else if (state
+                  .loginOutModel
+                  ?.data
+                  ?.registrationProgress
+                  ?.currentStep ==
+              4) {
+            context.go(AppRoutes.thirdStepPage);
+          } else if (state
+                  .loginOutModel
+                  ?.data
+                  ?.registrationProgress
+                  ?.currentStep ==
+              5) {
+            context.go(AppRoutes.fourthStepPage);
+          }
         } else if (state is LoginFailure) {
           // Handle login failure
           showToast(context, message: state.message, state: ToastStates.error);
@@ -84,8 +114,8 @@ class LoginPage extends StatelessWidget {
                                 hintText: "+966 5X XXX XXXX",
                                 radius: 16.r,
                                 textInputType: TextInputType.phone,
-                                textDirection: TextDirection.ltr,
-                                textAlign: TextAlign.end,
+                                // textDirection: TextDirection.ltr,
+                                // textAlign: TextAlign.end,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return AppLocalizations.of(
