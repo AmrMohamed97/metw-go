@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/features/register_steps/data/models/first_step_input_model.dart';
-import 'package:metw_go/features/register_steps/data/models/transport_type_model.dart';
 import 'package:metw_go/features/register_steps/data/models/warehouse_model.dart';
 import 'package:metw_go/features/register_steps/data/repo/first_step_repo.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_state.dart';
@@ -24,6 +23,25 @@ class FirstStepCubit extends Cubit<FirstStepState> {
   void changeDelegateType(bool isIndependent) {
     isIndependentDelegate = isIndependent;
     emit(ChangeDelegateTypeSuccess());
+  }
+
+  bool isDeliveryDelegate = false;
+  bool isShippingDelegate = false;
+  bool isBusDriver = false;
+
+  void toggleDeliveryDelegate(bool value) {
+    isDeliveryDelegate = value;
+    emit(ChangeWorkClassificationSuccess());
+  }
+
+  void toggleShippingDelegate(bool value) {
+    isShippingDelegate = value;
+    emit(ChangeWorkClassificationSuccess());
+  }
+
+  void toggleBusDriver(bool value) {
+    isBusDriver = value;
+    emit(ChangeWorkClassificationSuccess());
   }
 
   // void toggleTransportType(TransportTypeModel type) {
@@ -64,26 +82,29 @@ class FirstStepCubit extends Cubit<FirstStepState> {
   }
 
   Future<void> submitFirstStep() async {
-    // bool hasSelectedWorkTypes = selectedTransportTypes.isNotEmpty;
+    List<String> selectedWorkTypes = [];
+    if (isDeliveryDelegate) selectedWorkTypes.add('local_delivery');
+    if (isShippingDelegate) selectedWorkTypes.add('inter_governorate_shipping');
+    if (isBusDriver) selectedWorkTypes.add('bus_driver');
+
+    bool hasSelectedWorkTypes = selectedWorkTypes.isNotEmpty;
     bool hasSelectedWarehouse = selectedWarehouse != null;
-    
-    // if (firstStepFormKey.currentState!.validate() && 
-    //     (isIndependentDelegate ? hasSelectedWorkTypes : hasSelectedWorkTypes&&hasSelectedWarehouse)) {
-    //   emit(SubmitFirstStepLoading());
 
-    //   final input = FirstStepInputModel(
-    //     courierType: isIndependentDelegate ? 'freelance' : 'warehouse',
-    //     warehouseId: isIndependentDelegate ? null : selectedWarehouse?.id,
-    //     workTypes: isIndependentDelegate 
-    //         ? selectedTransportTypes.map((t) => t.name!).toList() 
-    //         : null,
-    //   );
+    if (firstStepFormKey.currentState!.validate() &&
+        (isIndependentDelegate ? hasSelectedWorkTypes : hasSelectedWorkTypes && hasSelectedWarehouse)) {
+      emit(SubmitFirstStepLoading());
 
-    //   final result = await firstStepRepo.submitFirstStep(input);
-    //   result.fold(
-    //     (failure) => emit(SubmitFirstStepFailure(failure.message)),
-    //     (successModel) => emit(SubmitFirstStepSuccess()),
-    //   );
-    // }
+      final input = FirstStepInputModel(
+        courierType: isIndependentDelegate ? 'freelance' : 'warehouse',
+        warehouseId: isIndependentDelegate ? null : selectedWarehouse?.id,
+        workTypes: selectedWorkTypes,
+      );
+
+      final result = await firstStepRepo.submitFirstStep(input);
+      result.fold(
+        (failure) => emit(SubmitFirstStepFailure(failure.message)),
+        (successModel) => emit(SubmitFirstStepSuccess()),
+      );
+    }
   }
 }

@@ -17,34 +17,31 @@ class WorkClassificationSelector extends StatelessWidget {
         final cubit = context.read<FirstStepCubit>();
         return Column(
           spacing: 12.h,
-          children: cubit.transportTypes.map((type) {
-            String title = type.name ?? '';
-            String subtitle = '';
-            String iconPath = AppImages.carIcon; // Default icon
-
-            // Map based on name or code to localizations and icons if known
-            if (type.name == 'delivery_inside_governorate') {
-              title = AppLocalizations.of(context)!.deliveryDelegate;
-              subtitle = AppLocalizations.of(context)!.deliveryDelegateSubtitle;
-              iconPath = AppImages.carIcon;
-            } else if (type.name == 'shipping_between_governorates') {
-              title = AppLocalizations.of(context)!.shippingDelegate;
-              subtitle = AppLocalizations.of(context)!.shippingDelegateSubtitle;
-              iconPath = AppImages.locationSuffixIcon;
-            } else if (type.name == 'bus_driver') {
-              title = AppLocalizations.of(context)!.busDriver;
-              subtitle = AppLocalizations.of(context)!.busDriverSubtitle;
-              iconPath = AppImages.busIcon;
-            }
-
-            return _WorkClassificationTile(
-              title: title,
-              subtitle: subtitle,
-              iconPath: iconPath,
-              isSelected: cubit.selectedTransportTypes.contains(type),
-              onTap: () => cubit.toggleTransportType(type),
-            );
-          }).toList(),
+          children: [
+            _WorkClassificationTile(
+              title: AppLocalizations.of(context)!.deliveryDelegate,
+              subtitle: AppLocalizations.of(context)!.deliveryDelegateSubtitle,
+              iconPath: AppImages.carIcon,
+              isSelected: cubit.isDeliveryDelegate,
+              onTap: () =>
+                  cubit.toggleDeliveryDelegate(!cubit.isDeliveryDelegate),
+            ),
+            _WorkClassificationTile(
+              title: AppLocalizations.of(context)!.shippingDelegate,
+              subtitle: AppLocalizations.of(context)!.shippingDelegateSubtitle,
+              iconPath: AppImages.locationSuffixIcon,
+              isSelected: cubit.isShippingDelegate,
+              onTap: () =>
+                  cubit.toggleShippingDelegate(!cubit.isShippingDelegate),
+            ),
+            _WorkClassificationTile(
+              title: AppLocalizations.of(context)!.busDriver,
+              subtitle: AppLocalizations.of(context)!.busDriverSubtitle,
+              iconPath: AppImages.busIcon,
+              isSelected: cubit.isBusDriver,
+              onTap: () => cubit.toggleBusDriver(!cubit.isBusDriver),
+            ),
+          ],
         );
       },
     );
