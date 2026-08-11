@@ -11,6 +11,9 @@ abstract class EndPoints {
   static const String registerStep2 = 'auth/register/step-2';
   static const String warehouses = 'warehouses';
   static const String transportTypes = 'lookups/transport-types';
+  static const String governorates = 'lookups/governorates';
+  static const String cities = 'lookups/cities';
+  static const String registerStep4 = 'auth/register/step-4';
   static const String forgotPasswordSendOtpUrl = 'auth/forgot-password/send-otp';
   static const String verifyOtpUrl = 'auth/otp/verify';
   static const String resendOtpUrl = 'auth/otp/resend';

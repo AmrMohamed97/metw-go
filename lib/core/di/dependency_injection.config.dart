@@ -65,10 +65,16 @@ import 'package:metw_go/features/register/presentation/manager/register_cubit.da
     as _i1006;
 import 'package:metw_go/features/register_steps/data/data_source/first_step_data_source.dart'
     as _i655;
+import 'package:metw_go/features/register_steps/data/data_source/third_step_data_source.dart'
+    as _i837;
 import 'package:metw_go/features/register_steps/data/repo/first_step_repo.dart'
     as _i305;
 import 'package:metw_go/features/register_steps/data/repo/first_step_repo_impl.dart'
     as _i29;
+import 'package:metw_go/features/register_steps/data/repo/third_step_repo.dart'
+    as _i319;
+import 'package:metw_go/features/register_steps/data/repo/third_step_repo_impl.dart'
+    as _i220;
 import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_cubit.dart'
     as _i212;
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_cubit.dart'
@@ -105,7 +111,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i197.ProfileCubit>(() => _i197.ProfileCubit());
     gh.factory<_i449.FourthStepCubit>(() => _i449.FourthStepCubit());
     gh.factory<_i333.SecondStepCubit>(() => _i333.SecondStepCubit());
-    gh.factory<_i273.ThirdStepCubit>(() => _i273.ThirdStepCubit());
     gh.factory<_i661.ServiceAreasCubit>(() => _i661.ServiceAreasCubit());
     gh.factory<_i192.VehicleCubit>(() => _i192.VehicleCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
@@ -134,6 +139,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i655.FirstStepDataSource>(
       () => _i655.FirstStepDataSource(gh<_i361.Dio>()),
+    );
+    gh.factory<_i837.ThirdStepDataSource>(
+      () => _i837.ThirdStepDataSource(gh<_i361.Dio>()),
     );
     gh.factory<_i540.LoginRepo>(
       () => _i770.LoginRepoImpl(loginDataSource: gh<_i101.LoginDataSource>()),
@@ -166,7 +174,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i37.ForgetPasswordCubit>(
       () => _i37.ForgetPasswordCubit(gh<_i778.ForgetPasswordRepo>()),
     );
+    gh.factory<_i319.ThirdStepRepo>(
+      () => _i220.ThirdStepRepoImpl(gh<_i837.ThirdStepDataSource>()),
+    );
     gh.factory<_i859.OtpCubit>(() => _i859.OtpCubit(gh<_i72.OtpRepo>()));
+    gh.factory<_i273.ThirdStepCubit>(
+      () => _i273.ThirdStepCubit(gh<_i319.ThirdStepRepo>()),
+    );
     return this;
   }
 }

@@ -242,7 +242,7 @@ class AppRouter {
         path: AppRoutes.thirdStepPage,
         name: AppRoutes.thirdStepPage,
         builder: (context, state) => BlocProvider(
-          create: (context) => getIt<ThirdStepCubit>(),
+          create: (context) => getIt<ThirdStepCubit>()..init(),
           child: const ThirdStepPage(),
         ),
       ),

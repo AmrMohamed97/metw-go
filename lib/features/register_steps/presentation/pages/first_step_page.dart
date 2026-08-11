@@ -101,6 +101,9 @@ class FirstStepPage extends StatelessWidget {
                                 showModalBottomSheet(
                                   context: context,
                                   isScrollControlled: true,
+                                  constraints: BoxConstraints(
+                                    maxHeight: MediaQuery.of(context).size.height * 0.5,
+                                  ),
                                   backgroundColor: Theme.of(context).colorScheme.surface,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
