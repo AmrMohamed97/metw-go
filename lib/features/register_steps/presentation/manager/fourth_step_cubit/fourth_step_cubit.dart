@@ -4,11 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/core/widgets/image_mixin.dart';
+import 'package:metw_go/features/register_steps/data/repo/fourth_step_repo.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_state.dart';
 
 @injectable
 class FourthStepCubit extends Cubit<FourthStepState> with ImageMixin{
-  FourthStepCubit() : super(FourthStepInitial());
+  final FourthStepRepo repo;
+
+  FourthStepCubit(this.repo) : super(FourthStepInitial());
 
     File? personalPhoto;
   File? nationalIdFront;
@@ -63,5 +66,33 @@ class FourthStepCubit extends Cubit<FourthStepState> with ImageMixin{
       currentlyLoadingDoc = null;
       emit(PickDocumentImageSuccess());
     }
+  }
+
+  Future<void> submitFourthStep() async {
+    if (personalPhoto == null ||
+        nationalIdFront == null ||
+        nationalIdBack == null ||
+        drivingLicenseFront == null ||
+        drivingLicenseBack == null ||
+        vehicleLicenseFront == null ||
+        vehicleLicenseBack == null) {
+      emit(SubmitFourthStepFailure('Please upload all required photos.'));
+      return;
+    }
+
+    emit(SubmitFourthStepLoading());
+    final result = await repo.submitFourthStep(
+      personalPhoto!,
+      nationalIdFront!,
+      nationalIdBack!,
+      drivingLicenseFront!,
+      drivingLicenseBack!,
+      vehicleLicenseFront!,
+      vehicleLicenseBack!,
+    );
+    result.fold(
+      (failure) => emit(SubmitFourthStepFailure(failure.message)),
+      (success) => emit(SubmitFourthStepSuccess()),
+    );
   }
 } 

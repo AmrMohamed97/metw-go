@@ -8,14 +8,12 @@ import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
+import 'package:metw_go/core/widgets/pic_image_bottom_sheet.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
-// import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
-// import 'package:metw_go/features/register/presentation/manager/register_state.dart';
-// import 'package:metw_go/features/register/presentation/widgets/custom_steper.dart';
 import 'package:metw_go/features/register/presentation/widgets/document_upload_box.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 import 'package:metw_go/features/register/presentation/widgets/personal_photo_container.dart';
-import 'package:metw_go/core/widgets/pic_image_bottom_sheet.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_cubit.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_state.dart';
 
@@ -24,7 +22,19 @@ class FourthStepPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FourthStepCubit, FourthStepState>(
+    return BlocConsumer<FourthStepCubit, FourthStepState>(
+      listener: (context, state) {
+        if (state is SubmitFourthStepSuccess) {
+          showToast(
+            context,
+            message: AppLocalizations.of(context)!.savedSuccessfully,
+            state: ToastStates.success,
+          );
+          context.go(AppRoutes.otp); // Proceeding to OTP or equivalent
+        } else if (state is SubmitFourthStepFailure) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        }
+      },
       builder: (context, state) {
         final cubit = context.read<FourthStepCubit>();
         bool isDocLoading(String key) =>
@@ -36,7 +46,7 @@ class FourthStepPage extends StatelessWidget {
             slivers: [
               SliverToBoxAdapter(
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     crossAxisAlignment: .start,
                     children: [
@@ -59,7 +69,7 @@ class FourthStepPage extends StatelessWidget {
                         ).copyWith(color: Colors.grey.shade400),
                       ),
                       24.verticalSpace,
-                            
+
                       // Personal Photo
                       FieldTitle(
                         title: AppLocalizations.of(context)!.personalPhoto,
@@ -77,14 +87,15 @@ class FourthStepPage extends StatelessWidget {
                               value: cubit,
                               child: PickImageBottomSheet(
                                 ctx: ctx,
-                                onPick: (source) => cubit.pickPersonalPhoto(source),
+                                onPick: (source) =>
+                                    cubit.pickPersonalPhoto(source),
                               ),
                             ),
                           );
                         },
                       ),
                       24.verticalSpace,
-                            
+
                       // National ID
                       FieldTitle(
                         title: AppLocalizations.of(context)!.nationalId,
@@ -157,7 +168,7 @@ class FourthStepPage extends StatelessWidget {
                         ],
                       ),
                       24.verticalSpace,
-                            
+
                       // Vehicle License
                       FieldTitle(
                         title: AppLocalizations.of(context)!.vehicleLicense,
@@ -211,15 +222,17 @@ class FourthStepPage extends StatelessWidget {
                                 color: Colors.grey.shade600,
                               ),
                               onPressed: () {},
-                                  // cubit.changePage(3), // Back to FourthView
+                              // cubit.changePage(3), // Back to FourthView
                             ),
                           ),
                           CustomButton(
-                            horizontalPadding: 40,
+                            loading: state is SubmitFourthStepLoading,
+                            horizontalPadding: state is SubmitFourthStepLoading
+                                ? null
+                                : 40,
                             text: AppLocalizations.of(context)!.next,
                             onPressed: () {
-                              // cubit.fifthViewPress(context);
-                              context.go(AppRoutes.otp);
+                              cubit.submitFourthStep();
                             },
                           ),
                         ],

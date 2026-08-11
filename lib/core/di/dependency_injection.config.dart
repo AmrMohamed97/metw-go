@@ -65,6 +65,8 @@ import 'package:metw_go/features/register/presentation/manager/register_cubit.da
     as _i1006;
 import 'package:metw_go/features/register_steps/data/data_source/first_step_data_source.dart'
     as _i655;
+import 'package:metw_go/features/register_steps/data/data_source/fourth_step_data_source.dart'
+    as _i701;
 import 'package:metw_go/features/register_steps/data/data_source/second_step_data_source.dart'
     as _i497;
 import 'package:metw_go/features/register_steps/data/data_source/third_step_data_source.dart'
@@ -73,6 +75,10 @@ import 'package:metw_go/features/register_steps/data/repo/first_step_repo.dart'
     as _i305;
 import 'package:metw_go/features/register_steps/data/repo/first_step_repo_impl.dart'
     as _i29;
+import 'package:metw_go/features/register_steps/data/repo/fourth_step_repo.dart'
+    as _i858;
+import 'package:metw_go/features/register_steps/data/repo/fourth_step_repo_impl.dart'
+    as _i605;
 import 'package:metw_go/features/register_steps/data/repo/second_step_repo.dart'
     as _i393;
 import 'package:metw_go/features/register_steps/data/repo/second_step_repo_impl.dart'
@@ -115,7 +121,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i364.OrdersCubit>(() => _i364.OrdersCubit());
     gh.factory<_i87.PersonalInfoCubit>(() => _i87.PersonalInfoCubit());
     gh.factory<_i197.ProfileCubit>(() => _i197.ProfileCubit());
-    gh.factory<_i449.FourthStepCubit>(() => _i449.FourthStepCubit());
     gh.factory<_i661.ServiceAreasCubit>(() => _i661.ServiceAreasCubit());
     gh.factory<_i192.VehicleCubit>(() => _i192.VehicleCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
@@ -145,6 +150,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i655.FirstStepDataSource>(
       () => _i655.FirstStepDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i701.FourthStepDataSource>(
+      () => _i701.FourthStepDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i497.SecondStepDataSource>(
       () => _i497.SecondStepDataSource(gh<_i361.Dio>()),
     );
@@ -165,6 +173,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i212.FirstStepCubit>(
       () => _i212.FirstStepCubit(gh<_i305.FirstStepRepo>()),
+    );
+    gh.factory<_i858.FourthStepRepo>(
+      () => _i605.FourthStepRepoImpl(gh<_i701.FourthStepDataSource>()),
     );
     gh.factory<_i778.ForgetPasswordRepo>(
       () => _i718.ForgetPasswordRepoImplement(
@@ -190,6 +201,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i333.SecondStepCubit>(
       () => _i333.SecondStepCubit(gh<_i393.SecondStepRepo>()),
+    );
+    gh.factory<_i449.FourthStepCubit>(
+      () => _i449.FourthStepCubit(gh<_i858.FourthStepRepo>()),
     );
     gh.factory<_i859.OtpCubit>(() => _i859.OtpCubit(gh<_i72.OtpRepo>()));
     gh.factory<_i273.ThirdStepCubit>(
