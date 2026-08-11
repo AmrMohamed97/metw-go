@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
@@ -9,6 +11,7 @@ import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_steper.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/core/widgets/pic_image_bottom_sheet.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 import 'package:metw_go/features/register/presentation/widgets/image_upload_container.dart';
@@ -21,7 +24,21 @@ class SecondStepPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SecondStepCubit, SecondStepState>(
+    return BlocConsumer<SecondStepCubit, SecondStepState>(
+      listener: (context, state) {
+        if (state is SubmitSecondStepSuccess) {
+          showToast(
+            context,
+            message: AppLocalizations.of(context)!.savedSuccessfully,
+            state: ToastStates.success,
+          );
+          context.go(AppRoutes.thirdStepPage);
+        } else if (state is SubmitSecondStepFailure) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        } else if (state is GetTransportTypesFailure) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        }
+      },
       builder: (context, state) {
         final cubit = context.read<SecondStepCubit>();
         return ScreenWrapper(
@@ -63,15 +80,29 @@ class SecondStepPage extends StatelessWidget {
                         ),
                         4.verticalSpace,
                         CustomTextField(
-                          hintText: AppLocalizations.of(
+                          hintText: cubit.selectedTransportType?.name ?? AppLocalizations.of(
                             context,
                           )!.chooseTransportMethod,
-                          suffixIcon: const Icon(Icons.keyboard_arrow_down),
+                          suffixIcon: state is GetTransportTypesLoading 
+                            ? const SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  ),
+                                )
+                            : const Icon(Icons.keyboard_arrow_down),
                           readOnly: true,
-                          onTap: () {},
+                          onTap: () {
+                            if (cubit.transportTypes.isNotEmpty) {
+                              _showTransportTypeBottomSheet(context, cubit);
+                            }
+                          },
                           validator: (value) {
-                            // Normally this validates selectedTransportMethod
-                            // For UI implementation, we can just return null or hook it up later.
+                            if (cubit.selectedTransportType == null) {
+                              return AppLocalizations.of(context)!.errChooseWorkClassification; // Or a specific error
+                            }
                             return null;
                           },
                         ),
@@ -94,6 +125,7 @@ class SecondStepPage extends StatelessWidget {
                                     )!.maxWeightHint,
                                     controller: cubit.maxWeightController,
                                     textInputType: TextInputType.number,
+                                    readOnly: true,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return AppLocalizations.of(
@@ -229,10 +261,10 @@ class SecondStepPage extends StatelessWidget {
                               ),
                             ),
                             CustomButton(
-                              horizontalPadding: 40,
+                              loading: state is SubmitSecondStepLoading,
+                              horizontalPadding: state is SubmitSecondStepLoading ? null : 40,
                               text: AppLocalizations.of(context)!.next,
-                              onPressed:
-                                  () {}, // cubit.thirdViewPress(context),
+                              onPressed: () => cubit.submitSecondStep(),
                             ),
                           ],
                         ),
@@ -244,6 +276,105 @@ class SecondStepPage extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showTransportTypeBottomSheet(BuildContext context, SecondStepCubit cubit) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.5,
+      ),
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+      ),
+      builder: (ctx) {
+        return BlocProvider.value(
+          value: cubit,
+          child: BlocBuilder<SecondStepCubit, SecondStepState>(
+            builder: (context, state) {
+              return SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        height: 4.h,
+                        width: 40.w,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                      ),
+                      16.verticalSpace,
+                      Text(
+                        AppLocalizations.of(context)!.chooseTransportMethod,
+                        style: AppTextStyle.bold18(context),
+                      ),
+                      16.verticalSpace,
+                      Flexible(
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: cubit.transportTypes.length,
+                          separatorBuilder: (context, index) => 12.verticalSpace,
+                          itemBuilder: (context, index) {
+                            final type = cubit.transportTypes[index];
+                            final isSelected = cubit.selectedTransportType?.id == type.id;
+                            return InkWell(
+                              onTap: () {
+                                cubit.changeTransportType(type);
+                                Navigator.pop(context);
+                              },
+                              borderRadius: BorderRadius.circular(12.r),
+                              child: Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? Theme.of(context).primaryColor
+                                        : Colors.grey.shade300,
+                                    width: isSelected ? 1.5 : 1,
+                                  ),
+                                  color: isSelected
+                                      ? Theme.of(context).primaryColor.withOpacity(0.05)
+                                      : Colors.transparent,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        type.name ?? '',
+                                        style: AppTextStyle.medium16(context).copyWith(
+                                          color: isSelected ? Theme.of(context).primaryColor : null,
+                                        ),
+                                      ),
+                                    ),
+                                    if (isSelected)
+                                      Icon(
+                                        Icons.check_circle,
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      16.verticalSpace,
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
         );
       },

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'first_step_data_source.dart';
+part of 'second_step_data_source.dart';
 
 // dart format off
 
@@ -10,8 +10,10 @@ part of 'first_step_data_source.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter,avoid_unused_constructor_parameters,unreachable_from_main,avoid_redundant_argument_values
 
-class _FirstStepDataSource implements FirstStepDataSource {
-  _FirstStepDataSource(this._dio, {this.baseUrl, this.errorLogger});
+class _SecondStepDataSource implements SecondStepDataSource {
+  _SecondStepDataSource(this._dio, {this.baseUrl, this.errorLogger}) {
+    baseUrl ??= 'https://lasco.evyx.lol/api/metwgo/';
+  }
 
   final Dio _dio;
 
@@ -20,25 +22,25 @@ class _FirstStepDataSource implements FirstStepDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<WarehouseListResponse> getWarehouses() async {
+  Future<TransportTypeListResponse> getTransportTypes() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<WarehouseListResponse>(
+    final _options = _setStreamType<TransportTypeListResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'warehouses',
+            'lookups/transport-types',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late WarehouseListResponse _value;
+    late TransportTypeListResponse _value;
     try {
-      _value = WarehouseListResponse.fromJson(_result.data!);
+      _value = TransportTypeListResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
@@ -47,17 +49,36 @@ class _FirstStepDataSource implements FirstStepDataSource {
   }
 
   @override
-  Future<FirstStepOutModel> submitFirstStep(FirstStepInputModel input) async {
+  Future<FirstStepOutModel> submitSecondStep(
+    int transportTypeId,
+    String plateNumber,
+    File vehicleImage,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(input.toJson());
+    final _data = FormData();
+    _data.fields.add(MapEntry('transport_type_id', transportTypeId.toString()));
+    _data.fields.add(MapEntry('plate_number', plateNumber));
+    _data.files.add(
+      MapEntry(
+        'vehicle_image',
+        MultipartFile.fromFileSync(
+          vehicleImage.path,
+          filename: vehicleImage.path.split(Platform.pathSeparator).last,
+        ),
+      ),
+    );
     final _options = _setStreamType<FirstStepOutModel>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+      Options(
+            method: 'POST',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'multipart/form-data',
+          )
           .compose(
             _dio.options,
-            'auth/register/step-2',
+            'auth/register/step-3',
             queryParameters: queryParameters,
             data: _data,
           )

@@ -13,6 +13,7 @@ abstract class EndPoints {
   static const String transportTypes = 'lookups/transport-types';
   static const String governorates = 'lookups/governorates';
   static const String cities = 'lookups/cities';
+  static const String registerStep3 = 'auth/register/step-3';
   static const String registerStep4 = 'auth/register/step-4';
   static const String forgotPasswordSendOtpUrl = 'auth/forgot-password/send-otp';
   static const String verifyOtpUrl = 'auth/otp/verify';
