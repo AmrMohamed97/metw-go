@@ -43,47 +43,14 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoutes.login,
     // redirect: (context, state) async {
-    //   final String currentPath = state.matchedLocation;
 
-    //   // 1. الخروج المبكر: لا نحتاج لهذه الحسابات إلا عند محاولة فتح الصفحة الرئيسية
-    //   if (currentPath != '/') return null;
+    //   final AuthModel? authData = CacheHelper.getauthData();
 
-    //   bool? isonboardingCompleted = CacheHelper.getData(
-    //     key: AppConstant.isOnboarding,
-    //   );
-
-    //   // إذا لم يكمل المستخدم الـ onboarding، نقله لصفحة الـ onboarding
-    //   if (isonboardingCompleted == null) return AppRoutes.onbording;
-
-    //   final Future<String> tokenFuture = CacheHelper.getSecuerString(
-    //     key: AppConstant.accessToken,
-    //   );
-
-    //   // 2. جلب البيانات بشكل متوازٍ (Parallel Fetch) لتحسين الأداء
-    //   final UserModel? userData = CacheHelper.getUserData();
-    //   final String token = await tokenFuture;
-
-    //   // 3. التحقق من التوكن
-    //   if (token.isEmpty) return AppRoutes.login;
-
-    //   // 4. التحقق من بيانات المستخدم وصلاحياته
-    //   final String? roles = userData?.role;
-    //   if (roles == null || roles.isEmpty) {
+    //   final bool isComplete = authData?.status == "complete";
+    //   if (isComplete) {
+    //     return AppRoutes.splashScreen;
+    //   } else {
     //     return AppRoutes.login;
-    //   }
-
-    //   // 5. التوجيه بناءً على الصلاحية (مبسط بدون تداخل if-else)
-    //   switch (roles) {
-    //     case "admin":
-    //       return AppRoutes.admin;
-    //     case "doctor":
-    //       return AppRoutes.doctor;
-    //     case "lab":
-    //       return AppRoutes.sectionWorker;
-    //     case "delivery":
-    //       return AppRoutes.openLocationPage;
-    //     default:
-    //       return AppRoutes.login;
     //   }
     // },
     routes: [
@@ -224,9 +191,8 @@ class AppRouter {
         path: AppRoutes.firstStepPage,
         name: AppRoutes.firstStepPage,
         builder: (context, state) => BlocProvider(
-          create: (context) => getIt<FirstStepCubit>()
-            ..getWarehouses(),
-            // ..getTransportTypes(),
+          create: (context) => getIt<FirstStepCubit>()..getWarehouses(),
+          // ..getTransportTypes(),
           child: const FirstStepPage(),
         ),
       ),

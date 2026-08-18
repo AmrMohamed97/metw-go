@@ -50,19 +50,22 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCnro1CUf6cmVdrCdzWGqqHeZkIgwfpDfw',
-    appId: '1:947444247858:android:a76a5484900d4b5570fb2b',
-    messagingSenderId: '947444247858',
-    projectId: 'new-lasco',
-    storageBucket: 'new-lasco.firebasestorage.app',
+    apiKey: 'AIzaSyBBwGR_dHiPg5GYV3lZ1rNLSLui2O7La2Y',
+    appId: '1:269069396327:android:09f1164a9430699e60e7c2',
+    messagingSenderId: '269069396327',
+    projectId: 'metw-d3270',
+    databaseURL: 'https://metw-d3270-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'metw-d3270.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAEeRGBNYE5vqmTmQ4Myb7-wP_gYxRYGho',
-    appId: '1:947444247858:ios:23858ccbdb36806370fb2b',
-    messagingSenderId: '947444247858',
-    projectId: 'new-lasco',
-    storageBucket: 'new-lasco.firebasestorage.app',
+    apiKey: 'AIzaSyAHsH23ergqgYtWB1pdjz3zzoZ_hHPQy0Y',
+    appId: '1:269069396327:ios:3df2f5bcfda263d760e7c2',
+    messagingSenderId: '269069396327',
+    projectId: 'metw-d3270',
+    databaseURL: 'https://metw-d3270-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'metw-d3270.firebasestorage.app',
     iosBundleId: 'com.evyx.metwGo',
   );
+
 }

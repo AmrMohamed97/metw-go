@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "947444247858",
-    "project_id": "new-lasco",
-    "storage_bucket": "new-lasco.firebasestorage.app"
+    "project_number": "269069396327",
+    "firebase_url": "https://metw-d3270-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "metw-d3270",
+    "storage_bucket": "metw-d3270.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:947444247858:android:a76a5484900d4b5570fb2b",
+        "mobilesdk_app_id": "1:269069396327:android:09f1164a9430699e60e7c2",
         "android_client_info": {
           "package_name": "com.evyx.metw_go"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCnro1CUf6cmVdrCdzWGqqHeZkIgwfpDfw"
+          "current_key": "AIzaSyBBwGR_dHiPg5GYV3lZ1rNLSLui2O7La2Y"
         }
       ],
       "services": {
