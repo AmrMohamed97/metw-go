@@ -22,6 +22,13 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       : RegistrationProgress.fromJson(
           json['registration_progress'] as Map<String, dynamic>,
         ),
+  isAuthorized: json['is_authorized'] as bool?,
+  courier: json['courier'] == null
+      ? null
+      : Courier.fromJson(json['courier'] as Map<String, dynamic>),
+  firebase: json['firebase'] == null
+      ? null
+      : Firebase.fromJson(json['firebase'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
@@ -36,4 +43,7 @@ Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
   'access_token': instance.accessToken,
   'token_type': instance.tokenType,
   'registration_progress': instance.registrationProgress,
+  'is_authorized': instance.isAuthorized,
+  'courier': instance.courier,
+  'firebase': instance.firebase,
 };

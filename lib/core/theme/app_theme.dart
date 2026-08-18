@@ -121,7 +121,7 @@ class AppTheme {
         surfaceTint: Color(0xFF2E2E42),
         outline: Color(0xFF3A3A52),
         scrim: Color(0xFF252535),
-        shadow: Color(0xFF000000),
+        shadow: MyColors.white, // Color(0xFF000000),
         surface: Color(0xFF16213E),
       ),
       // AppBar Theme

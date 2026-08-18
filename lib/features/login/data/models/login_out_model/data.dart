@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'courier.dart';
+import 'firebase.dart';
 import 'registration_progress.dart';
 
 part 'data.g.dart';
@@ -25,6 +27,10 @@ class Data {
 	String? tokenType;
 	@JsonKey(name: 'registration_progress') 
 	RegistrationProgress? registrationProgress;
+	@JsonKey(name: 'is_authorized') 
+	bool? isAuthorized;
+	Courier? courier;
+	Firebase? firebase;
 
 	Data({
 		this.screen, 
@@ -38,6 +44,9 @@ class Data {
 		this.accessToken, 
 		this.tokenType, 
 		this.registrationProgress, 
+		this.isAuthorized,
+		this.courier,
+		this.firebase,
 	});
 
 	factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);

@@ -113,7 +113,7 @@ class CustomTextField extends StatelessWidget {
               suffixIcon: suffixIcon,
               counter: counter,
             ),
-        cursorColor: cursorColor ?? Colors.black,
+        cursorColor: cursorColor ?? Theme.of(context).colorScheme.shadow,
         cursorHeight: cursorHieght,
         cursorWidth: cursorWidth ?? 2,
 
@@ -132,7 +132,7 @@ class CustomTextField extends StatelessWidget {
             textStyle ??
             Theme.of(context).textTheme.titleSmall!.copyWith(
               fontSize: 14.sp > 0 ? 14.sp : 14.0,
-              // color: Colors.black,
+              color: Theme.of(context).colorScheme.shadow,
             ),
       ),
     );
