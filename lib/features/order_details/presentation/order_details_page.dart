@@ -25,69 +25,69 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         child: Column(
           children: [
             // Top Row (Status & Timer)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Status (Right side in RTL)
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 8.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.bolt,
-                        color: Theme.of(context).colorScheme.tertiary,
-                        size: 20.r,
-                      ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        l10n.immediateDeliveryOnePoint,
-                        style: AppTextStyle.medium14(context).copyWith(
-                          color: Theme.of(context).colorScheme.tertiary,
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(
+                spacing: 10,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Status (Right side in RTL)
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 8.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondary,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.bolt, color: MyColors.white, size: 20.r),
+                        SizedBox(width: 8.w),
+                        Text(
+                          l10n.immediateDeliveryOnePoint,
+                          style: AppTextStyle.medium14(
+                            context,
+                          ).copyWith(color: MyColors.white),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Timer (Left side in RTL)
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 8.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20.r),
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.scrim,
+                      ],
                     ),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.pie_chart_outline,
-                        color: MyColors.primaryColor,
-                        size: 20.r,
+                  // Timer (Left side in RTL)
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 8.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.circular(20.r),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.scrim,
                       ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        '02:30 د',
-                        style: AppTextStyle.medium14(context).copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.pie_chart_outline,
+                          color: MyColors.primaryColor,
+                          size: 20.r,
                         ),
-                      ),
-                    ],
+                        SizedBox(width: 8.w),
+                        Text(
+                          '02:30 د',
+                          style: AppTextStyle.medium14(context).copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             SizedBox(height: 24.h),
 
