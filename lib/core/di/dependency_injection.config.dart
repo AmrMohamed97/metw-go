@@ -42,6 +42,11 @@ import 'package:metw_go/features/login/presentation/manager/login_cubit.dart'
     as _i563;
 import 'package:metw_go/features/notification/presentation/manager/notification_cubit.dart'
     as _i364;
+import 'package:metw_go/features/orders/data/data_source/orders_data_source.dart'
+    as _i533;
+import 'package:metw_go/features/orders/data/repo/orders_repo.dart' as _i480;
+import 'package:metw_go/features/orders/data/repo/orders_repo_impl.dart'
+    as _i975;
 import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart'
     as _i364;
 import 'package:metw_go/features/otp/data/data_source/otp_data_source.dart'
@@ -118,7 +123,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i203.DelegateInfoCubit>(() => _i203.DelegateInfoCubit());
     gh.factory<_i171.HomeCubit>(() => _i171.HomeCubit());
     gh.factory<_i364.NotificationCubit>(() => _i364.NotificationCubit());
-    gh.factory<_i364.OrdersCubit>(() => _i364.OrdersCubit());
     gh.factory<_i87.PersonalInfoCubit>(() => _i87.PersonalInfoCubit());
     gh.factory<_i197.ProfileCubit>(() => _i197.ProfileCubit());
     gh.factory<_i661.ServiceAreasCubit>(() => _i661.ServiceAreasCubit());
@@ -142,6 +146,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i101.LoginDataSource>(
       () => _i101.LoginDataSource(gh<_i361.Dio>()),
+    );
+    gh.factory<_i533.OrdersDataSource>(
+      () => _i533.OrdersDataSource(gh<_i361.Dio>()),
     );
     gh.factory<_i50.OtpDataSource>(() => _i50.OtpDataSource(gh<_i361.Dio>()));
     gh.factory<_i961.RegisterDataSource>(
@@ -196,11 +203,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i37.ForgetPasswordCubit>(
       () => _i37.ForgetPasswordCubit(gh<_i778.ForgetPasswordRepo>()),
     );
+    gh.factory<_i480.OrdersRepo>(
+      () =>
+          _i975.OrdersRepoImpl(ordersDataSource: gh<_i533.OrdersDataSource>()),
+    );
     gh.factory<_i319.ThirdStepRepo>(
       () => _i220.ThirdStepRepoImpl(gh<_i837.ThirdStepDataSource>()),
     );
     gh.factory<_i333.SecondStepCubit>(
       () => _i333.SecondStepCubit(gh<_i393.SecondStepRepo>()),
+    );
+    gh.factory<_i364.OrdersCubit>(
+      () => _i364.OrdersCubit(gh<_i480.OrdersRepo>()),
     );
     gh.factory<_i449.FourthStepCubit>(
       () => _i449.FourthStepCubit(gh<_i858.FourthStepRepo>()),

@@ -29,6 +29,7 @@ abstract class EndPoints {
   // static const String confirmPhoneUrl = 'Authentication/ConfirmPhone';
 
   static const String orders = 'orders';
+  static const String incomingOrdersUrl = 'orders/incoming';
   static const String orderInvoice = 'orders/{orderId}/invoice';
   static const String updatePatientNameUrl = 'orders/{order_id}/patient-name';
 

@@ -18,7 +18,7 @@ class OrdersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<OrdersCubit>(),
+      create: (context) => getIt<OrdersCubit>()..getIncomingOrders(),
       child: BlocBuilder<OrdersCubit, OrdersState>(
         builder: (context, state) {
           // final cubit = context.read<OrdersCubit>();
