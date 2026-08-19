@@ -6,6 +6,8 @@ import 'package:metw_go/core/widgets/order_item.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_state.dart';
 
+import 'package:skeletonizer/skeletonizer.dart';
+
 class OrdersListView extends StatefulWidget {
   const OrdersListView({super.key});
 
@@ -42,7 +44,28 @@ class _OrdersListViewState extends State<OrdersListView> {
         final cubit = context.read<OrdersCubit>();
         
         if (state is IncomingOrdersLoadingState) {
-          return const Expanded(child: Center(child: CircularProgressIndicator()));
+          return Expanded(
+            child: Skeletonizer(
+              enabled: true,
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 12.0),
+                    child: OrderItem(
+                      orderId: "F-ORD-00000000",
+                      distance: "5.0 كم",
+                      isUrgent: false,
+                      pickup: "عنوان استلام وهمي طويل لغرض التحميل",
+                      delivery: "عنوان تسليم وهمي طويل لغرض التحميل",
+                      onDetailsPressed: () {},
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
         }
 
         if (state is IncomingOrdersErrorState) {
