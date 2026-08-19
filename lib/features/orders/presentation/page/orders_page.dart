@@ -36,7 +36,7 @@ class OrdersPage extends StatelessWidget {
                   SearchView(),
                   10.verticalSpace,
                   // Filter Chips
-                  FilterView(),
+                  // FilterView(),
                   25.verticalSpace,
                   // Orders List
                   OrdersListView(),

@@ -23,7 +23,7 @@ class OrdersListView extends StatelessWidget {
                 orderId: "#MET-8842",
                 distance: "4.2 كم",
                 isUrgent: true,
-                isTodayOrders: cubit.isTodayOrders,
+                // isTodayOrders: cubit.isTodayOrders,
                 pickup: "مطعم شواية الخليج - طريق التخصصي",
                 delivery: "حي النخيل - شارع الأمير سعود",
                 onDetailsPressed: () =>
