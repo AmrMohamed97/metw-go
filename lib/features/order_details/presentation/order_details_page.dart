@@ -7,7 +7,8 @@ import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 
 class OrderDetailsPage extends StatefulWidget {
-  const OrderDetailsPage({super.key});
+  final int orderId;
+  const OrderDetailsPage({super.key, required this.orderId});
 
   @override
   State<OrderDetailsPage> createState() => _OrderDetailsPageState();

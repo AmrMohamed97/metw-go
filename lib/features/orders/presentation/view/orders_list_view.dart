@@ -102,7 +102,7 @@ class _OrdersListViewState extends State<OrdersListView> {
                   // isTodayOrders: cubit.isTodayOrders,
                   pickup: order.pickupAddress ?? "",
                   delivery: order.dropoffAddress ?? "",
-                  onDetailsPressed: () => context.push(AppRoutes.orderDetailsPage),
+                  onDetailsPressed: () => context.push(AppRoutes.orderDetailsPage, extra: order.id),
                   // borderColor: Theme.of(context).colorScheme.secondary,
                 ),
               );

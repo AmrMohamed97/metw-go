@@ -137,7 +137,7 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.orderDetailsPage,
         name: AppRoutes.orderDetailsPage,
-        builder: (context, state) => const OrderDetailsPage(),
+        builder: (context, state) =>  OrderDetailsPage(orderId: state.extra as int),
       ),
       GoRoute(
         path: AppRoutes.personalInfoPage,
