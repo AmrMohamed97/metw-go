@@ -14,7 +14,8 @@ class OrderItem extends StatelessWidget {
     required this.pickup,
     required this.delivery,
     this.deliveryLabel,
-    this.isTodayOrders = false, this.onDetailsPressed,
+    this.isTodayOrders = false,
+    this.onDetailsPressed,
     // required this.borderColor,
   });
   final String orderId;
@@ -156,7 +157,8 @@ class OrderItem extends StatelessWidget {
                       ),
                       SizedBox(height: 16),
                       Text(
-                        deliveryLabel ?? AppLocalizations.of(context)!.deliveryTo,
+                        deliveryLabel ??
+                            AppLocalizations.of(context)!.deliveryTo,
                         style: AppTextStyle.medium14(context).copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                           fontSize: 12.sp,
@@ -182,35 +184,15 @@ class OrderItem extends StatelessWidget {
                 if (isTodayOrders)
                   Expanded(
                     flex: 2,
-                    child: CustomButton(text: AppLocalizations.of(context)!.startOrder, onPressed: () {}),
+                    child: CustomButton(
+                      text: AppLocalizations.of(context)!.startOrder,
+                      onPressed: () {},
+                    ),
                   )
                 else
                   Expanded(
                     flex: 2,
-                    child: Container(
-                      height: 46,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.outline,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.mockDuration,
-                            style: AppTextStyle.medium14(context).copyWith(
-                              color: Theme.of(context).colorScheme.onSurface,
-                            ),
-                          ),
-                          SizedBox(width: 8.w),
-                          Icon(
-                            Icons.access_time,
-                            color: Theme.of(context).colorScheme.onSurface,
-                            size: 18.sp,
-                          ),
-                        ],
-                      ),
-                    ),
+                    child: CustomButton(text: AppLocalizations.of(context)!.startOrder, onPressed: () {}),
                   ),
                 12.horizontalSpace,
                 Expanded(
