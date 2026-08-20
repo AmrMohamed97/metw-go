@@ -42,6 +42,14 @@ import 'package:metw_go/features/login/presentation/manager/login_cubit.dart'
     as _i563;
 import 'package:metw_go/features/notification/presentation/manager/notification_cubit.dart'
     as _i364;
+import 'package:metw_go/features/order_details/data/data_source/order_details_data_source.dart'
+    as _i304;
+import 'package:metw_go/features/order_details/data/repositories/order_details_repository.dart'
+    as _i603;
+import 'package:metw_go/features/order_details/data/repositories/order_details_repository_impl.dart'
+    as _i94;
+import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart'
+    as _i571;
 import 'package:metw_go/features/orders/data/data_source/orders_data_source.dart'
     as _i533;
 import 'package:metw_go/features/orders/data/repo/orders_repo.dart' as _i480;
@@ -147,6 +155,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i101.LoginDataSource>(
       () => _i101.LoginDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i304.OrderDetailsDataSource>(
+      () => _i304.OrderDetailsDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i533.OrdersDataSource>(
       () => _i533.OrdersDataSource(gh<_i361.Dio>()),
     );
@@ -207,6 +218,9 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i975.OrdersRepoImpl(ordersDataSource: gh<_i533.OrdersDataSource>()),
     );
+    gh.factory<_i603.OrderDetailsRepository>(
+      () => _i94.OrderDetailsRepositoryImpl(gh<_i304.OrderDetailsDataSource>()),
+    );
     gh.factory<_i319.ThirdStepRepo>(
       () => _i220.ThirdStepRepoImpl(gh<_i837.ThirdStepDataSource>()),
     );
@@ -218,6 +232,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i449.FourthStepCubit>(
       () => _i449.FourthStepCubit(gh<_i858.FourthStepRepo>()),
+    );
+    gh.factory<_i571.OrderDetailsCubit>(
+      () => _i571.OrderDetailsCubit(gh<_i603.OrderDetailsRepository>()),
     );
     gh.factory<_i859.OtpCubit>(() => _i859.OtpCubit(gh<_i72.OtpRepo>()));
     gh.factory<_i273.ThirdStepCubit>(

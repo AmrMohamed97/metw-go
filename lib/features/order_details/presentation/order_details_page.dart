@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
+import 'package:metw_go/core/widgets/custom_error_widget.dart';
+import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../data/models/order_details_response.dart';
+import '../data/models/sender.dart';
+import '../data/models/receiver.dart';
+import '../data/models/courier.dart';
+import '../data/models/parcel.dart';
+import '../data/models/lifecycle.dart';
 
 class OrderDetailsPage extends StatefulWidget {
   final int orderId;
@@ -15,71 +26,126 @@ class OrderDetailsPage extends StatefulWidget {
 }
 
 class _OrderDetailsPageState extends State<OrderDetailsPage> {
+  late final OrderDetailsCubit _cubit;
+
+  static final _dummyOrder = OrderDetails(
+    id: 0,
+    orderNumber: "F-ORD-00000000",
+    priority: "normal",
+    distanceKm: 0.0,
+    pickupAddress: "عنوان استلام الطلب يظهر هنا أثناء التحميل",
+    dropoffAddress: "عنوان تسليم الطلب يظهر هنا أثناء التحميل",
+    estimatedFee: 100.0,
+    createdAt: "",
+    canStart: true,
+    courier: Courier(
+      id: 0,
+      accountNumber: "0",
+      name: "اسم المندوب",
+      phone: "01000000000",
+      rating: 5.0,
+      availabilityStatus: "available",
+      isProfileComplete: true,
+    ),
+    sender: Sender(name: "اسم المرسل", phone: "01000000000"),
+    receiver: Receiver(name: "اسم المستلم", phone: "01000000000"),
+    parcels: [Parcel(description: "وصف الشحنة الافتراضي للتحميل", weight: 5.0, quantity: 1)],
+    lifecycle: Lifecycle(canStart: true),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = context.read<OrderDetailsCubit>();
+    _cubit.fetchOrderDetails(widget.orderId);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: CustomAppBar(title: l10n.orders, centerTitle: true),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(12),
-        child: Column(
-          children: [
-            // Top Row (Status & Timer)
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Row(
-                spacing: 10,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Status (Right side in RTL)
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 8.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondary,
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.bolt, color: MyColors.white, size: 20.r),
-                        SizedBox(width: 8.w),
-                        Text(
-                          l10n.immediateDeliveryOnePoint,
-                          style: AppTextStyle.medium14(
-                            context,
-                          ).copyWith(color: MyColors.white),
-                        ),
-                      ],
-                    ),
+      body: BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
+        builder: (context, state) {
+          if (state is OrderDetailsLoading) {
+            return Skeletonizer(
+              enabled: true,
+              child: _buildContent(context, l10n, _dummyOrder),
+            );
+          } else if (state is OrderDetailsLoaded) {
+            return _buildContent(context, l10n, state.data ?? _dummyOrder);
+          } else if (state is OrderDetailsError) {
+            return CustomErrorWidget(
+              message: state.message,
+              onRetry: () => _cubit.fetchOrderDetails(widget.orderId),
+            );
+          }
+          return SizedBox.shrink();
+        },
+      ),
+    );
+  }
+
+  Widget _buildContent(BuildContext context, AppLocalizations l10n, OrderDetails order) {
+    final parcelsList = order.parcels ?? [];
+    final parcelContent = parcelsList.isNotEmpty
+        ? parcelsList.map((p) => p.description).where((d) => d != null && d.isNotEmpty).join(' + ')
+        : '---';
+    final weightSum = parcelsList.fold<double>(0, (sum, p) => sum + (p.weight ?? 0));
+    final parcelWeight = weightSum > 0 ? '$weightSum كجم تقريباً' : '---';
+    final feeText = order.estimatedFee != null ? '${order.estimatedFee} ج.م' : '---';
+    final pickupText = [order.pickupAddress, order.sender?.name].where((s) => s != null && s.isNotEmpty).join('\n');
+    final dropoffText = [order.dropoffAddress, order.receiver?.name].where((s) => s != null && s.isNotEmpty).join('\n');
+
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(12),
+      child: Column(
+        children: [
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              spacing: 10,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(20.r),
                   ),
-                  // Timer (Left side in RTL)
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.bolt, color: MyColors.white, size: 20.r),
+                      SizedBox(width: 8.w),
+                      Text(
+                        l10n.immediateDeliveryOnePoint,
+                        style: AppTextStyle.medium14(context).copyWith(color: MyColors.white),
+                      ),
+                    ],
+                  ),
+                ),
+                if (order.distanceKm != null)
                   Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 8.h,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(20.r),
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.scrim,
-                      ),
+                      border: Border.all(color: Theme.of(context).colorScheme.scrim),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(
-                          Icons.pie_chart_outline,
-                          color: MyColors.primaryColor,
-                          size: 20.r,
-                        ),
+                        Icon(Icons.location_on_outlined, color: MyColors.primaryColor, size: 20.r),
                         SizedBox(width: 8.w),
                         Text(
-                          '02:30 د',
+                          '${order.distanceKm} كم',
                           style: AppTextStyle.medium14(context).copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
@@ -87,168 +153,126 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                       ],
                     ),
                   ),
-                ],
-              ),
+              ],
             ),
-            SizedBox(height: 24.h),
-
-            // Pickup Location
-            _LocationCard(
-              title: l10n.pickupPoint,
-              subtitle: l10n.mockBakeryName,
-              icon: Icons.storefront_outlined,
-              iconColor: MyColors.primaryColor,
-              iconBgColor: MyColors.primaryColor.withValues(alpha: 0.1),
-              borderColor: MyColors.primaryColor,
+          ),
+          SizedBox(height: 24.h),
+          _LocationCard(
+            title: l10n.pickupPoint,
+            subtitle: pickupText.isNotEmpty ? pickupText : '---',
+            icon: Icons.storefront_outlined,
+            iconColor: MyColors.primaryColor,
+            iconBgColor: MyColors.primaryColor.withValues(alpha: 0.1),
+            borderColor: MyColors.primaryColor,
+            phoneNumber: order.sender?.phone,
+          ),
+          _LocationCard(
+            title: l10n.dropoffPoint,
+            subtitle: dropoffText.isNotEmpty ? dropoffText : '---',
+            icon: Icons.person_outline,
+            iconColor: Theme.of(context).colorScheme.secondary,
+            iconBgColor: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
+            borderColor: Theme.of(context).colorScheme.secondary,
+            phoneNumber: order.receiver?.phone,
+          ),
+          SizedBox(height: 16.h),
+          Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(16.r),
+              border: Border.all(color: Theme.of(context).colorScheme.scrim),
             ),
-
-            // Dropoff Location
-            _LocationCard(
-              title: l10n.dropoffPoint,
-              subtitle: l10n.mockCustomerAddress,
-              icon: Icons.person_outline,
-              iconColor: Theme.of(context).colorScheme.secondary,
-              iconBgColor: Theme.of(
-                context,
-              ).colorScheme.secondary.withValues(alpha: 0.1),
-              borderColor: Theme.of(context).colorScheme.secondary,
-            ),
-            SizedBox(height: 16.h),
-
-            // Shipment Details Card
-            Container(
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(16.r),
-                border: Border.all(color: Theme.of(context).colorScheme.scrim),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.inventory_2_outlined,
-                        color: MyColors.primaryColor,
-                        size: 24.r,
-                      ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        l10n.shipmentDetails,
-                        style: AppTextStyle.medium16(context).copyWith(
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16.h),
-                  _buildDetailRow(
-                    context,
-                    title: l10n.orderContent,
-                    value: 'علبة معجنات مشكلة + عصير',
-                  ),
-                  _buildDetailRow(
-                    context,
-                    title: l10n.approximateWeight,
-                    value: '5 كجم تقريباً',
-                  ),
-                  _buildDetailRow(
-                    context,
-                    title: l10n.paymentMethod,
-                    value: l10n.cashOnDelivery,
-                    valueColor: MyColors.primaryColor,
-                    icon: Icon(
-                      Icons.money,
-                      color: MyColors.primaryColor,
-                      size: 20.r,
-                    ),
-                  ),
-                  _buildDetailRow(
-                    context,
-                    title: l10n.totalOrderValue,
-                    value: '145.00 ج.م',
-                  ),
-                  SizedBox(height: 16.h),
-                  DashedDivider(
-                    color: Theme.of(context).colorScheme.surfaceTint,
-                  ),
-                  SizedBox(height: 16.h),
-                  _buildDetailRow(
-                    context,
-                    title: l10n.fare,
-                    value: '100 ج.م',
-                    valueColor: MyColors.primaryColor,
-                    isBold: true,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 24.h),
-
-            // Information Box
-            Container(
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.outline,
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.info_outline,
-                    color: Theme.of(context).colorScheme.tertiary,
-                    size: 24.r,
-                  ),
-                  SizedBox(width: 12.w),
-                  Expanded(
-                    child: Text(
-                      l10n.receiptConfirmationNote,
-                      style: AppTextStyle.regular14(context).copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.inventory_2_outlined, color: MyColors.primaryColor, size: 24.r),
+                    SizedBox(width: 8.w),
+                    Text(
+                      l10n.shipmentDetails,
+                      style: AppTextStyle.medium16(context).copyWith(
+                        color: Theme.of(context).colorScheme.tertiary,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 32.h),
-
-            // Buttons
-            CustomButton(
-              text: l10n.acceptOrder,
-              onPressed: () {},
-              isMax: true,
-              backgroundColor: MyColors.primaryColor,
-              textColor: Theme.of(context).colorScheme.surface,
-            ),
-            SizedBox(height: 16.h),
-            TextButton(
-              onPressed: () => _showRejectBottomSheet(context),
-              child: Text(
-                l10n.rejectOrder,
-                style: AppTextStyle.medium16(
+                  ],
+                ),
+                SizedBox(height: 16.h),
+                _buildDetailRow(context, title: l10n.orderContent, value: parcelContent),
+                _buildDetailRow(context, title: l10n.approximateWeight, value: parcelWeight),
+                _buildDetailRow(
                   context,
-                ).copyWith(color: Theme.of(context).colorScheme.tertiary),
-              ),
+                  title: l10n.paymentMethod,
+                  value: l10n.cashOnDelivery,
+                  valueColor: MyColors.primaryColor,
+                  icon: Icon(Icons.money, color: MyColors.primaryColor, size: 20.r),
+                ),
+                _buildDetailRow(context, title: l10n.totalOrderValue, value: feeText),
+                SizedBox(height: 16.h),
+                DashedDivider(color: Theme.of(context).colorScheme.surfaceTint),
+                SizedBox(height: 16.h),
+                _buildDetailRow(
+                  context,
+                  title: l10n.fare,
+                  value: feeText,
+                  valueColor: MyColors.primaryColor,
+                  isBold: true,
+                ),
+              ],
             ),
-            SizedBox(height: 24.h),
-          ],
-        ),
+          ),
+          SizedBox(height: 24.h),
+          Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.outline,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.info_outline, color: Theme.of(context).colorScheme.tertiary, size: 24.r),
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: Text(
+                    l10n.receiptConfirmationNote,
+                    style: AppTextStyle.regular14(context).copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 32.h),
+          CustomButton(
+            text: l10n.acceptOrder,
+            onPressed: () {},
+            isMax: true,
+            backgroundColor: MyColors.primaryColor,
+            textColor: Theme.of(context).colorScheme.surface,
+          ),
+          SizedBox(height: 16.h),
+          TextButton(
+            onPressed: () => _showRejectBottomSheet(context),
+            child: Text(
+              l10n.rejectOrder,
+              style: AppTextStyle.medium16(context).copyWith(color: Theme.of(context).colorScheme.tertiary),
+            ),
+          ),
+          SizedBox(height: 24.h),
+        ],
       ),
     );
   }
+
 
   void _showRejectBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      transitionAnimationController: AnimationController(
-        vsync: Navigator.of(context),
-        duration: const Duration(milliseconds: 450),
-      ),
       builder: (ctx) => const _RejectBottomSheet(),
     );
   }
@@ -268,9 +292,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         children: [
           Text(
             title,
-            style: AppTextStyle.regular14(
-              context,
-            ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+            style: AppTextStyle.regular14(context).copyWith(color: Theme.of(context).colorScheme.tertiary),
           ),
           Row(
             children: [
@@ -279,14 +301,10 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 value,
                 style: isBold
                     ? AppTextStyle.bold16(context).copyWith(
-                        color:
-                            valueColor ??
-                            Theme.of(context).colorScheme.onSurface,
+                        color: valueColor ?? Theme.of(context).colorScheme.onSurface,
                       )
                     : AppTextStyle.medium14(context).copyWith(
-                        color:
-                            valueColor ??
-                            Theme.of(context).colorScheme.onSurface,
+                        color: valueColor ?? Theme.of(context).colorScheme.onSurface,
                       ),
               ),
             ],
@@ -304,6 +322,7 @@ class _LocationCard extends StatelessWidget {
   final Color iconColor;
   final Color iconBgColor;
   final Color borderColor;
+  final String? phoneNumber;
 
   const _LocationCard({
     required this.title,
@@ -312,7 +331,19 @@ class _LocationCard extends StatelessWidget {
     required this.iconColor,
     required this.iconBgColor,
     required this.borderColor,
+    this.phoneNumber,
   });
+
+  void _launchPhone(BuildContext context) async {
+    final number = phoneNumber;
+    if (number != null && await canLaunchUrl(Uri.parse('tel:$number'))) {
+      await launchUrl(Uri.parse('tel:$number'));
+    } else if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Cannot launch phone dialer')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -326,7 +357,6 @@ class _LocationCard extends StatelessWidget {
       child: IntrinsicHeight(
         child: Row(
           children: [
-            // Colored Border line
             Container(
               width: 6.w,
               decoration: BoxDecoration(
@@ -338,7 +368,6 @@ class _LocationCard extends StatelessWidget {
               ),
             ),
             SizedBox(width: 12.w),
-            // Right Icon
             Container(
               padding: EdgeInsets.all(12.r),
               margin: EdgeInsets.symmetric(vertical: 12.h),
@@ -349,7 +378,6 @@ class _LocationCard extends StatelessWidget {
               child: Icon(icon, color: iconColor, size: 24.r),
             ),
             SizedBox(width: 12.w),
-            // Text Details
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -357,24 +385,22 @@ class _LocationCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppTextStyle.regular12(
-                      context,
-                    ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                    style: AppTextStyle.regular12(context).copyWith(color: Theme.of(context).colorScheme.onSurface),
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     subtitle,
-                    style: AppTextStyle.medium14(
-                      context,
-                    ).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                    style: AppTextStyle.medium14(context).copyWith(color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ],
               ),
             ),
-            // Action Buttons
             _buildActionButton(Icons.chat_bubble_outline, MyColors.green),
             SizedBox(width: 8.w),
-            _buildActionButton(Icons.phone_outlined, MyColors.red),
+            GestureDetector(
+              onTap: () => _launchPhone(context),
+              child: _buildActionButton(Icons.phone_outlined, MyColors.red),
+            ),
             SizedBox(width: 12.w),
           ],
         ),

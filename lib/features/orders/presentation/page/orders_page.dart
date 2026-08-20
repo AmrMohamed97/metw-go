@@ -8,8 +8,6 @@ import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_state.dart';
 import 'package:metw_go/features/orders/presentation/view/orders_list_view.dart';
-import 'package:metw_go/features/orders/presentation/view/search_view.dart';
-
 
 class OrdersPage extends StatelessWidget {
   const OrdersPage({super.key});
@@ -32,11 +30,11 @@ class OrdersPage extends StatelessWidget {
                 children: [
                   // 8.verticalSpace,
                   // Search Bar
-                  SearchView(),
+                  // SearchView(),
                   10.verticalSpace,
                   // Filter Chips
                   // FilterView(),
-                  25.verticalSpace,
+                  // 25.verticalSpace,
                   // Orders List
                   OrdersListView(),
                 ],
