@@ -6,10 +6,10 @@ part 'third_step_input_model.g.dart';
 class ThirdStepInputModel {
   @JsonKey(name: 'governorate_ids')
   final List<int> governorateIds;
-  
+
   @JsonKey(name: 'city_ids')
   final List<int> cityIds;
-  
+
   @JsonKey(name: 'villages_service_enabled')
   final bool villagesServiceEnabled;
 

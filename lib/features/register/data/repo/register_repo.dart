@@ -4,5 +4,7 @@ import 'package:metw_go/features/register/data/models/register_input_model/regis
 import 'package:metw_go/features/register/data/models/register_out_model/register_out_model.dart';
 
 abstract class RegisterRepo {
-  Future<Either<Failure, RegisterOutModel>> createUser(RegisterInputModel createUserModel);
+  Future<Either<Failure, RegisterOutModel>> createUser(
+    RegisterInputModel createUserModel,
+  );
 }

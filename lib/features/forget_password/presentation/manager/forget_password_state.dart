@@ -4,6 +4,7 @@ import 'package:metw_go/features/forget_password/data/models/forget_password_out
 abstract class ForgetPasswordState {}
 
 class ForgetPasswordInitial extends ForgetPasswordState {}
+
 class ChangeObscureState extends ForgetPasswordState {}
 
 class ForgetPasswordLoading extends ForgetPasswordState {}

@@ -30,7 +30,10 @@ class ForgetPasswordPage extends StatelessWidget {
           );
           context.pushReplacement(
             AppRoutes.otp,
-            extra: ( false , context.read<ForgetPasswordCubit>().phoneController.text),
+            extra: (
+              false,
+              context.read<ForgetPasswordCubit>().phoneController.text,
+            ),
           );
         } else if (state is ForgetPasswordFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
@@ -47,61 +50,66 @@ class ForgetPasswordPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Spacer(flex: 1),
-                  Center(
-                    child: Text(
-                      AppLocalizations.of(context)!.forgotPasswordTitle,
-                      style: AppTextStyle.medium18(context).copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 22.sp,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    AppLocalizations.of(context)!.forgotPasswordDesc,
-                    textAlign: TextAlign.center,
-                    style: AppTextStyle.regular16(context).copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                  50.verticalSpace,
-                  FieldTitle(
-                    title: AppLocalizations.of(context)!.phoneNumber,
-                  ),
-                  4.verticalSpace,
-                  CustomTextField(
-                    hintText: "+966 5X XXX XXXX",
-                    controller: cubit.phoneController,
-                    textInputType: TextInputType.phone,
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.end,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return AppLocalizations.of(context)!.errEnterFirstPhone;
-                      }
-                      return null;
-                    },
-                  ),
-                  Spacer(flex: 1),
-                  Center(
-                    child: CustomButton(
-                      loading: state is ForgetPasswordLoading,
-                      text: AppLocalizations.of(context)!.sendVerificationCode,
-                      onPressed: () {
-                        cubit.sendOtp();
-                      },
-                      isMax: true,
-                    ),
-                  ),
-                  Spacer(flex: 2),
-                  // ViewInsetsSpace(),
-                ]
-                    .animate(interval: 50.ms)
-                    .fade(duration: 500.ms)
-                    .slideY(begin: 0.05, end: 0),
+                children:
+                    [
+                          Spacer(flex: 1),
+                          Center(
+                            child: Text(
+                              AppLocalizations.of(context)!.forgotPasswordTitle,
+                              style: AppTextStyle.medium18(context).copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontSize: 22.sp,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            AppLocalizations.of(context)!.forgotPasswordDesc,
+                            textAlign: TextAlign.center,
+                            style: AppTextStyle.regular16(context).copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
+                          ),
+                          50.verticalSpace,
+                          FieldTitle(
+                            title: AppLocalizations.of(context)!.phoneNumber,
+                          ),
+                          4.verticalSpace,
+                          CustomTextField(
+                            hintText: "+966 5X XXX XXXX",
+                            controller: cubit.phoneController,
+                            textInputType: TextInputType.phone,
+                            textDirection: TextDirection.ltr,
+                            textAlign: TextAlign.end,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return AppLocalizations.of(
+                                  context,
+                                )!.errEnterFirstPhone;
+                              }
+                              return null;
+                            },
+                          ),
+                          Spacer(flex: 1),
+                          Center(
+                            child: CustomButton(
+                              loading: state is ForgetPasswordLoading,
+                              text: AppLocalizations.of(
+                                context,
+                              )!.sendVerificationCode,
+                              onPressed: () {
+                                cubit.sendOtp();
+                              },
+                              isMax: true,
+                            ),
+                          ),
+                          Spacer(flex: 2),
+                          // ViewInsetsSpace(),
+                        ]
+                        .animate(interval: 50.ms)
+                        .fade(duration: 500.ms)
+                        .slideY(begin: 0.05, end: 0),
               ),
             ),
           ),

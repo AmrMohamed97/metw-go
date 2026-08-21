@@ -54,7 +54,8 @@ class DefaultFirebaseOptions {
     appId: '1:269069396327:android:09f1164a9430699e60e7c2',
     messagingSenderId: '269069396327',
     projectId: 'metw-d3270',
-    databaseURL: 'https://metw-d3270-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://metw-d3270-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'metw-d3270.firebasestorage.app',
   );
 
@@ -63,9 +64,9 @@ class DefaultFirebaseOptions {
     appId: '1:269069396327:ios:3df2f5bcfda263d760e7c2',
     messagingSenderId: '269069396327',
     projectId: 'metw-d3270',
-    databaseURL: 'https://metw-d3270-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://metw-d3270-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'metw-d3270.firebasestorage.app',
     iosBundleId: 'com.evyx.metwGo',
   );
-
 }

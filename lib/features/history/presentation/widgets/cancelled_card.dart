@@ -31,4 +31,4 @@ class CancelledCard extends StatelessWidget {
       showReceiptButton: false,
     );
   }
-} 
+}

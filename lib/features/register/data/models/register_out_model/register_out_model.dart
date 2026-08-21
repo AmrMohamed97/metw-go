@@ -6,15 +6,15 @@ part 'register_out_model.g.dart';
 
 @JsonSerializable()
 class RegisterOutModel {
-	bool? success;
-	String? message;
-	Data? data;
+  bool? success;
+  String? message;
+  Data? data;
 
-	RegisterOutModel({this.success, this.message, this.data});
+  RegisterOutModel({this.success, this.message, this.data});
 
-	factory RegisterOutModel.fromJson(Map<String, dynamic> json) {
-		return _$RegisterOutModelFromJson(json);
-	}
+  factory RegisterOutModel.fromJson(Map<String, dynamic> json) {
+    return _$RegisterOutModelFromJson(json);
+  }
 
-	Map<String, dynamic> toJson() => _$RegisterOutModelToJson(this);
+  Map<String, dynamic> toJson() => _$RegisterOutModelToJson(this);
 }

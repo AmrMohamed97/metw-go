@@ -14,7 +14,7 @@ class BalanceCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        gradient:   LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [

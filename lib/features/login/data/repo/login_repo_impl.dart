@@ -32,12 +32,15 @@ class LoginRepoImpl implements LoginRepo {
       );
       await CacheHelper.saveAuthData(
         AuthModel(
-          status: result.data?.status  ,
-          isVerified: result.data?.isVerified ,
-          currentStep: result.data?.registrationProgress?.currentStep  
+          status: result.data?.status,
+          isVerified: result.data?.isVerified,
+          currentStep: result.data?.registrationProgress?.currentStep,
         ),
       );
-      CacheHelper.setSecuerString(key: AppConstant.accessToken, value: result.data?.accessToken ?? '');
+      CacheHelper.setSecuerString(
+        key: AppConstant.accessToken,
+        value: result.data?.accessToken ?? '',
+      );
       return Right(result);
     } catch (e) {
       if (e is DioException) {

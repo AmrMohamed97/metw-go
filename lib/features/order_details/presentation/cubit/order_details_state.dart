@@ -1,6 +1,6 @@
 part of 'order_details_cubit.dart';
 
-abstract class OrderDetailsState  {
+abstract class OrderDetailsState {
   const OrderDetailsState();
 
   @override

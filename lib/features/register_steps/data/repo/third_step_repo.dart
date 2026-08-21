@@ -9,5 +9,6 @@ abstract class ThirdStepRepo {
   Future<Either<Failure, GovernorateListResponse>> getGovernorates();
   Future<Either<Failure, CityListResponse>> getCities(List<int> governorateIds);
   Future<Either<Failure, FirstStepOutModel>> submitThirdStep(
-      ThirdStepInputModel input);
+    ThirdStepInputModel input,
+  );
 }

@@ -14,13 +14,13 @@ class ThirdStepCubit extends Cubit<ThirdStepState> {
   ThirdStepCubit(this.repo) : super(ThirdStepInitial());
 
   final GlobalKey<FormState> thirdStepFormKey = GlobalKey<FormState>();
-  
+
   List<GovernorateModel> governorates = [];
   List<GovernorateModel> selectedGovernorates = [];
-  
+
   List<CityModel> cities = [];
   List<CityModel> selectedCities = [];
-  
+
   bool isRuralServiceEnabled = false;
 
   void init() {
@@ -35,13 +35,12 @@ class ThirdStepCubit extends Cubit<ThirdStepState> {
   Future<void> getGovernorates() async {
     emit(GetGovernoratesLoading());
     final result = await repo.getGovernorates();
-    result.fold(
-      (failure) => emit(GetGovernoratesFailure(failure.message)),
-      (response) {
-        governorates = response.data ?? [];
-        emit(GetGovernoratesSuccess(governorates));
-      },
-    );
+    result.fold((failure) => emit(GetGovernoratesFailure(failure.message)), (
+      response,
+    ) {
+      governorates = response.data ?? [];
+      emit(GetGovernoratesSuccess(governorates));
+    });
   }
 
   Future<void> getCities() async {
@@ -51,20 +50,21 @@ class ThirdStepCubit extends Cubit<ThirdStepState> {
       emit(UpdateSelectionsState());
       return;
     }
-    
+
     emit(GetCitiesLoading());
     final selectedGovIds = selectedGovernorates.map((g) => g.id!).toList();
     final result = await repo.getCities(selectedGovIds);
-    
-    result.fold(
-      (failure) => emit(GetCitiesFailure(failure.message)),
-      (response) {
-        cities = response.data ?? [];
-        // Remove selected cities that are no longer in the fetched cities
-        selectedCities.removeWhere((selectedCity) => !cities.any((c) => c.id == selectedCity.id));
-        emit(GetCitiesSuccess(cities));
-      },
-    );
+
+    result.fold((failure) => emit(GetCitiesFailure(failure.message)), (
+      response,
+    ) {
+      cities = response.data ?? [];
+      // Remove selected cities that are no longer in the fetched cities
+      selectedCities.removeWhere(
+        (selectedCity) => !cities.any((c) => c.id == selectedCity.id),
+      );
+      emit(GetCitiesSuccess(cities));
+    });
   }
 
   void toggleGovernorate(GovernorateModel governorate) {
@@ -102,14 +102,14 @@ class ThirdStepCubit extends Cubit<ThirdStepState> {
       emit(SubmitThirdStepFailure('الرجاء اختيار المحافظات والمدن'));
       return;
     }
-    
+
     emit(SubmitThirdStepLoading());
     final input = ThirdStepInputModel(
       governorateIds: selectedGovernorates.map((e) => e.id!).toList(),
       cityIds: selectedCities.map((e) => e.id!).toList(),
       villagesServiceEnabled: isRuralServiceEnabled,
     );
-    
+
     final result = await repo.submitThirdStep(input);
     result.fold(
       (failure) => emit(SubmitThirdStepFailure(failure.message)),

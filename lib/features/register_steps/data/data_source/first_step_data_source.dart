@@ -22,7 +22,5 @@ abstract class FirstStepDataSource {
   // Future<TransportTypeListResponse> getTransportTypes();
 
   @POST(EndPoints.registerStep2)
-  Future<FirstStepOutModel> submitFirstStep(
-    @Body() FirstStepInputModel input,
-  );
+  Future<FirstStepOutModel> submitFirstStep(@Body() FirstStepInputModel input);
 }

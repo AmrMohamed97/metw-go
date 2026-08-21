@@ -24,7 +24,13 @@ class RegisterPage extends StatelessWidget {
                 AppLocalizations.of(context)!.register,
             state: ToastStates.success,
           );
-          context.go(AppRoutes.otp,extra: ( false , context.read<RegisterCubit>().firstPhoneController.text));
+          context.go(
+            AppRoutes.otp,
+            extra: (
+              false,
+              context.read<RegisterCubit>().firstPhoneController.text,
+            ),
+          );
         }
         if (state is RegisterFailure) {
           showToast(context, message: state.message, state: ToastStates.error);

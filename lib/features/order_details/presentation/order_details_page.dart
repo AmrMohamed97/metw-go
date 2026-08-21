@@ -49,7 +49,13 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
     ),
     sender: Sender(name: "اسم المرسل", phone: "01000000000"),
     receiver: Receiver(name: "اسم المستلم", phone: "01000000000"),
-    parcels: [Parcel(description: "وصف الشحنة الافتراضي للتحميل", weight: 5.0, quantity: 1)],
+    parcels: [
+      Parcel(
+        description: "وصف الشحنة الافتراضي للتحميل",
+        weight: 5.0,
+        quantity: 1,
+      ),
+    ],
     lifecycle: Lifecycle(canStart: true),
   );
 
@@ -92,16 +98,34 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
     );
   }
 
-  Widget _buildContent(BuildContext context, AppLocalizations l10n, OrderDetails order) {
+  Widget _buildContent(
+    BuildContext context,
+    AppLocalizations l10n,
+    OrderDetails order,
+  ) {
     final parcelsList = order.parcels ?? [];
     final parcelContent = parcelsList.isNotEmpty
-        ? parcelsList.map((p) => p.description).where((d) => d != null && d.isNotEmpty).join(' + ')
+        ? parcelsList
+              .map((p) => p.description)
+              .where((d) => d != null && d.isNotEmpty)
+              .join(' + ')
         : '---';
-    final weightSum = parcelsList.fold<double>(0, (sum, p) => sum + (p.weight ?? 0));
+    final weightSum = parcelsList.fold<double>(
+      0,
+      (sum, p) => sum + (p.weight ?? 0),
+    );
     final parcelWeight = weightSum > 0 ? '$weightSum كجم تقريباً' : '---';
-    final feeText = order.estimatedFee != null ? '${order.estimatedFee} ج.م' : '---';
-    final pickupText = [order.pickupAddress, order.sender?.name].where((s) => s != null && s.isNotEmpty).join('\n');
-    final dropoffText = [order.dropoffAddress, order.receiver?.name].where((s) => s != null && s.isNotEmpty).join('\n');
+    final feeText = order.estimatedFee != null
+        ? '${order.estimatedFee} ج.م'
+        : '---';
+    final pickupText = [
+      order.pickupAddress,
+      order.sender?.name,
+    ].where((s) => s != null && s.isNotEmpty).join('\n');
+    final dropoffText = [
+      order.dropoffAddress,
+      order.receiver?.name,
+    ].where((s) => s != null && s.isNotEmpty).join('\n');
 
     return SingleChildScrollView(
       padding: EdgeInsets.all(12),
@@ -114,7 +138,10 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 8.h,
+                  ),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(20.r),
@@ -126,23 +153,34 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                       SizedBox(width: 8.w),
                       Text(
                         l10n.immediateDeliveryOnePoint,
-                        style: AppTextStyle.medium14(context).copyWith(color: MyColors.white),
+                        style: AppTextStyle.medium14(
+                          context,
+                        ).copyWith(color: MyColors.white),
                       ),
                     ],
                   ),
                 ),
                 if (order.distanceKm != null)
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 8.h,
+                    ),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(20.r),
-                      border: Border.all(color: Theme.of(context).colorScheme.scrim),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.scrim,
+                      ),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.location_on_outlined, color: MyColors.primaryColor, size: 20.r),
+                        Icon(
+                          Icons.location_on_outlined,
+                          color: MyColors.primaryColor,
+                          size: 20.r,
+                        ),
                         SizedBox(width: 8.w),
                         Text(
                           '${order.distanceKm} كم',
@@ -171,7 +209,9 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             subtitle: dropoffText.isNotEmpty ? dropoffText : '---',
             icon: Icons.person_outline,
             iconColor: Theme.of(context).colorScheme.secondary,
-            iconBgColor: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
+            iconBgColor: Theme.of(
+              context,
+            ).colorScheme.secondary.withValues(alpha: 0.1),
             borderColor: Theme.of(context).colorScheme.secondary,
             phoneNumber: order.receiver?.phone,
           ),
@@ -188,27 +228,47 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.inventory_2_outlined, color: MyColors.primaryColor, size: 24.r),
+                    Icon(
+                      Icons.inventory_2_outlined,
+                      color: MyColors.primaryColor,
+                      size: 24.r,
+                    ),
                     SizedBox(width: 8.w),
                     Text(
                       l10n.shipmentDetails,
-                      style: AppTextStyle.medium16(context).copyWith(
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
+                      style: AppTextStyle.medium16(
+                        context,
+                      ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                     ),
                   ],
                 ),
                 SizedBox(height: 16.h),
-                _buildDetailRow(context, title: l10n.orderContent, value: parcelContent),
-                _buildDetailRow(context, title: l10n.approximateWeight, value: parcelWeight),
+                _buildDetailRow(
+                  context,
+                  title: l10n.orderContent,
+                  value: parcelContent,
+                ),
+                _buildDetailRow(
+                  context,
+                  title: l10n.approximateWeight,
+                  value: parcelWeight,
+                ),
                 _buildDetailRow(
                   context,
                   title: l10n.paymentMethod,
                   value: l10n.cashOnDelivery,
                   valueColor: MyColors.primaryColor,
-                  icon: Icon(Icons.money, color: MyColors.primaryColor, size: 20.r),
+                  icon: Icon(
+                    Icons.money,
+                    color: MyColors.primaryColor,
+                    size: 20.r,
+                  ),
                 ),
-                _buildDetailRow(context, title: l10n.totalOrderValue, value: feeText),
+                _buildDetailRow(
+                  context,
+                  title: l10n.totalOrderValue,
+                  value: feeText,
+                ),
                 SizedBox(height: 16.h),
                 DashedDivider(color: Theme.of(context).colorScheme.surfaceTint),
                 SizedBox(height: 16.h),
@@ -232,14 +292,18 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.info_outline, color: Theme.of(context).colorScheme.tertiary, size: 24.r),
+                Icon(
+                  Icons.info_outline,
+                  color: Theme.of(context).colorScheme.tertiary,
+                  size: 24.r,
+                ),
                 SizedBox(width: 12.w),
                 Expanded(
                   child: Text(
                     l10n.receiptConfirmationNote,
-                    style: AppTextStyle.regular14(context).copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
+                    style: AppTextStyle.regular14(
+                      context,
+                    ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ),
               ],
@@ -258,7 +322,9 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             onPressed: () => _showRejectBottomSheet(context),
             child: Text(
               l10n.rejectOrder,
-              style: AppTextStyle.medium16(context).copyWith(color: Theme.of(context).colorScheme.tertiary),
+              style: AppTextStyle.medium16(
+                context,
+              ).copyWith(color: Theme.of(context).colorScheme.tertiary),
             ),
           ),
           SizedBox(height: 24.h),
@@ -266,7 +332,6 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       ),
     );
   }
-
 
   void _showRejectBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -292,7 +357,9 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         children: [
           Text(
             title,
-            style: AppTextStyle.regular14(context).copyWith(color: Theme.of(context).colorScheme.tertiary),
+            style: AppTextStyle.regular14(
+              context,
+            ).copyWith(color: Theme.of(context).colorScheme.tertiary),
           ),
           Row(
             children: [
@@ -301,10 +368,14 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 value,
                 style: isBold
                     ? AppTextStyle.bold16(context).copyWith(
-                        color: valueColor ?? Theme.of(context).colorScheme.onSurface,
+                        color:
+                            valueColor ??
+                            Theme.of(context).colorScheme.onSurface,
                       )
                     : AppTextStyle.medium14(context).copyWith(
-                        color: valueColor ?? Theme.of(context).colorScheme.onSurface,
+                        color:
+                            valueColor ??
+                            Theme.of(context).colorScheme.onSurface,
                       ),
               ),
             ],
@@ -385,12 +456,16 @@ class _LocationCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppTextStyle.regular12(context).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                    style: AppTextStyle.regular12(
+                      context,
+                    ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     subtitle,
-                    style: AppTextStyle.medium14(context).copyWith(color: Theme.of(context).colorScheme.onSurface),
+                    style: AppTextStyle.medium14(
+                      context,
+                    ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ],
               ),

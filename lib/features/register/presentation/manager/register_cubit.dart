@@ -15,6 +15,7 @@ import 'package:metw_go/features/register/presentation/manager/register_state.da
 class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
   RegisterCubit(this.registerRepo) : super(RegisterInitial());
   final RegisterRepo registerRepo;
+
   /// global data in register
   //----------------------------------------------------------------------------
   // PageController pageController = PageController();
@@ -62,7 +63,7 @@ class RegisterCubit extends Cubit<RegisterState> with ImageMixin {
   TextEditingController addressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  
+
   Future<void> register() async {
     if (firstViewFormKey.currentState?.validate() == true) {
       emit(RegisterLoading());

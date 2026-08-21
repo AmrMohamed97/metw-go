@@ -9,11 +9,7 @@ class FirstStepOutModel {
   String? message;
   Data? data;
 
-  FirstStepOutModel({
-    this.success,
-    this.message,
-    this.data,
-  });
+  FirstStepOutModel({this.success, this.message, this.data});
 
   factory FirstStepOutModel.fromJson(Map<String, dynamic> json) =>
       _$FirstStepOutModelFromJson(json);

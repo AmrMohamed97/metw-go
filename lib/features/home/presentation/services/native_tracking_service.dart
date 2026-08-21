@@ -2,10 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class NativeTrackingService {
-  static const MethodChannel _channel = MethodChannel('com.metw_go/location_tracking');
+  static const MethodChannel _channel = MethodChannel(
+    'com.metw_go/location_tracking',
+  );
 
   // Singleton pattern
-  static final NativeTrackingService _instance = NativeTrackingService._internal();
+  static final NativeTrackingService _instance =
+      NativeTrackingService._internal();
 
   factory NativeTrackingService() {
     return _instance;

@@ -16,7 +16,9 @@ class OtpRepoImplement implements OtpRepo {
   OtpRepoImplement(this.otpDataSource);
 
   @override
-  Future<Either<Failure, VerifyOtpOutModel>> verifyOtp(VerifyOtpInputModel inputModel) async {
+  Future<Either<Failure, VerifyOtpOutModel>> verifyOtp(
+    VerifyOtpInputModel inputModel,
+  ) async {
     try {
       final response = await otpDataSource.verifyOtp(inputModel);
       return Right(response);
@@ -29,7 +31,9 @@ class OtpRepoImplement implements OtpRepo {
   }
 
   @override
-  Future<Either<Failure, ResendOtpOutModel>> resendOtp(ResendOtpInputModel inputModel) async {
+  Future<Either<Failure, ResendOtpOutModel>> resendOtp(
+    ResendOtpInputModel inputModel,
+  ) async {
     try {
       final response = await otpDataSource.resendOtp(inputModel);
       return Right(response);

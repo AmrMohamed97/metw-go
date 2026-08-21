@@ -16,8 +16,12 @@ abstract class ForgetPasswordDataSource {
   factory ForgetPasswordDataSource(Dio dio) = _ForgetPasswordDataSource;
 
   @POST(EndPoints.forgotPasswordSendOtpUrl)
-  Future<ForgetPasswordOutModel> sendOtp(@Body() ForgetPasswordInputModel inputModel);
+  Future<ForgetPasswordOutModel> sendOtp(
+    @Body() ForgetPasswordInputModel inputModel,
+  );
 
   @POST(EndPoints.changePasswordUrl)
-  Future<ChangePasswordOutModel> changePassword(@Body() ChangePasswordInputModel inputModel);
+  Future<ChangePasswordOutModel> changePassword(
+    @Body() ChangePasswordInputModel inputModel,
+  );
 }

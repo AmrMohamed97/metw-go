@@ -18,31 +18,35 @@ class CommingSoonPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: .start,
           mainAxisAlignment: .center,
-          children: [
-            Spacer(flex: 3),
-            Image.asset(AppImages.commingSoon),
-            Spacer(flex: 1),
-            Center(
-              child: Text(
-                AppLocalizations.of(context)!.thanksForJoining,
-                style: AppTextStyle.medium18(context).copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 22.sp,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              AppLocalizations.of(context)!.accountUnderReview,
-              textAlign: TextAlign.center,
-              style: AppTextStyle.regular16(
-                context,
-              ).copyWith(color: Theme.of(context).colorScheme.onSurface),
-            ),
-            Spacer(flex: 4),
-            // ViewInsetsSpace(),
-          ].animate(interval: 50.ms).fade(duration: 500.ms).slideY(begin: 0.05, end: 0),
+          children:
+              [
+                    Spacer(flex: 3),
+                    Image.asset(AppImages.commingSoon),
+                    Spacer(flex: 1),
+                    Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.thanksForJoining,
+                        style: AppTextStyle.medium18(context).copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontSize: 22.sp,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      AppLocalizations.of(context)!.accountUnderReview,
+                      textAlign: TextAlign.center,
+                      style: AppTextStyle.regular16(context).copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                    Spacer(flex: 4),
+                    // ViewInsetsSpace(),
+                  ]
+                  .animate(interval: 50.ms)
+                  .fade(duration: 500.ms)
+                  .slideY(begin: 0.05, end: 0),
         ),
       ),
     );

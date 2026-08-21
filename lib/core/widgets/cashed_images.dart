@@ -83,7 +83,8 @@ class CachedImage extends StatelessWidget {
 
             colorBlendMode: isBlur ? BlendMode.colorBurn : null,
             color: isBlur ? Colors.black26 : null,
-            imageUrl: url,//"${url.contains("http") ? "" : ApiUrls.imageUrl}$url",
+            imageUrl:
+                url, //"${url.contains("http") ? "" : ApiUrls.imageUrl}$url",
             filterQuality: FilterQuality.medium,
             placeholder: (context, url) {
               return BlurHash(

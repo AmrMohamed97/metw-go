@@ -3,11 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 
 class RemovableChip extends StatelessWidget {
-  const RemovableChip({
-    super.key,
-    required this.label,
-    required this.onRemove,
-  });
+  const RemovableChip({super.key, required this.label, required this.onRemove});
 
   final String label;
   final VoidCallback onRemove;
@@ -26,9 +22,9 @@ class RemovableChip extends StatelessWidget {
         children: [
           Text(
             label,
-            style: AppTextStyle.medium12(context).copyWith(
-              color: Colors.redAccent.shade200,
-            ),
+            style: AppTextStyle.medium12(
+              context,
+            ).copyWith(color: Colors.redAccent.shade200),
           ),
           8.horizontalSpace,
           GestureDetector(

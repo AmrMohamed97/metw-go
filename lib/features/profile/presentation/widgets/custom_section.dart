@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 
 class CustomSection extends StatelessWidget {
-  const CustomSection({
-    super.key,
-    required this.title,
-    required this.children,
-  });
+  const CustomSection({super.key, required this.title, required this.children});
   final String title;
   final List<Widget> children;
   @override

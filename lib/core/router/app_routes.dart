@@ -1,6 +1,5 @@
 // ==========================================
 
-
 class AppRoutes {
   // Auth routes
   static const String login = '/login';

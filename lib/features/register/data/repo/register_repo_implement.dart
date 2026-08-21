@@ -14,7 +14,9 @@ class RegisterRepoImplement implements RegisterRepo {
   RegisterRepoImplement(this._registerDataSource);
 
   @override
-  Future<Either<Failure, RegisterOutModel>> createUser(RegisterInputModel createUserModel) async {
+  Future<Either<Failure, RegisterOutModel>> createUser(
+    RegisterInputModel createUserModel,
+  ) async {
     try {
       final response = await _registerDataSource.createUser(createUserModel);
       return Right(response);

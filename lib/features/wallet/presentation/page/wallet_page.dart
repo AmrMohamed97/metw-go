@@ -69,32 +69,29 @@ class WalletPage extends StatelessWidget {
   }
 }
 
-
-
-        // _buildTransactionItem(
-        //   context,
-        //   "طلب سحب رصيد",
-        //   "أمس، 11:15 ص",
-        //   "-500.00 ج.م",
-        //   Icons.credit_card_outlined,
-        //   MyColors.primaryColor,
-        // ),
-        // 12.verticalSpace,
-        // _buildTransactionItem(
-        //   context,
-        //   "أرباح توصيل - #1244",
-        //   "أمس، 09:45 ص",
-        //   "+32.00 ج.م",
-        //   Icons.add_circle_outline,
-        //   MyColors.green,
-        // ),
-        // 12.verticalSpace,
-        // _buildTransactionItem(
-        //   context,
-        //   "مكافأة إنجاز",
-        //   "12 أكتوبر، 2023",
-        //   "+150.00 ج.م",
-        //   Icons.card_giftcard,
-        //   Theme.of(context).colorScheme.secondary,
-        // ),
-   
+// _buildTransactionItem(
+//   context,
+//   "طلب سحب رصيد",
+//   "أمس، 11:15 ص",
+//   "-500.00 ج.م",
+//   Icons.credit_card_outlined,
+//   MyColors.primaryColor,
+// ),
+// 12.verticalSpace,
+// _buildTransactionItem(
+//   context,
+//   "أرباح توصيل - #1244",
+//   "أمس، 09:45 ص",
+//   "+32.00 ج.م",
+//   Icons.add_circle_outline,
+//   MyColors.green,
+// ),
+// 12.verticalSpace,
+// _buildTransactionItem(
+//   context,
+//   "مكافأة إنجاز",
+//   "12 أكتوبر، 2023",
+//   "+150.00 ج.م",
+//   Icons.card_giftcard,
+//   Theme.of(context).colorScheme.secondary,
+// ),

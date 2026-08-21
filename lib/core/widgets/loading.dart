@@ -10,7 +10,7 @@ class LoadingWidget extends StatelessWidget {
     return SpinKitDualRing(
       lineWidth: 4,
       color: color ?? Theme.of(context).colorScheme.primary,
-      size:loadingSize?? 50,
+      size: loadingSize ?? 50,
     );
   }
 }

@@ -51,7 +51,8 @@ class AppCubit extends Cubit<AppState> {
     CacheHelper.getData(key: AppConstant.lang) ??
         ui.PlatformDispatcher.instance.locale.languageCode,
   );
-  bool isDarkMode = CacheHelper.getData(key: AppConstant.kTheme) ??
+  bool isDarkMode =
+      CacheHelper.getData(key: AppConstant.kTheme) ??
       (ui.PlatformDispatcher.instance.platformBrightness == ui.Brightness.dark);
 
   void changeLanguage(Locale locale) {
@@ -65,25 +66,19 @@ class AppCubit extends Cubit<AppState> {
     CacheHelper.saveData(key: AppConstant.kTheme, value: value);
     emit(ChangeThemeState());
   }
+  
 
-  // void trackDriver() {
-  //   TrackingLocationService().startTracking(
-  //     driverId: '9', //CacheHelper.getUserData()?.id.toString() ?? '',
-  //     // driverName: "محمد احمد", //CacheHelper.getUserData()?.name ?? '',
-  //   );
+  // Future<void> logout() async {
+  //   emit(ApplogoutLoadingState());
+  //   final result = await _appRepo.logout();
+  //   result.fold((failure) => emit(ApplogoutErrorState(failure.message)), (
+  //     response,
+  //   ) {
+  //     // TrackingLocationService().stopTracking(
+  //     //   CacheHelper.getUserData()?.id.toString() ?? '',
+  //     // );
+  //     CacheHelper.clearAll();
+  //     emit(ApplogoutLogoutSuccessState());
+  //   });
   // }
-
-  Future<void> logout() async {
-    emit(ApplogoutLoadingState());
-    final result = await _appRepo.logout();
-    result.fold((failure) => emit(ApplogoutErrorState(failure.message)), (
-      response,
-    ) {
-      // TrackingLocationService().stopTracking(
-      //   CacheHelper.getUserData()?.id.toString() ?? '',
-      // );
-      CacheHelper.clearAll();
-      emit(ApplogoutLogoutSuccessState());
-    });
-  }
 }

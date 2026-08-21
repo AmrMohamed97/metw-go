@@ -13,7 +13,8 @@ class AppImages {
   static const String openLook = "assets/images/openLook.png";
   static const String busIcon = "assets/images/busIcon.png";
   static const String carIcon = "assets/images/carIcon.png";
-  static const String locationSuffixIcon = "assets/images/locationSuffixIcon.png";
+  static const String locationSuffixIcon =
+      "assets/images/locationSuffixIcon.png";
   static const String personIcon = "assets/images/personIcon.png";
   static const String homeIcon = "assets/images/homeIcon.png";
   static const String balletNumIcon = "assets/images/balletNumIcon.png";

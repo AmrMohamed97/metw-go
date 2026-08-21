@@ -32,15 +32,15 @@ class MetwGo extends StatelessWidget {
                 builder: (context, theme) {
                   return MaterialApp.router(
                     title: 'Metw Go',
-                    localizationsDelegates: AppLocalizations.localizationsDelegates,
+                    localizationsDelegates:
+                        AppLocalizations.localizationsDelegates,
                     supportedLocales: AppLocalizations.supportedLocales,
                     locale: context.read<AppCubit>().currentLocale,
                     theme: theme,
                     routerConfig: AppRouter.router,
                     debugShowCheckedModeBanner: false,
-                    builder: (context, child) => ThemeSwitchingArea(
-                      child: child!,
-                    ),
+                    builder: (context, child) =>
+                        ThemeSwitchingArea(child: child!),
                   );
                 },
               );

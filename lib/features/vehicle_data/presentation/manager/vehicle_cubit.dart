@@ -8,10 +8,10 @@ import 'package:metw_go/core/widgets/image_mixin.dart';
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_state.dart';
 
 @injectable
-class VehicleCubit extends Cubit<VehicleState> with ImageMixin{
+class VehicleCubit extends Cubit<VehicleState> with ImageMixin {
   VehicleCubit() : super(VehicleInitialState());
 
-    final thirdViewFormKey = GlobalKey<FormState>();
+  final thirdViewFormKey = GlobalKey<FormState>();
   String? selectedTransportMethod;
   TextEditingController maxWeightController = TextEditingController();
   TextEditingController maxVolumeController = TextEditingController();
@@ -28,7 +28,4 @@ class VehicleCubit extends Cubit<VehicleState> with ImageMixin{
       emit(PickVehicleImageSuccess());
     }
   }
-
-
-
 }

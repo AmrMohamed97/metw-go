@@ -16,7 +16,8 @@ abstract class EndPoints {
   static const String registerStep3 = 'auth/register/step-3';
   static const String registerStep4 = 'auth/register/step-4';
   static const String registerStep5 = 'auth/register/step-5';
-  static const String forgotPasswordSendOtpUrl = 'auth/forgot-password/send-otp';
+  static const String forgotPasswordSendOtpUrl =
+      'auth/forgot-password/send-otp';
   static const String verifyOtpUrl = 'auth/otp/verify';
   static const String resendOtpUrl = 'auth/otp/resend';
   static const String changePasswordUrl = 'auth/password/change';
@@ -64,9 +65,12 @@ abstract class EndPoints {
   static const String invoiceDeleteAdditionChargeUrl =
       'admin/invoices/{invoice_id}/items/{addition_id}';
   static const String updatePaymentUrl = 'admin/invoices/{invoice_id}/payment';
-  static const String getInvoicePaymentsUrl = 'admin/invoices/{invoice_id}/payments';
-  static const String deleteInvoicePaymentUrl = 'admin/invoices/{invoice_id}/payments/{payment_id}';
-  static const String invoiceDiscountUrl = 'admin/invoices/{invoice_id}/discount';
+  static const String getInvoicePaymentsUrl =
+      'admin/invoices/{invoice_id}/payments';
+  static const String deleteInvoicePaymentUrl =
+      'admin/invoices/{invoice_id}/payments/{payment_id}';
+  static const String invoiceDiscountUrl =
+      'admin/invoices/{invoice_id}/discount';
 
   // doctor invoices
   static const String allDoctorInvoicesUrl = 'invoices';

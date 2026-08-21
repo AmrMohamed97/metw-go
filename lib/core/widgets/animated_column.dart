@@ -25,11 +25,13 @@ class AnimatedColumn extends StatelessWidget {
       return Column(
         crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
         children: children
-            .map((child) => ScrollReveal(
-                  duration: duration ?? const Duration(milliseconds: 500),
-                  verticalOffset: verticalOffset ?? 30.0,
-                  child: child,
-                ))
+            .map(
+              (child) => ScrollReveal(
+                duration: duration ?? const Duration(milliseconds: 500),
+                verticalOffset: verticalOffset ?? 30.0,
+                child: child,
+              ),
+            )
             .toList(),
       );
     }
@@ -79,13 +81,14 @@ class _ScrollRevealState extends State<ScrollReveal>
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: widget.duration);
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
-    _slideAnimation =
-        Tween<double>(begin: widget.verticalOffset, end: 0.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    _slideAnimation = Tween<double>(
+      begin: widget.verticalOffset,
+      end: 0.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
   }
 
   @override

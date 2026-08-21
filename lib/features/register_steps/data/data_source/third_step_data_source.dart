@@ -24,7 +24,5 @@ abstract class ThirdStepDataSource {
   );
 
   @POST(EndPoints.registerStep4)
-  Future<FirstStepOutModel> submitThirdStep(
-    @Body() ThirdStepInputModel input,
-  );
+  Future<FirstStepOutModel> submitThirdStep(@Body() ThirdStepInputModel input);
 }

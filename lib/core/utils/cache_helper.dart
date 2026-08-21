@@ -36,7 +36,6 @@ class CacheHelper {
     return authData;
   }
 
-  
   static Future<void> saveAuthModel(UserModel userModel) async {
     final authDataString = const JsonEncoder().convert(userModel.toJson());
     await getIt<SharedPreferences>().setString(

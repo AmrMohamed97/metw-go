@@ -7,7 +7,7 @@ import 'package:metw_go/features/personal_info/presentation/manager/personal_inf
 class PersonalInfoCubit extends Cubit<PersonalInfoState> {
   PersonalInfoCubit() : super(PersonalInfoInitialState());
 
-    bool isMale = true;
+  bool isMale = true;
 
   void changeGender(bool value) {
     isMale = value;
@@ -25,7 +25,6 @@ class PersonalInfoCubit extends Cubit<PersonalInfoState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController currentPasswordController = TextEditingController();
-  
 
   bool showPasswordFields = false;
 
@@ -41,10 +40,12 @@ class PersonalInfoCubit extends Cubit<PersonalInfoState> {
     obscurePassword = !obscurePassword;
     emit(ChangeOpsecureState());
   }
+
   void changeConfirmObscurePassword() {
     obscureConfirmPassword = !obscureConfirmPassword;
     emit(ChangeOpsecureState());
   }
+
   void changecurrentObscurePassword() {
     currentObscurePassword = !currentObscurePassword;
     emit(ChangeOpsecureState());

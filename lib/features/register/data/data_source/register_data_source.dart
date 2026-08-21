@@ -20,7 +20,9 @@ abstract class RegisterDataSource {
   // });
 
   @POST(EndPoints.registerUrl)
-  Future<RegisterOutModel> createUser(@Body() RegisterInputModel createUserModel);
+  Future<RegisterOutModel> createUser(
+    @Body() RegisterInputModel createUserModel,
+  );
 
   // @DELETE("/users/{id}")
   // Future<EmptyDataResponse> deleteUser(@Path("id") int id);

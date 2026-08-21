@@ -13,9 +13,6 @@ abstract class LoginDataSource {
   @FactoryMethod()
   factory LoginDataSource(Dio dio) = _LoginDataSource;
 
-
   @POST(EndPoints.loginUrl)
   Future<LoginOutModel> login(@Body() LoginInputModel loginModel);
-
- 
 }

@@ -16,14 +16,18 @@ class SecondStepCubit extends Cubit<SecondStepState> with ImageMixin {
   SecondStepCubit(this.repo) : super(SecondStepInitial());
 
   final secondStepFormKey = GlobalKey<FormState>();
-  
+
   List<TransportTypeModel> transportTypes = [];
   TransportTypeModel? selectedTransportType;
-  
-  TextEditingController maxWeightController = TextEditingController(text: '0.0');
-  TextEditingController maxVolumeController = TextEditingController(text: '0.0');
+
+  TextEditingController maxWeightController = TextEditingController(
+    text: '0.0',
+  );
+  TextEditingController maxVolumeController = TextEditingController(
+    text: '0.0',
+  );
   TextEditingController plateNumberController = TextEditingController();
-  
+
   File? vehicleImage;
 
   void init() {
@@ -33,13 +37,12 @@ class SecondStepCubit extends Cubit<SecondStepState> with ImageMixin {
   Future<void> getTransportTypes() async {
     emit(GetTransportTypesLoading());
     final result = await repo.getTransportTypes();
-    result.fold(
-      (failure) => emit(GetTransportTypesFailure(failure.message)),
-      (response) {
-        transportTypes = response.data ?? [];
-        emit(GetTransportTypesSuccess());
-      },
-    );
+    result.fold((failure) => emit(GetTransportTypesFailure(failure.message)), (
+      response,
+    ) {
+      transportTypes = response.data ?? [];
+      emit(GetTransportTypesSuccess());
+    });
   }
 
   void changeTransportType(TransportTypeModel type) {
@@ -60,15 +63,17 @@ class SecondStepCubit extends Cubit<SecondStepState> with ImageMixin {
   }
 
   Future<void> submitSecondStep() async {
-    if (secondStepFormKey.currentState!.validate() && selectedTransportType != null && vehicleImage != null) {
+    if (secondStepFormKey.currentState!.validate() &&
+        selectedTransportType != null &&
+        vehicleImage != null) {
       emit(SubmitSecondStepLoading());
-      
+
       final result = await repo.submitSecondStep(
         selectedTransportType!.id!,
         plateNumberController.text,
         vehicleImage!,
       );
-      
+
       result.fold(
         (failure) => emit(SubmitSecondStepFailure(failure.message)),
         (response) => emit(SubmitSecondStepSuccess()),

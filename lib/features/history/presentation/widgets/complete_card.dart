@@ -11,7 +11,7 @@ class CompleteCard extends StatelessWidget {
     required this.dateLabel,
     required this.dateValue,
     required this.fare,
-    this.onPressed
+    this.onPressed,
   });
   final String orderId;
   final String merchant;

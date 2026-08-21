@@ -45,7 +45,7 @@ class OrdersCubit extends Cubit<OrdersState> {
         final meta = response.data?.meta;
 
         hasMore = meta?.hasMore ?? false;
-        
+
         if (isLoadMore) {
           orders.addAll(newOrders);
           isLoadingMore = false;

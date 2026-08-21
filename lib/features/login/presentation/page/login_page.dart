@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
               AppRoutes.splashScreen,
               // extra: (true, context.read<LoginCubit>().phoneController.text),
             );
-          }else if (state.loginOutModel?.data?.isVerified == false) {
+          } else if (state.loginOutModel?.data?.isVerified == false) {
             context.go(
               AppRoutes.otp,
               extra: (true, context.read<LoginCubit>().phoneController.text),

@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title == null ? null : Text(title!),
       centerTitle: centerTitle,
       actions: actions,
-      automaticallyImplyLeading: canPob ,
+      automaticallyImplyLeading: canPob,
       leading: canPob
           ? CupertinoButton(
               onPressed: popPress ?? () => context.pop(),

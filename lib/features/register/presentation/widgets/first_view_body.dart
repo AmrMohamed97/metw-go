@@ -6,7 +6,7 @@ class FirstViewBody extends StatelessWidget {
   const FirstViewBody({super.key, required this.body, this.animate = false});
   final Widget body;
   final bool animate;
-  
+
   @override
   Widget build(BuildContext context) {
     Widget content = Container(
@@ -18,7 +18,7 @@ class FirstViewBody extends StatelessWidget {
         ),
         color: Theme.of(context).colorScheme.surface,
       ),
-      child: animate 
+      child: animate
           ? FadeIn(
               delay: Duration(milliseconds: 1500),
               duration: Duration(seconds: 1),
@@ -42,8 +42,6 @@ class FirstViewBody extends StatelessWidget {
           );
     }
 
-    return SliverToBoxAdapter(
-      child: content,
-    );
+    return SliverToBoxAdapter(child: content);
   }
 }

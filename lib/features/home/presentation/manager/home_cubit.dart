@@ -8,7 +8,7 @@ import 'package:metw_go/features/home/presentation/manager/home_state.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitial()) ;
+  HomeCubit() : super(HomeInitial());
   // {
   //   realTime(9);
   // }

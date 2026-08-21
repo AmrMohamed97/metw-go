@@ -31,7 +31,7 @@ class _OtpPageState extends State<OtpPage> {
 
   String _obscurePhone(String phone) {
     if (phone.length < 8) return phone;
-    int start = 3 ; //(phone.length - 6) ~/ 2;
+    int start = 3; //(phone.length - 6) ~/ 2;
     int end = start + 6;
     return phone.replaceRange(start, end, '******');
   }

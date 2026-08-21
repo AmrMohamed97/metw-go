@@ -20,7 +20,8 @@ class AvailableActionsModel {
     this.completeDelivery,
   });
 
-  factory AvailableActionsModel.fromJson(Map<String, dynamic> json) => _$AvailableActionsModelFromJson(json);
+  factory AvailableActionsModel.fromJson(Map<String, dynamic> json) =>
+      _$AvailableActionsModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$AvailableActionsModelToJson(this);
 }

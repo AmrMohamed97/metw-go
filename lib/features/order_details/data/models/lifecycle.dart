@@ -9,6 +9,7 @@ class Lifecycle {
 
   Lifecycle({this.canStart});
 
-  factory Lifecycle.fromJson(Map<String, dynamic> json) => _$LifecycleFromJson(json);
+  factory Lifecycle.fromJson(Map<String, dynamic> json) =>
+      _$LifecycleFromJson(json);
   Map<String, dynamic> toJson() => _$LifecycleToJson(this);
 }

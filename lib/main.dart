@@ -11,7 +11,8 @@ void main() async {
   await configureDependencies();
   await Firebase.initializeApp(
     // name: 'dental-clinic-b0628' ,
-    options: DefaultFirebaseOptions.currentPlatform);
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   Future.wait([NotificationHandler.init(), LocalNotificationService.init()]);
   runApp(const MetwGo());
 }

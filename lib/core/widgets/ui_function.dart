@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 
 // import 'package:motion_toast/motion_toast.dart';
@@ -165,7 +163,7 @@ class UiHelper {
                       text: 'خروج',
                       onPressed: () {
                         Navigator.pop(context);
-                        context.read<AppCubit>().logout();
+                        // context.read<AppCubit>().logout();
                       },
                       backgroundColor: MyColors.red,
                       fixedSize: false,

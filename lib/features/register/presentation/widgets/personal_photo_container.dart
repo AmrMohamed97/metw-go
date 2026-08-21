@@ -36,7 +36,9 @@ class PersonalPhotoContainer extends StatelessWidget {
           height: 180.h,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.05),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(24.r),
           ),
           child: isLoading
@@ -84,14 +86,18 @@ class PersonalPhotoContainer extends StatelessWidget {
                     Icon(
                       Icons.person_outline,
                       size: 48.sp,
-                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                     12.verticalSpace,
                     Text(
                       AppLocalizations.of(context)!.personalPhoto,
-                      style: AppTextStyle.medium14(
-                        context,
-                      ).copyWith(color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8)),
+                      style: AppTextStyle.medium14(context).copyWith(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.8),
+                      ),
                     ),
                   ],
                 ),

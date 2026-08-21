@@ -15,7 +15,8 @@ class OrderDetailsResponse {
 
   OrderDetailsResponse({this.success, this.message, this.data});
 
-  factory OrderDetailsResponse.fromJson(Map<String, dynamic> json) => _$OrderDetailsResponseFromJson(json);
+  factory OrderDetailsResponse.fromJson(Map<String, dynamic> json) =>
+      _$OrderDetailsResponseFromJson(json);
   Map<String, dynamic> toJson() => _$OrderDetailsResponseToJson(this);
 }
 
@@ -60,6 +61,7 @@ class OrderDetails {
     this.lifecycle,
   });
 
-  factory OrderDetails.fromJson(Map<String, dynamic> json) => _$OrderDetailsFromJson(json);
+  factory OrderDetails.fromJson(Map<String, dynamic> json) =>
+      _$OrderDetailsFromJson(json);
   Map<String, dynamic> toJson() => _$OrderDetailsToJson(this);
 }

@@ -15,7 +15,8 @@ class HistoryItem extends StatelessWidget {
     required this.dateLabel,
     required this.dateValue,
     required this.fare,
-    required this.showReceiptButton, this.onPressed,
+    required this.showReceiptButton,
+    this.onPressed,
   });
   final Color borderColor;
   final String statusText;

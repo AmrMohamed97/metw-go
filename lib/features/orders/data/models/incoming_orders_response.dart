@@ -10,13 +10,10 @@ class IncomingOrdersResponse {
   String? message;
   OrdersData? data;
 
-  IncomingOrdersResponse({
-    this.success,
-    this.message,
-    this.data,
-  });
+  IncomingOrdersResponse({this.success, this.message, this.data});
 
-  factory IncomingOrdersResponse.fromJson(Map<String, dynamic> json) => _$IncomingOrdersResponseFromJson(json);
+  factory IncomingOrdersResponse.fromJson(Map<String, dynamic> json) =>
+      _$IncomingOrdersResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$IncomingOrdersResponseToJson(this);
 }
@@ -26,12 +23,10 @@ class OrdersData {
   List<OrderModel>? data;
   Meta? meta;
 
-  OrdersData({
-    this.data,
-    this.meta,
-  });
+  OrdersData({this.data, this.meta});
 
-  factory OrdersData.fromJson(Map<String, dynamic> json) => _$OrdersDataFromJson(json);
+  factory OrdersData.fromJson(Map<String, dynamic> json) =>
+      _$OrdersDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrdersDataToJson(this);
 }
@@ -44,11 +39,7 @@ class Meta {
   bool? hasMore;
   int? total;
 
-  Meta({
-    this.currentPage,
-    this.hasMore,
-    this.total,
-  });
+  Meta({this.currentPage, this.hasMore, this.total});
 
   factory Meta.fromJson(Map<String, dynamic> json) => _$MetaFromJson(json);
 

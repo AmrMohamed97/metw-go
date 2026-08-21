@@ -19,7 +19,8 @@ class CustomErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayText = message ?? errorMessage ?? 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
+    final displayText =
+        message ?? errorMessage ?? 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
     final retryAction = onRetry ?? onPressed;
 
     return Center(
@@ -37,9 +38,9 @@ class CustomErrorWidget extends StatelessWidget {
             Text(
               displayText,
               textAlign: TextAlign.center,
-              style: AppTextStyle.medium16(context).copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
+              style: AppTextStyle.medium16(
+                context,
+              ).copyWith(color: Theme.of(context).colorScheme.onSurface),
             ),
             if (retryAction != null) ...[
               const SizedBox(height: 24),

@@ -12,14 +12,14 @@
 //   /// النتيجة: صورة أقل من 1MB مع الحفاظ على الجودة ونسبة الأبعاد
 //   Future<File> compress({required File targetImage}) async {
 //     final int maxFileSize = 2 * 1024 * 1024; // 2 MB
-    
+
 //     // استبدال أي امتداد (بغض النظر عن حالة الأحرف) بـ .webp
 //     // نضيف مسار فريد لتجنب أي مشاكل إذا كان الملف الأصلي يحمل نفس الاسم
 //     String targetPath = targetImage.path.replaceAll(
-//       RegExp(r'\.(jpg|jpeg|png|heic|heif)$', caseSensitive: false), 
+//       RegExp(r'\.(jpg|jpeg|png|heic|heif)$', caseSensitive: false),
 //       '_compressed.webp'
 //     );
-    
+
 //     // في حالة لم يتم التغيير (مثلاً الملف ليس له امتداد معروف)، نضيف الامتداد ببساطة
 //     if (targetPath == targetImage.path) {
 //       targetPath = '${targetImage.path}_compressed.webp';
@@ -34,7 +34,7 @@
 //       minWidth: 1920,
 //       minHeight: 1920,
 //     );
-    
+
 //     if (result == null) return targetImage;
 //     File compressedFile = File(result.path);
 
@@ -156,8 +156,9 @@ mixin ImageMixin {
     }
 
     String targetPath = targetImage.path.replaceAll(
-        RegExp(r'\.(jpg|jpeg|png|heic|heif)$', caseSensitive: false),
-        '_compressed.webp');
+      RegExp(r'\.(jpg|jpeg|png|heic|heif)$', caseSensitive: false),
+      '_compressed.webp',
+    );
 
     if (targetPath == targetImage.path) {
       targetPath = '${targetImage.path}_compressed.webp';

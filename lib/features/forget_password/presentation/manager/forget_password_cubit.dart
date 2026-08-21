@@ -19,13 +19,14 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   final GlobalKey<FormState> sendOtpFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> changePasswordFormKey = GlobalKey<FormState>();
 
-    bool obscurePassword = true;
-    bool confirmObscurePassword = true;
+  bool obscurePassword = true;
+  bool confirmObscurePassword = true;
 
   void toggleObscurePassword() {
     obscurePassword = !obscurePassword;
     emit(ChangeObscureState());
   }
+
   void toggleConfirmObscurePassword() {
     confirmObscurePassword = !confirmObscurePassword;
     emit(ChangeObscureState());

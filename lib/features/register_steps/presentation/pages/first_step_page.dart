@@ -102,16 +102,25 @@ class FirstStepPage extends StatelessWidget {
                                   context: context,
                                   isScrollControlled: true,
                                   constraints: BoxConstraints(
-                                    maxHeight: MediaQuery.of(context).size.height * 0.5,
+                                    maxHeight:
+                                        MediaQuery.of(context).size.height *
+                                        0.5,
                                   ),
-                                  backgroundColor: Theme.of(context).colorScheme.surface,
+                                  backgroundColor: Theme.of(
+                                    context,
+                                  ).colorScheme.surface,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(24.r),
+                                    ),
                                   ),
                                   builder: (context) {
                                     return SafeArea(
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0,
+                                          vertical: 8.0,
+                                        ),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
@@ -121,90 +130,154 @@ class FirstStepPage extends StatelessWidget {
                                               width: 40.w,
                                               decoration: BoxDecoration(
                                                 color: Colors.grey[300],
-                                                borderRadius: BorderRadius.circular(4.r),
+                                                borderRadius:
+                                                    BorderRadius.circular(4.r),
                                               ),
                                             ),
                                             16.verticalSpace,
                                             // Title
                                             Text(
-                                              AppLocalizations.of(context)!.chooseWarehouseNumber,
-                                              style: AppTextStyle.bold18(context),
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.chooseWarehouseNumber,
+                                              style: AppTextStyle.bold18(
+                                                context,
+                                              ),
                                             ),
                                             16.verticalSpace,
                                             // List of items
                                             Flexible(
                                               child: ListView.separated(
                                                 shrinkWrap: true,
-                                                itemCount: cubit.warehouses.length,
-                                                separatorBuilder: (context, index) => 12.verticalSpace,
+                                                itemCount:
+                                                    cubit.warehouses.length,
+                                                separatorBuilder:
+                                                    (context, index) =>
+                                                        12.verticalSpace,
                                                 itemBuilder: (context, index) {
-                                                  final warehouse = cubit.warehouses[index];
-                                                  final isSelected = cubit.selectedWarehouse == warehouse;
+                                                  final warehouse =
+                                                      cubit.warehouses[index];
+                                                  final isSelected =
+                                                      cubit.selectedWarehouse ==
+                                                      warehouse;
                                                   return InkWell(
                                                     onTap: () {
-                                                      cubit.selectWarehouse(warehouse);
+                                                      cubit.selectWarehouse(
+                                                        warehouse,
+                                                      );
                                                       Navigator.pop(context);
                                                     },
-                                                    borderRadius: BorderRadius.circular(12.r),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          12.r,
+                                                        ),
                                                     child: Container(
-                                                      padding: const EdgeInsets.all(16),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                            16,
+                                                          ),
                                                       decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(12.r),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              12.r,
+                                                            ),
                                                         border: Border.all(
                                                           color: isSelected
-                                                              ? Theme.of(context).primaryColor
-                                                              : Colors.grey.shade300,
-                                                          width: isSelected ? 1.5 : 1,
+                                                              ? Theme.of(
+                                                                  context,
+                                                                ).primaryColor
+                                                              : Colors
+                                                                    .grey
+                                                                    .shade300,
+                                                          width: isSelected
+                                                              ? 1.5
+                                                              : 1,
                                                         ),
                                                         color: isSelected
-                                                            ? Theme.of(context).primaryColor.withOpacity(0.05)
-                                                            : Colors.transparent,
+                                                            ? Theme.of(context)
+                                                                  .primaryColor
+                                                                  .withOpacity(
+                                                                    0.05,
+                                                                  )
+                                                            : Colors
+                                                                  .transparent,
                                                       ),
                                                       child: Row(
                                                         children: [
                                                           Container(
-                                                            padding: const EdgeInsets.all(10),
+                                                            padding:
+                                                                const EdgeInsets.all(
+                                                                  10,
+                                                                ),
                                                             decoration: BoxDecoration(
                                                               color: isSelected
-                                                                  ? Theme.of(context).primaryColor
-                                                                  : Colors.grey.shade100,
-                                                              shape: BoxShape.circle,
+                                                                  ? Theme.of(
+                                                                      context,
+                                                                    ).primaryColor
+                                                                  : Colors
+                                                                        .grey
+                                                                        .shade100,
+                                                              shape: BoxShape
+                                                                  .circle,
                                                             ),
                                                             child: Icon(
-                                                              Icons.storefront_outlined,
+                                                              Icons
+                                                                  .storefront_outlined,
                                                               color: isSelected
                                                                   ? Colors.white
-                                                                  : Colors.grey.shade600,
+                                                                  : Colors
+                                                                        .grey
+                                                                        .shade600,
                                                               size: 24.sp,
                                                             ),
                                                           ),
                                                           16.horizontalSpace,
                                                           Expanded(
                                                             child: Column(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
                                                               children: [
                                                                 Text(
-                                                                  warehouse.name ?? '',
-                                                                  style: AppTextStyle.medium16(context).copyWith(
-                                                                    color: isSelected
-                                                                        ? Theme.of(context).primaryColor
-                                                                        : null,
-                                                                  ),
+                                                                  warehouse
+                                                                          .name ??
+                                                                      '',
+                                                                  style:
+                                                                      AppTextStyle.medium16(
+                                                                        context,
+                                                                      ).copyWith(
+                                                                        color:
+                                                                            isSelected
+                                                                            ? Theme.of(
+                                                                                context,
+                                                                              ).primaryColor
+                                                                            : null,
+                                                                      ),
                                                                 ),
                                                                 4.verticalSpace,
                                                                 Text(
-                                                                  warehouse.accountNumber ?? '',
-                                                                  style: AppTextStyle.regular12(context).copyWith(
-                                                                    color: Colors.grey.shade600,
-                                                                  ),
+                                                                  warehouse
+                                                                          .accountNumber ??
+                                                                      '',
+                                                                  style:
+                                                                      AppTextStyle.regular12(
+                                                                        context,
+                                                                      ).copyWith(
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .shade600,
+                                                                      ),
                                                                 ),
                                                               ],
                                                             ),
                                                           ),
                                                           if (isSelected)
                                                             Icon(
-                                                              Icons.check_circle,
-                                                              color: Theme.of(context).primaryColor,
+                                                              Icons
+                                                                  .check_circle,
+                                                              color: Theme.of(
+                                                                context,
+                                                              ).primaryColor,
                                                             ),
                                                         ],
                                                       ),

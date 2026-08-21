@@ -32,7 +32,9 @@ class ThirdStepRepoImpl implements ThirdStepRepo {
   }
 
   @override
-  Future<Either<Failure, CityListResponse>> getCities(List<int> governorateIds) async {
+  Future<Either<Failure, CityListResponse>> getCities(
+    List<int> governorateIds,
+  ) async {
     try {
       final response = await dataSource.getCities(governorateIds);
       return Right(response);
@@ -46,7 +48,8 @@ class ThirdStepRepoImpl implements ThirdStepRepo {
 
   @override
   Future<Either<Failure, FirstStepOutModel>> submitThirdStep(
-      ThirdStepInputModel input) async {
+    ThirdStepInputModel input,
+  ) async {
     try {
       final response = await dataSource.submitThirdStep(input);
       CacheHelper.setSecuerString(

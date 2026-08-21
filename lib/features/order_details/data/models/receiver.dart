@@ -9,6 +9,7 @@ class Receiver {
 
   Receiver({this.name, this.phone});
 
-  factory Receiver.fromJson(Map<String, dynamic> json) => _$ReceiverFromJson(json);
+  factory Receiver.fromJson(Map<String, dynamic> json) =>
+      _$ReceiverFromJson(json);
   Map<String, dynamic> toJson() => _$ReceiverToJson(this);
 }

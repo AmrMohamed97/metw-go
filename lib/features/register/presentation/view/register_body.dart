@@ -122,17 +122,12 @@ class _RegisterBodyState extends State<RegisterBody> {
                         ),
                       ],
                     ),
-                    FieldTitle(
-                      title: AppLocalizations.of(context)!.lastName,
-                    ),
+                    FieldTitle(title: AppLocalizations.of(context)!.lastName),
                     4.verticalSpace,
                     CustomTextField(
-                      hintText: AppLocalizations.of(
-                        context,
-                      )!.exampleMohamed,
+                      hintText: AppLocalizations.of(context)!.exampleMohamed,
                       controller: cubit.lastNameController,
-                      validator: (val) =>
-                          lastNameValidator(context, val),
+                      validator: (val) => lastNameValidator(context, val),
                     ),
                     // 16.verticalSpace,
                     FieldTitle(
@@ -173,13 +168,16 @@ class _RegisterBodyState extends State<RegisterBody> {
                       onTap: () async {
                         final picked = await showDatePicker(
                           context: context,
-                          initialDate: DateTime.now().subtract(const Duration(days: 365 * 18)),
+                          initialDate: DateTime.now().subtract(
+                            const Duration(days: 365 * 18),
+                          ),
                           firstDate: DateTime(1900),
                           lastDate: DateTime.now(),
                         );
                         if (picked != null) {
-                          cubit.boarnDateController.text =
-                              DateFormat('yyyy-MM-dd').format(picked);
+                          cubit.boarnDateController.text = DateFormat(
+                            'yyyy-MM-dd',
+                          ).format(picked);
                         }
                       },
                     ),

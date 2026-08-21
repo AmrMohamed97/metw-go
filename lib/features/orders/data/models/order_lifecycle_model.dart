@@ -44,7 +44,8 @@ class OrderLifecycleModel {
     this.collectedAmount,
   });
 
-  factory OrderLifecycleModel.fromJson(Map<String, dynamic> json) => _$OrderLifecycleModelFromJson(json);
+  factory OrderLifecycleModel.fromJson(Map<String, dynamic> json) =>
+      _$OrderLifecycleModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrderLifecycleModelToJson(this);
 }

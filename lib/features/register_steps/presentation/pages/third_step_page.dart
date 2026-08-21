@@ -89,7 +89,9 @@ class ThirdStepPage extends StatelessWidget {
                                   height: 20,
                                   child: Padding(
                                     padding: EdgeInsets.all(12.0),
-                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
                                   ),
                                 )
                               : const Icon(Icons.keyboard_arrow_down),
@@ -126,7 +128,9 @@ class ThirdStepPage extends StatelessWidget {
                                   height: 20,
                                   child: Padding(
                                     padding: EdgeInsets.all(12.0),
-                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
                                   ),
                                 )
                               : const Icon(Icons.keyboard_arrow_down),
@@ -193,12 +197,15 @@ class ThirdStepPage extends StatelessWidget {
                                   size: 18.sp,
                                   color: Colors.grey.shade600,
                                 ),
-                                onPressed: () => context.go(AppRoutes.secondStepPage),
+                                onPressed: () =>
+                                    context.go(AppRoutes.secondStepPage),
                               ),
                             ),
                             CustomButton(
                               loading: state is SubmitThirdStepLoading,
-                              horizontalPadding: state is SubmitThirdStepLoading ? null : 40,
+                              horizontalPadding: state is SubmitThirdStepLoading
+                                  ? null
+                                  : 40,
                               text: AppLocalizations.of(context)!.next,
                               onPressed: () => cubit.submitThirdStep(),
                             ),
@@ -218,7 +225,10 @@ class ThirdStepPage extends StatelessWidget {
     );
   }
 
-  void _showGovernoratesBottomSheet(BuildContext context, ThirdStepCubit cubit) {
+  void _showGovernoratesBottomSheet(
+    BuildContext context,
+    ThirdStepCubit cubit,
+  ) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -236,7 +246,10 @@ class ThirdStepPage extends StatelessWidget {
             builder: (context, state) {
               return SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8.0,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -258,10 +271,12 @@ class ThirdStepPage extends StatelessWidget {
                         child: ListView.separated(
                           shrinkWrap: true,
                           itemCount: cubit.governorates.length,
-                          separatorBuilder: (context, index) => 12.verticalSpace,
+                          separatorBuilder: (context, index) =>
+                              12.verticalSpace,
                           itemBuilder: (context, index) {
                             final gov = cubit.governorates[index];
-                            final isSelected = cubit.selectedGovernorates.contains(gov);
+                            final isSelected = cubit.selectedGovernorates
+                                .contains(gov);
                             return InkWell(
                               onTap: () => cubit.toggleGovernorate(gov),
                               borderRadius: BorderRadius.circular(12.r),
@@ -276,17 +291,23 @@ class ThirdStepPage extends StatelessWidget {
                                     width: isSelected ? 1.5 : 1,
                                   ),
                                   color: isSelected
-                                      ? Theme.of(context).primaryColor.withOpacity(0.05)
+                                      ? Theme.of(
+                                          context,
+                                        ).primaryColor.withOpacity(0.05)
                                       : Colors.transparent,
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       gov.name ?? '',
-                                      style: AppTextStyle.medium16(context).copyWith(
-                                        color: isSelected ? Theme.of(context).primaryColor : null,
-                                      ),
+                                      style: AppTextStyle.medium16(context)
+                                          .copyWith(
+                                            color: isSelected
+                                                ? Theme.of(context).primaryColor
+                                                : null,
+                                          ),
                                     ),
                                     if (isSelected)
                                       Icon(
@@ -330,7 +351,10 @@ class ThirdStepPage extends StatelessWidget {
             builder: (context, state) {
               return SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8.0,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -352,10 +376,13 @@ class ThirdStepPage extends StatelessWidget {
                         child: ListView.separated(
                           shrinkWrap: true,
                           itemCount: cubit.cities.length,
-                          separatorBuilder: (context, index) => 12.verticalSpace,
+                          separatorBuilder: (context, index) =>
+                              12.verticalSpace,
                           itemBuilder: (context, index) {
                             final city = cubit.cities[index];
-                            final isSelected = cubit.selectedCities.contains(city);
+                            final isSelected = cubit.selectedCities.contains(
+                              city,
+                            );
                             return InkWell(
                               onTap: () => cubit.toggleCity(city),
                               borderRadius: BorderRadius.circular(12.r),
@@ -370,17 +397,23 @@ class ThirdStepPage extends StatelessWidget {
                                     width: isSelected ? 1.5 : 1,
                                   ),
                                   color: isSelected
-                                      ? Theme.of(context).primaryColor.withOpacity(0.05)
+                                      ? Theme.of(
+                                          context,
+                                        ).primaryColor.withOpacity(0.05)
                                       : Colors.transparent,
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       city.name ?? '',
-                                      style: AppTextStyle.medium16(context).copyWith(
-                                        color: isSelected ? Theme.of(context).primaryColor : null,
-                                      ),
+                                      style: AppTextStyle.medium16(context)
+                                          .copyWith(
+                                            color: isSelected
+                                                ? Theme.of(context).primaryColor
+                                                : null,
+                                          ),
                                     ),
                                     if (isSelected)
                                       Icon(

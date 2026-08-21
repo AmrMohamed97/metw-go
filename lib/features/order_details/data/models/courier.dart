@@ -27,6 +27,7 @@ class Courier {
     this.isProfileComplete,
   });
 
-  factory Courier.fromJson(Map<String, dynamic> json) => _$CourierFromJson(json);
+  factory Courier.fromJson(Map<String, dynamic> json) =>
+      _$CourierFromJson(json);
   Map<String, dynamic> toJson() => _$CourierToJson(this);
 }

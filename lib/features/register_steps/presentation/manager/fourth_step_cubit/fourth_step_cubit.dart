@@ -8,12 +8,12 @@ import 'package:metw_go/features/register_steps/data/repo/fourth_step_repo.dart'
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_state.dart';
 
 @injectable
-class FourthStepCubit extends Cubit<FourthStepState> with ImageMixin{
+class FourthStepCubit extends Cubit<FourthStepState> with ImageMixin {
   final FourthStepRepo repo;
 
   FourthStepCubit(this.repo) : super(FourthStepInitial());
 
-    File? personalPhoto;
+  File? personalPhoto;
   File? nationalIdFront;
   File? nationalIdBack;
   File? drivingLicenseFront;
@@ -95,4 +95,4 @@ class FourthStepCubit extends Cubit<FourthStepState> with ImageMixin{
       (success) => emit(SubmitFourthStepSuccess()),
     );
   }
-} 
+}

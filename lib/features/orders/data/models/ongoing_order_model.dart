@@ -82,7 +82,8 @@ class OngoingOrderModel {
     this.primaryActionLabel,
   });
 
-  factory OngoingOrderModel.fromJson(Map<String, dynamic> json) => _$OngoingOrderModelFromJson(json);
+  factory OngoingOrderModel.fromJson(Map<String, dynamic> json) =>
+      _$OngoingOrderModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$OngoingOrderModelToJson(this);
 }
@@ -94,13 +95,10 @@ class PointTabModel {
   @JsonKey(name: 'is_active')
   bool? isActive;
 
-  PointTabModel({
-    this.index,
-    this.label,
-    this.isActive,
-  });
+  PointTabModel({this.index, this.label, this.isActive});
 
-  factory PointTabModel.fromJson(Map<String, dynamic> json) => _$PointTabModelFromJson(json);
+  factory PointTabModel.fromJson(Map<String, dynamic> json) =>
+      _$PointTabModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$PointTabModelToJson(this);
 }

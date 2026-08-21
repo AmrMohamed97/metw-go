@@ -7,7 +7,7 @@ import 'package:metw_go/features/service_areas/presentation/manager/service_area
 class ServiceAreasCubit extends Cubit<ServiceAreasState> {
   ServiceAreasCubit() : super(ServiceAreasInitialState());
 
-    final GlobalKey<FormState> fourthViewFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> fourthViewFormKey = GlobalKey<FormState>();
   List<String> selectedGovernorates = ['القاهرة', 'الجيزة'];
   List<String> selectedCities = ['مدينة نصر', 'مصر الجديدة'];
   bool isRuralServiceEnabled = false;
@@ -26,5 +26,4 @@ class ServiceAreasCubit extends Cubit<ServiceAreasState> {
     selectedCities.remove(city);
     emit(RemoveCityState());
   }
-
 }

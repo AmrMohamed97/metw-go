@@ -6,6 +6,10 @@ import 'package:metw_go/features/forget_password/data/models/forget_password_inp
 import 'package:metw_go/features/forget_password/data/models/forget_password_out_model.dart';
 
 abstract class ForgetPasswordRepo {
-  Future<Either<Failure, ForgetPasswordOutModel>> sendOtp(ForgetPasswordInputModel inputModel);
-  Future<Either<Failure, ChangePasswordOutModel>> changePassword(ChangePasswordInputModel inputModel);
+  Future<Either<Failure, ForgetPasswordOutModel>> sendOtp(
+    ForgetPasswordInputModel inputModel,
+  );
+  Future<Either<Failure, ChangePasswordOutModel>> changePassword(
+    ChangePasswordInputModel inputModel,
+  );
 }

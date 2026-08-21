@@ -13,5 +13,7 @@ abstract class OrderDetailsDataSource {
   factory OrderDetailsDataSource(Dio dio) = _OrderDetailsDataSource;
 
   @GET(EndPoints.orderDetailsUrl)
-  Future<HttpResponse<OrderDetailsResponse>> getOrderDetails(@Path('orderId') int orderId);
+  Future<HttpResponse<OrderDetailsResponse>> getOrderDetails(
+    @Path('orderId') int orderId,
+  );
 }

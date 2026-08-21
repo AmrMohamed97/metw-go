@@ -11,13 +11,10 @@ class Firebase {
   @JsonKey(name: 'device_token_saved')
   bool? deviceTokenSaved;
 
-  Firebase({
-    this.authStatus,
-    this.isAuthorized,
-    this.deviceTokenSaved,
-  });
+  Firebase({this.authStatus, this.isAuthorized, this.deviceTokenSaved});
 
-  factory Firebase.fromJson(Map<String, dynamic> json) => _$FirebaseFromJson(json);
+  factory Firebase.fromJson(Map<String, dynamic> json) =>
+      _$FirebaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$FirebaseToJson(this);
 }

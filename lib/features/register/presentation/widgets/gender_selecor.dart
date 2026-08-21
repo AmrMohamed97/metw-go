@@ -16,7 +16,7 @@ class GenderSelector extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-             FieldTitle(title: AppLocalizations.of(context)!.gender),
+            FieldTitle(title: AppLocalizations.of(context)!.gender),
             SizedBox(height: 4),
             Row(
               children: [

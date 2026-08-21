@@ -192,7 +192,10 @@ class OrderItem extends StatelessWidget {
                 else
                   Expanded(
                     flex: 2,
-                    child: CustomButton(text: AppLocalizations.of(context)!.startOrder, onPressed: () {}),
+                    child: CustomButton(
+                      text: AppLocalizations.of(context)!.startOrder,
+                      onPressed: () {},
+                    ),
                   ),
                 12.horizontalSpace,
                 Expanded(

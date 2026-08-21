@@ -91,7 +91,9 @@ class FirstStepCubit extends Cubit<FirstStepState> {
     bool hasSelectedWarehouse = selectedWarehouse != null;
 
     if (firstStepFormKey.currentState!.validate() &&
-        (isIndependentDelegate ? hasSelectedWorkTypes : hasSelectedWorkTypes && hasSelectedWarehouse)) {
+        (isIndependentDelegate
+            ? hasSelectedWorkTypes
+            : hasSelectedWorkTypes && hasSelectedWarehouse)) {
       emit(SubmitFirstStepLoading());
 
       final input = FirstStepInputModel(

@@ -13,7 +13,10 @@ class OrdersRepoImpl implements OrdersRepo {
   OrdersRepoImpl({required this.ordersDataSource});
 
   @override
-  Future<Either<Failure, IncomingOrdersResponse>> getIncomingOrders(int page, int limit) async {
+  Future<Either<Failure, IncomingOrdersResponse>> getIncomingOrders(
+    int page,
+    int limit,
+  ) async {
     try {
       final result = await ordersDataSource.getIncomingOrders(page, limit);
       return Right(result);

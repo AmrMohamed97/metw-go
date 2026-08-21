@@ -27,7 +27,8 @@ class _OrdersListViewState extends State<OrdersListView> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent * 0.9) {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent * 0.9) {
       context.read<OrdersCubit>().getIncomingOrders(isLoadMore: true);
     }
   }
@@ -43,7 +44,7 @@ class _OrdersListViewState extends State<OrdersListView> {
     return BlocBuilder<OrdersCubit, OrdersState>(
       builder: (context, state) {
         final cubit = context.read<OrdersCubit>();
-        
+
         if (state is IncomingOrdersLoadingState) {
           return Expanded(
             child: Skeletonizer(
@@ -97,12 +98,15 @@ class _OrdersListViewState extends State<OrdersListView> {
                 padding: const EdgeInsets.only(bottom: 12.0),
                 child: OrderItem(
                   orderId: order.orderNumber ?? "",
-                  distance: order.distanceKm != null ? "${order.distanceKm} كم" : "",
+                  distance: order.distanceKm != null
+                      ? "${order.distanceKm} كم"
+                      : "",
                   isUrgent: order.priority == "urgent",
                   // isTodayOrders: cubit.isTodayOrders,
                   pickup: order.pickupAddress ?? "",
                   delivery: order.dropoffAddress ?? "",
-                  onDetailsPressed: () => context.push(AppRoutes.orderDetailsPage, extra: order.id),
+                  onDetailsPressed: () =>
+                      context.push(AppRoutes.orderDetailsPage, extra: order.id),
                   // borderColor: Theme.of(context).colorScheme.secondary,
                 ),
               );

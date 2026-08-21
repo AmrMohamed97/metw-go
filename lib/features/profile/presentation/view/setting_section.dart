@@ -13,19 +13,24 @@ import 'package:metw_go/features/profile/presentation/widgets/custom_section.dar
 import 'package:metw_go/features/profile/presentation/widgets/profile_item.dart';
 
 class SettingSection extends StatelessWidget {
-  const SettingSection({
-    super.key,
-  });
+  const SettingSection({super.key});
 
   void _showLanguageMenu(BuildContext itemContext, AppCubit appCubit) {
     final isArabic = appCubit.currentLocale.languageCode == 'ar';
     final RenderBox button = itemContext.findRenderObject() as RenderBox;
     final RenderBox overlay =
-        Navigator.of(itemContext).overlay!.context.findRenderObject() as RenderBox;
+        Navigator.of(itemContext).overlay!.context.findRenderObject()
+            as RenderBox;
     final RelativeRect position = RelativeRect.fromRect(
       Rect.fromPoints(
-        button.localToGlobal(button.size.topLeft(Offset.zero), ancestor: overlay),
-        button.localToGlobal(button.size.bottomRight(Offset.zero), ancestor: overlay),
+        button.localToGlobal(
+          button.size.topLeft(Offset.zero),
+          ancestor: overlay,
+        ),
+        button.localToGlobal(
+          button.size.bottomRight(Offset.zero),
+          ancestor: overlay,
+        ),
       ),
       Offset.zero & overlay.size,
     );
@@ -41,11 +46,7 @@ class SettingSection extends StatelessWidget {
               Text('🇸🇦  العربية'),
               const Spacer(),
               if (isArabic)
-                Icon(
-                  Icons.check,
-                  size: 18,
-                  color:  MyColors.primaryColor,
-                ),
+                Icon(Icons.check, size: 18, color: MyColors.primaryColor),
             ],
           ),
         ),
@@ -56,11 +57,7 @@ class SettingSection extends StatelessWidget {
               Text('🇬🇧  English'),
               const Spacer(),
               if (!isArabic)
-                Icon(
-                  Icons.check,
-                  size: 18,
-                  color: MyColors.primaryColor,
-                ),
+                Icon(Icons.check, size: 18, color: MyColors.primaryColor),
             ],
           ),
         ),

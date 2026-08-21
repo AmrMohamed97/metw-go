@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:metw_go/core/models/empty_data_response.dart';
 import 'package:metw_go/core/network/end_point.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -13,6 +12,6 @@ abstract class AppDataSource {
   factory AppDataSource(Dio dio) =>
       _AppDataSource(dio, baseUrl: EndPoints.baseUrl);
 
-  @POST(EndPoints.logoutUrl)
-  Future<EmptyDataResponse> logout();
+  // @POST(EndPoints.logoutUrl)
+  // Future<EmptyDataResponse> logout();
 }

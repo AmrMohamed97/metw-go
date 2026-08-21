@@ -117,8 +117,8 @@
 //         Geolocator.getPositionStream(locationSettings: locationSettings).listen(
 //           (Position position) {
 //             _throttledUpdate(
-//               driverId, 
-//               position, 
+//               driverId,
+//               position,
 //               // driverName
 //               );
 //           },
@@ -145,8 +145,8 @@
 //   }
 
 //   void _throttledUpdate(
-//     String driverId, 
-//     Position position, 
+//     String driverId,
+//     Position position,
 //     // String driverName
 //     ) {
 //     final now = DateTime.now();

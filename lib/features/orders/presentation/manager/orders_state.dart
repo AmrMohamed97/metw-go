@@ -3,6 +3,7 @@ import 'package:metw_go/features/orders/data/models/order_model.dart';
 abstract class OrdersState {}
 
 class OrdersInitialState extends OrdersState {}
+
 class ChangeViewOrdersState extends OrdersState {}
 
 class IncomingOrdersLoadingState extends OrdersState {}

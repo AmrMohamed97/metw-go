@@ -9,11 +9,7 @@ class WarehouseModel {
   String? accountNumber;
   String? name;
 
-  WarehouseModel({
-    this.id,
-    this.accountNumber,
-    this.name,
-  });
+  WarehouseModel({this.id, this.accountNumber, this.name});
 
   factory WarehouseModel.fromJson(Map<String, dynamic> json) =>
       _$WarehouseModelFromJson(json);

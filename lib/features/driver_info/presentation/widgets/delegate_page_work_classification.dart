@@ -7,7 +7,6 @@ import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/features/driver_info/presentation/manager/delegate_info_cubit.dart';
 import 'package:metw_go/features/driver_info/presentation/manager/delegate_info_state.dart';
 
-
 class DelegatePageWorkClassification extends StatelessWidget {
   const DelegatePageWorkClassification({super.key});
 
