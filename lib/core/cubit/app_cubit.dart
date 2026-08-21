@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:firebase_database/firebase_database.dart';
@@ -80,4 +81,79 @@ class AppCubit extends Cubit<AppState> {
   //     emit(ApplogoutLogoutSuccessState());
   //   });
   // }
+
+  Future<void> acceptStartOrder({required String orderId}) async {
+    emit(AcceptStartOrderLoadingState());
+    final result = await _appRepo.acceptStartOrder(orderId: orderId);
+    result.fold(
+      (failure) => emit(AcceptStartOrderErrorState(failure.message)),
+      (response) => emit(AcceptStartOrderSuccessState(response)),
+    );
+  }
+
+  Future<void> arriveAtPickupOrder({required String orderId}) async {
+    emit(ArriveAtPickupOrderLoadingState());
+    final result = await _appRepo.arriveAtPickupOrder(orderId: orderId);
+    result.fold(
+      (failure) => emit(ArriveAtPickupOrderErrorState(failure.message)),
+      (response) => emit(ArriveAtPickupOrderSuccessState(response)),
+    );
+  }
+
+  Future<void> confirmPickupOrder({
+    required String orderId,
+    File? proofPhoto,
+    String? signature,
+    String? packageCountVerified,
+    String? packageConditionVerified,
+    String? merchantSignatureObtained,
+  }) async {
+    emit(ConfirmPickupOrderLoadingState());
+    final result = await _appRepo.confirmPickupOrder(
+      orderId: orderId,
+      proofPhoto: proofPhoto,
+      signature: signature,
+      packageCountVerified: packageCountVerified,
+      packageConditionVerified: packageConditionVerified,
+      merchantSignatureObtained: merchantSignatureObtained,
+    );
+    result.fold(
+      (failure) => emit(ConfirmPickupOrderErrorState(failure.message)),
+      (response) => emit(ConfirmPickupOrderSuccessState(response)),
+    );
+  }
+
+  Future<void> arriveAtDropoffOrder({required String orderId}) async {
+    emit(ArriveAtDropoffOrderLoadingState());
+    final result = await _appRepo.arriveAtDropoffOrder(orderId: orderId);
+    result.fold(
+      (failure) => emit(ArriveAtDropoffOrderErrorState(failure.message)),
+      (response) => emit(ArriveAtDropoffOrderSuccessState(response)),
+    );
+  }
+
+  Future<void> completeDeliveryOrder({
+    required String orderId,
+    File? proofPhoto,
+    String? signature,
+    String? recipientOtp,
+    String? collectedAmount,
+    String? deliveryNote,
+    String? recipientName,
+  }) async {
+    emit(CompleteDeliveryOrderLoadingState());
+    final result = await _appRepo.completeDeliveryOrder(
+      orderId: orderId,
+      proofPhoto: proofPhoto,
+      signature: signature,
+      recipientOtp: recipientOtp,
+      collectedAmount: collectedAmount,
+      deliveryNote: deliveryNote,
+      recipientName: recipientName,
+    );
+    result.fold(
+      (failure) => emit(CompleteDeliveryOrderErrorState(failure.message)),
+      (response) => emit(CompleteDeliveryOrderSuccessState(response)),
+    );
+  }
 }
