@@ -66,7 +66,6 @@ class AppCubit extends Cubit<AppState> {
     CacheHelper.saveData(key: AppConstant.kTheme, value: value);
     emit(ChangeThemeState());
   }
-  
 
   // Future<void> logout() async {
   //   emit(ApplogoutLoadingState());
