@@ -125,6 +125,12 @@ import 'package:metw_go/features/register_steps/presentation/manager/second_step
     as _i333;
 import 'package:metw_go/features/register_steps/presentation/manager/third_step_cubit.dart/third_step_cubit.dart'
     as _i273;
+import 'package:metw_go/features/service_areas/data/data_source/service_areas_data_source.dart'
+    as _i139;
+import 'package:metw_go/features/service_areas/data/repo/service_areas_repo.dart'
+    as _i967;
+import 'package:metw_go/features/service_areas/data/repo/service_areas_repo_impl.dart'
+    as _i508;
 import 'package:metw_go/features/service_areas/presentation/manager/service_areas_cubit.dart'
     as _i661;
 import 'package:metw_go/features/vehicle_data/data/data_source/vehicle_data_source.dart'
@@ -153,7 +159,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i91.DocumentsCubit>(() => _i91.DocumentsCubit());
     gh.factory<_i171.HomeCubit>(() => _i171.HomeCubit());
     gh.factory<_i364.NotificationCubit>(() => _i364.NotificationCubit());
-    gh.factory<_i661.ServiceAreasCubit>(() => _i661.ServiceAreasCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => registerModule.secureStorage,
     );
@@ -205,6 +210,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i837.ThirdStepDataSource>(
       () => _i837.ThirdStepDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i139.ServiceAreasDataSource>(
+      () => _i139.ServiceAreasDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i773.VehicleDataSource>(
       () => _i773.VehicleDataSource(gh<_i361.Dio>()),
     );
@@ -250,6 +258,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i1006.RegisterCubit>(
       () => _i1006.RegisterCubit(gh<_i617.RegisterRepo>()),
+    );
+    gh.factory<_i967.ServiceAreasRepo>(
+      () => _i508.ServiceAreasRepoImpl(
+        serviceAreasDataSource: gh<_i139.ServiceAreasDataSource>(),
+      ),
     );
     gh.factory<_i72.OtpRepo>(
       () => _i794.OtpRepoImplement(gh<_i50.OtpDataSource>()),
@@ -301,6 +314,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i571.OrderDetailsCubit(gh<_i603.OrderDetailsRepository>()),
     );
     gh.factory<_i859.OtpCubit>(() => _i859.OtpCubit(gh<_i72.OtpRepo>()));
+    gh.factory<_i661.ServiceAreasCubit>(
+      () => _i661.ServiceAreasCubit(gh<_i967.ServiceAreasRepo>()),
+    );
     gh.factory<_i197.ProfileCubit>(
       () => _i197.ProfileCubit(profileRepo: gh<_i869.ProfileRepo>()),
     );

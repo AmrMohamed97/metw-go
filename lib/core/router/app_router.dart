@@ -171,7 +171,7 @@ class AppRouter {
         path: AppRoutes.serviceAreasPage,
         name: AppRoutes.serviceAreasPage,
         builder: (context, state) => BlocProvider(
-          create: (context) => getIt<ServiceAreasCubit>(),
+          create: (context) => getIt<ServiceAreasCubit>()..init(),
           child: const ServiceAreasPage(),
         ),
       ),
