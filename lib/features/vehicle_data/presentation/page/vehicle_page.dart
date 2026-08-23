@@ -44,19 +44,19 @@ class VehiclePage extends StatelessWidget {
         final cubit = context.read<VehicleCubit>();
         return ScreenWrapper(
           appBar: CustomAppBar(title: 'بيانات المركبة'),
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Center(
-              child: CustomButton(
-                isMax: state is! UpdateTransportLoading,
-                loading: state is UpdateTransportLoading,
-                text: 'حفظ',
-                onPressed: () {
-                  cubit.updateTransport();
-                },
-              ),
-            ),
-          ),
+          // bottomNavigationBar: Padding(
+          //   padding: const EdgeInsets.all(12.0),
+          //   child: Center(
+          //     child: CustomButton(
+          //       isMax: state is! UpdateTransportLoading,
+          //       loading: state is UpdateTransportLoading,
+          //       text: 'حفظ',
+          //       onPressed: () {
+          //         cubit.updateTransport();
+          //       },
+          //     ),
+          //   ),
+          // ),
           body: Form(
             key: cubit.thirdViewFormKey,
             child: Padding(
@@ -221,6 +221,18 @@ class VehiclePage extends StatelessWidget {
                     ),
                     20.verticalSpace,
                     const ViewInsetsSpace(),
+
+                    50.verticalSpace,
+                    Center(
+              child: CustomButton(
+                isMax: state is! UpdateTransportLoading,
+                loading: state is UpdateTransportLoading,
+                text: 'حفظ',
+                onPressed: () {
+                  cubit.updateTransport();
+                },
+              ),
+            ),
                   ],
                 ),
               ),
@@ -231,10 +243,7 @@ class VehiclePage extends StatelessWidget {
     );
   }
 
-  void _showTransportTypeBottomSheet(
-    BuildContext context,
-    VehicleCubit cubit,
-  ) {
+  void _showTransportTypeBottomSheet(BuildContext context, VehicleCubit cubit) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -300,11 +309,8 @@ class VehiclePage extends StatelessWidget {
                                     width: isSelected ? 1.5 : 1,
                                   ),
                                   color: isSelected
-                                      ? Theme.of(
-                                          context,
-                                        ).colorScheme.primary.withValues(
-                                          alpha: 0.05,
-                                        )
+                                      ? Theme.of(context).colorScheme.primary
+                                            .withValues(alpha: 0.05)
                                       : Colors.transparent,
                                 ),
                                 child: Row(
