@@ -163,7 +163,7 @@ class AppRouter {
         path: AppRoutes.vehiclePage,
         name: AppRoutes.vehiclePage,
         builder: (context, state) => BlocProvider(
-          create: (context) => getIt<VehicleCubit>(),
+          create: (context) => getIt<VehicleCubit>()..init(),
           child: const VehiclePage(),
         ),
       ),

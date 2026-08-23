@@ -127,6 +127,12 @@ import 'package:metw_go/features/register_steps/presentation/manager/third_step_
     as _i273;
 import 'package:metw_go/features/service_areas/presentation/manager/service_areas_cubit.dart'
     as _i661;
+import 'package:metw_go/features/vehicle_data/data/data_source/vehicle_data_source.dart'
+    as _i773;
+import 'package:metw_go/features/vehicle_data/data/repo/vehicle_repo.dart'
+    as _i451;
+import 'package:metw_go/features/vehicle_data/data/repo/vehicle_repo_impl.dart'
+    as _i916;
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_cubit.dart'
     as _i192;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -148,7 +154,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i171.HomeCubit>(() => _i171.HomeCubit());
     gh.factory<_i364.NotificationCubit>(() => _i364.NotificationCubit());
     gh.factory<_i661.ServiceAreasCubit>(() => _i661.ServiceAreasCubit());
-    gh.factory<_i192.VehicleCubit>(() => _i192.VehicleCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => registerModule.secureStorage,
     );
@@ -200,6 +205,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i837.ThirdStepDataSource>(
       () => _i837.ThirdStepDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i773.VehicleDataSource>(
+      () => _i773.VehicleDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i540.LoginRepo>(
       () => _i770.LoginRepoImpl(loginDataSource: gh<_i101.LoginDataSource>()),
     );
@@ -220,8 +228,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i212.FirstStepCubit>(
       () => _i212.FirstStepCubit(gh<_i305.FirstStepRepo>()),
     );
+    gh.factory<_i451.VehicleRepo>(
+      () => _i916.VehicleRepoImpl(
+        vehicleDataSource: gh<_i773.VehicleDataSource>(),
+      ),
+    );
     gh.factory<_i858.FourthStepRepo>(
       () => _i605.FourthStepRepoImpl(gh<_i701.FourthStepDataSource>()),
+    );
+    gh.factory<_i192.VehicleCubit>(
+      () => _i192.VehicleCubit(vehicleRepo: gh<_i451.VehicleRepo>()),
     );
     gh.factory<_i778.ForgetPasswordRepo>(
       () => _i718.ForgetPasswordRepoImplement(
