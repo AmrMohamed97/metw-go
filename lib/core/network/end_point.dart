@@ -26,7 +26,6 @@ abstract class EndPoints {
   static const String orderDetailsUrl = 'orders/{orderId}';
   static const String incomingOrdersUrl = 'orders/incoming';
 
-
   static const String profileUrl = 'profile';
 
   static const String startOrdersUrl = 'orders/{{order_id}}/start';

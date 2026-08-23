@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:metw_go/core/models/empty_response/empty_response.dart';
 import 'package:metw_go/core/models/order_action_response/order_action_response.dart';
 import 'package:metw_go/core/models/start_order_response/start_order_response.dart';
 import 'package:metw_go/core/network/end_point.dart';
@@ -16,8 +17,8 @@ abstract class AppDataSource {
   factory AppDataSource(Dio dio) =>
       _AppDataSource(dio, baseUrl: EndPoints.baseUrl);
 
-  // @POST(EndPoints.logoutUrl)
-  // Future<EmptyDataResponse> logout();
+  @POST(EndPoints.logoutUrl)
+  Future<EmptyResponse> logout();
 
   @POST(EndPoints.startOrdersUrl)
   Future<StartOrderResponse> acceptStartOrder({

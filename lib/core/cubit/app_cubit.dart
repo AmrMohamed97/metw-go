@@ -68,19 +68,19 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangeThemeState());
   }
 
-  // Future<void> logout() async {
-  //   emit(ApplogoutLoadingState());
-  //   final result = await _appRepo.logout();
-  //   result.fold((failure) => emit(ApplogoutErrorState(failure.message)), (
-  //     response,
-  //   ) {
-  //     // TrackingLocationService().stopTracking(
-  //     //   CacheHelper.getUserData()?.id.toString() ?? '',
-  //     // );
-  //     CacheHelper.clearAll();
-  //     emit(ApplogoutLogoutSuccessState());
-  //   });
-  // }
+  Future<void> logout() async {
+    emit(ApplogoutLoadingState());
+    final result = await _appRepo.logout();
+    result.fold((failure) => emit(ApplogoutErrorState(failure.message)), (
+      response,
+    ) {
+      // TrackingLocationService().stopTracking(
+      //   CacheHelper.getUserData()?.id.toString() ?? '',
+      // );
+      CacheHelper.clearAll();
+      emit(ApplogoutLogoutSuccessState());
+    });
+  }
 
   Future<void> acceptStartOrder({required String orderId}) async {
     emit(AcceptStartOrderLoadingState());

@@ -13,9 +13,9 @@ class ProfileStatsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit,ProfileState>(
-      builder: (context,state) {
-        final cubit=context.read<ProfileCubit>();
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        final cubit = context.read<ProfileCubit>();
         return Skeletonizer(
           enabled: state is GetProfileLoading,
           child: Row(
@@ -24,7 +24,10 @@ class ProfileStatsRow extends StatelessWidget {
                 child: _buildStatCard(
                   context,
                   title: AppLocalizations.of(context)!.totalEarnings,
-                  value: cubit.profile?.data?.profileHome?.statsCards?.last.value?.toString()??"",
+                  value:
+                      cubit.profile?.data?.profileHome?.statsCards?.last.value
+                          ?.toString() ??
+                      "",
                   icon: Icons.account_balance_wallet_outlined,
                   iconColor: Theme.of(context).colorScheme.secondary,
                 ),
@@ -34,7 +37,10 @@ class ProfileStatsRow extends StatelessWidget {
                 child: _buildStatCard(
                   context,
                   title: AppLocalizations.of(context)!.completedOrders,
-                  value: cubit.profile?.data?.profileHome?.statsCards?[1].value?.toString()??"",
+                  value:
+                      cubit.profile?.data?.profileHome?.statsCards?[1].value
+                          ?.toString() ??
+                      "",
                   icon: Icons.check_circle_outline,
                   iconColor: MyColors.green,
                 ),
@@ -44,7 +50,10 @@ class ProfileStatsRow extends StatelessWidget {
                 child: _buildStatCard(
                   context,
                   title: AppLocalizations.of(context)!.totalOrders,
-                  value: cubit.profile?.data?.profileHome?.statsCards?.first.value?.toString()??"",
+                  value:
+                      cubit.profile?.data?.profileHome?.statsCards?.first.value
+                          ?.toString() ??
+                      "",
                   icon: Icons.shopping_bag_outlined,
                   iconColor: Theme.of(context).colorScheme.primary,
                 ),
@@ -52,7 +61,7 @@ class ProfileStatsRow extends StatelessWidget {
             ],
           ),
         );
-      }
+      },
     );
   }
 
