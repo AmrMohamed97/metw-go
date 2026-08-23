@@ -30,7 +30,7 @@ class LoginPage extends StatelessWidget {
           // context.push(AppRoutes.splashScreen);
           showToast(
             context,
-            message: AppLocalizations.of(context)!.loginSuccessful,
+            message: state.loginOutModel?.message ?? '',
             state: ToastStates.success,
           );
           if (state.loginOutModel?.data?.isAuthorized == true) {
