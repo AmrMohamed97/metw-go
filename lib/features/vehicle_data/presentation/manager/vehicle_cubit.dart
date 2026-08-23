@@ -37,13 +37,12 @@ class VehicleCubit extends Cubit<VehicleState> with ImageMixin {
   Future<void> getTransportTypes() async {
     emit(GetTransportTypesLoading());
     final result = await vehicleRepo.getTransportTypes();
-    result.fold(
-      (failure) => emit(GetTransportTypesFailure(failure.message)),
-      (response) {
-        transportTypes = response.data ?? [];
-        emit(GetTransportTypesSuccess());
-      },
-    );
+    result.fold((failure) => emit(GetTransportTypesFailure(failure.message)), (
+      response,
+    ) {
+      transportTypes = response.data ?? [];
+      emit(GetTransportTypesSuccess());
+    });
   }
 
   void changeTransportType(TransportTypeModel type) {
@@ -64,8 +63,15 @@ class VehicleCubit extends Cubit<VehicleState> with ImageMixin {
   }
 
   Future<void> updateTransport() async {
-    if (thirdViewFormKey.currentState?.validate() == true &&
-        selectedTransportType != null) {
+    if (selectedTransportType?.id == null) {
+      emit(UpdateTransportFailure('يرجى اختيار وسيلة النقل'));
+      return;
+    }
+    print('======================================');
+    print(selectedTransportType!.id!);
+    print(plateNumberController.text);
+
+    if (thirdViewFormKey.currentState?.validate() == true) {
       emit(UpdateTransportLoading());
 
       final result = await vehicleRepo.updateTransport(
