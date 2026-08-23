@@ -155,7 +155,7 @@ class AppRouter {
         path: AppRoutes.delegateInfoPage,
         name: AppRoutes.delegateInfoPage,
         builder: (context, state) => BlocProvider(
-          create: (context) => getIt<DelegateInfoCubit>(),
+          create: (context) => getIt<DelegateInfoCubit>()..getWarehouses(),
           child: const DelegateInfoPage(),
         ),
       ),

@@ -22,6 +22,12 @@ import 'package:metw_go/core/repo/app_repo.dart' as _i444;
 import 'package:metw_go/core/repo/app_repo_impl.dart' as _i837;
 import 'package:metw_go/features/documents/presentation/manager/documents_cubit.dart'
     as _i91;
+import 'package:metw_go/features/driver_info/data/data_source/delegate_info_data_source.dart'
+    as _i237;
+import 'package:metw_go/features/driver_info/data/repo/delegate_info_repo.dart'
+    as _i848;
+import 'package:metw_go/features/driver_info/data/repo/delegate_info_repo_impl.dart'
+    as _i308;
 import 'package:metw_go/features/driver_info/presentation/manager/delegate_info_cubit.dart'
     as _i203;
 import 'package:metw_go/features/forget_password/data/data_source/forget_password_data_source.dart'
@@ -139,7 +145,6 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i91.DocumentsCubit>(() => _i91.DocumentsCubit());
-    gh.factory<_i203.DelegateInfoCubit>(() => _i203.DelegateInfoCubit());
     gh.factory<_i171.HomeCubit>(() => _i171.HomeCubit());
     gh.factory<_i364.NotificationCubit>(() => _i364.NotificationCubit());
     gh.factory<_i661.ServiceAreasCubit>(() => _i661.ServiceAreasCubit());
@@ -158,6 +163,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => dioFactory.getDio(gh<_i402.CustomInterceptor>()),
     );
     gh.factory<_i863.AppDataSource>(() => _i863.AppDataSource(gh<_i361.Dio>()));
+    gh.factory<_i237.DelegateInfoDataSource>(
+      () => _i237.DelegateInfoDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i904.ForgetPasswordDataSource>(
       () => _i904.ForgetPasswordDataSource(gh<_i361.Dio>()),
     );
@@ -236,6 +244,11 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.factory<_i405.AppCubit>(() => _i405.AppCubit(gh<_i444.AppRepo>()));
+    gh.factory<_i848.DelegateInfoRepo>(
+      () => _i308.DelegateInfoRepoImpl(
+        delegateInfoDataSource: gh<_i237.DelegateInfoDataSource>(),
+      ),
+    );
     gh.factory<_i37.ForgetPasswordCubit>(
       () => _i37.ForgetPasswordCubit(gh<_i778.ForgetPasswordRepo>()),
     );
@@ -256,6 +269,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i333.SecondStepCubit>(
       () => _i333.SecondStepCubit(gh<_i393.SecondStepRepo>()),
+    );
+    gh.factory<_i203.DelegateInfoCubit>(
+      () => _i203.DelegateInfoCubit(
+        delegateInfoRepo: gh<_i848.DelegateInfoRepo>(),
+      ),
     );
     gh.factory<_i364.OrdersCubit>(
       () => _i364.OrdersCubit(gh<_i480.OrdersRepo>()),
