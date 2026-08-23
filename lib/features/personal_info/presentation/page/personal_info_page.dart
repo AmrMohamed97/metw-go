@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
@@ -11,6 +12,7 @@ import 'package:metw_go/core/widgets/animated_column.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/personal_info/presentation/manager/personal_info_cubit.dart';
 import 'package:metw_go/features/personal_info/presentation/manager/personal_info_state.dart';
@@ -22,7 +24,21 @@ class PersonalInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PersonalInfoCubit, PersonalInfoState>(
+    return BlocConsumer<PersonalInfoCubit, PersonalInfoState>(
+      listener: (context, state) {
+        if (state is UpdatePersonalInfoSuccess) {
+          showToast(
+            context,
+            message:
+                state.profileOutModel.message ??
+                AppLocalizations.of(context)!.personalInfo,
+            state: ToastStates.success,
+          );
+        }
+        if (state is UpdatePersonalInfoFailure) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        }
+      },
       builder: (context, state) {
         final cubit = context.read<PersonalInfoCubit>();
         return ScreenWrapper(
@@ -35,27 +51,13 @@ class PersonalInfoPage extends StatelessWidget {
                 child: AnimatedColumn(
                   revealOnScroll: true,
                   children: [
-                    // 16.verticalSpace,
-                    // Text(
-                    //   AppLocalizations.of(context)!.personalInfo,
-                    //   style: AppTextStyle.medium16(
-                    //     context,
-                    //   ).copyWith(color: Theme.of(context).primaryColor),
-                    // ),
-                    // 3.verticalSpace,
-                    // Text(
-                    //   AppLocalizations.of(context)!.startCreatingProfile,
-                    //   style: AppTextStyle.medium14(context).copyWith(
-                    //     color: Theme.of(context).colorScheme.onSurface,
-                    //   ),
-                    // ),
                     24.verticalSpace,
                     Row(
                       spacing: 14,
                       children: [
                         Expanded(
                           child: Column(
-                            crossAxisAlignment: .start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               FieldTitle(
                                 title: AppLocalizations.of(context)!.firstName,
@@ -74,26 +76,34 @@ class PersonalInfoPage extends StatelessWidget {
                         ),
                         Expanded(
                           child: Column(
-                            crossAxisAlignment: .start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               FieldTitle(
-                                title: AppLocalizations.of(context)!.lastName,
+                                title: AppLocalizations.of(context)!.fatherName,
                               ),
                               4.verticalSpace,
                               CustomTextField(
                                 hintText: AppLocalizations.of(
                                   context,
-                                )!.exampleMohamed,
-                                controller: cubit.lastNameController,
+                                )!.exampleFather,
+                                controller: cubit.fatherNameController,
                                 validator: (val) =>
-                                    lastNameValidator(context, val),
+                                    fatherNameValidator(context, val),
                               ),
                             ],
                           ),
                         ),
                       ],
                     ),
-                    // 16.verticalSpace,
+                    16.verticalSpace,
+                    FieldTitle(title: AppLocalizations.of(context)!.lastName),
+                    4.verticalSpace,
+                    CustomTextField(
+                      hintText: AppLocalizations.of(context)!.exampleMohamed,
+                      controller: cubit.lastNameController,
+                      validator: (val) => lastNameValidator(context, val),
+                    ),
+                    16.verticalSpace,
                     FieldTitle(
                       title: AppLocalizations.of(context)!.phoneNumber,
                     ),
@@ -103,7 +113,7 @@ class PersonalInfoPage extends StatelessWidget {
                       controller: cubit.firstPhoneController,
                       validator: (val) => firstPhoneValidator(context, val),
                     ),
-                    // 16.verticalSpace,
+                    16.verticalSpace,
                     FieldTitle(
                       title: AppLocalizations.of(context)!.anotherPhoneNumber,
                     ),
@@ -113,7 +123,7 @@ class PersonalInfoPage extends StatelessWidget {
                       controller: cubit.secondPhoneController,
                       validator: (val) => secondPhoneValidator(context, val),
                     ),
-                    // 16.verticalSpace,
+                    16.verticalSpace,
                     FieldTitle(title: AppLocalizations.of(context)!.email),
                     4.verticalSpace,
                     CustomTextField(
@@ -121,15 +131,43 @@ class PersonalInfoPage extends StatelessWidget {
                       controller: cubit.emailController,
                       validator: (val) => emailValidator(context, val),
                     ),
-                    // 16.verticalSpace,
+                    16.verticalSpace,
                     FieldTitle(title: AppLocalizations.of(context)!.birthDate),
                     4.verticalSpace,
                     CustomTextField(
-                      hintText: 'mm/dd/yyyy',
+                      hintText: 'yyyy-MM-dd',
                       controller: cubit.boarnDateController,
                       validator: (val) => boarnDateValidator(context, val),
+                      readOnly: true,
+                      onTap: () async {
+                        final picked = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now().subtract(
+                            const Duration(days: 365 * 18),
+                          ),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        );
+                        if (picked != null) {
+                          cubit.boarnDateController.text = DateFormat(
+                            'yyyy-MM-dd',
+                          ).format(picked);
+                        }
+                      },
                     ),
-                    // 16.verticalSpace,
+                    16.verticalSpace,
+                    FieldTitle(
+                      title: AppLocalizations.of(context)!.detailedAddress,
+                    ),
+                    4.verticalSpace,
+                    CustomTextField(
+                      hintText: AppLocalizations.of(
+                        context,
+                      )!.cityNeighborhoodStreet,
+                      controller: cubit.addressController,
+                      validator: (val) => addressValidator(context, val),
+                    ),
+                    16.verticalSpace,
                     PersonalInfoGenderSelector(),
                     20.verticalSpace,
                     Divider(
@@ -138,7 +176,7 @@ class PersonalInfoPage extends StatelessWidget {
                     ),
                     20.verticalSpace,
                     Row(
-                      mainAxisAlignment: .spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         FieldTitle(title: "تغيير كلمة المرور"),
                         CupertinoButton(
@@ -239,12 +277,15 @@ class PersonalInfoPage extends StatelessWidget {
                       ),
                     ),
                     25.verticalSpace,
-                    CustomButton(
-                      isMax: true,
-                      text: 'حفظ',
-                      onPressed: () {
-                        // cubit.firstViewPress();
-                      },
+                    Center(
+                      child: CustomButton(
+                        isMax: state is! UpdatePersonalInfoLoading,
+                        loading: state is UpdatePersonalInfoLoading,
+                        text: 'حفظ',
+                        onPressed: () {
+                          cubit.updatePersonalInfo();
+                        },
+                      ),
                     ),
                     20.verticalSpace,
                     ViewInsetsSpace(),

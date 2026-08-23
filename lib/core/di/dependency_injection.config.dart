@@ -64,6 +64,12 @@ import 'package:metw_go/features/otp/data/repo/otp_repo_implement.dart'
     as _i794;
 import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart'
     as _i859;
+import 'package:metw_go/features/personal_info/data/data_source/personal_info_data_source.dart'
+    as _i971;
+import 'package:metw_go/features/personal_info/data/repo/personal_info_repo.dart'
+    as _i169;
+import 'package:metw_go/features/personal_info/data/repo/personal_info_repo_impl.dart'
+    as _i74;
 import 'package:metw_go/features/personal_info/presentation/manager/personal_info_cubit.dart'
     as _i87;
 import 'package:metw_go/features/profile/data/data_source/profile_data_source.dart'
@@ -136,7 +142,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i203.DelegateInfoCubit>(() => _i203.DelegateInfoCubit());
     gh.factory<_i171.HomeCubit>(() => _i171.HomeCubit());
     gh.factory<_i364.NotificationCubit>(() => _i364.NotificationCubit());
-    gh.factory<_i87.PersonalInfoCubit>(() => _i87.PersonalInfoCubit());
     gh.factory<_i661.ServiceAreasCubit>(() => _i661.ServiceAreasCubit());
     gh.factory<_i192.VehicleCubit>(() => _i192.VehicleCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
@@ -166,6 +171,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i533.OrdersDataSource(gh<_i361.Dio>()),
     );
     gh.factory<_i50.OtpDataSource>(() => _i50.OtpDataSource(gh<_i361.Dio>()));
+    gh.factory<_i971.PersonalInfoDataSource>(
+      () => _i971.PersonalInfoDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i587.ProfileDataSource>(
       () => _i587.ProfileDataSource(gh<_i361.Dio>()),
     );
@@ -192,6 +200,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i444.AppRepo>(
       () => _i837.AppRepoImpl(gh<_i863.AppDataSource>()),
+    );
+    gh.factory<_i169.PersonalInfoRepo>(
+      () => _i74.PersonalInfoRepoImpl(
+        personalInfoDataSource: gh<_i971.PersonalInfoDataSource>(),
+      ),
     );
     gh.factory<_i393.SecondStepRepo>(
       () => _i211.SecondStepRepoImpl(gh<_i497.SecondStepDataSource>()),
@@ -235,6 +248,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i319.ThirdStepRepo>(
       () => _i220.ThirdStepRepoImpl(gh<_i837.ThirdStepDataSource>()),
+    );
+    gh.factory<_i87.PersonalInfoCubit>(
+      () => _i87.PersonalInfoCubit(
+        personalInfoRepo: gh<_i169.PersonalInfoRepo>(),
+      ),
     );
     gh.factory<_i333.SecondStepCubit>(
       () => _i333.SecondStepCubit(gh<_i393.SecondStepRepo>()),
