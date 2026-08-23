@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/router/app_routes.dart';
+import 'package:metw_go/features/profile/presentation/manager/profile_cubit.dart';
 import 'package:metw_go/features/profile/presentation/widgets/custom_section.dart';
 import 'package:metw_go/features/profile/presentation/widgets/profile_item.dart';
 
@@ -16,7 +18,12 @@ class PersonalInfoSection extends StatelessWidget {
         ProfileItem(
           icon: Icons.person_outline,
           title: AppLocalizations.of(context)!.personalData,
-          onPressed: () => context.push(AppRoutes.personalInfoPage),
+          onPressed: () =>
+              context.push(AppRoutes.personalInfoPage).then((value) {
+                if (value == true && context.mounted) {
+                  context.read<ProfileCubit>().getProfile();
+                }
+              }),
         ),
         ProfileItem(
           icon: Icons.language,

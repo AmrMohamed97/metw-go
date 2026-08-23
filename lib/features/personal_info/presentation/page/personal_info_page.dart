@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
@@ -34,6 +35,7 @@ class PersonalInfoPage extends StatelessWidget {
                 AppLocalizations.of(context)!.personalInfo,
             state: ToastStates.success,
           );
+          context.pop(true);
         }
         if (state is UpdatePersonalInfoFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
