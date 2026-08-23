@@ -1,20 +1,32 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:metw_go/core/notifications/notification_handler.dart';
+import 'package:metw_go/features/profile/data/models/profile_out_model/profile_out_model.dart';
+import 'package:metw_go/features/profile/data/repo/profile_repo.dart';
 import 'package:metw_go/features/profile/presentation/manager/profile_state.dart';
 
 @injectable
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit() : super(ProfileInitialState());
+  final ProfileRepo profileRepo;
+  ProfileOutModel? profile;
 
-  bool get notificationsEnabled => NotificationHandler.notificationsEnabled;
-
-  Future<void> toggleNotifications(bool value) async {
-    if (value) {
-      await NotificationHandler.enableNotifications();
-    } else {
-      await NotificationHandler.disableNotifications();
-    }
-    emit(ToggleNotificationsState(NotificationHandler.notificationsEnabled));
+  ProfileCubit({required this.profileRepo}) : super(ProfileInitialState());
+  Future<void> getProfile() async {
+    emit(GetProfileLoading());
+    final result = await profileRepo.getProfile();
+    result.fold((failure) => emit(GetProfileError(failure.message)), (profile) {
+      this.profile = profile;
+      emit(GetProfileSuccess(profile));
+    });
   }
+
+  // bool get notificationsEnabled => NotificationHandler.notificationsEnabled;
+
+  // Future<void> toggleNotifications(bool value) async {
+  //   if (value) {
+  //     await NotificationHandler.enableNotifications();
+  //   } else {
+  //     await NotificationHandler.disableNotifications();
+  //   }
+  //   emit(ToggleNotificationsState(NotificationHandler.notificationsEnabled));
+  // }
 }

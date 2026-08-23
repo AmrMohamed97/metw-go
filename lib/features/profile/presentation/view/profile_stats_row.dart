@@ -1,46 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
+import 'package:metw_go/features/profile/presentation/manager/profile_cubit.dart';
+import 'package:metw_go/features/profile/presentation/manager/profile_state.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProfileStatsRow extends StatelessWidget {
   const ProfileStatsRow({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: _buildStatCard(
-            context,
-            title: AppLocalizations.of(context)!.totalEarnings,
-            value: AppLocalizations.of(context)!.earningsValueMock,
-            icon: Icons.account_balance_wallet_outlined,
-            iconColor: Theme.of(context).colorScheme.secondary,
+    return BlocBuilder<ProfileCubit,ProfileState>(
+      builder: (context,state) {
+        final cubit=context.read<ProfileCubit>();
+        return Skeletonizer(
+          enabled: state is GetProfileLoading,
+          child: Row(
+            children: [
+              Expanded(
+                child: _buildStatCard(
+                  context,
+                  title: AppLocalizations.of(context)!.totalEarnings,
+                  value: cubit.profile?.data?.profileHome?.statsCards?.last.value?.toString()??"",
+                  icon: Icons.account_balance_wallet_outlined,
+                  iconColor: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+              8.horizontalSpace,
+              Expanded(
+                child: _buildStatCard(
+                  context,
+                  title: AppLocalizations.of(context)!.completedOrders,
+                  value: cubit.profile?.data?.profileHome?.statsCards?[1].value?.toString()??"",
+                  icon: Icons.check_circle_outline,
+                  iconColor: MyColors.green,
+                ),
+              ),
+              8.horizontalSpace,
+              Expanded(
+                child: _buildStatCard(
+                  context,
+                  title: AppLocalizations.of(context)!.totalOrders,
+                  value: cubit.profile?.data?.profileHome?.statsCards?.first.value?.toString()??"",
+                  icon: Icons.shopping_bag_outlined,
+                  iconColor: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ],
           ),
-        ),
-        8.horizontalSpace,
-        Expanded(
-          child: _buildStatCard(
-            context,
-            title: AppLocalizations.of(context)!.completedOrders,
-            value: AppLocalizations.of(context)!.completedOrdersValueMock,
-            icon: Icons.check_circle_outline,
-            iconColor: MyColors.green,
-          ),
-        ),
-        8.horizontalSpace,
-        Expanded(
-          child: _buildStatCard(
-            context,
-            title: AppLocalizations.of(context)!.totalOrders,
-            value: AppLocalizations.of(context)!.totalOrdersValueMock,
-            icon: Icons.shopping_bag_outlined,
-            iconColor: Theme.of(context).colorScheme.primary,
-          ),
-        ),
-      ],
+        );
+      }
     );
   }
 

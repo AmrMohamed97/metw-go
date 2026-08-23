@@ -1,6 +1,6 @@
 abstract class EndPoints {
   static const String baseUrl = "https://lasco.evyx.lol/api/metwgo/";
-  // static const String baseUrl = "https://photo.progmaker.com/api/v1/";
+  static const String baseImageUrl = "https://lasco.evyx.lol/";
   // static const String baseImageUrl = '${baseUrl}uploads/';
   // static const String baseFileUrl = '${baseUrl}uploads/files/';
 
@@ -26,9 +26,15 @@ abstract class EndPoints {
   static const String orderDetailsUrl = 'orders/{orderId}';
   static const String incomingOrdersUrl = 'orders/incoming';
 
+
+  static const String profileUrl = 'profile';
+
   static const String startOrdersUrl = 'orders/{{order_id}}/start';
-  static const String arrivePickupOrdersUrl = 'orders/{{order_id}}/arrive-pickup';
-  static const String confirmationOrdersUrl = 'orders/{{order_id}}/pickup-confirmation';
+  static const String arrivePickupOrdersUrl =
+      'orders/{{order_id}}/arrive-pickup';
+  static const String confirmationOrdersUrl =
+      'orders/{{order_id}}/pickup-confirmation';
   static const String dropoffOrdersUrl = 'orders/{{order_id}}/arrive-dropoff';
-  static const String completeOrdersUrl = 'orders/{{order_id}}/complete-delivery';
+  static const String completeOrdersUrl =
+      'orders/{{order_id}}/complete-delivery';
 }

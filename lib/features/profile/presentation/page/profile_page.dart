@@ -21,7 +21,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<ProfileCubit>(),
+      create: (context) => getIt<ProfileCubit>()..getProfile(),
       child: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           return ScreenWrapper(

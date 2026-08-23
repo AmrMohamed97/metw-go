@@ -98,4 +98,5 @@ class CompleteDeliveryOrderErrorState extends AppState {
   final String message;
   CompleteDeliveryOrderErrorState(this.message);
 }
+
 //------------------------------------------------------------------------------

@@ -1,14 +1,14 @@
+import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/theme/app_theme.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/features/profile/presentation/manager/profile_cubit.dart';
 import 'package:metw_go/features/profile/presentation/manager/profile_state.dart';
-import 'package:animated_theme_switcher/animated_theme_switcher.dart';
-import 'package:metw_go/core/theme/app_theme.dart';
 import 'package:metw_go/features/profile/presentation/widgets/custom_section.dart';
 import 'package:metw_go/features/profile/presentation/widgets/profile_item.dart';
 
@@ -71,11 +71,11 @@ class SettingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final profileCubit = context.read<ProfileCubit>();
-    final appCubit = context.read<AppCubit>();
+    // final profileCubit = context.read<ProfileCubit>();
     return BlocBuilder<AppCubit, AppState>(
       buildWhen: (prev, curr) => curr is ChangeLanguageState,
       builder: (context, appState) {
+        final appCubit = context.read<AppCubit>();
         final isArabic = appCubit.currentLocale.languageCode == 'ar';
         return BlocBuilder<ProfileCubit, ProfileState>(
           buildWhen: (prev, curr) => curr is ToggleNotificationsState,
@@ -83,15 +83,15 @@ class SettingSection extends StatelessWidget {
             return CustomSection(
               title: AppLocalizations.of(context)!.settings,
               children: [
-                ProfileItem(
-                  icon: Icons.notifications_none,
-                  title: AppLocalizations.of(context)!.notificationSettings,
-                  trailing: CupertinoSwitch(
-                    value: profileCubit.notificationsEnabled,
-                    onChanged: (v) => profileCubit.toggleNotifications(v),
-                    activeTrackColor: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
+                // ProfileItem(
+                //   icon: Icons.notifications_none,
+                //   title: AppLocalizations.of(context)!.notificationSettings,
+                //   trailing: CupertinoSwitch(
+                //     value: profileCubit.notificationsEnabled,
+                //     onChanged: (v) => profileCubit.toggleNotifications(v),
+                //     activeTrackColor: Theme.of(context).colorScheme.primary,
+                //   ),
+                // ),
                 Builder(
                   builder: (itemContext) => ProfileItem(
                     icon: Icons.language,
