@@ -30,6 +30,7 @@ abstract class EndPoints {
   static const String profileWorkInfoUrl = 'profile/work-info';
   static const String profileTransportUrl = 'profile/transport';
   static const String profileServiceAreasUrl = 'profile/service-areas';
+  static const String profileDocumentsUrl = 'profile/documents';
 
   static const String startOrdersUrl = 'orders/{{order_id}}/start';
   static const String arrivePickupOrdersUrl =

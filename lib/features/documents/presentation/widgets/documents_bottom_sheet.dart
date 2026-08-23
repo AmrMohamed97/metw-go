@@ -20,7 +20,6 @@ class DocumentsBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DocumentsCubit, DocumentsState>(
       builder: (context, state) {
-        final cubit = context.read<DocumentsCubit>();
         return Container(
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
