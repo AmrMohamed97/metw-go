@@ -7,6 +7,7 @@ import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_theme.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/features/profile/presentation/manager/profile_cubit.dart';
 import 'package:metw_go/features/profile/presentation/manager/profile_state.dart';
 import 'package:metw_go/features/profile/presentation/widgets/custom_section.dart';
@@ -72,13 +73,27 @@ class SettingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final profileCubit = context.read<ProfileCubit>();
-    return BlocBuilder<AppCubit, AppState>(
-      buildWhen: (prev, curr) => curr is ChangeLanguageState,
+    return BlocConsumer<AppCubit, AppState>(
+      // buildWhen: (prev, curr) => curr is ChangeLanguageState,
+       listener: (context, state) {
+            if(state is AppDeleteAccountSuccessState){
+              context.read<AppCubit>().logout();
+            }
+            if(state is AppDeleteAccountErrorState){
+              showToast(
+                context,
+               message: state.message,
+               state: ToastStates.error,
+              );
+              
+            }
+          },
       builder: (context, appState) {
         final appCubit = context.read<AppCubit>();
         final isArabic = appCubit.currentLocale.languageCode == 'ar';
         return BlocBuilder<ProfileCubit, ProfileState>(
-          buildWhen: (prev, curr) => curr is ToggleNotificationsState,
+         
+          // buildWhen: (prev, curr) => curr is ToggleNotificationsState,
           builder: (context, profileState) {
             return CustomSection(
               title: AppLocalizations.of(context)!.settings,
@@ -117,8 +132,10 @@ class SettingSection extends StatelessWidget {
                     ),
                   ),
                 ),
-                ProfileItem(
+                ProfileItem(onPressed: () => context.read<AppCubit>().deleteAccount(),
                   icon: Icons.delete_outline,
+                  trailing: appState is AppDeleteAccountLoadingState
+                  ? CupertinoActivityIndicator():null,
                   title: AppLocalizations.of(context)!.deleteAccount,
                   isLast: true,
                 ),

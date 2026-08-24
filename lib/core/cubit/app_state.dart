@@ -32,6 +32,15 @@ class ApplogoutErrorState extends AppState {
 
   ApplogoutErrorState(this.message);
 }
+class AppDeleteAccountLoadingState extends AppState {}
+
+class AppDeleteAccountSuccessState extends AppState {}
+
+class AppDeleteAccountErrorState extends AppState {
+  final String message;
+
+  AppDeleteAccountErrorState(this.message);
+}
 
 //-----------------------------Order_Actions-------------------------------------
 // Start Order

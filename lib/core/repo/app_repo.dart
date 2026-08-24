@@ -8,6 +8,7 @@ import 'package:metw_go/core/models/start_order_response/start_order_response.da
 
 abstract class AppRepo {
   Future<Either<Failure, EmptyResponse>> logout();
+  Future<Either<Failure, EmptyResponse>> deleteAccount();
 
   Future<Either<Failure, StartOrderResponse>> acceptStartOrder({
     required String orderId,

@@ -20,6 +20,9 @@ abstract class AppDataSource {
   @POST(EndPoints.logoutUrl)
   Future<EmptyResponse> logout();
 
+  @POST(EndPoints.deleteAccountUrl)
+  Future<EmptyResponse> deleteAccount();
+
   @POST(EndPoints.startOrdersUrl)
   Future<StartOrderResponse> acceptStartOrder({
     @Path("order_id") required String orderId,

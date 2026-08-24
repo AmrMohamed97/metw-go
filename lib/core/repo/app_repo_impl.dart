@@ -28,6 +28,19 @@ class AppRepoImpl implements AppRepo {
       return Left(ServerFailure(error.toString()));
     }
   }
+  @override
+  Future<Either<Failure, EmptyResponse>> deleteAccount() async {
+    try {
+      final response = await _apiService.deleteAccount();
+      return Right(response);
+    } catch (error) {
+      // debugPrint(error.toString());
+      if (error is DioException) {
+        return Left(ServerFailure.fromDioError(error));
+      }
+      return Left(ServerFailure(error.toString()));
+    }
+  }
 
   @override
   Future<Either<Failure, StartOrderResponse>> acceptStartOrder({
@@ -129,4 +142,5 @@ class AppRepoImpl implements AppRepo {
       return Left(ServerFailure(error.toString()));
     }
   }
+ 
 }
