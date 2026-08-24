@@ -39,6 +39,8 @@ import 'package:metw_go/features/service_areas/presentation/page/service_areas_p
 import 'package:metw_go/features/splash_screen/splash_screen.dart';
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_cubit.dart';
 import 'package:metw_go/features/vehicle_data/presentation/page/vehicle_page.dart';
+import 'package:metw_go/features/wallet_transaction/presentation/manager/wallet_operation_cubit.dart';
+import 'package:metw_go/features/wallet_transaction/presentation/page/wallet_operation_page.dart';
 
 import 'app_routes.dart';
 
@@ -229,6 +231,14 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<FourthStepCubit>(),
           child: const FourthStepPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.walletOperationPage,
+        name: AppRoutes.walletOperationPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<WalletOperationCubit>()..init(),
+          child: const WalletOperationPage(),
         ),
       ),
 

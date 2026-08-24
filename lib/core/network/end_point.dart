@@ -41,4 +41,6 @@ abstract class EndPoints {
   static const String dropoffOrdersUrl = 'orders/{{order_id}}/arrive-dropoff';
   static const String completeOrdersUrl =
       'orders/{{order_id}}/complete-delivery';
+
+  static const String walletOperationsUrl = 'wallet/operations';
 }

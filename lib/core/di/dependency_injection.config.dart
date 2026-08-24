@@ -147,6 +147,14 @@ import 'package:metw_go/features/vehicle_data/data/repo/vehicle_repo_impl.dart'
     as _i916;
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_cubit.dart'
     as _i192;
+import 'package:metw_go/features/wallet_transaction/data/data_source/wallet_operation_data_source.dart'
+    as _i997;
+import 'package:metw_go/features/wallet_transaction/data/repo/wallet_operation_repo.dart'
+    as _i717;
+import 'package:metw_go/features/wallet_transaction/data/repo/wallet_operation_repo_impl.dart'
+    as _i863;
+import 'package:metw_go/features/wallet_transaction/presentation/manager/wallet_operation_cubit.dart'
+    as _i286;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -223,6 +231,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i773.VehicleDataSource>(
       () => _i773.VehicleDataSource(gh<_i361.Dio>()),
+    );
+    gh.factory<_i997.WalletOperationDataSource>(
+      () => _i997.WalletOperationDataSource(gh<_i361.Dio>()),
     );
     gh.factory<_i540.LoginRepo>(
       () => _i770.LoginRepoImpl(loginDataSource: gh<_i101.LoginDataSource>()),
@@ -301,6 +312,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i603.OrderDetailsRepository>(
       () => _i94.OrderDetailsRepositoryImpl(gh<_i304.OrderDetailsDataSource>()),
     );
+    gh.factory<_i717.WalletOperationRepo>(
+      () => _i863.WalletOperationRepoImpl(
+        dataSource: gh<_i997.WalletOperationDataSource>(),
+      ),
+    );
     gh.factory<_i319.ThirdStepRepo>(
       () => _i220.ThirdStepRepoImpl(gh<_i837.ThirdStepDataSource>()),
     );
@@ -319,6 +335,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i364.OrdersCubit>(
       () => _i364.OrdersCubit(gh<_i480.OrdersRepo>()),
+    );
+    gh.factory<_i286.WalletOperationCubit>(
+      () => _i286.WalletOperationCubit(gh<_i717.WalletOperationRepo>()),
     );
     gh.factory<_i449.FourthStepCubit>(
       () => _i449.FourthStepCubit(gh<_i858.FourthStepRepo>()),
