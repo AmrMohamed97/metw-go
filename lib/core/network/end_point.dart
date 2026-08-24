@@ -46,4 +46,5 @@ abstract class EndPoints {
   static const String walletOverviewUrl = 'wallet/overview';
 
   static const String faqUrl = 'support/faq';
+  static const String privacyUrl = 'support/privacy';
 }

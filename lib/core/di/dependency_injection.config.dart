@@ -90,6 +90,13 @@ import 'package:metw_go/features/personal_info/data/repo/personal_info_repo_impl
     as _i74;
 import 'package:metw_go/features/personal_info/presentation/manager/personal_info_cubit.dart'
     as _i87;
+import 'package:metw_go/features/privacy/data/data_source/privacy_data_source.dart'
+    as _i160;
+import 'package:metw_go/features/privacy/data/repo/privacy_repo.dart' as _i195;
+import 'package:metw_go/features/privacy/data/repo/privacy_repo_impl.dart'
+    as _i914;
+import 'package:metw_go/features/privacy/presentation/manager/privacy_cubit.dart'
+    as _i963;
 import 'package:metw_go/features/profile/data/data_source/profile_data_source.dart'
     as _i587;
 import 'package:metw_go/features/profile/data/repo/profile_repo.dart' as _i869;
@@ -222,6 +229,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i971.PersonalInfoDataSource>(
       () => _i971.PersonalInfoDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i160.PrivacyDataSource>(
+      () => _i160.PrivacyDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i587.ProfileDataSource>(
       () => _i587.ProfileDataSource(gh<_i361.Dio>()),
     );
@@ -292,6 +302,9 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.factory<_i563.LoginCubit>(() => _i563.LoginCubit(gh<_i540.LoginRepo>()));
+    gh.factory<_i195.PrivacyRepo>(
+      () => _i914.PrivacyRepoImpl(dataSource: gh<_i160.PrivacyDataSource>()),
+    );
     gh.factory<_i617.RegisterRepo>(
       () => _i142.RegisterRepoImplement(gh<_i961.RegisterDataSource>()),
     );
@@ -351,6 +364,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i333.SecondStepCubit>(
       () => _i333.SecondStepCubit(gh<_i393.SecondStepRepo>()),
+    );
+    gh.factory<_i963.PrivacyCubit>(
+      () => _i963.PrivacyCubit(gh<_i195.PrivacyRepo>()),
     );
     gh.factory<_i203.DelegateInfoCubit>(
       () => _i203.DelegateInfoCubit(

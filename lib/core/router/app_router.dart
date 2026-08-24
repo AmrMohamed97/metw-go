@@ -26,6 +26,8 @@ import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart';
 import 'package:metw_go/features/otp/presentation/page/otp_page.dart';
 import 'package:metw_go/features/personal_info/presentation/manager/personal_info_cubit.dart';
 import 'package:metw_go/features/personal_info/presentation/page/personal_info_page.dart';
+import 'package:metw_go/features/privacy/presentation/manager/privacy_cubit.dart';
+import 'package:metw_go/features/privacy/presentation/page/privacy_manager.dart';
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart';
 import 'package:metw_go/features/register/presentation/page/register_page.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_cubit.dart';
@@ -249,6 +251,14 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<FaqCubit>()..init(),
           child: const FaqPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.privacyPage,
+        name: AppRoutes.privacyPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<PrivacyCubit>()..init(),
+          child: const PrivacyManager(),
         ),
       ),
 
