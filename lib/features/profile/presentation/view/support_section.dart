@@ -20,7 +20,7 @@ class SupportSection extends StatelessWidget {
         ProfileItem(
           icon: Icons.privacy_tip_outlined,
           title: AppLocalizations.of(context)!.privacyPolicy,
-          onTap: () => context.push(AppRoutes.privacyPage),
+          onPressed: () => context.push(AppRoutes.privacyPage),
         ),
         ProfileItem(
           icon: Icons.help_outline,
