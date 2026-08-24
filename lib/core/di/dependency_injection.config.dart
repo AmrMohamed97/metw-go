@@ -147,6 +147,13 @@ import 'package:metw_go/features/vehicle_data/data/repo/vehicle_repo_impl.dart'
     as _i916;
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_cubit.dart'
     as _i192;
+import 'package:metw_go/features/wallet/data/data_source/wallet_data_source.dart'
+    as _i361;
+import 'package:metw_go/features/wallet/data/repo/wallet_repo.dart' as _i141;
+import 'package:metw_go/features/wallet/data/repo/wallet_repo_impl.dart'
+    as _i1002;
+import 'package:metw_go/features/wallet/presentation/manager/wallet_cubit.dart'
+    as _i661;
 import 'package:metw_go/features/wallet_transaction/data/data_source/wallet_operation_data_source.dart'
     as _i997;
 import 'package:metw_go/features/wallet_transaction/data/repo/wallet_operation_repo.dart'
@@ -232,6 +239,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i773.VehicleDataSource>(
       () => _i773.VehicleDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i361.WalletDataSource>(
+      () => _i361.WalletDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i997.WalletOperationDataSource>(
       () => _i997.WalletOperationDataSource(gh<_i361.Dio>()),
     );
@@ -312,6 +322,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i603.OrderDetailsRepository>(
       () => _i94.OrderDetailsRepositoryImpl(gh<_i304.OrderDetailsDataSource>()),
     );
+    gh.factory<_i141.WalletRepo>(
+      () =>
+          _i1002.WalletRepoImpl(walletDataSource: gh<_i361.WalletDataSource>()),
+    );
     gh.factory<_i717.WalletOperationRepo>(
       () => _i863.WalletOperationRepoImpl(
         dataSource: gh<_i997.WalletOperationDataSource>(),
@@ -354,6 +368,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i91.DocumentsCubit>(
       () => _i91.DocumentsCubit(gh<_i642.DocumentsRepo>()),
+    );
+    gh.factory<_i661.WalletCubit>(
+      () => _i661.WalletCubit(walletRepo: gh<_i141.WalletRepo>()),
     );
     gh.factory<_i273.ThirdStepCubit>(
       () => _i273.ThirdStepCubit(gh<_i319.ThirdStepRepo>()),

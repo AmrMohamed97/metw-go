@@ -3,15 +3,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
+import 'package:metw_go/features/wallet/data/models/wallet_overview_response.dart';
 
 class BalanceCard extends StatelessWidget {
-  const BalanceCard({super.key});
+  const BalanceCard({super.key, this.walletData});
+
+  final WalletDataModel? walletData;
 
   @override
   Widget build(BuildContext context) {
+    final balanceVal = walletData?.availableBalance ?? walletData?.balance ?? 0;
+    final currencyText =
+        walletData?.currencyLabel ?? AppLocalizations.of(context)!.egp;
+
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         gradient: LinearGradient(
@@ -37,7 +44,7 @@ class BalanceCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "1,250.50",
+                "$balanceVal",
                 style: AppTextStyle.medium18(context).copyWith(
                   color: Theme.of(context).colorScheme.surface,
                   fontSize: 20.sp,
@@ -45,7 +52,7 @@ class BalanceCard extends StatelessWidget {
               ),
               4.horizontalSpace,
               Text(
-                AppLocalizations.of(context)!.egp,
+                currencyText,
                 style: AppTextStyle.medium14(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.surface),
@@ -63,9 +70,11 @@ class BalanceCard extends StatelessWidget {
             ),
             child: InkWell(
               onTap: () {},
-              // borderRadius: BorderRadius.circular(16.r),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w),
+                padding: EdgeInsets.symmetric(
+                  vertical: 12.h,
+                  horizontal: 24.w,
+                ),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,

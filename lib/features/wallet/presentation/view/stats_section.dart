@@ -3,23 +3,45 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
+import 'package:metw_go/features/wallet/data/models/wallet_overview_response.dart';
 
 class StatsSection extends StatelessWidget {
-  const StatsSection({super.key});
+  const StatsSection({super.key, this.todayData});
+
+  final TodayPerformanceModel? todayData;
 
   @override
   Widget build(BuildContext context) {
+    final earningsText =
+        '${todayData?.earnings ?? 0} ${todayData?.currencyLabel ?? ''}';
+    final growthPct = todayData?.growthPercentage ?? 0;
+    final growthDir = todayData?.growthDirection ?? 'same';
+
+    final growthIcon = growthDir == 'up'
+        ? Icons.trending_up
+        : growthDir == 'down'
+        ? Icons.trending_down
+        : Icons.trending_flat;
+
+    final growthColor = growthDir == 'up'
+        ? MyColors.green
+        : growthDir == 'down'
+        ? Colors.red
+        : MyColors.green;
+
+    final ordersCount = '${todayData?.completedOrders ?? 0}';
+
     return Row(
       children: [
         Expanded(
           child: _buildStatCard(
             context,
             title: AppLocalizations.of(context)!.today,
-            value: AppLocalizations.of(context)!.statsAmountMock,
-            icon: Icons.trending_up,
-            iconColor: MyColors.green,
-            subtitle: AppLocalizations.of(context)!.statsPercentageMock,
-            subtitleColor: MyColors.green,
+            value: earningsText,
+            icon: growthIcon,
+            iconColor: growthColor,
+            subtitle: '$growthPct%',
+            subtitleColor: growthColor,
             borderColor: Theme.of(context).colorScheme.secondary,
           ),
         ),
@@ -28,7 +50,7 @@ class StatsSection extends StatelessWidget {
           child: _buildStatCard(
             context,
             title: AppLocalizations.of(context)!.orders,
-            value: AppLocalizations.of(context)!.statsOrdersCountMock,
+            value: ordersCount,
             icon: Icons.local_shipping_outlined,
             iconColor: Theme.of(context).colorScheme.tertiary,
             subtitle: AppLocalizations.of(context)!.completed,
@@ -51,7 +73,7 @@ class StatsSection extends StatelessWidget {
     required Color borderColor,
   }) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(8),

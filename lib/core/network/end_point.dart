@@ -43,4 +43,5 @@ abstract class EndPoints {
       'orders/{{order_id}}/complete-delivery';
 
   static const String walletOperationsUrl = 'wallet/operations';
+  static const String walletOverviewUrl = 'wallet/overview';
 }
