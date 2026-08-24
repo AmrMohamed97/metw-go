@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
+import 'package:metw_go/core/models/auth_model/auth_model.dart';
+import 'package:metw_go/core/utils/cache_helper.dart';
 import 'package:metw_go/features/comming_soon/comming_soon_page.dart';
 import 'package:metw_go/features/complete_order_details/presentation/page/complete_order_page.dart';
 import 'package:metw_go/features/documents/presentation/manager/documents_cubit.dart';
@@ -43,17 +45,22 @@ import 'app_routes.dart';
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoutes.login,
-    // redirect: (context, state) async {
+    redirect: (context, state) {
+      final AuthModel? authData = CacheHelper.getauthData();
+      final bool isComplete = authData?.status == "complete";
+      final String currentLocation = state.matchedLocation;
 
-    //   final AuthModel? authData = CacheHelper.getauthData();
-
-    //   final bool isComplete = authData?.status == "complete";
-    //   if (isComplete) {
-    //     return AppRoutes.splashScreen;
-    //   } else {
-    //     return AppRoutes.login;
-    //   }
-    // },
+      if (isComplete) {
+        if (currentLocation == AppRoutes.login) {
+          return AppRoutes.splashScreen;
+        }
+      } else {
+        if (currentLocation == AppRoutes.splashScreen) {
+          return AppRoutes.login;
+        }
+      }
+      return null;
+    },
     routes: [
       GoRoute(
         path: AppRoutes.splashScreen,
