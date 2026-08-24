@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/features/profile/presentation/widgets/custom_section.dart';
 import 'package:metw_go/features/profile/presentation/widgets/profile_item.dart';
 
@@ -22,6 +24,7 @@ class SupportSection extends StatelessWidget {
         ProfileItem(
           icon: Icons.help_outline,
           title: AppLocalizations.of(context)!.faq,
+          onPressed: () => context.push(AppRoutes.faqPage),
           isLast: true,
         ),
       ],

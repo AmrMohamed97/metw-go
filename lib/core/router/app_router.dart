@@ -9,6 +9,8 @@ import 'package:metw_go/features/documents/presentation/manager/documents_cubit.
 import 'package:metw_go/features/documents/presentation/page/documents_page.dart';
 import 'package:metw_go/features/driver_info/presentation/manager/delegate_info_cubit.dart';
 import 'package:metw_go/features/driver_info/presentation/page/delegate_info_page.dart';
+import 'package:metw_go/features/faq/presentation/manager/faq_cubit.dart';
+import 'package:metw_go/features/faq/presentation/page/faq_page.dart';
 import 'package:metw_go/features/forget_password/presentation/manager/forget_password_cubit.dart';
 import 'package:metw_go/features/forget_password/presentation/page/change_password_page.dart';
 import 'package:metw_go/features/forget_password/presentation/page/forget_password_page.dart';
@@ -239,6 +241,14 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<WalletOperationCubit>()..init(),
           child: const WalletOperationPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.faqPage,
+        name: AppRoutes.faqPage,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<FaqCubit>()..init(),
+          child: const FaqPage(),
         ),
       ),
 

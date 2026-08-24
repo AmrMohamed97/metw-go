@@ -36,6 +36,12 @@ import 'package:metw_go/features/driver_info/data/repo/delegate_info_repo_impl.d
     as _i308;
 import 'package:metw_go/features/driver_info/presentation/manager/delegate_info_cubit.dart'
     as _i203;
+import 'package:metw_go/features/faq/data/data_source/faq_data_source.dart'
+    as _i201;
+import 'package:metw_go/features/faq/data/repo/faq_repo.dart' as _i522;
+import 'package:metw_go/features/faq/data/repo/faq_repo_impl.dart' as _i679;
+import 'package:metw_go/features/faq/presentation/manager/faq_cubit.dart'
+    as _i129;
 import 'package:metw_go/features/forget_password/data/data_source/forget_password_data_source.dart'
     as _i904;
 import 'package:metw_go/features/forget_password/data/repo/forget_password_repo.dart'
@@ -199,6 +205,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i237.DelegateInfoDataSource>(
       () => _i237.DelegateInfoDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i201.FaqDataSource>(() => _i201.FaqDataSource(gh<_i361.Dio>()));
     gh.factory<_i904.ForgetPasswordDataSource>(
       () => _i904.ForgetPasswordDataSource(gh<_i361.Dio>()),
     );
@@ -253,6 +260,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i444.AppRepo>(
       () => _i837.AppRepoImpl(gh<_i863.AppDataSource>()),
+    );
+    gh.factory<_i522.FaqRepo>(
+      () => _i679.FaqRepoImpl(dataSource: gh<_i201.FaqDataSource>()),
     );
     gh.factory<_i169.PersonalInfoRepo>(
       () => _i74.PersonalInfoRepoImpl(
@@ -347,6 +357,7 @@ extension GetItInjectableX on _i174.GetIt {
         delegateInfoRepo: gh<_i848.DelegateInfoRepo>(),
       ),
     );
+    gh.factory<_i129.FaqCubit>(() => _i129.FaqCubit(gh<_i522.FaqRepo>()));
     gh.factory<_i364.OrdersCubit>(
       () => _i364.OrdersCubit(gh<_i480.OrdersRepo>()),
     );
