@@ -1597,6 +1597,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Information saved successfully'**
   String get register;
+
+  /// No description provided for @recentOperations.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Operations'**
+  String get recentOperations;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @noCurrentOperations.
+  ///
+  /// In en, this message translates to:
+  /// **'No current operations'**
+  String get noCurrentOperations;
 }
 
 class _AppLocalizationsDelegate

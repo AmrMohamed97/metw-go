@@ -774,4 +774,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get register => 'تم حفظ المعلومات الشخصية';
+
+  @override
+  String get recentOperations => 'آخر العمليات';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get noCurrentOperations => 'لا توجد عمليات حالية';
 }

@@ -778,4 +778,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get register => 'Information saved successfully';
+
+  @override
+  String get recentOperations => 'Recent Operations';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get noCurrentOperations => 'No current operations';
 }

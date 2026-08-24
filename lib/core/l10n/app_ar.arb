@@ -255,5 +255,8 @@
     "startOrder": "بدء الطلب",
     "mockDuration": "2 يوم - 03:25 ساعة",
     "details": "تفاصيل",
-    "register": "تم حفظ المعلومات الشخصية"
+    "register": "تم حفظ المعلومات الشخصية",
+    "recentOperations": "آخر العمليات",
+    "retry": "إعادة المحاولة",
+    "noCurrentOperations": "لا توجد عمليات حالية"
 }

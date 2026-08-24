@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
@@ -48,7 +49,9 @@ class WalletOperationPage extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<WalletOperationCubit>();
         return ScreenWrapper(
-          appBar: CustomAppBar(title: 'آخر العمليات'),
+          appBar: CustomAppBar(
+            title: AppLocalizations.of(context)!.recentOperations,
+          ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: RefreshIndicator(
@@ -83,7 +86,7 @@ class WalletOperationPage extends StatelessWidget {
             16.verticalSpace,
             ElevatedButton(
               onPressed: () => cubit.getWalletOperations(),
-              child: const Text('إعادة المحاولة'),
+              child: Text(AppLocalizations.of(context)!.retry),
             ),
           ],
         ),
@@ -93,7 +96,7 @@ class WalletOperationPage extends StatelessWidget {
     if (cubit.operations.isEmpty) {
       return Center(
         child: Text(
-          'لا توجد عمليات حالية',
+          AppLocalizations.of(context)!.noCurrentOperations,
           style: AppTextStyle.medium16(context),
         ),
       );
