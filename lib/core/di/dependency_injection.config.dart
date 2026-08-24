@@ -20,6 +20,14 @@ import 'package:metw_go/core/network/dio/dio_factory.dart' as _i611;
 import 'package:metw_go/core/network/dio/dio_interceptor.dart' as _i402;
 import 'package:metw_go/core/repo/app_repo.dart' as _i444;
 import 'package:metw_go/core/repo/app_repo_impl.dart' as _i837;
+import 'package:metw_go/features/contact_us/data/data_source/contact_us_data_source.dart'
+    as _i359;
+import 'package:metw_go/features/contact_us/data/repo/contact_us_repo.dart'
+    as _i312;
+import 'package:metw_go/features/contact_us/data/repo/contact_us_repo_impl.dart'
+    as _i14;
+import 'package:metw_go/features/contact_us/presentation/manager/contact_us_cubit.dart'
+    as _i874;
 import 'package:metw_go/features/documents/data/data_source/documents_data_source.dart'
     as _i818;
 import 'package:metw_go/features/documents/data/repo/documents_repo.dart'
@@ -206,6 +214,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => dioFactory.getDio(gh<_i402.CustomInterceptor>()),
     );
     gh.factory<_i863.AppDataSource>(() => _i863.AppDataSource(gh<_i361.Dio>()));
+    gh.factory<_i359.ContactUsDataSource>(
+      () => _i359.ContactUsDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i818.DocumentsDataSource>(
       () => _i818.DocumentsDataSource(gh<_i361.Dio>()),
     );
@@ -289,6 +300,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i916.VehicleRepoImpl(
         vehicleDataSource: gh<_i773.VehicleDataSource>(),
       ),
+    );
+    gh.factory<_i312.ContactUsRepo>(
+      () => _i14.ContactUsRepoImpl(dataSource: gh<_i359.ContactUsDataSource>()),
     );
     gh.factory<_i858.FourthStepRepo>(
       () => _i605.FourthStepRepoImpl(gh<_i701.FourthStepDataSource>()),
@@ -379,6 +393,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i286.WalletOperationCubit>(
       () => _i286.WalletOperationCubit(gh<_i717.WalletOperationRepo>()),
+    );
+    gh.factory<_i874.ContactUsCubit>(
+      () => _i874.ContactUsCubit(gh<_i312.ContactUsRepo>()),
     );
     gh.factory<_i449.FourthStepCubit>(
       () => _i449.FourthStepCubit(gh<_i858.FourthStepRepo>()),

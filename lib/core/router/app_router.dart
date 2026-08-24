@@ -5,6 +5,8 @@ import 'package:metw_go/core/di/dependency_injection.dart';
 // import 'package:metw_go/core/utils/cache_helper.dart';
 import 'package:metw_go/features/comming_soon/comming_soon_page.dart';
 import 'package:metw_go/features/complete_order_details/presentation/page/complete_order_page.dart';
+import 'package:metw_go/features/contact_us/presentation/manager/contact_us_cubit.dart';
+import 'package:metw_go/features/contact_us/presentation/page/contact_us.dart';
 import 'package:metw_go/features/documents/presentation/manager/documents_cubit.dart';
 import 'package:metw_go/features/documents/presentation/page/documents_page.dart';
 import 'package:metw_go/features/driver_info/presentation/manager/delegate_info_cubit.dart';
@@ -259,6 +261,14 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<PrivacyCubit>()..init(),
           child: const PrivacyManager(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.contactUs,
+        name: AppRoutes.contactUs,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<ContactUsCubit>()..init(),
+          child: const ContactUs(),
         ),
       ),
 

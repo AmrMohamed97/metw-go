@@ -47,4 +47,5 @@ abstract class EndPoints {
 
   static const String faqUrl = 'support/faq';
   static const String privacyUrl = 'support/privacy';
+  static const String contactUsUrl = 'support/contact-us';
 }

@@ -16,6 +16,7 @@ class SupportSection extends StatelessWidget {
         ProfileItem(
           icon: Icons.support_agent,
           title: AppLocalizations.of(context)!.contactUs,
+          onPressed: () => context.push(AppRoutes.contactUs),
         ),
         ProfileItem(
           icon: Icons.privacy_tip_outlined,
