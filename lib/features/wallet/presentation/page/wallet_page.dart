@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
@@ -36,7 +38,9 @@ class WalletPage extends StatelessWidget {
                   12.verticalSpace,
                   WalletChartView(),
                   24.verticalSpace,
-                  ViewAllWidget(),
+                  ViewAllWidget(
+                    onPressed: () => context.push(AppRoutes.walletOperationPage),
+                  ),
                   8.verticalSpace,
                 ],
               ),
