@@ -11,12 +11,12 @@ import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../data/models/order_details_response.dart';
-import '../data/models/sender.dart';
-import '../data/models/receiver.dart';
-import '../data/models/courier.dart';
-import '../data/models/parcel.dart';
-import '../data/models/lifecycle.dart';
+import '../../data/models/order_details_response.dart';
+import '../../data/models/sender.dart';
+import '../../data/models/receiver.dart';
+import '../../data/models/courier.dart';
+import '../../data/models/parcel.dart';
+import '../../data/models/lifecycle.dart';
 
 class OrderDetailsPage extends StatefulWidget {
   final int orderId;

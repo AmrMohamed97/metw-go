@@ -23,7 +23,7 @@ import 'package:metw_go/features/main_view/main_view.dart';
 import 'package:metw_go/features/notification/presentation/manager/notification_cubit.dart';
 import 'package:metw_go/features/notification/presentation/page/notification_page.dart';
 import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart';
-import 'package:metw_go/features/order_details/presentation/order_details_page.dart';
+import 'package:metw_go/features/order_details/presentation/pages/order_details_page.dart';
 import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart';
 import 'package:metw_go/features/otp/presentation/page/otp_page.dart';
 import 'package:metw_go/features/personal_info/presentation/manager/personal_info_cubit.dart';
