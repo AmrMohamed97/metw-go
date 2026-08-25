@@ -7,6 +7,7 @@ import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_error_widget.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -319,7 +320,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
           ),
           SizedBox(height: 16.h),
           TextButton(
-            onPressed: () => _showRejectBottomSheet(context),
+            onPressed: () => _showRejectBottomSheet(context, widget.orderId),
             child: Text(
               l10n.rejectOrder,
               style: AppTextStyle.medium16(
@@ -333,12 +334,16 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
     );
   }
 
-  void _showRejectBottomSheet(BuildContext context) {
+  void _showRejectBottomSheet(BuildContext context, int orderId) {
+    final cubit = context.read<OrderDetailsCubit>();
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (ctx) => const _RejectBottomSheet(),
+      builder: (ctx) => BlocProvider.value(
+        value: cubit,
+        child: _RejectBottomSheet(orderId: orderId),
+      ),
     );
   }
 
@@ -527,197 +532,259 @@ class DashedDivider extends StatelessWidget {
 
 // ─── Reject Bottom Sheet ───────────────────────────────────────────────────
 
-class _RejectReason {
-  final String label;
-  final IconData icon;
-
-  const _RejectReason({required this.label, required this.icon});
-}
-
 class _RejectBottomSheet extends StatefulWidget {
-  const _RejectBottomSheet();
+  final int orderId;
+  const _RejectBottomSheet({required this.orderId});
 
   @override
   State<_RejectBottomSheet> createState() => _RejectBottomSheetState();
 }
 
-class _RejectBottomSheetState extends State<_RejectBottomSheet>
-    with SingleTickerProviderStateMixin {
-  int _selectedIndex = 0;
+class _RejectBottomSheetState extends State<_RejectBottomSheet> {
+  int? _selectedReasonId;
+  final TextEditingController _customReasonController = TextEditingController();
 
-  List<_RejectReason> _buildReasons(AppLocalizations l10n) => [
-    _RejectReason(label: l10n.locationTooFar, icon: Icons.location_on_outlined),
-    _RejectReason(
-      label: l10n.packageTooHeavy,
-      icon: Icons.shopping_bag_outlined,
-    ),
-    _RejectReason(label: l10n.vehicleIssue, icon: Icons.no_drinks_outlined),
-    _RejectReason(label: l10n.personalBreak, icon: Icons.coffee_outlined),
-    _RejectReason(label: l10n.other, icon: Icons.more_horiz),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    final cubit = context.read<OrderDetailsCubit>();
+    if (cubit.returnReasons.isEmpty) {
+      cubit.fetchReturnReasons();
+    }
+  }
+
+  @override
+  void dispose() {
+    _customReasonController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final reasons = _buildReasons(l10n);
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
-        ),
-        padding: EdgeInsets.only(
-          left: 20.w,
-          right: 20.w,
-          top: 12.h,
-          bottom: MediaQuery.of(context).viewInsets.bottom + 24.h,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Drag Handle
-            Container(
-              width: 48.w,
-              height: 4.h,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceTint,
-                borderRadius: BorderRadius.circular(100.r),
-              ),
-            ),
-            SizedBox(height: 24.h),
+    return BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
+      listener: (context, state) {
+        if (state is RejectOrderSuccess) {
+          showToast(context, message: state.message, state: ToastStates.success);
+          Navigator.of(context).pop(); // Close bottom sheet
+          Navigator.of(context).pop(); // Exit order details page after rejection
+        } else if (state is RejectOrderFailure) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        } else if (state is ReturnReasonsError) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        }
+      },
+      builder: (context, state) {
+        final cubit = context.read<OrderDetailsCubit>();
+        final reasons = cubit.returnReasons;
+        final isReasonsLoading = state is ReturnReasonsLoading;
+        final isSubmitting = state is RejectOrderLoading;
 
-            // Title
-            Text(
-              l10n.rejectionReason,
-              style: AppTextStyle.bold20(
-                context,
-              ).copyWith(color: Theme.of(context).colorScheme.onSurface),
-              textAlign: TextAlign.center,
+        return Directionality(
+          textDirection: TextDirection.rtl,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
             ),
-            SizedBox(height: 8.h),
-
-            // Subtitle
-            Text(
-              l10n.selectRejectionReason,
-              style: AppTextStyle.regular14(
-                context,
-              ).copyWith(color: Theme.of(context).colorScheme.onSurface),
-              textAlign: TextAlign.center,
+            padding: EdgeInsets.only(
+              left: 20.w,
+              right: 20.w,
+              top: 12.h,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 24.h,
             ),
-            SizedBox(height: 24.h),
-
-            // Reason Options
-            ...List.generate(reasons.length, (index) {
-              final reason = reasons[index];
-              final isSelected = _selectedIndex == index;
-              return GestureDetector(
-                onTap: () => setState(() => _selectedIndex = index),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 250),
-                  curve: Curves.easeInOut,
-                  margin: EdgeInsets.only(bottom: 12.h),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 14.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(14.r),
-                    border: Border.all(
-                      color: isSelected
-                          ? Theme.of(
-                              context,
-                            ).colorScheme.secondary.withValues(alpha: 0.4)
-                          : Theme.of(context).colorScheme.surfaceTint,
-                      width: isSelected ? 1.5 : 1,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Drag Handle
+                  Container(
+                    width: 48.w,
+                    height: 4.h,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surfaceTint,
+                      borderRadius: BorderRadius.circular(100.r),
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      // Radio indicator
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 250),
-                        width: 24.r,
-                        height: 24.r,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: isSelected
-                              ? Theme.of(context).colorScheme.secondary
-                              : Colors.transparent,
-                          border: Border.all(
-                            color: isSelected
-                                ? Theme.of(context).colorScheme.secondary
-                                : Theme.of(context).colorScheme.surfaceTint,
-                            width: 2,
+                  SizedBox(height: 24.h),
+
+                  // Title
+                  Text(
+                    l10n.rejectionReason,
+                    style: AppTextStyle.bold20(context).copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 8.h),
+
+                  // Subtitle
+                  Text(
+                    l10n.selectRejectionReason,
+                    style: AppTextStyle.regular14(context).copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 24.h),
+
+                  if (isReasonsLoading)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 24.0),
+                      child: CircularProgressIndicator(),
+                    )
+                  else ...[
+                    // Reason Options from API
+                    ...List.generate(reasons.length, (index) {
+                      final reason = reasons[index];
+                      final isSelected = _selectedReasonId == reason.id;
+                      return GestureDetector(
+                        onTap: () => setState(() => _selectedReasonId = reason.id),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 250),
+                          curve: Curves.easeInOut,
+                          margin: EdgeInsets.only(bottom: 12.h),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16.w,
+                            vertical: 14.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surface,
+                            borderRadius: BorderRadius.circular(14.r),
+                            border: Border.all(
+                              color: isSelected
+                                  ? Theme.of(context)
+                                      .colorScheme
+                                      .secondary
+                                      .withValues(alpha: 0.4)
+                                  : Theme.of(context).colorScheme.surfaceTint,
+                              width: isSelected ? 1.5 : 1,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              // Radio indicator
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 250),
+                                width: 24.r,
+                                height: 24.r,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: isSelected
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : Colors.transparent,
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? Theme.of(context).colorScheme.secondary
+                                        : Theme.of(context).colorScheme.surfaceTint,
+                                    width: 2,
+                                  ),
+                                ),
+                                child: isSelected
+                                    ? Icon(
+                                        Icons.circle,
+                                        size: 10.r,
+                                        color: Theme.of(context).colorScheme.surface,
+                                      )
+                                    : null,
+                              ),
+                              SizedBox(width: 14.w),
+
+                              // Label
+                              Expanded(
+                                child: Text(
+                                  reason.reasonText ?? '',
+                                  style: AppTextStyle.medium14(context).copyWith(
+                                    color: Theme.of(context).colorScheme.onSurface,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        child: isSelected
-                            ? Icon(
-                                Icons.circle,
-                                size: 10.r,
-                                color: Theme.of(context).colorScheme.surface,
-                              )
-                            : null,
-                      ),
-                      SizedBox(width: 14.w),
+                      );
+                    }),
 
-                      // Label
-                      Expanded(
-                        child: Text(
-                          reason.label,
-                          style: AppTextStyle.medium14(context).copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
+                    SizedBox(height: 12.h),
+
+                    // Custom Reason Form Field
+                    TextFormField(
+                      controller: _customReasonController,
+                      maxLines: 2,
+                      decoration: InputDecoration(
+                        hintText: 'إضافة سبب مخصص (اختياري)...',
+                        hintStyle: AppTextStyle.regular14(context).copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        filled: true,
+                        fillColor: Theme.of(context).colorScheme.surface,
+                        contentPadding: EdgeInsets.all(12.r),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).colorScheme.surfaceTint,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).colorScheme.surfaceTint,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(height: 20.h),
 
-                      // Icon Badge
-                      Container(
-                        padding: EdgeInsets.all(10.r),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.outline,
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        child: Icon(
-                          reason.icon,
-                          size: 22.r,
+                    // Confirm button
+                    CustomButton(
+                      text: l10n.confirmRejection,
+                      loading: isSubmitting,
+                      onPressed: isSubmitting
+                          ? null
+                          : () {
+                              if (_selectedReasonId == null) {
+                                showToast(
+                                  context,
+                                  message: 'يرجى تحديد سبب الرفض أولاً',
+                                  state: ToastStates.error,
+                                );
+                                return;
+                              }
+                              cubit.rejectOrder(
+                                orderId: widget.orderId,
+                                reasonId: _selectedReasonId!,
+                                customReason: _customReasonController.text.trim(),
+                              );
+                            },
+                      isMax: true,
+                      backgroundColor: MyColors.primaryColor,
+                      textColor: Theme.of(context).colorScheme.surface,
+                    ),
+                    SizedBox(height: 12.h),
+
+                    // Cancel text
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(
+                        l10n.cancel,
+                        style: AppTextStyle.medium16(context).copyWith(
                           color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              );
-            }),
-
-            SizedBox(height: 16.h),
-
-            // Confirm button
-            CustomButton(
-              text: l10n.confirmRejection,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              isMax: true,
-              backgroundColor: MyColors.primaryColor,
-              textColor: Theme.of(context).colorScheme.surface,
-            ),
-            SizedBox(height: 12.h),
-
-            // Cancel text
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(
-                l10n.cancel,
-                style: AppTextStyle.medium16(
-                  context,
-                ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                    ),
+                  ],
+                ],
               ),
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
