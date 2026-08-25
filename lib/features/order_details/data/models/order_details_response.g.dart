@@ -49,6 +49,11 @@ OrderDetails _$OrderDetailsFromJson(Map<String, dynamic> json) => OrderDetails(
   lifecycle: json['lifecycle'] == null
       ? null
       : Lifecycle.fromJson(json['lifecycle'] as Map<String, dynamic>),
+  ongoingOrder: json['ongoing_order'] == null
+      ? null
+      : OngoingOrderModel.fromJson(
+          json['ongoing_order'] as Map<String, dynamic>,
+        ),
 );
 
 Map<String, dynamic> _$OrderDetailsToJson(OrderDetails instance) =>
@@ -67,4 +72,5 @@ Map<String, dynamic> _$OrderDetailsToJson(OrderDetails instance) =>
       'receiver': instance.receiver,
       'parcels': instance.parcels,
       'lifecycle': instance.lifecycle,
+      'ongoing_order': instance.ongoingOrder,
     };

@@ -4,6 +4,7 @@ import 'sender.dart';
 import 'receiver.dart';
 import 'parcel.dart';
 import 'lifecycle.dart';
+import 'ongoing_order_model.dart';
 
 part 'order_details_response.g.dart';
 
@@ -15,8 +16,22 @@ class OrderDetailsResponse {
 
   OrderDetailsResponse({this.success, this.message, this.data});
 
-  factory OrderDetailsResponse.fromJson(Map<String, dynamic> json) =>
-      _$OrderDetailsResponseFromJson(json);
+  factory OrderDetailsResponse.fromJson(Map<String, dynamic> json) {
+    final generated = _$OrderDetailsResponseFromJson(json);
+    OrderDetails? orderData = generated.data;
+    if (json['data'] != null && json['data'] is Map<String, dynamic>) {
+      final dataMap = json['data'] as Map<String, dynamic>;
+      if (dataMap['active_order'] != null && dataMap['active_order'] is Map<String, dynamic>) {
+        orderData = OrderDetails.fromJson(dataMap['active_order'] as Map<String, dynamic>);
+      }
+    }
+    return OrderDetailsResponse(
+      success: generated.success,
+      message: generated.message,
+      data: orderData,
+    );
+  }
+
   Map<String, dynamic> toJson() => _$OrderDetailsResponseToJson(this);
 }
 
@@ -43,6 +58,8 @@ class OrderDetails {
   final Receiver? receiver;
   final List<Parcel>? parcels;
   final Lifecycle? lifecycle;
+  @JsonKey(name: 'ongoing_order')
+  final OngoingOrderModel? ongoingOrder;
 
   OrderDetails({
     this.id,
@@ -59,6 +76,7 @@ class OrderDetails {
     this.receiver,
     this.parcels,
     this.lifecycle,
+    this.ongoingOrder,
   });
 
   factory OrderDetails.fromJson(Map<String, dynamic> json) =>
