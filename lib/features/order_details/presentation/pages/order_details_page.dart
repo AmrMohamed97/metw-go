@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/cubit/app_cubit.dart';
+import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
@@ -11,12 +15,13 @@ import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../data/models/order_details_response.dart';
-import '../../data/models/sender.dart';
-import '../../data/models/receiver.dart';
+
 import '../../data/models/courier.dart';
-import '../../data/models/parcel.dart';
 import '../../data/models/lifecycle.dart';
+import '../../data/models/order_details_response.dart';
+import '../../data/models/parcel.dart';
+import '../../data/models/receiver.dart';
+import '../../data/models/sender.dart';
 
 class OrderDetailsPage extends StatefulWidget {
   final int orderId;
@@ -314,12 +319,44 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             ),
           ),
           SizedBox(height: 32.h),
-          CustomButton(
-            text: l10n.acceptOrder,
-            onPressed: () {},
-            isMax: true,
-            backgroundColor: MyColors.primaryColor,
-            textColor: Theme.of(context).colorScheme.surface,
+          BlocConsumer<AppCubit, AppState>(
+            listener: (context, appState) {
+              if (appState is AcceptStartOrderSuccessState) {
+                showToast(
+                  context,
+                  message: appState.response.message??'success',
+                  state: ToastStates.success,
+                );
+                context.pushReplacement(
+                  AppRoutes.confirmPickupPage,
+                  extra: widget.orderId,
+                );
+              } else if (appState is AcceptStartOrderErrorState) {
+                showToast(
+                  context,
+                  message: appState.message,
+                  state: ToastStates.error,
+                );
+              }
+            },
+            builder: (context, appState) {
+              final appCubit = context.read<AppCubit>();
+              return CustomButton(
+                text: l10n.acceptOrder,
+                onPressed: () =>
+                    appCubit.acceptStartOrder(orderId: widget.orderId),
+                isMax:
+                    appState is AcceptStartOrderLoadingState &&
+                        appState.orderId == widget.orderId
+                    ? false
+                    : true,
+                loading:
+                    appState is AcceptStartOrderLoadingState &&
+                    appState.orderId == widget.orderId,
+                backgroundColor: MyColors.primaryColor,
+                textColor: Theme.of(context).colorScheme.surface,
+              );
+            },
           ),
           SizedBox(height: 16.h),
           TextButton(
@@ -568,9 +605,15 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
     return BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
       listener: (context, state) {
         if (state is RejectOrderSuccess) {
-          showToast(context, message: state.message, state: ToastStates.success);
+          showToast(
+            context,
+            message: state.message,
+            state: ToastStates.success,
+          );
           Navigator.of(context).pop(); // Close bottom sheet
-          Navigator.of(context).pop(); // Exit order details page after rejection
+          Navigator.of(
+            context,
+          ).pop(); // Exit order details page after rejection
         } else if (state is RejectOrderFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
         } else if (state is ReturnReasonsError) {
@@ -619,9 +662,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                   // Title
                   Text(
                     l10n.rejectionReason,
-                    style: AppTextStyle.bold20(context).copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
+                    style: AppTextStyle.bold20(
+                      context,
+                    ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 6.h),
@@ -629,9 +672,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                   // Subtitle
                   Text(
                     l10n.selectRejectionReason,
-                    style: AppTextStyle.regular14(context).copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
+                    style: AppTextStyle.regular14(
+                      context,
+                    ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 18.h),
@@ -657,7 +700,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                                       vertical: 14.h,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Theme.of(context).colorScheme.surface,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.surface,
                                       borderRadius: BorderRadius.circular(14.r),
                                     ),
                                     child: Row(
@@ -674,7 +719,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                                         Expanded(
                                           child: Text(
                                             'سبب الرفض الافتراضي أثناء التحميل',
-                                            style: AppTextStyle.medium14(context),
+                                            style: AppTextStyle.medium14(
+                                              context,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -689,8 +736,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                               final reason = reasons[index];
                               final isSelected = _selectedReasonId == reason.id;
                               return GestureDetector(
-                                onTap: () =>
-                                    setState(() => _selectedReasonId = reason.id),
+                                onTap: () => setState(
+                                  () => _selectedReasonId = reason.id,
+                                ),
                                 child: AnimatedContainer(
                                   duration: const Duration(milliseconds: 250),
                                   curve: Curves.easeInOut,
@@ -700,15 +748,19 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                                     vertical: 14.h,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.surface,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.surface,
                                     borderRadius: BorderRadius.circular(14.r),
                                     border: Border.all(
                                       color: isSelected
                                           ? Theme.of(context)
-                                              .colorScheme
-                                              .secondary
-                                              .withValues(alpha: 0.4)
-                                          : Theme.of(context).colorScheme.surfaceTint,
+                                                .colorScheme
+                                                .secondary
+                                                .withValues(alpha: 0.4)
+                                          : Theme.of(
+                                              context,
+                                            ).colorScheme.surfaceTint,
                                       width: isSelected ? 1.5 : 1,
                                     ),
                                   ),
@@ -716,18 +768,26 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                                     children: [
                                       // Radio indicator
                                       AnimatedContainer(
-                                        duration: const Duration(milliseconds: 250),
+                                        duration: const Duration(
+                                          milliseconds: 250,
+                                        ),
                                         width: 24.r,
                                         height: 24.r,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           color: isSelected
-                                              ? Theme.of(context).colorScheme.secondary
+                                              ? Theme.of(
+                                                  context,
+                                                ).colorScheme.secondary
                                               : Colors.transparent,
                                           border: Border.all(
                                             color: isSelected
-                                                ? Theme.of(context).colorScheme.secondary
-                                                : Theme.of(context).colorScheme.surfaceTint,
+                                                ? Theme.of(
+                                                    context,
+                                                  ).colorScheme.secondary
+                                                : Theme.of(
+                                                    context,
+                                                  ).colorScheme.surfaceTint,
                                             width: 2,
                                           ),
                                         ),
@@ -735,7 +795,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                                             ? Icon(
                                                 Icons.circle,
                                                 size: 10.r,
-                                                color: Theme.of(context).colorScheme.surface,
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.surface,
                                               )
                                             : null,
                                       ),
@@ -745,9 +807,12 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                                       Expanded(
                                         child: Text(
                                           reason.reasonText ?? '',
-                                          style: AppTextStyle.medium14(context).copyWith(
-                                            color: Theme.of(context).colorScheme.onSurface,
-                                          ),
+                                          style: AppTextStyle.medium14(context)
+                                              .copyWith(
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.onSurface,
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -764,28 +829,39 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                               maxLines: 2,
                               decoration: InputDecoration(
                                 hintText: 'إضافة سبب مخصص (اختياري)...',
-                                hintStyle: AppTextStyle.regular14(context).copyWith(
-                                  color: Theme.of(context).colorScheme.onSurface,
-                                ),
+                                hintStyle: AppTextStyle.regular14(context)
+                                    .copyWith(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onSurface,
+                                    ),
                                 filled: true,
-                                fillColor: Theme.of(context).colorScheme.surface,
+                                fillColor: Theme.of(
+                                  context,
+                                ).colorScheme.surface,
                                 contentPadding: EdgeInsets.all(12.r),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12.r),
                                   borderSide: BorderSide(
-                                    color: Theme.of(context).colorScheme.surfaceTint,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.surfaceTint,
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12.r),
                                   borderSide: BorderSide(
-                                    color: Theme.of(context).colorScheme.surfaceTint,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.surfaceTint,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12.r),
                                   borderSide: BorderSide(
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
                                   ),
                                 ),
                               ),
@@ -830,9 +906,9 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                     onPressed: () => Navigator.of(context).pop(),
                     child: Text(
                       l10n.cancel,
-                      style: AppTextStyle.medium16(context).copyWith(
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
+                      style: AppTextStyle.medium16(
+                        context,
+                      ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                     ),
                   ),
                 ],
