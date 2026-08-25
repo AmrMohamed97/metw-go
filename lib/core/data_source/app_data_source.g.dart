@@ -76,7 +76,7 @@ class _AppDataSource implements AppDataSource {
   }
 
   @override
-  Future<StartOrderResponse> acceptStartOrder({required String orderId}) async {
+  Future<StartOrderResponse> acceptStartOrder({required int orderId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -85,7 +85,7 @@ class _AppDataSource implements AppDataSource {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'orders/{${orderId}}/start',
+            'orders/${orderId}/start',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -104,7 +104,7 @@ class _AppDataSource implements AppDataSource {
 
   @override
   Future<OrderActionResponse> arriveAtPickupOrder({
-    required String orderId,
+    required int orderId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -114,7 +114,7 @@ class _AppDataSource implements AppDataSource {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'orders/{${orderId}}/arrive-pickup',
+            'orders/${orderId}/arrive-pickup',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -133,7 +133,7 @@ class _AppDataSource implements AppDataSource {
 
   @override
   Future<OrderActionResponse> confirmPickupOrder({
-    required String orderId,
+    required int orderId,
     File? proofPhoto,
     String? signature,
     String? packageCountVerified,
@@ -189,7 +189,7 @@ class _AppDataSource implements AppDataSource {
           )
           .compose(
             _dio.options,
-            'orders/{${orderId}}/pickup-confirmation',
+            'orders/${orderId}/pickup-confirmation',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -208,7 +208,7 @@ class _AppDataSource implements AppDataSource {
 
   @override
   Future<OrderActionResponse> arriveAtDropoffOrder({
-    required String orderId,
+    required int orderId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -218,7 +218,7 @@ class _AppDataSource implements AppDataSource {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'orders/{${orderId}}/arrive-dropoff',
+            'orders/${orderId}/arrive-dropoff',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -237,7 +237,7 @@ class _AppDataSource implements AppDataSource {
 
   @override
   Future<OrderActionResponse> completeDeliveryOrder({
-    required String orderId,
+    required int orderId,
     File? proofPhoto,
     String? signature,
     String? recipientOtp,
@@ -285,7 +285,7 @@ class _AppDataSource implements AppDataSource {
           )
           .compose(
             _dio.options,
-            'orders/{${orderId}}/complete-delivery',
+            'orders/${orderId}/complete-delivery',
             queryParameters: queryParameters,
             data: _data,
           )

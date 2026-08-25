@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:metw_go/core/di/dependency_injection.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
-import 'package:metw_go/features/home/presentation/page/home_page.dart';
-import 'package:metw_go/features/orders/presentation/page/orders_page.dart';
-import 'package:metw_go/features/profile/presentation/page/profile_page.dart';
-import 'package:metw_go/features/wallet/presentation/page/wallet_page.dart';
+import 'package:metw_go/features/main_view/manager/main_view_cubit.dart';
+import 'package:metw_go/features/main_view/manager/main_view_state.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -17,27 +17,33 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  int _currentIndex = 0; // Starts with Home
+  // int _currentIndex = 0; // Starts with Home
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = [
-      HomePage(),
-      OrdersPage(),
-      WalletPage(),
-      ProfilePage(),
-    ];
+    // final List<Widget> pages = [
+    //   HomePage(),
+    //   OrdersPage(),
+    //   WalletPage(),
+    //   ProfilePage(),
+    // ];
 
-    return Scaffold(
-      extendBody: true,
-      backgroundColor: Theme.of(context).colorScheme.outline,
-      body: pages[_currentIndex],
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+    return BlocProvider(
+      create: (context) => getIt<MainViewCubit>(),
+      child: BlocBuilder<MainViewCubit, MainViewState>(
+        builder: (context, state) {
+          final mainViewCubit = context.read<MainViewCubit>();
+          return Scaffold(
+            extendBody: true,
+            backgroundColor: Theme.of(context).colorScheme.outline,
+            body: mainViewCubit.pages[mainViewCubit.currentIndex],
+            bottomNavigationBar: CustomBottomNavBar(
+              currentIndex: mainViewCubit.currentIndex,
+              onTap: (index) {
+                mainViewCubit.changePage(index);
+              },
+            ),
+          );
         },
       ),
     );

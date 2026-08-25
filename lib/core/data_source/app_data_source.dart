@@ -25,18 +25,18 @@ abstract class AppDataSource {
 
   @POST(EndPoints.startOrdersUrl)
   Future<StartOrderResponse> acceptStartOrder({
-    @Path("order_id") required String orderId,
+    @Path("order_id") required int orderId,
   });
 
   @POST(EndPoints.arrivePickupOrdersUrl)
   Future<OrderActionResponse> arriveAtPickupOrder({
-    @Path("order_id") required String orderId,
+    @Path("order_id") required int orderId,
   });
 
   @POST(EndPoints.confirmationOrdersUrl)
   @MultiPart()
   Future<OrderActionResponse> confirmPickupOrder({
-    @Path("order_id") required String orderId,
+    @Path("order_id") required int orderId,
     @Part(name: 'proof_photo') File? proofPhoto,
     @Part(name: 'signature') String? signature,
     @Part(name: 'checklist[package_count_verified]')
@@ -49,13 +49,13 @@ abstract class AppDataSource {
 
   @POST(EndPoints.dropoffOrdersUrl)
   Future<OrderActionResponse> arriveAtDropoffOrder({
-    @Path("order_id") required String orderId,
+    @Path("order_id") required int orderId,
   });
 
   @POST(EndPoints.completeOrdersUrl)
   @MultiPart()
   Future<OrderActionResponse> completeDeliveryOrder({
-    @Path("order_id") required String orderId,
+    @Path("order_id") required int orderId,
     @Part(name: 'proof_photo') File? proofPhoto,
     @Part(name: 'signature') String? signature,
     @Part(name: 'recipient_otp') String? recipientOtp,

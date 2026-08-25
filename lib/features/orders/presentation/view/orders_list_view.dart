@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/cubit/app_cubit.dart';
+import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/router/app_routes.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/order_item.dart';
+import 'package:metw_go/features/main_view/manager/main_view_cubit.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_cubit.dart';
 import 'package:metw_go/features/orders/presentation/manager/orders_state.dart';
 
@@ -41,77 +44,100 @@ class _OrdersListViewState extends State<OrdersListView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrdersCubit, OrdersState>(
-      builder: (context, state) {
-        final cubit = context.read<OrdersCubit>();
-
-        if (state is IncomingOrdersLoadingState) {
-          return Expanded(
-            child: Skeletonizer(
-              enabled: true,
+    return BlocConsumer<AppCubit, AppState>(
+      
+      listener: (context, appState) {
+        if(appState is AcceptStartOrderSuccessState){
+          showToast(context,
+          message: appState.response.message??"success",
+          state: ToastStates.success
+          );
+        context.read<MainViewCubit>().changePage(0);
+        }
+        if(appState is AcceptStartOrderErrorState){
+          showToast(context,
+          message: appState.message,
+          state: ToastStates.error
+          );
+        }
+      },
+      builder: (context, appState) {
+        final appCubit = context.read<AppCubit>();
+        return BlocBuilder<OrdersCubit, OrdersState>(
+          builder: (context, state) {
+            final cubit = context.read<OrdersCubit>();
+    
+            if (state is IncomingOrdersLoadingState) {
+              return Expanded(
+                child: Skeletonizer(
+                  enabled: true,
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12.0),
+                        child: OrderItem(
+                          orderId: "F-ORD-00000000",
+                          distance: "5.0 كم",
+                          isUrgent: false,
+                          pickup: "عنوان استلام وهمي طويل لغرض التحميل",
+                          delivery: "عنوان تسليم وهمي طويل لغرض التحميل",
+                          onDetailsPressed: () {},
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              );
+            }
+    
+            if (state is IncomingOrdersErrorState) {
+              return Expanded(child: Center(child: Text(state.error)));
+            }
+    
+            final orders = cubit.orders;
+    
+            if (orders.isEmpty) {
+              return const Expanded(child: Center(child: Text("لا توجد طلبات")));
+            }
+    
+            return Expanded(
               child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 5,
+                controller: _scrollController,
+                physics: const BouncingScrollPhysics(),
+                itemCount: orders.length + (cubit.isLoadingMore ? 1 : 0),
                 itemBuilder: (context, index) {
+                  if (index >= orders.length) {
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                      child: Center(child: CupertinoActivityIndicator()),
+                    );
+                  }
+    
+                  final order = orders[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 12.0),
                     child: OrderItem(
-                      orderId: "F-ORD-00000000",
-                      distance: "5.0 كم",
-                      isUrgent: false,
-                      pickup: "عنوان استلام وهمي طويل لغرض التحميل",
-                      delivery: "عنوان تسليم وهمي طويل لغرض التحميل",
-                      onDetailsPressed: () {},
+                      onPressed: ()=>appCubit.acceptStartOrder(orderId: order.id!),
+                      isLoading: appState is AcceptStartOrderLoadingState && appState.orderId == order.id,
+                      orderId: order.orderNumber ?? "",
+                      distance: order.distanceKm != null
+                          ? "${order.distanceKm} كم"
+                          : "",
+                      isUrgent: order.priority == "urgent",
+                      
+                      pickup: order.pickupAddress ?? "",
+                      delivery: order.dropoffAddress ?? "",
+                      onDetailsPressed: () =>
+                          context.push(AppRoutes.orderDetailsPage, extra: order.id),
+                      // borderColor: Theme.of(context).colorScheme.secondary,
                     ),
                   );
                 },
               ),
-            ),
-          );
-        }
-
-        if (state is IncomingOrdersErrorState) {
-          return Expanded(child: Center(child: Text(state.error)));
-        }
-
-        final orders = cubit.orders;
-
-        if (orders.isEmpty) {
-          return const Expanded(child: Center(child: Text("لا توجد طلبات")));
-        }
-
-        return Expanded(
-          child: ListView.builder(
-            controller: _scrollController,
-            physics: const BouncingScrollPhysics(),
-            itemCount: orders.length + (cubit.isLoadingMore ? 1 : 0),
-            itemBuilder: (context, index) {
-              if (index >= orders.length) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Center(child: CupertinoActivityIndicator()),
-                );
-              }
-
-              final order = orders[index];
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
-                child: OrderItem(
-                  orderId: order.orderNumber ?? "",
-                  distance: order.distanceKm != null
-                      ? "${order.distanceKm} كم"
-                      : "",
-                  isUrgent: order.priority == "urgent",
-                  // isTodayOrders: cubit.isTodayOrders,
-                  pickup: order.pickupAddress ?? "",
-                  delivery: order.dropoffAddress ?? "",
-                  onDetailsPressed: () =>
-                      context.push(AppRoutes.orderDetailsPage, extra: order.id),
-                  // borderColor: Theme.of(context).colorScheme.secondary,
-                ),
-              );
-            },
-          ),
+            );
+          },
         );
       },
     );

@@ -11,15 +11,15 @@ abstract class AppRepo {
   Future<Either<Failure, EmptyResponse>> deleteAccount();
 
   Future<Either<Failure, StartOrderResponse>> acceptStartOrder({
-    required String orderId,
+    required int orderId,
   });
 
   Future<Either<Failure, OrderActionResponse>> arriveAtPickupOrder({
-    required String orderId,
+    required int orderId,
   });
 
   Future<Either<Failure, OrderActionResponse>> confirmPickupOrder({
-    required String orderId,
+    required int orderId,
     File? proofPhoto,
     String? signature,
     String? packageCountVerified,
@@ -28,11 +28,11 @@ abstract class AppRepo {
   });
 
   Future<Either<Failure, OrderActionResponse>> arriveAtDropoffOrder({
-    required String orderId,
+    required int orderId,
   });
 
   Future<Either<Failure, OrderActionResponse>> completeDeliveryOrder({
-    required String orderId,
+    required int orderId,
     File? proofPhoto,
     String? signature,
     String? recipientOtp,

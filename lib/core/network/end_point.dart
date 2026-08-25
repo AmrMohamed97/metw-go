@@ -33,14 +33,14 @@ abstract class EndPoints {
   static const String profileServiceAreasUrl = 'profile/service-areas';
   static const String profileDocumentsUrl = 'profile/documents';
 
-  static const String startOrdersUrl = 'orders/{{order_id}}/start';
+  static const String startOrdersUrl = 'orders/{order_id}/start';
   static const String arrivePickupOrdersUrl =
-      'orders/{{order_id}}/arrive-pickup';
+      'orders/{order_id}/arrive-pickup';
   static const String confirmationOrdersUrl =
-      'orders/{{order_id}}/pickup-confirmation';
-  static const String dropoffOrdersUrl = 'orders/{{order_id}}/arrive-dropoff';
+      'orders/{order_id}/pickup-confirmation';
+  static const String dropoffOrdersUrl = 'orders/{order_id}/arrive-dropoff';
   static const String completeOrdersUrl =
-      'orders/{{order_id}}/complete-delivery';
+      'orders/{order_id}/complete-delivery';
 
   static const String walletOperationsUrl = 'wallet/operations';
   static const String walletOverviewUrl = 'wallet/overview';

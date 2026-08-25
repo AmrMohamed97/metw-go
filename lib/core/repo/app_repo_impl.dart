@@ -44,7 +44,7 @@ class AppRepoImpl implements AppRepo {
 
   @override
   Future<Either<Failure, StartOrderResponse>> acceptStartOrder({
-    required String orderId,
+    required int orderId,
   }) async {
     try {
       final response = await _apiService.acceptStartOrder(orderId: orderId);
@@ -59,7 +59,7 @@ class AppRepoImpl implements AppRepo {
 
   @override
   Future<Either<Failure, OrderActionResponse>> arriveAtPickupOrder({
-    required String orderId,
+    required int orderId,
   }) async {
     try {
       final response = await _apiService.arriveAtPickupOrder(orderId: orderId);
@@ -74,7 +74,7 @@ class AppRepoImpl implements AppRepo {
 
   @override
   Future<Either<Failure, OrderActionResponse>> confirmPickupOrder({
-    required String orderId,
+    required int orderId,
     File? proofPhoto,
     String? signature,
     String? packageCountVerified,
@@ -101,7 +101,7 @@ class AppRepoImpl implements AppRepo {
 
   @override
   Future<Either<Failure, OrderActionResponse>> arriveAtDropoffOrder({
-    required String orderId,
+    required int orderId,
   }) async {
     try {
       final response = await _apiService.arriveAtDropoffOrder(orderId: orderId);
@@ -116,7 +116,7 @@ class AppRepoImpl implements AppRepo {
 
   @override
   Future<Either<Failure, OrderActionResponse>> completeDeliveryOrder({
-    required String orderId,
+    required int orderId,
     File? proofPhoto,
     String? signature,
     String? recipientOtp,

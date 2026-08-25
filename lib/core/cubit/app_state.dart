@@ -44,7 +44,10 @@ class AppDeleteAccountErrorState extends AppState {
 
 //-----------------------------Order_Actions-------------------------------------
 // Start Order
-class AcceptStartOrderLoadingState extends AppState {}
+class AcceptStartOrderLoadingState extends AppState {
+  final int orderId;
+  AcceptStartOrderLoadingState(this.orderId);
+}
 
 class AcceptStartOrderSuccessState extends AppState {
   final StartOrderResponse response;

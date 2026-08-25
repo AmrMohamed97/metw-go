@@ -95,8 +95,8 @@ class AppCubit extends Cubit<AppState> {
     });
   }
 
-  Future<void> acceptStartOrder({required String orderId}) async {
-    emit(AcceptStartOrderLoadingState());
+  Future<void> acceptStartOrder({required int orderId}) async {
+    emit(AcceptStartOrderLoadingState(orderId));
     final result = await _appRepo.acceptStartOrder(orderId: orderId);
     result.fold(
       (failure) => emit(AcceptStartOrderErrorState(failure.message)),
@@ -104,7 +104,7 @@ class AppCubit extends Cubit<AppState> {
     );
   }
 
-  Future<void> arriveAtPickupOrder({required String orderId}) async {
+  Future<void> arriveAtPickupOrder({required int orderId}) async {
     emit(ArriveAtPickupOrderLoadingState());
     final result = await _appRepo.arriveAtPickupOrder(orderId: orderId);
     result.fold(
@@ -114,7 +114,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   Future<void> confirmPickupOrder({
-    required String orderId,
+    required int orderId,
     File? proofPhoto,
     String? signature,
     String? packageCountVerified,
@@ -136,7 +136,7 @@ class AppCubit extends Cubit<AppState> {
     );
   }
 
-  Future<void> arriveAtDropoffOrder({required String orderId}) async {
+  Future<void> arriveAtDropoffOrder({required int orderId}) async {
     emit(ArriveAtDropoffOrderLoadingState());
     final result = await _appRepo.arriveAtDropoffOrder(orderId: orderId);
     result.fold(
@@ -146,7 +146,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   Future<void> completeDeliveryOrder({
-    required String orderId,
+    required int orderId,
     File? proofPhoto,
     String? signature,
     String? recipientOtp,
