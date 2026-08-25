@@ -15,13 +15,15 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
 
   OrderDetailsCubit(this.repository) : super(OrderDetailsInitial());
 
+  OrderDetails? orderDetails;
   List<ReasonItemModel> returnReasons = [];
 
   Future<void> fetchOrderDetails(int orderId) async {
     emit(OrderDetailsLoading());
     try {
       final response = await repository.fetchOrderDetails(orderId);
-      emit(OrderDetailsLoaded(response.data));
+      orderDetails = response.data;
+      emit(OrderDetailsLoaded(orderDetails));
     } catch (e) {
       emit(OrderDetailsError(e.toString()));
     }

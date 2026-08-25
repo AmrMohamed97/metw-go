@@ -80,20 +80,23 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       appBar: CustomAppBar(title: l10n.orders, centerTitle: true),
       body: BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
         builder: (context, state) {
-          if (state is OrderDetailsLoading) {
+          final cubit = context.read<OrderDetailsCubit>();
+          if (state is OrderDetailsLoading && cubit.orderDetails == null) {
             return Skeletonizer(
               enabled: true,
               child: _buildContent(context, l10n, _dummyOrder),
             );
-          } else if (state is OrderDetailsLoaded) {
-            return _buildContent(context, l10n, state.data ?? _dummyOrder);
-          } else if (state is OrderDetailsError) {
+          } else if (state is OrderDetailsError && cubit.orderDetails == null) {
             return CustomErrorWidget(
               message: state.message,
               onRetry: () => _cubit.fetchOrderDetails(widget.orderId),
             );
+          } else if (cubit.orderDetails != null) {
+            return _buildContent(context, l10n, cubit.orderDetails!);
+          } else if (state is OrderDetailsLoaded) {
+            return _buildContent(context, l10n, state.data ?? _dummyOrder);
           }
-          return SizedBox.shrink();
+          return _buildContent(context, l10n, _dummyOrder);
         },
       ),
     );
@@ -577,23 +580,28 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
       builder: (context, state) {
         final cubit = context.read<OrderDetailsCubit>();
         final reasons = cubit.returnReasons;
-        final isReasonsLoading = state is ReturnReasonsLoading;
+        final isReasonsLoading =
+            state is ReturnReasonsLoading ||
+            (reasons.isEmpty && state is! ReturnReasonsError);
         final isSubmitting = state is RejectOrderLoading;
 
         return Directionality(
           textDirection: TextDirection.rtl,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.85,
             ),
-            padding: EdgeInsets.only(
-              left: 20.w,
-              right: 20.w,
-              top: 12.h,
-              bottom: MediaQuery.of(context).viewInsets.bottom + 24.h,
-            ),
-            child: SingleChildScrollView(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+              ),
+              padding: EdgeInsets.only(
+                left: 20.w,
+                right: 20.w,
+                top: 12.h,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 20.h,
+              ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -606,7 +614,7 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                       borderRadius: BorderRadius.circular(100.r),
                     ),
                   ),
-                  SizedBox(height: 24.h),
+                  SizedBox(height: 18.h),
 
                   // Title
                   Text(
@@ -616,7 +624,7 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 6.h),
 
                   // Subtitle
                   Text(
@@ -626,159 +634,207 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 24.h),
+                  SizedBox(height: 18.h),
 
-                  if (isReasonsLoading)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 24.0),
-                      child: CircularProgressIndicator(),
-                    )
-                  else ...[
-                    // Reason Options from API
-                    ...List.generate(reasons.length, (index) {
-                      final reason = reasons[index];
-                      final isSelected = _selectedReasonId == reason.id;
-                      return GestureDetector(
-                        onTap: () => setState(() => _selectedReasonId = reason.id),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 250),
-                          curve: Curves.easeInOut,
-                          margin: EdgeInsets.only(bottom: 12.h),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 14.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surface,
-                            borderRadius: BorderRadius.circular(14.r),
-                            border: Border.all(
-                              color: isSelected
-                                  ? Theme.of(context)
-                                      .colorScheme
-                                      .secondary
-                                      .withValues(alpha: 0.4)
-                                  : Theme.of(context).colorScheme.surfaceTint,
-                              width: isSelected ? 1.5 : 1,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              // Radio indicator
-                              AnimatedContainer(
-                                duration: const Duration(milliseconds: 250),
-                                width: 24.r,
-                                height: 24.r,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: isSelected
-                                      ? Theme.of(context).colorScheme.secondary
-                                      : Colors.transparent,
-                                  border: Border.all(
-                                    color: isSelected
-                                        ? Theme.of(context).colorScheme.secondary
-                                        : Theme.of(context).colorScheme.surfaceTint,
-                                    width: 2,
-                                  ),
-                                ),
-                                child: isSelected
-                                    ? Icon(
-                                        Icons.circle,
-                                        size: 10.r,
-                                        color: Theme.of(context).colorScheme.surface,
-                                      )
-                                    : null,
-                              ),
-                              SizedBox(width: 14.w),
-
-                              // Label
-                              Expanded(
-                                child: Text(
-                                  reason.reasonText ?? '',
-                                  style: AppTextStyle.medium14(context).copyWith(
-                                    color: Theme.of(context).colorScheme.onSurface,
+                  // Scrollable Content Area
+                  Flexible(
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (isReasonsLoading)
+                            Skeletonizer(
+                              enabled: true,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: List.generate(
+                                  4,
+                                  (index) => Container(
+                                    margin: EdgeInsets.only(bottom: 12.h),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 16.w,
+                                      vertical: 14.h,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).colorScheme.surface,
+                                      borderRadius: BorderRadius.circular(14.r),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 24.r,
+                                          height: 24.r,
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        SizedBox(width: 14.w),
+                                        Expanded(
+                                          child: Text(
+                                            'سبب الرفض الافتراضي أثناء التحميل',
+                                            style: AppTextStyle.medium14(context),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
+                            )
+                          else ...[
+                            // Reason Options from API
+                            ...List.generate(reasons.length, (index) {
+                              final reason = reasons[index];
+                              final isSelected = _selectedReasonId == reason.id;
+                              return GestureDetector(
+                                onTap: () =>
+                                    setState(() => _selectedReasonId = reason.id),
+                                child: AnimatedContainer(
+                                  duration: const Duration(milliseconds: 250),
+                                  curve: Curves.easeInOut,
+                                  margin: EdgeInsets.only(bottom: 12.h),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 16.w,
+                                    vertical: 14.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.surface,
+                                    borderRadius: BorderRadius.circular(14.r),
+                                    border: Border.all(
+                                      color: isSelected
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .secondary
+                                              .withValues(alpha: 0.4)
+                                          : Theme.of(context).colorScheme.surfaceTint,
+                                      width: isSelected ? 1.5 : 1,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      // Radio indicator
+                                      AnimatedContainer(
+                                        duration: const Duration(milliseconds: 250),
+                                        width: 24.r,
+                                        height: 24.r,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: isSelected
+                                              ? Theme.of(context).colorScheme.secondary
+                                              : Colors.transparent,
+                                          border: Border.all(
+                                            color: isSelected
+                                                ? Theme.of(context).colorScheme.secondary
+                                                : Theme.of(context).colorScheme.surfaceTint,
+                                            width: 2,
+                                          ),
+                                        ),
+                                        child: isSelected
+                                            ? Icon(
+                                                Icons.circle,
+                                                size: 10.r,
+                                                color: Theme.of(context).colorScheme.surface,
+                                              )
+                                            : null,
+                                      ),
+                                      SizedBox(width: 14.w),
 
-                    SizedBox(height: 12.h),
-
-                    // Custom Reason Form Field
-                    TextFormField(
-                      controller: _customReasonController,
-                      maxLines: 2,
-                      decoration: InputDecoration(
-                        hintText: 'إضافة سبب مخصص (اختياري)...',
-                        hintStyle: AppTextStyle.regular14(context).copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        filled: true,
-                        fillColor: Theme.of(context).colorScheme.surface,
-                        contentPadding: EdgeInsets.all(12.r),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                          borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.surfaceTint,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                          borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.surfaceTint,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                          borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20.h),
-
-                    // Confirm button
-                    CustomButton(
-                      text: l10n.confirmRejection,
-                      loading: isSubmitting,
-                      onPressed: isSubmitting
-                          ? null
-                          : () {
-                              if (_selectedReasonId == null) {
-                                showToast(
-                                  context,
-                                  message: 'يرجى تحديد سبب الرفض أولاً',
-                                  state: ToastStates.error,
-                                );
-                                return;
-                              }
-                              cubit.rejectOrder(
-                                orderId: widget.orderId,
-                                reasonId: _selectedReasonId!,
-                                customReason: _customReasonController.text.trim(),
+                                      // Label
+                                      Expanded(
+                                        child: Text(
+                                          reason.reasonText ?? '',
+                                          style: AppTextStyle.medium14(context).copyWith(
+                                            color: Theme.of(context).colorScheme.onSurface,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               );
-                            },
-                      isMax: true,
-                      backgroundColor: MyColors.primaryColor,
-                      textColor: Theme.of(context).colorScheme.surface,
-                    ),
-                    SizedBox(height: 12.h),
+                            }),
 
-                    // Cancel text
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: Text(
-                        l10n.cancel,
-                        style: AppTextStyle.medium16(context).copyWith(
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
+                            SizedBox(height: 8.h),
+
+                            // Custom Reason Form Field
+                            TextFormField(
+                              controller: _customReasonController,
+                              maxLines: 2,
+                              decoration: InputDecoration(
+                                hintText: 'إضافة سبب مخصص (اختياري)...',
+                                hintStyle: AppTextStyle.regular14(context).copyWith(
+                                  color: Theme.of(context).colorScheme.onSurface,
+                                ),
+                                filled: true,
+                                fillColor: Theme.of(context).colorScheme.surface,
+                                contentPadding: EdgeInsets.all(12.r),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  borderSide: BorderSide(
+                                    color: Theme.of(context).colorScheme.surfaceTint,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  borderSide: BorderSide(
+                                    color: Theme.of(context).colorScheme.surfaceTint,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  borderSide: BorderSide(
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
                     ),
-                  ],
+                  ),
+
+                  SizedBox(height: 16.h),
+
+                  // Confirm button
+                  CustomButton(
+                    text: l10n.confirmRejection,
+                    loading: isSubmitting,
+                    onPressed: isSubmitting
+                        ? null
+                        : () {
+                            if (_selectedReasonId == null) {
+                              showToast(
+                                context,
+                                message: 'يرجى تحديد سبب الرفض أولاً',
+                                state: ToastStates.error,
+                              );
+                              return;
+                            }
+                            cubit.rejectOrder(
+                              orderId: widget.orderId,
+                              reasonId: _selectedReasonId!,
+                              customReason: _customReasonController.text.trim(),
+                            );
+                          },
+                    isMax: true,
+                    backgroundColor: MyColors.primaryColor,
+                    textColor: Theme.of(context).colorScheme.surface,
+                  ),
+                  SizedBox(height: 8.h),
+
+                  // Cancel text
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(
+                      l10n.cancel,
+                      style: AppTextStyle.medium16(context).copyWith(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
