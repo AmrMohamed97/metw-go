@@ -28,4 +28,5 @@ class AppRoutes {
   static const String privacyPage = '/privacyPage';
   static const String contactUs = '/contactUs';
   static const String onWayOrder = '/onWayOrder';
+  static const String confirmPickupPage = '/confirmPickupPage';
 }

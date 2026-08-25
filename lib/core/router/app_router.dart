@@ -5,6 +5,7 @@ import 'package:metw_go/core/di/dependency_injection.dart';
 // import 'package:metw_go/core/utils/cache_helper.dart';
 import 'package:metw_go/features/comming_soon/comming_soon_page.dart';
 import 'package:metw_go/features/complete_order_details/presentation/page/complete_order_page.dart';
+import 'package:metw_go/features/confirm_pickup/presentation/page/confirm_pickup_page.dart';
 import 'package:metw_go/features/contact_us/presentation/manager/contact_us_cubit.dart';
 import 'package:metw_go/features/contact_us/presentation/page/contact_us.dart';
 import 'package:metw_go/features/documents/presentation/manager/documents_cubit.dart';
@@ -277,8 +278,19 @@ class AppRouter {
         name: AppRoutes.onWayOrder,
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<OrderDetailsCubit>()..fetchOrderDetails(state.extra as int),
-          child:  OnWayOrderPage(orderId: state.extra as int),
+          child: OnWayOrderPage(orderId: state.extra as int),
         ),
+      ),
+      GoRoute(
+        path: AppRoutes.confirmPickupPage,
+        name: AppRoutes.confirmPickupPage,
+        builder: (context, state) {
+          final orderId = state.extra is int ? state.extra as int : 0;
+          return BlocProvider(
+            create: (context) => getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),
+            child: ConfirmPickupPage(orderId: orderId),
+          );
+        },
       ),
 
       // ========== onbording ==========
