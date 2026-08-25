@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ConfirmDropoffPage extends StatelessWidget {
-  const ConfirmDropoffPage({super.key});
+class CompleteDelivaryPage extends StatelessWidget {
+  const CompleteDelivaryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
