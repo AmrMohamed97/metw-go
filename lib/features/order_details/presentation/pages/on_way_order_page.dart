@@ -183,7 +183,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
             AppImages.onWayOrderAppBarImage,
             fit: BoxFit.cover,
             width: double.infinity,
-            height: 230.h,
+            height: 300.h,
           ),
 
           // Floating Back Button
@@ -217,7 +217,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
 
           // Floating White Card Over Image
           Positioned(
-            bottom: 0,
+            bottom: 25.h,
             left: 16.w,
             right: 16.w,
             child: Container(
@@ -370,7 +370,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
               6.verticalSpace,
               Text(
                 locationAddress,
-                style: AppTextStyle.bold18(
+                style: AppTextStyle.bold14(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
