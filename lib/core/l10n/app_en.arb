@@ -266,5 +266,13 @@
                 "type": "String"
             }
         }
+    },
+    "outOfPlanned": "out of {count} planned",
+    "@outOfPlanned": {
+        "placeholders": {
+            "count": {
+                "type": "num"
+            }
+        }
     }
 }

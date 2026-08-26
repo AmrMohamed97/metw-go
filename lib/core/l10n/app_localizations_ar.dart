@@ -788,4 +788,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String welcomeUser(String name) {
     return 'أهلاً بك، $name';
   }
+
+  @override
+  String outOfPlanned(num count) {
+    return 'من أصل $count مخطط';
+  }
 }

@@ -1621,6 +1621,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome, {name}'**
   String welcomeUser(String name);
+
+  /// No description provided for @outOfPlanned.
+  ///
+  /// In en, this message translates to:
+  /// **'out of {count} planned'**
+  String outOfPlanned(num count);
 }
 
 class _AppLocalizationsDelegate

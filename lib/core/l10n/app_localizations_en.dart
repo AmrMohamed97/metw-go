@@ -792,4 +792,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String welcomeUser(String name) {
     return 'Welcome, $name';
   }
+
+  @override
+  String outOfPlanned(num count) {
+    return 'out of $count planned';
+  }
 }

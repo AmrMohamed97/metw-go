@@ -266,5 +266,13 @@
                 "type": "String"
             }
         }
+    },
+    "outOfPlanned": "من أصل {count} مخطط",
+    "@outOfPlanned": {
+        "placeholders": {
+            "count": {
+                "type": "num"
+            }
+        }
     }
 }
