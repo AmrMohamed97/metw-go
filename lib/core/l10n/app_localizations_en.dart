@@ -839,4 +839,56 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get arrivedAtLocation => 'Arrived at Location';
+
+  @override
+  String get unableToCaptureImage => 'Unable to capture image';
+
+  @override
+  String get takePhotoWithCamera => 'Take photo with camera';
+
+  @override
+  String get chooseFromGallery => 'Choose from gallery';
+
+  @override
+  String get pickupConfirmedSuccess => 'Pickup confirmed successfully';
+
+  @override
+  String get noorGiftsStore => 'Noor Gifts Store';
+
+  @override
+  String get confirmPickup => 'Confirm Pickup';
+
+  @override
+  String get pickupSteps => 'Pickup Steps';
+
+  @override
+  String get merchantSignature => 'Merchant Signature';
+
+  @override
+  String get clearSignature => 'Re-sign';
+
+  @override
+  String get parcelPhoto => 'Parcel Photo';
+
+  @override
+  String get pickupCompleted => 'Pickup Completed';
+
+  @override
+  String get confirmPickupFromMerchant =>
+      'Confirm pickup process from merchant';
+
+  @override
+  String get verifyPackage => 'Package Condition Verification';
+
+  @override
+  String get verifyPackageCount => 'Verify Package Count';
+
+  @override
+  String get obtainMerchantSignature => 'Obtain Merchant Signature';
+
+  @override
+  String get signHereForPickup => 'Sign here for pickup';
+
+  @override
+  String get takePhotoForProofOfPickup => 'Take photo for proof of pickup';
 }

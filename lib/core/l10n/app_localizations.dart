@@ -1705,6 +1705,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Arrived at Location'**
   String get arrivedAtLocation;
+
+  /// No description provided for @unableToCaptureImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to capture image'**
+  String get unableToCaptureImage;
+
+  /// No description provided for @takePhotoWithCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Take photo with camera'**
+  String get takePhotoWithCamera;
+
+  /// No description provided for @chooseFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get chooseFromGallery;
+
+  /// No description provided for @pickupConfirmedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup confirmed successfully'**
+  String get pickupConfirmedSuccess;
+
+  /// No description provided for @noorGiftsStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Noor Gifts Store'**
+  String get noorGiftsStore;
+
+  /// No description provided for @confirmPickup.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Pickup'**
+  String get confirmPickup;
+
+  /// No description provided for @pickupSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup Steps'**
+  String get pickupSteps;
+
+  /// No description provided for @merchantSignature.
+  ///
+  /// In en, this message translates to:
+  /// **'Merchant Signature'**
+  String get merchantSignature;
+
+  /// No description provided for @clearSignature.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-sign'**
+  String get clearSignature;
+
+  /// No description provided for @parcelPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Parcel Photo'**
+  String get parcelPhoto;
+
+  /// No description provided for @pickupCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup Completed'**
+  String get pickupCompleted;
+
+  /// No description provided for @confirmPickupFromMerchant.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm pickup process from merchant'**
+  String get confirmPickupFromMerchant;
+
+  /// No description provided for @verifyPackage.
+  ///
+  /// In en, this message translates to:
+  /// **'Package Condition Verification'**
+  String get verifyPackage;
+
+  /// No description provided for @verifyPackageCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Package Count'**
+  String get verifyPackageCount;
+
+  /// No description provided for @obtainMerchantSignature.
+  ///
+  /// In en, this message translates to:
+  /// **'Obtain Merchant Signature'**
+  String get obtainMerchantSignature;
+
+  /// No description provided for @signHereForPickup.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign here for pickup'**
+  String get signHereForPickup;
+
+  /// No description provided for @takePhotoForProofOfPickup.
+  ///
+  /// In en, this message translates to:
+  /// **'Take photo for proof of pickup'**
+  String get takePhotoForProofOfPickup;
 }
 
 class _AppLocalizationsDelegate

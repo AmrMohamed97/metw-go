@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
@@ -47,6 +48,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
+    final l10n = AppLocalizations.of(context)!;
     try {
       final picker = ImagePicker();
       final pickedFile = await picker.pickImage(
@@ -62,7 +64,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
       if (mounted) {
         showToast(
           context,
-          message: 'تعذر التقاط الصورة',
+          message: l10n.unableToCaptureImage,
           state: ToastStates.error,
         );
       }
@@ -70,6 +72,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
   }
 
   void _showImagePickerModal() {
+    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -83,7 +86,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
             children: [
               ListTile(
                 leading: const Icon(Icons.camera_alt_outlined),
-                title: const Text('التقاط صورة بواسطة الكاميرا'),
+                title: Text(l10n.takePhotoWithCamera),
                 onTap: () {
                   Navigator.of(ctx).pop();
                   _pickImage(ImageSource.camera);
@@ -91,7 +94,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
               ),
               ListTile(
                 leading: const Icon(Icons.photo_library_outlined),
-                title: const Text('اختيار من المعرض'),
+                title: Text(l10n.chooseFromGallery),
                 onTap: () {
                   Navigator.of(ctx).pop();
                   _pickImage(ImageSource.gallery);
@@ -106,12 +109,14 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return BlocListener<AppCubit, AppState>(
       listener: (context, appState) {
         if (appState is ConfirmPickupOrderSuccessState) {
           showToast(
             context,
-            message: appState.response.message ?? 'تم تأكيد الاستلام بنجاح',
+            message: appState.response.message ?? l10n.pickupConfirmedSuccess,
             state: ToastStates.success,
           );
           context.pop(true);
@@ -134,11 +139,11 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
           final merchantName =
               order?.sender?.name ??
               order?.ongoingOrder?.contactName ??
-              'متجر النور للهدايا';
+              l10n.noorGiftsStore;
 
           return ScreenWrapper(
-            appBar: const CustomAppBar(
-              title: 'تأكيد الاستلام',
+            appBar: CustomAppBar(
+              title: l10n.confirmPickup,
               centerTitle: true,
             ),
             body: Skeletonizer(
@@ -153,18 +158,18 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
                       12.verticalSpace,
 
                       // 1. Order Info Card
-                      _buildOrderCard(context, orderNumber, merchantName),
+                      _buildOrderCard(context, orderNumber, merchantName, l10n),
                       20.verticalSpace,
 
                       // 2. Checklist Section ("خطوات الاستلام")
                       Text(
-                        'خطوات الاستلام',
+                        l10n.pickupSteps,
                         style: AppTextStyle.bold16(context).copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                       10.verticalSpace,
-                      _buildChecklistCard(context),
+                      _buildChecklistCard(context, l10n),
                       24.verticalSpace,
 
                       // 3. Merchant Signature Section ("توقيع التاجر")
@@ -172,7 +177,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'توقيع التاجر',
+                            l10n.merchantSignature,
                             style: AppTextStyle.bold16(context).copyWith(
                               color: Theme.of(context).colorScheme.onSurface,
                             ),
@@ -188,7 +193,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
                                 ),
                                 4.horizontalSpace,
                                 Text(
-                                  'إعادة التوقيع',
+                                  l10n.clearSignature,
                                   style: AppTextStyle.medium14(
                                     context,
                                   ).copyWith(color: const Color(0xFF6E56CF)),
@@ -199,18 +204,18 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
                         ],
                       ),
                       10.verticalSpace,
-                      _buildSignatureBox(context),
+                      _buildSignatureBox(context, l10n),
                       24.verticalSpace,
 
                       // 4. Proof Photo Section ("صورة الشحنة")
                       Text(
-                        'صورة الشحنة',
+                        l10n.parcelPhoto,
                         style: AppTextStyle.bold16(context).copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                       10.verticalSpace,
-                      _buildProofPhotoBox(context),
+                      _buildProofPhotoBox(context, l10n),
                       32.verticalSpace,
 
                       // 5. Submit Action Button ("تم الاستلام")
@@ -220,7 +225,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
                               appState is ConfirmPickupOrderLoadingState;
 
                           return CustomButton(
-                            text: 'تم الاستلام',
+                            text: l10n.pickupCompleted,
                             loading: isActionLoading,
                             onPressed: isActionLoading
                                 ? null
@@ -274,6 +279,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
     BuildContext context,
     String orderNumber,
     String merchantName,
+    AppLocalizations l10n,
   ) {
     return Container(
       padding: EdgeInsets.all(16.r),
@@ -330,7 +336,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
                 ),
                 4.verticalSpace,
                 Text(
-                  'تأكيد عملية الاستلام من التاجر',
+                  l10n.confirmPickupFromMerchant,
                   style: AppTextStyle.regular14(context).copyWith(
                     color: Theme.of(
                       context,
@@ -345,7 +351,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
     );
   }
 
-  Widget _buildChecklistCard(BuildContext context) {
+  Widget _buildChecklistCard(BuildContext context, AppLocalizations l10n) {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
@@ -360,7 +366,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
         children: [
           _buildChecklistItem(
             context,
-            title: 'التحقق من الشحنة',
+            title: l10n.verifyPackage,
             value: _conditionVerified,
             onChanged: (val) =>
                 setState(() => _conditionVerified = val ?? false),
@@ -373,7 +379,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
           ),
           _buildChecklistItem(
             context,
-            title: 'التأكد من عدد القطع',
+            title: l10n.verifyPackageCount,
             value: _countVerified,
             onChanged: (val) => setState(() => _countVerified = val ?? false),
           ),
@@ -385,7 +391,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
           ),
           _buildChecklistItem(
             context,
-            title: 'الحصول على توقيع التاجر',
+            title: l10n.obtainMerchantSignature,
             value: _signatureObtained || _signatureController.points.isNotEmpty,
             onChanged: (val) =>
                 setState(() => _signatureObtained = val ?? false),
@@ -428,7 +434,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
     );
   }
 
-  Widget _buildSignatureBox(BuildContext context) {
+  Widget _buildSignatureBox(BuildContext context, AppLocalizations l10n) {
     return DottedBorder(
       options: RoundedRectDottedBorderOptions(
         radius: Radius.circular(16.r),
@@ -447,14 +453,14 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
           borderRadius: BorderRadius.circular(16.r),
           child: _SignaturePad(
             controller: _signatureController,
-            hintText: 'وقع هنا للاستلام',
+            hintText: l10n.signHereForPickup,
           ),
         ),
       ),
     );
   }
 
-  Widget _buildProofPhotoBox(BuildContext context) {
+  Widget _buildProofPhotoBox(BuildContext context, AppLocalizations l10n) {
     if (_proofPhotoFile != null) {
       return Stack(
         children: [
@@ -522,7 +528,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
               ),
               10.verticalSpace,
               Text(
-                'التقط صورة لإثبات الاستلام',
+                l10n.takePhotoForProofOfPickup,
                 style: AppTextStyle.regular14(context).copyWith(
                   color: Theme.of(
                     context,

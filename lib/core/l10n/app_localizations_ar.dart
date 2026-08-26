@@ -834,4 +834,55 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get arrivedAtLocation => 'تم الوصول للموقع';
+
+  @override
+  String get unableToCaptureImage => 'تعذر التقاط الصورة';
+
+  @override
+  String get takePhotoWithCamera => 'التقاط صورة بواسطة الكاميرا';
+
+  @override
+  String get chooseFromGallery => 'اختيار من المعرض';
+
+  @override
+  String get pickupConfirmedSuccess => 'تم تأكيد الاستلام بنجاح';
+
+  @override
+  String get noorGiftsStore => 'متجر النور للهدايا';
+
+  @override
+  String get confirmPickup => 'تأكيد الاستلام';
+
+  @override
+  String get pickupSteps => 'خطوات الاستلام';
+
+  @override
+  String get merchantSignature => 'توقيع التاجر';
+
+  @override
+  String get clearSignature => 'إعادة التوقيع';
+
+  @override
+  String get parcelPhoto => 'صورة الشحنة';
+
+  @override
+  String get pickupCompleted => 'تم الاستلام';
+
+  @override
+  String get confirmPickupFromMerchant => 'تأكيد عملية الاستلام من التاجر';
+
+  @override
+  String get verifyPackage => 'التحقق من الشحنة';
+
+  @override
+  String get verifyPackageCount => 'التأكد من عدد القطع';
+
+  @override
+  String get obtainMerchantSignature => 'الحصول على توقيع التاجر';
+
+  @override
+  String get signHereForPickup => 'وقع هنا للاستلام';
+
+  @override
+  String get takePhotoForProofOfPickup => 'التقط صورة لإثبات الاستلام';
 }

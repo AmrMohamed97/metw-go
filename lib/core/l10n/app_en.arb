@@ -299,5 +299,22 @@
     "totalOrderValue": "Total Order Value",
     "deliveryFare": "Delivery Fee",
     "contactBeforeArrivalHint": "Please contact 5 minutes before arrival",
-    "arrivedAtLocation": "Arrived at Location"
+    "arrivedAtLocation": "Arrived at Location",
+    "unableToCaptureImage": "Unable to capture image",
+    "takePhotoWithCamera": "Take photo with camera",
+    "chooseFromGallery": "Choose from gallery",
+    "pickupConfirmedSuccess": "Pickup confirmed successfully",
+    "noorGiftsStore": "Noor Gifts Store",
+    "confirmPickup": "Confirm Pickup",
+    "pickupSteps": "Pickup Steps",
+    "merchantSignature": "Merchant Signature",
+    "clearSignature": "Re-sign",
+    "parcelPhoto": "Parcel Photo",
+    "pickupCompleted": "Pickup Completed",
+    "confirmPickupFromMerchant": "Confirm pickup process from merchant",
+    "verifyPackage": "Package Condition Verification",
+    "verifyPackageCount": "Verify Package Count",
+    "obtainMerchantSignature": "Obtain Merchant Signature",
+    "signHereForPickup": "Sign here for pickup",
+    "takePhotoForProofOfPickup": "Take photo for proof of pickup"
 }
