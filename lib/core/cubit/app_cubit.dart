@@ -20,33 +20,33 @@ class AppCubit extends Cubit<AppState> {
     // realTime(9);
   }
 
-  String status = 'offline';
-  StreamSubscription<DatabaseEvent>? _statusSubscription;
-  final FirebaseDatabase _database = FirebaseRtdbHelper.database;
+  // String status = 'offline';
+  // StreamSubscription<DatabaseEvent>? _statusSubscription;
+  // final FirebaseDatabase _database = FirebaseRtdbHelper.database;
 
-  Future<void> realTime(int driverId) async {
-    // Listen to the specific driver's status
-    final statusRef = _database.ref('drivers/$driverId/status');
-    emit(HomeStatusLoading());
-    try {
-      // throw Exception('kkkkk');
-      _statusSubscription?.cancel();
-      _statusSubscription = statusRef.onValue.listen((event) {
-        if (event.snapshot.value != null) {
-          status = event.snapshot.value.toString();
-          emit(HomeStatusChanged(status));
-        }
-      });
-    } catch (e) {
-      emit(HomeStatusError(e.toString()));
-    }
-  }
+  // Future<void> realTime(int driverId) async {
+  //   // Listen to the specific driver's status
+  //   final statusRef = _database.ref('drivers/$driverId/status');
+  //   emit(HomeStatusLoading());
+  //   try {
+  //     // throw Exception('kkkkk');
+  //     _statusSubscription?.cancel();
+  //     _statusSubscription = statusRef.onValue.listen((event) {
+  //       if (event.snapshot.value != null) {
+  //         status = event.snapshot.value.toString();
+  //         emit(HomeStatusChanged(status));
+  //       }
+  //     });
+  //   } catch (e) {
+  //     emit(HomeStatusError(e.toString()));
+  //   }
+  // }
 
-  @override
-  Future<void> close() {
-    _statusSubscription?.cancel();
-    return super.close();
-  }
+  // @override
+  // Future<void> close() {
+  //   _statusSubscription?.cancel();
+  //   return super.close();
+  // }
 
   Locale currentLocale = Locale(
     CacheHelper.getData(key: AppConstant.lang) ??

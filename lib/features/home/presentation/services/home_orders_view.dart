@@ -1,49 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/order_item.dart';
 import 'package:metw_go/core/widgets/view_all_widgets.dart';
+import 'package:metw_go/features/home/presentation/manager/home_cubit.dart';
+import 'package:metw_go/features/home/presentation/manager/home_state.dart';
 
 class HomeOrdersView extends StatelessWidget {
   const HomeOrdersView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: .start,
-      children: [
-        ViewAllWidget(),
-        12.verticalSpace,
-
-        // Active Order
-        OrderItem(
-          orderId: "#MET-8842",
-          distance: "4.2 كم",
-          isUrgent: true,
-          pickup: "مطعم شواية الخليج - طريق التخصصي",
-          delivery: "حي النخيل - شارع الأمير سعود",
-          isTodayOrders: true,
-          onDetailsPressed: () => context.push(AppRoutes.orderDetailsPage),
-        ),
-        16.verticalSpace,
-
-        // Small Order Item 1
-        _buildSmallOrderItem(
-          context: context,
-          orderId: "#MET-8845",
-          showArrow: true,
-        ),
-        16.verticalSpace,
-
-        // Small Order Item 2
-        _buildSmallOrderItem(
-          context: context,
-          orderId: "#MET-8845",
-          showSwipeAction: true,
-        ),
-      ],
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        final cubit = context.read<HomeCubit>();
+        return Column(
+          children: [
+            if(cubit.homeData?.data?.incomingOrders?.isNotEmpty ?? false)
+                Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      ViewAllWidget(),
+                      12.verticalSpace,
+                      // Active Order
+                      ...List.generate(
+                        cubit.homeData?.data?.incomingOrders?.length ?? 0,
+                        (index) {
+                          final order =
+                              cubit.homeData!.data!.incomingOrders![index];
+                          return OrderItem(
+                            orderId: order.id.toString(),
+                            distance: order.distanceKm?.toString() ?? "",
+                            isUrgent: true,
+                            pickup: order.pickupAddress ?? "",
+                            delivery: order.dropoffAddress ?? "",
+                            // onDetailsPressed: () =>
+                            //     context.push(AppRoutes.orderDetailsPage),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  // if(cubit.homeData?.data?.?.isNotEmpty ?? false)
+                  // Column(
+                  //   crossAxisAlignment: .start,
+                  //   children: [
+                  //     _buildSmallOrderItem(context: context, orderId: "9"),
+                  //   ],
+                  // ),
+          ],
+        );
+      },
     );
   }
 

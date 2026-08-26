@@ -3,12 +3,28 @@
 // import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:metw_go/features/home/data/models/home_out_model/home_out_model.dart';
+import 'package:metw_go/features/home/data/repo/home_repo.dart';
 import 'package:metw_go/features/home/presentation/manager/home_state.dart';
 // import 'package:metw_go/features/home/presentation/services/firebase_rtdb_helper.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitial());
+  final HomeRepo repo;
+  HomeCubit({required this.repo}) : super(HomeInitial());
+
+  HomeOutModel? homeData;
+  Future<void> getHomeData() async {
+    emit(HomeLoading());
+    final result = await repo.getHomeData();
+    result.fold(
+      (failure) => emit(HomeFailure(failure.message)),
+      (response) {
+        homeData = response;
+        emit(HomeSuccess(homeData!));
+      },
+    );
+  }
   // {
   //   realTime(9);
   // }

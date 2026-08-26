@@ -73,13 +73,13 @@ class AppRouter {
     //   return null;
     // },
     routes: [
-      GoRoute(
-        path: AppRoutes.splashScreen,
-        name: AppRoutes.splashScreen,
-        builder: (context, state) {
-          return SplashScreen();
-        },
-      ),
+      // GoRoute(
+      //   path: AppRoutes.splashScreen,
+      //   name: AppRoutes.splashScreen,
+      //   builder: (context, state) {
+      //     return SplashScreen();
+      //   },
+      // ),
       GoRoute(
         path: AppRoutes.otp,
         name: AppRoutes.otp,
