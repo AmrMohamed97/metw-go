@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui' as ui;
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -10,7 +9,6 @@ import 'package:metw_go/core/const/app_const.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/repo/app_repo.dart';
 import 'package:metw_go/core/utils/cache_helper.dart';
-import 'package:metw_go/features/home/presentation/services/firebase_rtdb_helper.dart';
 // import 'package:metw_go/features/homer/presentation/services/tracking_location_service.dart';
 
 @injectable
@@ -171,6 +169,7 @@ class AppCubit extends Cubit<AppState> {
       (response) => emit(CompleteDeliveryOrderSuccessState(response)),
     );
   }
+
   void update() {
     emit(AppUpdateState());
   }

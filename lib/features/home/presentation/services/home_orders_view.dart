@@ -37,8 +37,10 @@ class HomeOrdersView extends StatelessWidget {
                         isUrgent: order.priority == "urgent",
                         pickup: order.pickupAddress ?? "",
                         delivery: order.dropoffAddress ?? "",
-                        onDetailsPressed: () =>
-                            context.push(AppRoutes.orderDetailsPage,extra: order.id),
+                        onDetailsPressed: () => context.push(
+                          AppRoutes.orderDetailsPage,
+                          extra: order.id,
+                        ),
                       );
                     },
                   ),
@@ -61,7 +63,10 @@ class HomeOrdersView extends StatelessWidget {
                         cubit.homeData!.data!.activeOrder!.pickupAddress ?? "",
                     delivery:
                         cubit.homeData!.data!.activeOrder!.dropoffAddress ?? "",
-                    onDetailsPressed: () => context.push(AppRoutes.onWayOrder,extra: cubit.homeData!.data!.activeOrder!.id),
+                    onDetailsPressed: () => context.push(
+                      AppRoutes.onWayOrder,
+                      extra: cubit.homeData!.data!.activeOrder!.id,
+                    ),
                   ),
                 ],
               ),

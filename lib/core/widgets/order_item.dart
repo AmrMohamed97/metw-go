@@ -193,14 +193,48 @@ class OrderItem extends StatelessWidget {
                 //     ),
                 //   )
                 // else
-                Expanded(
-                  flex: 2,
-                  child: CustomButton(
-                    text: AppLocalizations.of(context)!.startOrder,
-                    onPressed: onPressed,
-                    loading: isLoading,
-                  ),
-                ),
+                onPressed == null
+                    ? Expanded(
+                        flex: 2,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16.w,
+                            vertical: 16.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary,
+                            borderRadius: BorderRadiusDirectional.horizontal(
+                              start: Radius.circular(30),
+                              end: Radius.circular(30),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: .center,
+                            children: [
+                              Text(
+                                "طلب جاري",
+                                style: AppTextStyle.medium14(
+                                  context,
+                                ).copyWith(color: Colors.white),
+                              ),
+                              SizedBox(width: 8.w),
+                              Icon(
+                                Icons.more_horiz,
+                                color: Colors.white,
+                                size: 20.sp,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Expanded(
+                        flex: 2,
+                        child: CustomButton(
+                          text: AppLocalizations.of(context)!.startOrder,
+                          onPressed: onPressed,
+                          loading: isLoading,
+                        ),
+                      ),
                 12.horizontalSpace,
                 Expanded(
                   flex: 1,
