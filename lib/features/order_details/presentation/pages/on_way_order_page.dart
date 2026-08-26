@@ -95,60 +95,53 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
           final ongoing = order?.ongoingOrder;
 
           return ScreenWrapper(
-            body: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Skeletonizer(
-                enabled: isLoading,
-                child: Column(
-                  children: [
-                    // Top AppBar Header with Image background & Floating Card
-                    _buildTopHeader(context, ongoing, order),
+            body: Skeletonizer(
+              enabled: isLoading,
+              child: Column(
+                children: [
+                  // Top AppBar Header with Image background & Floating Card
+                  _buildTopHeader(context, ongoing, order),
 
-                    // Scrollable Main Content Card
-                    Expanded(
-                      child: Container(
-                        width: double.infinity,
-                        transform: Matrix4.translationValues(0, -20.h, 0),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(24.r),
-                          ),
+                  // Scrollable Main Content Card
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      transform: Matrix4.translationValues(0, -20.h, 0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(24.r),
                         ),
-                        child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 18.w,
-                            vertical: 20.h,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // 1. Location Header Status
-                              _buildLocationStatusHeader(
-                                context,
-                                ongoing,
-                                order,
-                              ),
-                              20.verticalSpace,
+                      ),
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 18.w,
+                          vertical: 20.h,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // 1. Location Header Status
+                            _buildLocationStatusHeader(context, ongoing, order),
+                            20.verticalSpace,
 
-                              // 2. Parcel Details Card ("تفاصيل الشحنة")
-                              _buildParcelDetailsCard(context, ongoing, order),
-                              16.verticalSpace,
+                            // 2. Parcel Details Card ("تفاصيل الشحنة")
+                            _buildParcelDetailsCard(context, ongoing, order),
+                            16.verticalSpace,
 
-                              // 3. Arrival Hint Banner
-                              _buildArrivalHintBanner(context, ongoing),
-                              24.verticalSpace,
-                            ],
-                          ),
+                            // 3. Arrival Hint Banner
+                            _buildArrivalHintBanner(context, ongoing),
+                            24.verticalSpace,
+                          ],
                         ),
                       ),
                     ),
+                  ),
 
-                    // Bottom Fixed Action Bar (Call button + Primary action button)
-                    _buildBottomActionBar(context, ongoing, widget.orderId),
-                  ],
-                ),
+                  // Bottom Fixed Action Bar (Call button + Primary action button)
+                  _buildBottomActionBar(context, ongoing, widget.orderId),
+                ],
               ),
             ),
           );
