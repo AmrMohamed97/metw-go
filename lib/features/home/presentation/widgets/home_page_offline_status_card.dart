@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
@@ -7,13 +8,63 @@ import 'package:metw_go/features/home/presentation/services/location_service.dar
 import 'package:metw_go/features/home/presentation/services/native_tracking_service.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
 
-class HomePageOfflineStatusCard extends StatelessWidget {
+class HomePageOfflineStatusCard extends StatefulWidget {
   const HomePageOfflineStatusCard({super.key, required this.durationSeconds});
   final num durationSeconds;
+
+  @override
+  State<HomePageOfflineStatusCard> createState() =>
+      _HomePageOfflineStatusCardState();
+}
+
+class _HomePageOfflineStatusCardState
+    extends State<HomePageOfflineStatusCard> {
+  Timer? _timer;
+  late int _currentSeconds;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentSeconds = widget.durationSeconds.toInt();
+    _startTimer();
+  }
+
+  @override
+  void didUpdateWidget(covariant HomePageOfflineStatusCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.durationSeconds != widget.durationSeconds) {
+      _currentSeconds = widget.durationSeconds.toInt();
+    }
+  }
+
+  void _startTimer() {
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) {
+        setState(() {
+          _currentSeconds++;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  String _formatDuration(int totalSeconds) {
+    final hours = (totalSeconds ~/ 3600).toString().padLeft(2, '0');
+    final minutes = ((totalSeconds % 3600) ~/ 60).toString().padLeft(2, '0');
+    final seconds = (totalSeconds % 60).toString().padLeft(2, '0');
+    return '$hours:$minutes:$seconds';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(8),
@@ -36,7 +87,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
                 AppLocalizations.of(context)!.unavailableForWork,
                 style: AppTextStyle.regular14(
                   context,
-                ).copyWith(color: Color(0xFFEAEAEA)),
+                ).copyWith(color: const Color(0xFFEAEAEA)),
               ),
               const Spacer(),
               Container(
@@ -51,15 +102,15 @@ class HomePageOfflineStatusCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.access_time,
-                      color: Color(0xFFEAEAEA),
+                      color: const Color(0xFFEAEAEA),
                       size: 16.sp,
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Text(
-                      "00:00:00",
+                      _formatDuration(_currentSeconds),
                       style: AppTextStyle.regular14(
                         context,
-                      ).copyWith(color: Color(0xFFEAEAEA)),
+                      ).copyWith(color: const Color(0xFFEAEAEA)),
                     ),
                   ],
                 ),
@@ -74,7 +125,7 @@ class HomePageOfflineStatusCard extends StatelessWidget {
                   AppLocalizations.of(context)!.activateStatusToReceiveOrders,
                   style: AppTextStyle.regular12(
                     context,
-                  ).copyWith(color: Color(0xFFEAEAEA), height: 1.5),
+                  ).copyWith(color: const Color(0xFFEAEAEA), height: 1.5),
                 ),
               ),
               16.horizontalSpace,
@@ -86,20 +137,14 @@ class HomePageOfflineStatusCard extends StatelessWidget {
                       .checkAndRequestLocationService();
                   if (!serviceEnabled) {
                     await ph.openAppSettings();
-                    // return;
                   }
                   bool permissionGranted = await locationService
                       .checkAndRequestPermission();
                   if (!permissionGranted) {
                     await ph.openAppSettings();
-                    // return;
                   }
-                  // if (context.mounted) {
-                  //   context.read<AppCubit>().trackDriver();
-                  // }
                   NativeTrackingService().startNativeTracking('9');
                 },
-                // fixedSize: false,
                 height: 35,
                 horizontalPadding: 16,
                 textColor: Theme.of(context).colorScheme.onSurface,

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
@@ -6,13 +7,62 @@ import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/features/home/presentation/services/native_tracking_service.dart';
 
-class HomePageOnlineStatusCard extends StatelessWidget {
+class HomePageOnlineStatusCard extends StatefulWidget {
   const HomePageOnlineStatusCard({super.key, required this.durationSeconds});
   final num durationSeconds;
+
+  @override
+  State<HomePageOnlineStatusCard> createState() =>
+      _HomePageOnlineStatusCardState();
+}
+
+class _HomePageOnlineStatusCardState extends State<HomePageOnlineStatusCard> {
+  Timer? _timer;
+  late int _currentSeconds;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentSeconds = widget.durationSeconds.toInt();
+    _startTimer();
+  }
+
+  @override
+  void didUpdateWidget(covariant HomePageOnlineStatusCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.durationSeconds != widget.durationSeconds) {
+      _currentSeconds = widget.durationSeconds.toInt();
+    }
+  }
+
+  void _startTimer() {
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) {
+        setState(() {
+          _currentSeconds++;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  String _formatDuration(int totalSeconds) {
+    final hours = (totalSeconds ~/ 3600).toString().padLeft(2, '0');
+    final minutes = ((totalSeconds % 3600) ~/ 60).toString().padLeft(2, '0');
+    final seconds = (totalSeconds % 60).toString().padLeft(2, '0');
+    return '$hours:$minutes:$seconds';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(8),
@@ -35,7 +85,7 @@ class HomePageOnlineStatusCard extends StatelessWidget {
                 AppLocalizations.of(context)!.availableToReceive,
                 style: AppTextStyle.regular14(
                   context,
-                ).copyWith(color: Color(0xFFEAEAEA)),
+                ).copyWith(color: const Color(0xFFEAEAEA)),
               ),
               const Spacer(),
               Container(
@@ -50,15 +100,15 @@ class HomePageOnlineStatusCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.access_time,
-                      color: Color(0xFFEAEAEA),
+                      color: const Color(0xFFEAEAEA),
                       size: 16.sp,
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Text(
-                      "02:45:14",
+                      _formatDuration(_currentSeconds),
                       style: AppTextStyle.regular14(
                         context,
-                      ).copyWith(color: Color(0xFFEAEAEA)),
+                      ).copyWith(color: const Color(0xFFEAEAEA)),
                     ),
                   ],
                 ),
@@ -73,7 +123,7 @@ class HomePageOnlineStatusCard extends StatelessWidget {
                   AppLocalizations.of(context)!.onlineWaitingForOrders,
                   style: AppTextStyle.regular12(
                     context,
-                  ).copyWith(color: Color(0xFFEAEAEA), height: 1.5),
+                  ).copyWith(color: const Color(0xFFEAEAEA), height: 1.5),
                 ),
               ),
               16.horizontalSpace,
@@ -82,7 +132,6 @@ class HomePageOnlineStatusCard extends StatelessWidget {
                 onPressed: () {
                   NativeTrackingService().stopNativeTracking();
                 },
-                // fixedSize: false,
                 height: 35,
                 horizontalPadding: 16,
                 backgroundColor: Theme.of(context).colorScheme.primary,
