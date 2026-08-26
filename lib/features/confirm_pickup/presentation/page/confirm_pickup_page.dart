@@ -6,6 +6,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
@@ -113,7 +114,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
             message: appState.response.message ?? 'تم تأكيد الاستلام بنجاح',
             state: ToastStates.success,
           );
-          Navigator.of(context).pop();
+          context.pop(true);
         } else if (appState is ConfirmPickupOrderErrorState) {
           showToast(
             context,
@@ -140,129 +141,125 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
               title: 'تأكيد الاستلام',
               centerTitle: true,
             ),
-            body: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Skeletonizer(
-                enabled: isLoading,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18.w),
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        12.verticalSpace,
+            body: Skeletonizer(
+              enabled: isLoading,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18.w),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      12.verticalSpace,
 
-                        // 1. Order Info Card
-                        _buildOrderCard(context, orderNumber, merchantName),
-                        20.verticalSpace,
+                      // 1. Order Info Card
+                      _buildOrderCard(context, orderNumber, merchantName),
+                      20.verticalSpace,
 
-                        // 2. Checklist Section ("خطوات الاستلام")
-                        Text(
-                          'خطوات الاستلام',
-                          style: AppTextStyle.bold16(context).copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
+                      // 2. Checklist Section ("خطوات الاستلام")
+                      Text(
+                        'خطوات الاستلام',
+                        style: AppTextStyle.bold16(context).copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
-                        10.verticalSpace,
-                        _buildChecklistCard(context),
-                        24.verticalSpace,
+                      ),
+                      10.verticalSpace,
+                      _buildChecklistCard(context),
+                      24.verticalSpace,
 
-                        // 3. Merchant Signature Section ("توقيع التاجر")
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'توقيع التاجر',
-                              style: AppTextStyle.bold16(context).copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
+                      // 3. Merchant Signature Section ("توقيع التاجر")
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'توقيع التاجر',
+                            style: AppTextStyle.bold16(context).copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
-                            InkWell(
-                              onTap: () => _signatureController.clear(),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.refresh_rounded,
-                                    size: 18.sp,
-                                    color: const Color(0xFF6E56CF),
-                                  ),
-                                  4.horizontalSpace,
-                                  Text(
-                                    'إعادة التوقيع',
-                                    style: AppTextStyle.medium14(
-                                      context,
-                                    ).copyWith(color: const Color(0xFF6E56CF)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        10.verticalSpace,
-                        _buildSignatureBox(context),
-                        24.verticalSpace,
-
-                        // 4. Proof Photo Section ("صورة الشحنة")
-                        Text(
-                          'صورة الشحنة',
-                          style: AppTextStyle.bold16(context).copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
                           ),
+                          InkWell(
+                            onTap: () => _signatureController.clear(),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.refresh_rounded,
+                                  size: 18.sp,
+                                  color: const Color(0xFF6E56CF),
+                                ),
+                                4.horizontalSpace,
+                                Text(
+                                  'إعادة التوقيع',
+                                  style: AppTextStyle.medium14(
+                                    context,
+                                  ).copyWith(color: const Color(0xFF6E56CF)),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      10.verticalSpace,
+                      _buildSignatureBox(context),
+                      24.verticalSpace,
+
+                      // 4. Proof Photo Section ("صورة الشحنة")
+                      Text(
+                        'صورة الشحنة',
+                        style: AppTextStyle.bold16(context).copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
-                        10.verticalSpace,
-                        _buildProofPhotoBox(context),
-                        32.verticalSpace,
+                      ),
+                      10.verticalSpace,
+                      _buildProofPhotoBox(context),
+                      32.verticalSpace,
 
-                        // 5. Submit Action Button ("تم الاستلام")
-                        BlocBuilder<AppCubit, AppState>(
-                          builder: (context, appState) {
-                            final isActionLoading =
-                                appState is ConfirmPickupOrderLoadingState;
+                      // 5. Submit Action Button ("تم الاستلام")
+                      BlocBuilder<AppCubit, AppState>(
+                        builder: (context, appState) {
+                          final isActionLoading =
+                              appState is ConfirmPickupOrderLoadingState;
 
-                            return CustomButton(
-                              text: 'تم الاستلام',
-                              loading: isActionLoading,
-                              onPressed: isActionLoading
-                                  ? null
-                                  : () async {
-                                      final signatureBase64 =
-                                          await _signatureController
-                                              .exportBase64Png();
+                          return CustomButton(
+                            text: 'تم الاستلام',
+                            loading: isActionLoading,
+                            onPressed: isActionLoading
+                                ? null
+                                : () async {
+                                    final signatureBase64 =
+                                        await _signatureController
+                                            .exportBase64Png();
 
-                                      if (context.mounted) {
-                                        context
-                                            .read<AppCubit>()
-                                            .confirmPickupOrder(
-                                              orderId: widget.orderId,
-                                              proofPhoto: _proofPhotoFile,
-                                              signature: signatureBase64,
-                                              packageCountVerified:
-                                                  _countVerified ? '1' : '0',
-                                              packageConditionVerified:
-                                                  _conditionVerified
-                                                  ? '1'
-                                                  : '0',
-                                              merchantSignatureObtained:
-                                                  (_signatureController
-                                                          .points
-                                                          .isNotEmpty ||
-                                                      _signatureObtained)
-                                                  ? '1'
-                                                  : '0',
-                                            );
-                                      }
-                                    },
-                              isMax: true,
-                              backgroundColor: const Color(0xFFFF5E3A),
-                              textColor: Colors.white,
-                              radius: 30.r,
-                            );
-                          },
-                        ),
-                        32.verticalSpace,
-                      ],
-                    ),
+                                    if (context.mounted) {
+                                      context
+                                          .read<AppCubit>()
+                                          .confirmPickupOrder(
+                                            orderId: widget.orderId,
+                                            proofPhoto: _proofPhotoFile,
+                                            signature: signatureBase64,
+                                            packageCountVerified: _countVerified
+                                                ? '1'
+                                                : '0',
+                                            packageConditionVerified:
+                                                _conditionVerified ? '1' : '0',
+                                            merchantSignatureObtained:
+                                                (_signatureController
+                                                        .points
+                                                        .isNotEmpty ||
+                                                    _signatureObtained)
+                                                ? '1'
+                                                : '0',
+                                          );
+                                    }
+                                  },
+                            isMax: true,
+                            backgroundColor: const Color(0xFFFF5E3A),
+                            textColor: Colors.white,
+                            radius: 30.r,
+                          );
+                        },
+                      ),
+                      32.verticalSpace,
+                    ],
                   ),
                 ),
               ),

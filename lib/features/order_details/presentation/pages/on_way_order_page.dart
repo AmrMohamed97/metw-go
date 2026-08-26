@@ -704,7 +704,15 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                       );
                     }
                     if (lifecycle?.currentStage == "pickup_confirmation") {
-                      context.push(AppRoutes.confirmPickupPage, extra: orderId);
+                      context
+                          .push(AppRoutes.confirmPickupPage, extra: orderId)
+                          .then((val) {
+                            if (val == true && context.mounted) {
+                              context
+                                  .read<OrderDetailsCubit>()
+                                  .fetchOrderDetails(widget.orderId);
+                            }
+                          });
                     }
                     if (lifecycle?.currentStage == "dropoff_confirmation") {
                       context.push(

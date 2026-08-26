@@ -299,5 +299,22 @@
     "totalOrderValue": "إجمالي قيمة الطلب",
     "deliveryFare": "الاجرة",
     "contactBeforeArrivalHint": "يرجى التواصل قبل الوصول بخمس دقائق",
-    "arrivedAtLocation": "تم الوصول للموقع"
+    "arrivedAtLocation": "تم الوصول للموقع",
+    "unableToCaptureImage": "تعذر التقاط الصورة",
+    "takePhotoWithCamera": "التقاط صورة بواسطة الكاميرا",
+    "chooseFromGallery": "اختيار من المعرض",
+    "pickupConfirmedSuccess": "تم تأكيد الاستلام بنجاح",
+    "noorGiftsStore": "متجر النور للهدايا",
+    "confirmPickup": "تأكيد الاستلام",
+    "pickupSteps": "خطوات الاستلام",
+    "merchantSignature": "توقيع التاجر",
+    "clearSignature": "إعادة التوقيع",
+    "parcelPhoto": "صورة الشحنة",
+    "pickupCompleted": "تم الاستلام",
+    "confirmPickupFromMerchant": "تأكيد عملية الاستلام من التاجر",
+    "verifyPackage": "التحقق من الشحنة",
+    "verifyPackageCount": "التأكد من عدد القطع",
+    "obtainMerchantSignature": "الحصول على توقيع التاجر",
+    "signHereForPickup": "وقع هنا للاستلام",
+    "takePhotoForProofOfPickup": "التقط صورة لإثبات الاستلام"
 }
