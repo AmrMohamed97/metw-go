@@ -15,7 +15,7 @@ class Data {
   @JsonKey(name: 'incoming_orders')
   List<IncomingOrder>? incomingOrders;
   @JsonKey(name: 'active_order')
-  dynamic activeOrder;
+  IncomingOrder? activeOrder;
 
   Data({
     this.courier,

@@ -42,13 +42,21 @@ class HomeOrdersView extends StatelessWidget {
                   ),
                 ],
               ),
-            // if(cubit.homeData?.data?.?.isNotEmpty ?? false)
-            // Column(
-            //   crossAxisAlignment: .start,
-            //   children: [
-            //     _buildSmallOrderItem(context: context, orderId: "9"),
-            //   ],
-            // ),
+            if(cubit.homeData?.data?.activeOrder != null)
+            Column(
+              crossAxisAlignment: .start,
+              children: [
+                OrderItem(
+                        orderId: cubit.homeData!.data!.activeOrder!.id.toString(),
+                        distance: cubit.homeData!.data!.activeOrder!.distanceKm?.toString() ?? "",
+                        isUrgent: true,
+                        pickup: cubit.homeData!.data!.activeOrder!.pickupAddress ?? "",
+                        delivery: cubit.homeData!.data!.activeOrder!.dropoffAddress ?? "",
+                        // onDetailsPressed: () =>
+                        //     context.push(AppRoutes.orderDetailsPage),
+                      ),
+              ],
+            ),
           ],
         );
       },

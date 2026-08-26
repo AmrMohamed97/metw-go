@@ -19,7 +19,9 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
   incomingOrders: (json['incoming_orders'] as List<dynamic>?)
       ?.map((e) => IncomingOrder.fromJson(e as Map<String, dynamic>))
       .toList(),
-  activeOrder: json['active_order'],
+  activeOrder: json['active_order'] == null
+      ? null
+      : IncomingOrder.fromJson(json['active_order'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{

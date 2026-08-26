@@ -61,6 +61,7 @@ import 'package:metw_go/features/forget_password/presentation/manager/forget_pas
 import 'package:metw_go/features/home/data/data_source/home_data_source.dart'
     as _i551;
 import 'package:metw_go/features/home/data/repo/home_repo.dart' as _i576;
+import 'package:metw_go/features/home/data/repo/home_repo_impl.dart' as _i591;
 import 'package:metw_go/features/home/presentation/manager/home_cubit.dart'
     as _i171;
 import 'package:metw_go/features/login/data/data_source/login_data_source.dart'
@@ -218,9 +219,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i361.Dio>(
       () => dioFactory.getDio(gh<_i402.CustomInterceptor>()),
     );
-    gh.factory<_i171.HomeCubit>(
-      () => _i171.HomeCubit(repo: gh<_i576.HomeRepo>()),
-    );
     gh.factory<_i863.AppDataSource>(() => _i863.AppDataSource(gh<_i361.Dio>()));
     gh.factory<_i359.ContactUsDataSource>(
       () => _i359.ContactUsDataSource(gh<_i361.Dio>()),
@@ -370,6 +368,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i603.OrderDetailsRepository>(
       () => _i94.OrderDetailsRepositoryImpl(gh<_i304.OrderDetailsDataSource>()),
     );
+    gh.factory<_i576.HomeRepo>(
+      () => _i591.HomeRepoImpl(homeDataSource: gh<_i551.HomeDataSource>()),
+    );
     gh.factory<_i141.WalletRepo>(
       () =>
           _i1002.WalletRepoImpl(walletDataSource: gh<_i361.WalletDataSource>()),
@@ -417,6 +418,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i859.OtpCubit>(() => _i859.OtpCubit(gh<_i72.OtpRepo>()));
     gh.factory<_i661.ServiceAreasCubit>(
       () => _i661.ServiceAreasCubit(gh<_i967.ServiceAreasRepo>()),
+    );
+    gh.factory<_i171.HomeCubit>(
+      () => _i171.HomeCubit(repo: gh<_i576.HomeRepo>()),
     );
     gh.factory<_i197.ProfileCubit>(
       () => _i197.ProfileCubit(profileRepo: gh<_i869.ProfileRepo>()),
