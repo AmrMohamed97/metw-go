@@ -1,12 +1,14 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
-import 'package:metw_go/features/home/presentation/services/location_service.dart';
-import 'package:metw_go/features/home/presentation/services/native_tracking_service.dart';
-import 'package:permission_handler/permission_handler.dart' as ph;
+import 'package:metw_go/core/widgets/custom_toast.dart';
+import 'package:metw_go/features/home/presentation/manager/home_cubit.dart';
+import 'package:metw_go/features/home/presentation/manager/home_state.dart';
 
 class HomePageOfflineStatusCard extends StatefulWidget {
   const HomePageOfflineStatusCard({super.key, required this.durationSeconds});
@@ -128,26 +130,45 @@ class _HomePageOfflineStatusCardState extends State<HomePageOfflineStatusCard> {
                 ),
               ),
               16.horizontalSpace,
-              CustomButton(
-                text: AppLocalizations.of(context)!.readyToReceive,
-                onPressed: () async {
-                  final locationService = LocationService();
-                  bool serviceEnabled = await locationService
-                      .checkAndRequestLocationService();
-                  if (!serviceEnabled) {
-                    await ph.openAppSettings();
+              BlocConsumer<HomeCubit, HomeState>(
+                listener: (context, state) {
+                  if (state is ChangeStatusFailure) {
+                    showToast(
+                      context,
+                      message: state.message,
+                      state: ToastStates.error,
+                    );
                   }
-                  bool permissionGranted = await locationService
-                      .checkAndRequestPermission();
-                  if (!permissionGranted) {
-                    await ph.openAppSettings();
+                  if (state is ChangeStatusSuccess) {
+                    context.read<HomeCubit>().getHomeData();
                   }
-                  NativeTrackingService().startNativeTracking('9');
                 },
-                height: 35,
-                horizontalPadding: 16,
-                textColor: Theme.of(context).colorScheme.onSurface,
-                backgroundColor: Theme.of(context).colorScheme.surface,
+                builder: (context, state) {
+                  final cubit = context.read<HomeCubit>();
+                  return CustomButton(
+                    text: AppLocalizations.of(context)!.readyToReceive,
+                    loading: state is ChangeStatusLoading,
+                    onPressed: () async {
+                      cubit.changeStatus(status: 'online');
+                      // final locationService = LocationService();
+                      // bool serviceEnabled = await locationService
+                      //     .checkAndRequestLocationService();
+                      // if (!serviceEnabled) {
+                      //   await ph.openAppSettings();
+                      // }
+                      // bool permissionGranted = await locationService
+                      //     .checkAndRequestPermission();
+                      // if (!permissionGranted) {
+                      //   await ph.openAppSettings();
+                      // }
+                      // NativeTrackingService().startNativeTracking('9');
+                    },
+                    height: 35,
+                    horizontalPadding: 16,
+                    textColor: Theme.of(context).colorScheme.onSurface,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                  );
+                },
               ),
             ],
           ),

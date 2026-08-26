@@ -1,11 +1,15 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
-import 'package:metw_go/features/home/presentation/services/native_tracking_service.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
+import 'package:metw_go/features/home/presentation/manager/home_cubit.dart';
+import 'package:metw_go/features/home/presentation/manager/home_state.dart';
 
 class HomePageOnlineStatusCard extends StatefulWidget {
   const HomePageOnlineStatusCard({super.key, required this.durationSeconds});
@@ -127,14 +131,33 @@ class _HomePageOnlineStatusCardState extends State<HomePageOnlineStatusCard> {
                 ),
               ),
               16.horizontalSpace,
-              CustomButton(
-                text: AppLocalizations.of(context)!.stopReceiving,
-                onPressed: () {
-                  NativeTrackingService().stopNativeTracking();
+              BlocConsumer<HomeCubit, HomeState>(
+                listener: (context, state) {
+                  if (state is ChangeStatusFailure) {
+                    showToast(
+                      context,
+                      message: state.message,
+                      state: ToastStates.error,
+                    );
+                  }
+                  if (state is ChangeStatusSuccess) {
+                    context.read<HomeCubit>().getHomeData();
+                  }
                 },
-                height: 35,
-                horizontalPadding: 16,
-                backgroundColor: Theme.of(context).colorScheme.primary,
+                builder: (context, state) {
+                  final cubit = context.read<HomeCubit>();
+                  return CustomButton(
+                    text: AppLocalizations.of(context)!.stopReceiving,
+                    loading: state is ChangeStatusLoading,
+                    onPressed: () {
+                      cubit.changeStatus(status: 'offline');
+                      // NativeTrackingService().stopNativeTracking();
+                    },
+                    height: 35,
+                    horizontalPadding: 16,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                  );
+                },
               ),
             ],
           ),
