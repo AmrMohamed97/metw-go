@@ -28,33 +28,53 @@ class HomePage extends StatelessWidget {
             return Skeletonizer(
               enabled: state is HomeLoading,
               child: SafeArea(
-                child:  ListView(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      physics: const BouncingScrollPhysics(),
-                      children: [
-                        8.verticalSpace,
-                        // Top Bar
-                        HomeAppBar(),
-                        12.verticalSpace,
-                        // Purple Status Card
-                        (cubit.homeData?.data?.courier?.availabilityStatus??"offline" ) != 'online'
-                            ? HomePageOfflineStatusCard(duration: cubit.homeData?.data?.courier?.onlineDurationSeconds??0,)
-                            : HomePageOnlineStatusCard(duration: cubit.homeData?.data?.courier?.onlineDurationSeconds??0,),
-                        14.verticalSpace,
-                        // Today's Earnings and Completed Orders Row
-                        HomeTodayEarnings(),
-                        12.verticalSpace,
-                        // Wallet Card
-                        HomeWalletView(),
-                        30.verticalSpace,
-                        (cubit.homeData?.data?.courier?.availabilityStatus??"offline" ) != 'online'
-                            ? Image.asset(AppImages.offline)
-                            // Upcoming Orders Header
-                            : HomeOrdersView(),
-              
-                        40.verticalSpace,
-                      ],
-                    ) ,
+                child: ListView(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    8.verticalSpace,
+                    // Top Bar
+                    HomeAppBar(),
+                    12.verticalSpace,
+                    // Purple Status Card
+                    (cubit.homeData?.data?.courier?.availabilityStatus ??
+                                "offline") !=
+                            'online'
+                        ? HomePageOfflineStatusCard(
+                            durationSeconds:
+                                cubit
+                                    .homeData
+                                    ?.data
+                                    ?.courier
+                                    ?.onlineDurationSeconds ??
+                                0,
+                          )
+                        : HomePageOnlineStatusCard(
+                            durationSeconds:
+                                cubit
+                                    .homeData
+                                    ?.data
+                                    ?.courier
+                                    ?.onlineDurationSeconds ??
+                                0,
+                          ),
+                    14.verticalSpace,
+                    // Today's Earnings and Completed Orders Row
+                    HomeTodayEarnings(),
+                    12.verticalSpace,
+                    // Wallet Card
+                    HomeWalletView(),
+                    30.verticalSpace,
+                    (cubit.homeData?.data?.courier?.availabilityStatus ??
+                                "offline") !=
+                            'online'
+                        ? Image.asset(AppImages.offline)
+                        // Upcoming Orders Header
+                        : HomeOrdersView(),
+
+                    40.verticalSpace,
+                  ],
+                ),
               ),
             );
           },
