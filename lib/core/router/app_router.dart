@@ -45,7 +45,6 @@ import 'package:metw_go/features/register_steps/presentation/pages/second_step_p
 import 'package:metw_go/features/register_steps/presentation/pages/third_step_page.dart';
 import 'package:metw_go/features/service_areas/presentation/manager/service_areas_cubit.dart';
 import 'package:metw_go/features/service_areas/presentation/page/service_areas_page.dart';
-import 'package:metw_go/features/splash_screen/splash_screen.dart';
 import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_cubit.dart';
 import 'package:metw_go/features/vehicle_data/presentation/page/vehicle_page.dart';
 import 'package:metw_go/features/wallet_transaction/presentation/manager/wallet_operation_cubit.dart';

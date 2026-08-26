@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/order_item.dart';
 import 'package:metw_go/core/widgets/view_all_widgets.dart';
@@ -32,31 +34,37 @@ class HomeOrdersView extends StatelessWidget {
                       return OrderItem(
                         orderId: order.id.toString(),
                         distance: order.distanceKm?.toString() ?? "",
-                        isUrgent: true,
+                        isUrgent: order.priority == "urgent",
                         pickup: order.pickupAddress ?? "",
                         delivery: order.dropoffAddress ?? "",
-                        // onDetailsPressed: () =>
-                        //     context.push(AppRoutes.orderDetailsPage),
+                        onDetailsPressed: () =>
+                            context.push(AppRoutes.orderDetailsPage),
                       );
                     },
                   ),
                 ],
               ),
-            if(cubit.homeData?.data?.activeOrder != null)
-            Column(
-              crossAxisAlignment: .start,
-              children: [
-                OrderItem(
-                        orderId: cubit.homeData!.data!.activeOrder!.id.toString(),
-                        distance: cubit.homeData!.data!.activeOrder!.distanceKm?.toString() ?? "",
-                        isUrgent: true,
-                        pickup: cubit.homeData!.data!.activeOrder!.pickupAddress ?? "",
-                        delivery: cubit.homeData!.data!.activeOrder!.dropoffAddress ?? "",
-                        // onDetailsPressed: () =>
-                        //     context.push(AppRoutes.orderDetailsPage),
-                      ),
-              ],
-            ),
+            if (cubit.homeData?.data?.activeOrder != null)
+              Column(
+                crossAxisAlignment: .start,
+                children: [
+                  OrderItem(
+                    onPressed: null,
+                    orderId: cubit.homeData!.data!.activeOrder!.id.toString(),
+                    distance:
+                        cubit.homeData!.data!.activeOrder!.distanceKm
+                            ?.toString() ??
+                        "",
+                    isUrgent:
+                        cubit.homeData!.data!.activeOrder!.priority == "urgent",
+                    pickup:
+                        cubit.homeData!.data!.activeOrder!.pickupAddress ?? "",
+                    delivery:
+                        cubit.homeData!.data!.activeOrder!.dropoffAddress ?? "",
+                    onDetailsPressed: () => context.push(AppRoutes.onWayOrder),
+                  ),
+                ],
+              ),
           ],
         );
       },
