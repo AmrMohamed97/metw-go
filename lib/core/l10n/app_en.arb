@@ -334,5 +334,7 @@
     "enter4DigitOtp": "Enter the 4-digit code received by the customer",
     "recipientNameOptional": "Recipient Name (Optional)",
     "deliveryNotesOptional": "Delivery Notes (Optional)",
-    "deliveringOrder": "Out for Delivery"
+    "deliveringOrder": "Out for Delivery",
+    "pickupAction": "Pickup",
+    "deliveryAction": "Deliver"
 }

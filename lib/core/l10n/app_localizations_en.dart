@@ -947,4 +947,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deliveringOrder => 'Out for Delivery';
+
+  @override
+  String get pickupAction => 'Pickup';
+
+  @override
+  String get deliveryAction => 'Deliver';
 }

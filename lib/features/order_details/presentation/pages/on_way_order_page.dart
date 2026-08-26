@@ -684,12 +684,12 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                   text: lifecycle?.currentStage == "pickup_navigation"
                       ? primaryActionLabel
                       : lifecycle?.currentStage == "pickup_confirmation"
-                      ? "استلام"
+                      ? l10n.pickupAction
                       : lifecycle?.currentStage == "dropoff_navigation"
                       ? primaryActionLabel
                       : lifecycle?.currentStage == "dropoff_confirmation"
-                      ? "تسليم"
-                      : "fsdf",
+                      ? l10n.deliveryAction
+                      : "",
                   loading: isActionLoading,
                   onPressed: () {
                     if (lifecycle?.currentStage ==

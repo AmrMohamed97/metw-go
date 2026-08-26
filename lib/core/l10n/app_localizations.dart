@@ -1915,6 +1915,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Out for Delivery'**
   String get deliveringOrder;
+
+  /// No description provided for @pickupAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup'**
+  String get pickupAction;
+
+  /// No description provided for @deliveryAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver'**
+  String get deliveryAction;
 }
 
 class _AppLocalizationsDelegate

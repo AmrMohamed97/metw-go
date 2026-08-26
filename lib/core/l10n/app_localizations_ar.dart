@@ -941,4 +941,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get deliveringOrder => 'جاري التوصيل';
+
+  @override
+  String get pickupAction => 'استلام';
+
+  @override
+  String get deliveryAction => 'تسليم';
 }
