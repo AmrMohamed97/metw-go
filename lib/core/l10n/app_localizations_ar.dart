@@ -783,4 +783,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noCurrentOperations => 'لا توجد عمليات حالية';
+
+  @override
+  String welcomeUser(String name) {
+    return 'أهلاً بك، $name';
+  }
 }

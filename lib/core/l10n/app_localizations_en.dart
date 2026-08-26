@@ -787,4 +787,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noCurrentOperations => 'No current operations';
+
+  @override
+  String welcomeUser(String name) {
+    return 'Welcome, $name';
+  }
 }

@@ -1615,6 +1615,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No current operations'**
   String get noCurrentOperations;
+
+  /// No description provided for @welcomeUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome, {name}'**
+  String welcomeUser(String name);
 }
 
 class _AppLocalizationsDelegate
