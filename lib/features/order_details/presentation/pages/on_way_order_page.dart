@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
@@ -97,6 +99,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
               state is OrderDetailsLoading && cubit.orderDetails == null;
           final order = cubit.orderDetails;
           final ongoing = order?.ongoingOrder;
+          final lifecycle = order?.lifecycle;
 
           return ScreenWrapper(
             body: Skeletonizer(
@@ -127,11 +130,21 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // 1. Location Header Status
-                            _buildLocationStatusHeader(context, ongoing, order, l10n),
+                            _buildLocationStatusHeader(
+                              context,
+                              ongoing,
+                              order,
+                              l10n,
+                            ),
                             20.verticalSpace,
 
                             // 2. Parcel Details Card ("تفاصيل الشحنة")
-                            _buildParcelDetailsCard(context, ongoing, order, l10n),
+                            _buildParcelDetailsCard(
+                              context,
+                              ongoing,
+                              order,
+                              l10n,
+                            ),
                             16.verticalSpace,
 
                             // 3. Arrival Hint Banner
@@ -144,7 +157,13 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                   ),
 
                   // Bottom Fixed Action Bar (Call button + Primary action button)
-                  _buildBottomActionBar(context, ongoing, widget.orderId, l10n),
+                  _buildBottomActionBar(
+                    context,
+                    ongoing,
+                    widget.orderId,
+                    l10n,
+                    lifecycle,
+                  ),
                 ],
               ),
             ),
@@ -160,8 +179,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     OrderDetails? order,
     AppLocalizations l10n,
   ) {
-    final headerNote =
-        ongoing?.headerNote ?? l10n.contactCustomerForLocation;
+    final headerNote = ongoing?.headerNote ?? l10n.contactCustomerForLocation;
     final contactName =
         ongoing?.contactName ??
         order?.receiver?.name ??
@@ -422,9 +440,11 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     final paymentMethodLabel =
         ongoing?.paymentMethodLabel ?? l10n.cashOnDelivery;
     final orderTotalLabel =
-        ongoing?.orderTotalLabel ?? '${order?.estimatedFee ?? 145.00} ${l10n.egp}';
+        ongoing?.orderTotalLabel ??
+        '${order?.estimatedFee ?? 145.00} ${l10n.egp}';
     final deliveryFeeLabel =
-        ongoing?.deliveryFeeLabel ?? '${order?.estimatedFee ?? 100.00} ${l10n.egp}';
+        ongoing?.deliveryFeeLabel ??
+        '${order?.estimatedFee ?? 100.00} ${l10n.egp}';
 
     return Container(
       padding: EdgeInsets.all(16.r),
@@ -468,7 +488,11 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
           12.verticalSpace,
 
           // Row 2: الوزن التقريبي
-          _buildDetailRow(context, label: l10n.approximateWeight, value: weightLabel),
+          _buildDetailRow(
+            context,
+            label: l10n.approximateWeight,
+            value: weightLabel,
+          ),
           12.verticalSpace,
 
           // Row 3: طريقة الدفع
@@ -590,6 +614,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     dynamic ongoing,
     int orderId,
     AppLocalizations l10n,
+    lifecycle,
   ) {
     final contactPhone = ongoing?.contactPhone ?? '';
     final primaryActionLabel =
@@ -646,16 +671,32 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
               // Main Primary Action Button
               Expanded(
                 child: CustomButton(
-                  text: primaryActionLabel,
+                  text: lifecycle == "pickup_navigation"
+                      ? primaryActionLabel
+                      : lifecycle == "pickup_confirmation"
+                      ? "استلام"
+                      : lifecycle == "dropoff_navigation"
+                      ? primaryActionLabel
+                      : lifecycle == "dropoff_confirmation"
+                      ? "تسليم"
+                      : "",
                   loading: isActionLoading,
                   onPressed: () {
-                    if (mode == 'dropoff') {
+                    if (lifecycle ==
+                        "pickup_navigation" /*mode == 'dropoff'*/ ) {
                       context.read<AppCubit>().arriveAtDropoffOrder(
                         orderId: orderId,
                       );
-                    } else {
+                    } else if (lifecycle == "dropoff_navigation") {
                       context.read<AppCubit>().arriveAtPickupOrder(
                         orderId: orderId,
+                      );
+                    } else if (lifecycle == "pickup_navigation") {
+                      context.push(AppRoutes.confirmPickupPage, extra: orderId);
+                    } else if (lifecycle == "dropoff_confirmation") {
+                      context.push(
+                        AppRoutes.completeDeliveryPage,
+                        extra: orderId,
                       );
                     }
                   },
