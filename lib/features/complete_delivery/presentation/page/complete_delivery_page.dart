@@ -4,11 +4,14 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
+import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
@@ -33,8 +36,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage>
   final TextEditingController _otpController = TextEditingController();
   final TextEditingController _recipientNameController =
       TextEditingController();
-  final TextEditingController _deliveryNoteController =
-      TextEditingController();
+  final TextEditingController _deliveryNoteController = TextEditingController();
   late TextEditingController _collectedAmountController;
 
   File? _proofPhotoFile;
@@ -135,7 +137,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage>
             message: appState.response.message ?? l10n.deliveryConfirmedSuccess,
             state: ToastStates.success,
           );
-          Navigator.of(context).pop();
+          context.go(AppRoutes.mainView);
         } else if (appState is CompleteDeliveryOrderErrorState) {
           showToast(
             context,
@@ -257,54 +259,60 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage>
                           final isActionLoading =
                               appState is CompleteDeliveryOrderLoadingState;
 
-                          return CustomButton(
-                            text: l10n.confirmDelivery,
-                            loading: isActionLoading,
-                            onPressed: isActionLoading
-                                ? null
-                                : () async {
-                                    final signatureText =
-                                        _signatureController.text.trim();
+                          return Center(
+                            child: CustomButton(
+                              text: l10n.confirmDelivery,
+                              loading: isActionLoading,
+                              onPressed: isActionLoading
+                                  ? null
+                                  : () async {
+                                      final signatureText = _signatureController
+                                          .text
+                                          .trim();
 
-                                    File? proofPhotoToUpload = _proofPhotoFile;
-                                    if (proofPhotoToUpload != null) {
-                                      proofPhotoToUpload = await compress(
-                                        targetImage: proofPhotoToUpload,
-                                      );
-                                    }
+                                      File? proofPhotoToUpload =
+                                          _proofPhotoFile;
+                                      if (proofPhotoToUpload != null) {
+                                        proofPhotoToUpload = await compress(
+                                          targetImage: proofPhotoToUpload,
+                                        );
+                                      }
 
-                                    if (context.mounted) {
-                                      context
-                                          .read<AppCubit>()
-                                          .completeDeliveryOrder(
-                                            orderId: widget.orderId,
-                                            proofPhoto: proofPhotoToUpload,
-                                            signature: signatureText.isNotEmpty
-                                                ? signatureText
-                                                : null,
-                                            recipientOtp: _otpController.text
-                                                .trim(),
-                                            collectedAmount:
-                                                _collectedAmountController
-                                                    .text
-                                                    .trim(),
-                                            deliveryNote:
-                                                _deliveryNoteController.text
-                                                    .trim(),
-                                            recipientName:
-                                                _recipientNameController.text
-                                                    .trim(),
-                                          );
-                                    }
-                                  },
-                            isMax: true,
-                            backgroundColor: const Color(0xFFFF5E3A),
-                            textColor: Colors.white,
-                            radius: 30.r,
+                                      if (context.mounted) {
+                                        context
+                                            .read<AppCubit>()
+                                            .completeDeliveryOrder(
+                                              orderId: widget.orderId,
+                                              proofPhoto: proofPhotoToUpload,
+                                              signature:
+                                                  signatureText.isNotEmpty
+                                                  ? signatureText
+                                                  : null,
+                                              recipientOtp: _otpController.text
+                                                  .trim(),
+                                              collectedAmount:
+                                                  _collectedAmountController
+                                                      .text
+                                                      .trim(),
+                                              deliveryNote:
+                                                  _deliveryNoteController.text
+                                                      .trim(),
+                                              recipientName:
+                                                  _recipientNameController.text
+                                                      .trim(),
+                                            );
+                                      }
+                                    },
+                              isMax: true,
+                              backgroundColor: const Color(0xFFFF5E3A),
+                              textColor: Colors.white,
+                              radius: 30.r,
+                            ),
                           );
                         },
                       ),
                       32.verticalSpace,
+                      ViewInsetsSpace(),
                     ],
                   ),
                 ),
