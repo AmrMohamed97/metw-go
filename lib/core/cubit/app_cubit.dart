@@ -171,4 +171,7 @@ class AppCubit extends Cubit<AppState> {
       (response) => emit(CompleteDeliveryOrderSuccessState(response)),
     );
   }
+  void update() {
+    emit(AppUpdateState());
+  }
 }

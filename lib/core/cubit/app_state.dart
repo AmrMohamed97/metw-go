@@ -4,6 +4,7 @@ import 'package:metw_go/core/models/start_order_response/start_order_response.da
 abstract class AppState {}
 
 class AppInitial extends AppState {}
+class AppUpdateState extends AppState {}
 
 //-----------------------------Home_Status--------------------------------------
 class HomeStatusLoading extends AppState {}

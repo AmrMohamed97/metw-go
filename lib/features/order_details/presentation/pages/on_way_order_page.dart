@@ -638,7 +638,17 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
           ),
         ],
       ),
-      child: BlocBuilder<AppCubit, AppState>(
+      child: BlocConsumer<AppCubit, AppState>(
+        listener: (context, appState) {
+          if (appState is ArriveAtPickupOrderSuccessState) {
+            lifecycle = "pickup_confirmation";
+            context.read<AppCubit>().update();
+          }
+          if (appState is ArriveAtDropoffOrderSuccessState) {
+            lifecycle = "dropoff_confirmation";
+            context.read<AppCubit>().update();
+          }
+        },
         builder: (context, appState) {
           final isActionLoading =
               appState is ArriveAtDropoffOrderLoadingState ||
@@ -684,11 +694,11 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                   onPressed: () {
                     if (lifecycle ==
                         "pickup_navigation" /*mode == 'dropoff'*/ ) {
-                      context.read<AppCubit>().arriveAtDropoffOrder(
+                      context.read<AppCubit>().arriveAtPickupOrder(
                         orderId: orderId,
                       );
                     } else if (lifecycle == "dropoff_navigation") {
-                      context.read<AppCubit>().arriveAtPickupOrder(
+                      context.read<AppCubit>().arriveAtDropoffOrder(
                         orderId: orderId,
                       );
                     } else if (lifecycle == "pickup_navigation") {
