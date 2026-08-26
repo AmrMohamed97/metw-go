@@ -197,31 +197,65 @@ class OrderItem extends StatelessWidget {
                     ? Expanded(
                         flex: 2,
                         child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 16.h,
-                          ),
+                          height: 46,
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadiusDirectional.horizontal(
-                              start: Radius.circular(30),
-                              end: Radius.circular(30),
+                            color: Theme.of(context).colorScheme.surface,
+                            borderRadius: BorderRadius.circular(12.r),
+                            border: Border.all(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.primary.withValues(alpha: 0.35),
+                              width: 1.2,
                             ),
                           ),
                           child: Row(
-                            mainAxisAlignment: .center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                "طلب جاري",
-                                style: AppTextStyle.medium14(
-                                  context,
-                                ).copyWith(color: Colors.white),
+                              Container(
+                                padding: EdgeInsets.all(6.r),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.primary.withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Icon(
+                                  Icons.two_wheeler_rounded,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  size: 16.sp,
+                                ),
                               ),
-                              SizedBox(width: 8.w),
-                              Icon(
-                                Icons.more_horiz,
-                                color: Colors.white,
-                                size: 20.sp,
+                              8.horizontalSpace,
+                              Expanded(
+                                child: Text(
+                                  "جاري التوصيل",
+                                  style: AppTextStyle.medium14(context)
+                                      .copyWith(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.primary,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              4.horizontalSpace,
+                              Container(
+                                width: 7.r,
+                                height: 7.r,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFF10B981),
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0x6610B981),
+                                      blurRadius: 4,
+                                      spreadRadius: 1,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
