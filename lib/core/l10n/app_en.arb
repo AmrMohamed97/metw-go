@@ -258,5 +258,13 @@
     "register": "Information saved successfully",
     "recentOperations": "Recent Operations",
     "retry": "Retry",
-    "noCurrentOperations": "No current operations"
+    "noCurrentOperations": "No current operations",
+    "welcomeUser": "Welcome, {name}",
+    "@welcomeUser": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    }
 }

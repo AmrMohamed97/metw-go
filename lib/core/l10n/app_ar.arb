@@ -258,5 +258,13 @@
     "register": "تم حفظ المعلومات الشخصية",
     "recentOperations": "آخر العمليات",
     "retry": "إعادة المحاولة",
-    "noCurrentOperations": "لا توجد عمليات حالية"
+    "noCurrentOperations": "لا توجد عمليات حالية",
+    "welcomeUser": "أهلاً بك، {name}",
+    "@welcomeUser": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    }
 }
