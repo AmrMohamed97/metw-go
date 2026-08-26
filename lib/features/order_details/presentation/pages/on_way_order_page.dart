@@ -11,6 +11,7 @@ import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
+import 'package:metw_go/features/order_details/data/models/lifecycle.dart';
 import 'package:metw_go/features/order_details/data/models/order_details_response.dart';
 import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -614,12 +615,11 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     dynamic ongoing,
     int orderId,
     AppLocalizations l10n,
-    lifecycle,
+    Lifecycle? lifecycle,
   ) {
     final contactPhone = ongoing?.contactPhone ?? '';
     final primaryActionLabel =
         ongoing?.primaryActionLabel ?? l10n.arrivedAtLocation;
-    final mode = ongoing?.mode ?? 'dropoff';
 
     return Container(
       padding: EdgeInsets.only(
@@ -641,11 +641,11 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
       child: BlocConsumer<AppCubit, AppState>(
         listener: (context, appState) {
           if (appState is ArriveAtPickupOrderSuccessState) {
-            lifecycle = "pickup_confirmation";
+            lifecycle!.currentStage = "pickup_confirmation";
             context.read<AppCubit>().update();
           }
           if (appState is ArriveAtDropoffOrderSuccessState) {
-            lifecycle = "dropoff_confirmation";
+            lifecycle!.currentStage = "dropoff_confirmation";
             context.read<AppCubit>().update();
           }
         },
@@ -681,29 +681,32 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
               // Main Primary Action Button
               Expanded(
                 child: CustomButton(
-                  text: lifecycle == "pickup_navigation"
+                  text: lifecycle?.currentStage == "pickup_navigation"
                       ? primaryActionLabel
-                      : lifecycle == "pickup_confirmation"
+                      : lifecycle?.currentStage == "pickup_confirmation"
                       ? "استلام"
-                      : lifecycle == "dropoff_navigation"
+                      : lifecycle?.currentStage == "dropoff_navigation"
                       ? primaryActionLabel
-                      : lifecycle == "dropoff_confirmation"
+                      : lifecycle?.currentStage == "dropoff_confirmation"
                       ? "تسليم"
-                      : "",
+                      : "fsdf",
                   loading: isActionLoading,
                   onPressed: () {
-                    if (lifecycle ==
+                    if (lifecycle?.currentStage ==
                         "pickup_navigation" /*mode == 'dropoff'*/ ) {
                       context.read<AppCubit>().arriveAtPickupOrder(
                         orderId: orderId,
                       );
-                    } else if (lifecycle == "dropoff_navigation") {
+                    }
+                    if (lifecycle?.currentStage == "dropoff_navigation") {
                       context.read<AppCubit>().arriveAtDropoffOrder(
                         orderId: orderId,
                       );
-                    } else if (lifecycle == "pickup_navigation") {
+                    }
+                    if (lifecycle?.currentStage == "pickup_confirmation") {
                       context.push(AppRoutes.confirmPickupPage, extra: orderId);
-                    } else if (lifecycle == "dropoff_confirmation") {
+                    }
+                    if (lifecycle?.currentStage == "dropoff_confirmation") {
                       context.push(
                         AppRoutes.completeDeliveryPage,
                         extra: orderId,
