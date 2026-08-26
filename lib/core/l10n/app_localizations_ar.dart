@@ -793,4 +793,45 @@ class AppLocalizationsAr extends AppLocalizations {
   String outOfPlanned(num count) {
     return 'من أصل $count مخطط';
   }
+
+  @override
+  String get unableToMakeCall => 'تعذر إجراء الاتصال';
+
+  @override
+  String get arrivedAtLocationSuccess => 'تم الوصول للموقع بنجاح';
+
+  @override
+  String get contactCustomerForLocation => 'تواصل مع العميل للحصول على الموقع';
+
+  @override
+  String get lavenderBakery => 'مخبز لافندر الفرنسي';
+
+  @override
+  String get arrivingAtPickupLocation => 'جاري الوصول لموقع الاستلام';
+
+  @override
+  String get nakheelDistrictTaxasusi => 'حي النخيل، شارع التخصصي';
+
+  @override
+  String get riyadhSaudiArabia => 'الرياض، المملكة العربية السعودية';
+
+  @override
+  String get parcelDetails => 'تفاصيل الشحنة';
+
+  @override
+  String get mixedPastriesJuice => 'علبة معجنات مشكلة + عصير';
+
+  @override
+  String approxWeight(Object weight) {
+    return '$weight كجم تقريباً';
+  }
+
+  @override
+  String get deliveryFare => 'الاجرة';
+
+  @override
+  String get contactBeforeArrivalHint => 'يرجى التواصل قبل الوصول بخمس دقائق';
+
+  @override
+  String get arrivedAtLocation => 'تم الوصول للموقع';
 }

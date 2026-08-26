@@ -1627,6 +1627,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'out of {count} planned'**
   String outOfPlanned(num count);
+
+  /// No description provided for @unableToMakeCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to make the call'**
+  String get unableToMakeCall;
+
+  /// No description provided for @arrivedAtLocationSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrived at location successfully'**
+  String get arrivedAtLocationSuccess;
+
+  /// No description provided for @contactCustomerForLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact customer to get location'**
+  String get contactCustomerForLocation;
+
+  /// No description provided for @lavenderBakery.
+  ///
+  /// In en, this message translates to:
+  /// **'Lavender French Bakery'**
+  String get lavenderBakery;
+
+  /// No description provided for @arrivingAtPickupLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Arriving at pickup location'**
+  String get arrivingAtPickupLocation;
+
+  /// No description provided for @nakheelDistrictTaxasusi.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Nakheel District, Takhassusi St.'**
+  String get nakheelDistrictTaxasusi;
+
+  /// No description provided for @riyadhSaudiArabia.
+  ///
+  /// In en, this message translates to:
+  /// **'Riyadh, Saudi Arabia'**
+  String get riyadhSaudiArabia;
+
+  /// No description provided for @parcelDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Parcel Details'**
+  String get parcelDetails;
+
+  /// No description provided for @mixedPastriesJuice.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixed pastries box + juice'**
+  String get mixedPastriesJuice;
+
+  /// No description provided for @approxWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Approx. {weight} kg'**
+  String approxWeight(Object weight);
+
+  /// No description provided for @deliveryFare.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Fee'**
+  String get deliveryFare;
+
+  /// No description provided for @contactBeforeArrivalHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Please contact 5 minutes before arrival'**
+  String get contactBeforeArrivalHint;
+
+  /// No description provided for @arrivedAtLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrived at Location'**
+  String get arrivedAtLocation;
 }
 
 class _AppLocalizationsDelegate

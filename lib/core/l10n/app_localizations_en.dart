@@ -797,4 +797,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String outOfPlanned(num count) {
     return 'out of $count planned';
   }
+
+  @override
+  String get unableToMakeCall => 'Unable to make the call';
+
+  @override
+  String get arrivedAtLocationSuccess => 'Arrived at location successfully';
+
+  @override
+  String get contactCustomerForLocation => 'Contact customer to get location';
+
+  @override
+  String get lavenderBakery => 'Lavender French Bakery';
+
+  @override
+  String get arrivingAtPickupLocation => 'Arriving at pickup location';
+
+  @override
+  String get nakheelDistrictTaxasusi => 'Al Nakheel District, Takhassusi St.';
+
+  @override
+  String get riyadhSaudiArabia => 'Riyadh, Saudi Arabia';
+
+  @override
+  String get parcelDetails => 'Parcel Details';
+
+  @override
+  String get mixedPastriesJuice => 'Mixed pastries box + juice';
+
+  @override
+  String approxWeight(Object weight) {
+    return 'Approx. $weight kg';
+  }
+
+  @override
+  String get deliveryFare => 'Delivery Fee';
+
+  @override
+  String get contactBeforeArrivalHint =>
+      'Please contact 5 minutes before arrival';
+
+  @override
+  String get arrivedAtLocation => 'Arrived at Location';
 }

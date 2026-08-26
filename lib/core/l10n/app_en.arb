@@ -274,5 +274,30 @@
                 "type": "num"
             }
         }
-    }
+    },
+    "unableToMakeCall": "Unable to make the call",
+    "arrivedAtLocationSuccess": "Arrived at location successfully",
+    "contactCustomerForLocation": "Contact customer to get location",
+    "lavenderBakery": "Lavender French Bakery",
+    "arrivingAtPickupLocation": "Arriving at pickup location",
+    "nakheelDistrictTaxasusi": "Al Nakheel District, Takhassusi St.",
+    "riyadhSaudiArabia": "Riyadh, Saudi Arabia",
+    "parcelDetails": "Parcel Details",
+    "mixedPastriesJuice": "Mixed pastries box + juice",
+    "approxWeight": "Approx. {weight} kg",
+    "@approxWeight": {
+        "placeholders": {
+            "weight": {
+                "type": "Object"
+            }
+        }
+    },
+    "cashOnDelivery": "Cash on Delivery",
+    "orderContent": "Order Content",
+    "approximateWeight": "Approximate Weight",
+    "paymentMethod": "Payment Method",
+    "totalOrderValue": "Total Order Value",
+    "deliveryFare": "Delivery Fee",
+    "contactBeforeArrivalHint": "Please contact 5 minutes before arrival",
+    "arrivedAtLocation": "Arrived at Location"
 }

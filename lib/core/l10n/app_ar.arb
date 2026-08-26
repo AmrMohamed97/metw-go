@@ -274,5 +274,30 @@
                 "type": "num"
             }
         }
-    }
+    },
+    "unableToMakeCall": "تعذر إجراء الاتصال",
+    "arrivedAtLocationSuccess": "تم الوصول للموقع بنجاح",
+    "contactCustomerForLocation": "تواصل مع العميل للحصول على الموقع",
+    "lavenderBakery": "مخبز لافندر الفرنسي",
+    "arrivingAtPickupLocation": "جاري الوصول لموقع الاستلام",
+    "nakheelDistrictTaxasusi": "حي النخيل، شارع التخصصي",
+    "riyadhSaudiArabia": "الرياض، المملكة العربية السعودية",
+    "parcelDetails": "تفاصيل الشحنة",
+    "mixedPastriesJuice": "علبة معجنات مشكلة + عصير",
+    "approxWeight": "{weight} كجم تقريباً",
+    "@approxWeight": {
+        "placeholders": {
+            "weight": {
+                "type": "Object"
+            }
+        }
+    },
+    "cashOnDelivery": "الدفع عند الاستلام (كاش)",
+    "orderContent": "محتوى الطلب",
+    "approximateWeight": "الوزن التقريبي",
+    "paymentMethod": "طريقة الدفع",
+    "totalOrderValue": "إجمالي قيمة الطلب",
+    "deliveryFare": "الاجرة",
+    "contactBeforeArrivalHint": "يرجى التواصل قبل الوصول بخمس دقائق",
+    "arrivedAtLocation": "تم الوصول للموقع"
 }

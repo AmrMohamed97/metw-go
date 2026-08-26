@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/utils/app_images.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
@@ -30,6 +31,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
 
   Future<void> _launchUrlString(BuildContext context, String? urlString) async {
     if (urlString == null || urlString.isEmpty) return;
+    final l10n = AppLocalizations.of(context)!;
     try {
       final uri = Uri.parse(urlString);
       if (await canLaunchUrl(uri)) {
@@ -38,7 +40,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
         if (context.mounted) {
           showToast(
             context,
-            message: 'تعذر إجراء الاتصال',
+            message: l10n.unableToMakeCall,
             state: ToastStates.error,
           );
         }
@@ -47,7 +49,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
       if (context.mounted) {
         showToast(
           context,
-          message: 'تعذر إجراء الاتصال',
+          message: l10n.unableToMakeCall,
           state: ToastStates.error,
         );
       }
@@ -56,19 +58,21 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return BlocListener<AppCubit, AppState>(
       listener: (context, appState) {
         if (appState is ArriveAtDropoffOrderSuccessState) {
           showToast(
             context,
-            message: appState.response.message ?? 'تم الوصول للموقع بنجاح',
+            message: appState.response.message ?? l10n.arrivedAtLocationSuccess,
             state: ToastStates.success,
           );
           context.read<OrderDetailsCubit>().fetchOrderDetails(widget.orderId);
         } else if (appState is ArriveAtPickupOrderSuccessState) {
           showToast(
             context,
-            message: appState.response.message ?? 'تم الوصول للموقع بنجاح',
+            message: appState.response.message ?? l10n.arrivedAtLocationSuccess,
             state: ToastStates.success,
           );
           context.read<OrderDetailsCubit>().fetchOrderDetails(widget.orderId);
@@ -100,7 +104,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
               child: Column(
                 children: [
                   // Top AppBar Header with Image background & Floating Card
-                  _buildTopHeader(context, ongoing, order),
+                  _buildTopHeader(context, ongoing, order, l10n),
 
                   // Scrollable Main Content Card
                   Expanded(
@@ -123,15 +127,15 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // 1. Location Header Status
-                            _buildLocationStatusHeader(context, ongoing, order),
+                            _buildLocationStatusHeader(context, ongoing, order, l10n),
                             20.verticalSpace,
 
                             // 2. Parcel Details Card ("تفاصيل الشحنة")
-                            _buildParcelDetailsCard(context, ongoing, order),
+                            _buildParcelDetailsCard(context, ongoing, order, l10n),
                             16.verticalSpace,
 
                             // 3. Arrival Hint Banner
-                            _buildArrivalHintBanner(context, ongoing),
+                            _buildArrivalHintBanner(context, ongoing, l10n),
                             24.verticalSpace,
                           ],
                         ),
@@ -140,7 +144,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                   ),
 
                   // Bottom Fixed Action Bar (Call button + Primary action button)
-                  _buildBottomActionBar(context, ongoing, widget.orderId),
+                  _buildBottomActionBar(context, ongoing, widget.orderId, l10n),
                 ],
               ),
             ),
@@ -154,14 +158,15 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     BuildContext context,
     dynamic ongoing,
     OrderDetails? order,
+    AppLocalizations l10n,
   ) {
     final headerNote =
-        ongoing?.headerNote ?? 'تواصل مع العميل للحصول على الموقع';
+        ongoing?.headerNote ?? l10n.contactCustomerForLocation;
     final contactName =
         ongoing?.contactName ??
         order?.receiver?.name ??
         order?.sender?.name ??
-        'مخبز لافندر الفرنسي';
+        l10n.lavenderBakery;
     final contactPhone =
         ongoing?.contactPhone ??
         order?.receiver?.phone ??
@@ -230,7 +235,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
               ),
               child: Row(
                 children: [
-                  // WhatsApp Button (Left side in RTL)
+                  // WhatsApp Button
                   InkWell(
                     borderRadius: BorderRadius.circular(100.r),
                     onTap: () {
@@ -259,7 +264,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                   ),
                   14.horizontalSpace,
 
-                  // Subtitle & Store Name (Right side in RTL)
+                  // Subtitle & Store Name
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -318,22 +323,23 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     BuildContext context,
     dynamic ongoing,
     OrderDetails? order,
+    AppLocalizations l10n,
   ) {
     final locationTitle =
         ongoing?.locationTitle ??
         ongoing?.dropoffTitle ??
         ongoing?.pickupTitle ??
-        'جاري الوصول لموقع الاستلام';
+        l10n.arrivingAtPickupLocation;
     final locationAddress =
         ongoing?.locationAddress ??
         ongoing?.dropoffAddress ??
         order?.dropoffAddress ??
         order?.pickupAddress ??
-        'حي النخيل، شارع التخصصي';
+        l10n.nakheelDistrictTaxasusi;
     final locationCountry =
         ongoing?.locationCountry ??
         ongoing?.dropoffCountry ??
-        'الرياض، المملكة العربية السعودية';
+        l10n.riyadhSaudiArabia;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -403,21 +409,22 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     BuildContext context,
     dynamic ongoing,
     OrderDetails? order,
+    AppLocalizations l10n,
   ) {
-    final detailsTitle = ongoing?.detailsTitle ?? 'تفاصيل الشحنة';
+    final detailsTitle = ongoing?.detailsTitle ?? l10n.parcelDetails;
     final packageDescription =
         ongoing?.packageDescription ??
         order?.parcels?.firstOrNull?.description ??
-        'علبة معجنات مشكلة + عصير';
+        l10n.mixedPastriesJuice;
     final weightLabel =
         ongoing?.weightLabel ??
-        '${order?.parcels?.firstOrNull?.weight ?? 5} كجم تقريباً';
+        l10n.approxWeight(order?.parcels?.firstOrNull?.weight ?? 5);
     final paymentMethodLabel =
-        ongoing?.paymentMethodLabel ?? 'الدفع عند الاستلام (كاش)';
+        ongoing?.paymentMethodLabel ?? l10n.cashOnDelivery;
     final orderTotalLabel =
-        ongoing?.orderTotalLabel ?? '${order?.estimatedFee ?? 145.00} ج.م';
+        ongoing?.orderTotalLabel ?? '${order?.estimatedFee ?? 145.00} ${l10n.egp}';
     final deliveryFeeLabel =
-        ongoing?.deliveryFeeLabel ?? '${order?.estimatedFee ?? 100.00} ج.م';
+        ongoing?.deliveryFeeLabel ?? '${order?.estimatedFee ?? 100.00} ${l10n.egp}';
 
     return Container(
       padding: EdgeInsets.all(16.r),
@@ -455,19 +462,19 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
           // Row 1: محتوى الطلب
           _buildDetailRow(
             context,
-            label: 'محتوى الطلب',
+            label: l10n.orderContent,
             value: packageDescription,
           ),
           12.verticalSpace,
 
           // Row 2: الوزن التقريبي
-          _buildDetailRow(context, label: 'الوزن التقريبي', value: weightLabel),
+          _buildDetailRow(context, label: l10n.approximateWeight, value: weightLabel),
           12.verticalSpace,
 
           // Row 3: طريقة الدفع
           _buildDetailRow(
             context,
-            label: 'طريقة الدفع',
+            label: l10n.paymentMethod,
             value: paymentMethodLabel,
             valueColor: const Color(0xFFFF5E3A),
             icon: Icon(
@@ -481,7 +488,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
           // Row 4: إجمالي قيمة الطلب
           _buildDetailRow(
             context,
-            label: 'إجمالي قيمة الطلب',
+            label: l10n.totalOrderValue,
             value: orderTotalLabel,
           ),
           12.verticalSpace,
@@ -493,7 +500,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
           // Row 5: الاجرة
           _buildDetailRow(
             context,
-            label: 'الاجرة',
+            label: l10n.deliveryFare,
             value: deliveryFeeLabel,
             isBold: true,
             valueColor: const Color(0xFFFF5E3A),
@@ -543,8 +550,12 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     );
   }
 
-  Widget _buildArrivalHintBanner(BuildContext context, dynamic ongoing) {
-    final hint = ongoing?.arrivalHint ?? 'يرجى التواصل قبل الوصول بخمس دقائق';
+  Widget _buildArrivalHintBanner(
+    BuildContext context,
+    dynamic ongoing,
+    AppLocalizations l10n,
+  ) {
+    final hint = ongoing?.arrivalHint ?? l10n.contactBeforeArrivalHint;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
@@ -578,10 +589,11 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     BuildContext context,
     dynamic ongoing,
     int orderId,
+    AppLocalizations l10n,
   ) {
     final contactPhone = ongoing?.contactPhone ?? '';
     final primaryActionLabel =
-        ongoing?.primaryActionLabel ?? 'تم الوصول للموقع';
+        ongoing?.primaryActionLabel ?? l10n.arrivedAtLocation;
     final mode = ongoing?.mode ?? 'dropoff';
 
     return Container(
@@ -609,7 +621,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
 
           return Row(
             children: [
-              // Phone Call Button (Left side in RTL)
+              // Phone Call Button
               InkWell(
                 borderRadius: BorderRadius.circular(16.r),
                 onTap: () {
@@ -631,7 +643,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
               ),
               12.horizontalSpace,
 
-              // Main Primary Action Button ("تم الوصول للموقع")
+              // Main Primary Action Button
               Expanded(
                 child: CustomButton(
                   text: primaryActionLabel,
