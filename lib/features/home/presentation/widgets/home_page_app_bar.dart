@@ -74,9 +74,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        l10n.welcomeUser(
-                          cubit.homeData?.data?.courier?.name ?? "",
-                        ),
+                        cubit.homeData?.data?.courier?.name ?? "",
                         style: AppTextStyle.bold16(context).copyWith(
                           color: Theme.of(context).colorScheme.tertiary,
                         ),
