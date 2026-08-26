@@ -4,6 +4,7 @@ abstract class EndPoints {
   // static const String baseImageUrl = '${baseUrl}uploads/';
 
   static const String homeUrl = 'home';
+  static const String courierAvailabilityUrl = 'courier/availability';
   //  Auth
   static const String loginUrl = 'auth/login';
   static const String logoutUrl = 'auth/logout';

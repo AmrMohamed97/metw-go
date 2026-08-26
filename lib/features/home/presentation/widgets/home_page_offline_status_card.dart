@@ -17,8 +17,7 @@ class HomePageOfflineStatusCard extends StatefulWidget {
       _HomePageOfflineStatusCardState();
 }
 
-class _HomePageOfflineStatusCardState
-    extends State<HomePageOfflineStatusCard> {
+class _HomePageOfflineStatusCardState extends State<HomePageOfflineStatusCard> {
   Timer? _timer;
   late int _currentSeconds;
 

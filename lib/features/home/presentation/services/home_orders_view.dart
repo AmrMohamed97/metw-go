@@ -17,38 +17,38 @@ class HomeOrdersView extends StatelessWidget {
         final cubit = context.read<HomeCubit>();
         return Column(
           children: [
-            if(cubit.homeData?.data?.incomingOrders?.isNotEmpty ?? false)
-                Column(
-                    crossAxisAlignment: .start,
-                    children: [
-                      ViewAllWidget(),
-                      12.verticalSpace,
-                      // Active Order
-                      ...List.generate(
-                        cubit.homeData?.data?.incomingOrders?.length ?? 0,
-                        (index) {
-                          final order =
-                              cubit.homeData!.data!.incomingOrders![index];
-                          return OrderItem(
-                            orderId: order.id.toString(),
-                            distance: order.distanceKm?.toString() ?? "",
-                            isUrgent: true,
-                            pickup: order.pickupAddress ?? "",
-                            delivery: order.dropoffAddress ?? "",
-                            // onDetailsPressed: () =>
-                            //     context.push(AppRoutes.orderDetailsPage),
-                          );
-                        },
-                      ),
-                    ],
+            if (cubit.homeData?.data?.incomingOrders?.isNotEmpty ?? false)
+              Column(
+                crossAxisAlignment: .start,
+                children: [
+                  ViewAllWidget(),
+                  12.verticalSpace,
+                  // Active Order
+                  ...List.generate(
+                    cubit.homeData?.data?.incomingOrders?.length ?? 0,
+                    (index) {
+                      final order =
+                          cubit.homeData!.data!.incomingOrders![index];
+                      return OrderItem(
+                        orderId: order.id.toString(),
+                        distance: order.distanceKm?.toString() ?? "",
+                        isUrgent: true,
+                        pickup: order.pickupAddress ?? "",
+                        delivery: order.dropoffAddress ?? "",
+                        // onDetailsPressed: () =>
+                        //     context.push(AppRoutes.orderDetailsPage),
+                      );
+                    },
                   ),
-                  // if(cubit.homeData?.data?.?.isNotEmpty ?? false)
-                  // Column(
-                  //   crossAxisAlignment: .start,
-                  //   children: [
-                  //     _buildSmallOrderItem(context: context, orderId: "9"),
-                  //   ],
-                  // ),
+                ],
+              ),
+            // if(cubit.homeData?.data?.?.isNotEmpty ?? false)
+            // Column(
+            //   crossAxisAlignment: .start,
+            //   children: [
+            //     _buildSmallOrderItem(context: context, orderId: "9"),
+            //   ],
+            // ),
           ],
         );
       },

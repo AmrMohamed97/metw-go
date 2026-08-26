@@ -17,13 +17,10 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getHomeData() async {
     emit(HomeLoading());
     final result = await repo.getHomeData();
-    result.fold(
-      (failure) => emit(HomeFailure(failure.message)),
-      (response) {
-        homeData = response;
-        emit(HomeSuccess(homeData!));
-      },
-    );
+    result.fold((failure) => emit(HomeFailure(failure.message)), (response) {
+      homeData = response;
+      emit(HomeSuccess(homeData!));
+    });
   }
   // {
   //   realTime(9);

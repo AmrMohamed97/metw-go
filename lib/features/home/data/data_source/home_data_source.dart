@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/core/network/end_point.dart';
 import 'package:metw_go/features/home/data/models/home_out_model/home_out_model.dart';
+import 'package:metw_go/features/home/data/models/status_out_model/status_out_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'home_data_source.g.dart';
@@ -14,4 +15,9 @@ abstract class HomeDataSource {
 
   @GET(EndPoints.homeUrl)
   Future<HomeOutModel> getHomeData();
+
+  @POST(EndPoints.courierAvailabilityUrl)
+  Future<StatusOutModel> changeStatus({
+    @Body() required Map<String, dynamic> body,
+  });
 }
