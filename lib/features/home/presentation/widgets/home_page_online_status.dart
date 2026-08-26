@@ -7,8 +7,8 @@ import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/features/home/presentation/services/native_tracking_service.dart';
 
 class HomePageOnlineStatusCard extends StatelessWidget {
-  const HomePageOnlineStatusCard({super.key});
-
+  const HomePageOnlineStatusCard({super.key, required this.duration});
+  final num duration;
   @override
   Widget build(BuildContext context) {
     return Container(

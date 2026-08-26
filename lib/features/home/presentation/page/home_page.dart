@@ -38,8 +38,8 @@ class HomePage extends StatelessWidget {
                         12.verticalSpace,
                         // Purple Status Card
                         (cubit.homeData?.data?.courier?.availabilityStatus??"offline" ) != 'online'
-                            ? HomePageOfflineStatusCard()
-                            : HomePageOnlineStatusCard(),
+                            ? HomePageOfflineStatusCard(duration: cubit.homeData?.data?.courier?.onlineDurationSeconds??0,)
+                            : HomePageOnlineStatusCard(duration: cubit.homeData?.data?.courier?.onlineDurationSeconds??0,),
                         14.verticalSpace,
                         // Today's Earnings and Completed Orders Row
                         HomeTodayEarnings(),

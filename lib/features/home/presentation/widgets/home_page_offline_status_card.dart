@@ -8,8 +8,8 @@ import 'package:metw_go/features/home/presentation/services/native_tracking_serv
 import 'package:permission_handler/permission_handler.dart' as ph;
 
 class HomePageOfflineStatusCard extends StatelessWidget {
-  const HomePageOfflineStatusCard({super.key});
-
+  const HomePageOfflineStatusCard({super.key, required this.duration});
+  final num duration;
   @override
   Widget build(BuildContext context) {
     return Container(
