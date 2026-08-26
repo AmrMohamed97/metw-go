@@ -59,7 +59,11 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
       }
     } catch (e) {
       if (mounted) {
-        showToast(context, message: 'تعذر التقاط الصورة', state: ToastStates.error);
+        showToast(
+          context,
+          message: 'تعذر التقاط الصورة',
+          state: ToastStates.error,
+        );
       }
     }
   }
@@ -111,17 +115,23 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
           );
           Navigator.of(context).pop();
         } else if (appState is ConfirmPickupOrderErrorState) {
-          showToast(context, message: appState.message, state: ToastStates.error);
+          showToast(
+            context,
+            message: appState.message,
+            state: ToastStates.error,
+          );
         }
       },
       child: BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
         builder: (context, state) {
           final cubit = context.read<OrderDetailsCubit>();
-          final isLoading = state is OrderDetailsLoading && cubit.orderDetails == null;
+          final isLoading =
+              state is OrderDetailsLoading && cubit.orderDetails == null;
           final order = cubit.orderDetails;
 
           final orderNumber = order?.orderNumber ?? '#ORD-8821';
-          final merchantName = order?.sender?.name ??
+          final merchantName =
+              order?.sender?.name ??
               order?.ongoingOrder?.contactName ??
               'متجر النور للهدايا';
 
@@ -180,9 +190,9 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
                                   4.horizontalSpace,
                                   Text(
                                     'إعادة التوقيع',
-                                    style: AppTextStyle.medium14(context).copyWith(
-                                      color: const Color(0xFF6E56CF),
-                                    ),
+                                    style: AppTextStyle.medium14(
+                                      context,
+                                    ).copyWith(color: const Color(0xFF6E56CF)),
                                   ),
                                 ],
                               ),
@@ -231,15 +241,15 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
                                                   _countVerified ? '1' : '0',
                                               packageConditionVerified:
                                                   _conditionVerified
-                                                      ? '1'
-                                                      : '0',
+                                                  ? '1'
+                                                  : '0',
                                               merchantSignatureObtained:
                                                   (_signatureController
-                                                              .points
-                                                              .isNotEmpty ||
-                                                          _signatureObtained)
-                                                      ? '1'
-                                                      : '0',
+                                                          .points
+                                                          .isNotEmpty ||
+                                                      _signatureObtained)
+                                                  ? '1'
+                                                  : '0',
                                             );
                                       }
                                     },
@@ -274,7 +284,9 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.5),
+          color: Theme.of(
+            context,
+          ).colorScheme.surfaceTint.withValues(alpha: 0.5),
         ),
       ),
       child: Row(
@@ -297,30 +309,35 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 4.h,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFFFF3ED),
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Text(
                     orderNumber,
-                    style: AppTextStyle.bold14(context).copyWith(
-                      color: const Color(0xFFFF5E3A),
-                    ),
+                    style: AppTextStyle.bold14(
+                      context,
+                    ).copyWith(color: const Color(0xFFFF5E3A)),
                   ),
                 ),
                 6.verticalSpace,
                 Text(
                   merchantName,
-                  style: AppTextStyle.bold16(context).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                  style: AppTextStyle.bold16(
+                    context,
+                  ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                 ),
                 4.verticalSpace,
                 Text(
                   'تأكيد عملية الاستلام من التاجر',
                   style: AppTextStyle.regular14(context).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.5),
                   ),
                 ),
               ],
@@ -337,7 +354,9 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.5),
+          color: Theme.of(
+            context,
+          ).colorScheme.surfaceTint.withValues(alpha: 0.5),
         ),
       ),
       child: Column(
@@ -346,21 +365,33 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
             context,
             title: 'التحقق من الشحنة',
             value: _conditionVerified,
-            onChanged: (val) => setState(() => _conditionVerified = val ?? false),
+            onChanged: (val) =>
+                setState(() => _conditionVerified = val ?? false),
           ),
-          Divider(height: 1, color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.3)),
+          Divider(
+            height: 1,
+            color: Theme.of(
+              context,
+            ).colorScheme.surfaceTint.withValues(alpha: 0.3),
+          ),
           _buildChecklistItem(
             context,
             title: 'التأكد من عدد القطع',
             value: _countVerified,
             onChanged: (val) => setState(() => _countVerified = val ?? false),
           ),
-          Divider(height: 1, color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.3)),
+          Divider(
+            height: 1,
+            color: Theme.of(
+              context,
+            ).colorScheme.surfaceTint.withValues(alpha: 0.3),
+          ),
           _buildChecklistItem(
             context,
             title: 'الحصول على توقيع التاجر',
             value: _signatureObtained || _signatureController.points.isNotEmpty,
-            onChanged: (val) => setState(() => _signatureObtained = val ?? false),
+            onChanged: (val) =>
+                setState(() => _signatureObtained = val ?? false),
           ),
         ],
       ),
@@ -382,9 +413,9 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
           children: [
             Text(
               title,
-              style: AppTextStyle.medium14(context).copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
+              style: AppTextStyle.medium14(
+                context,
+              ).copyWith(color: Theme.of(context).colorScheme.onSurface),
             ),
             Checkbox(
               value: value,
@@ -496,7 +527,9 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
               Text(
                 'التقط صورة لإثبات الاستلام',
                 style: AppTextStyle.regular14(context).copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
               ),
             ],
@@ -513,10 +546,7 @@ class _SignaturePad extends StatefulWidget {
   final _SignatureController controller;
   final String hintText;
 
-  const _SignaturePad({
-    required this.controller,
-    required this.hintText,
-  });
+  const _SignaturePad({required this.controller, required this.hintText});
 
   @override
   State<_SignaturePad> createState() => _SignaturePadState();
@@ -532,12 +562,16 @@ class _SignaturePadState extends State<_SignaturePad> {
         return GestureDetector(
           onPanStart: (details) {
             final renderBox = context.findRenderObject() as RenderBox;
-            final localPosition = renderBox.globalToLocal(details.globalPosition);
+            final localPosition = renderBox.globalToLocal(
+              details.globalPosition,
+            );
             widget.controller.addPoint(localPosition);
           },
           onPanUpdate: (details) {
             final renderBox = context.findRenderObject() as RenderBox;
-            final localPosition = renderBox.globalToLocal(details.globalPosition);
+            final localPosition = renderBox.globalToLocal(
+              details.globalPosition,
+            );
             widget.controller.addPoint(localPosition);
           },
           onPanEnd: (details) {
@@ -554,7 +588,9 @@ class _SignaturePadState extends State<_SignaturePad> {
                   child: Text(
                     widget.hintText,
                     style: AppTextStyle.regular14(context).copyWith(
-                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.4),
                     ),
                   ),
                 ),

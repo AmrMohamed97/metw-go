@@ -24,12 +24,20 @@ class ContactUs extends StatelessWidget {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
       } else {
         if (context.mounted) {
-          showToast(context, message: 'تعذر فتح الرابط', state: ToastStates.error);
+          showToast(
+            context,
+            message: 'تعذر فتح الرابط',
+            state: ToastStates.error,
+          );
         }
       }
     } catch (e) {
       if (context.mounted) {
-        showToast(context, message: 'تعذر فتح الرابط', state: ToastStates.error);
+        showToast(
+          context,
+          message: 'تعذر فتح الرابط',
+          state: ToastStates.error,
+        );
       }
     }
   }
@@ -126,7 +134,9 @@ class ContactUs extends StatelessWidget {
                       )
                     else ...[
                       SliverList.builder(
-                        itemCount: isLoading ? 4 : (data?.contacts?.length ?? 0),
+                        itemCount: isLoading
+                            ? 4
+                            : (data?.contacts?.length ?? 0),
                         itemBuilder: (context, index) {
                           if (isLoading) {
                             return const Padding(
@@ -137,7 +147,11 @@ class ContactUs extends StatelessWidget {
                           final item = data!.contacts![index];
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 12.0),
-                            child: _buildContactCard(context, item, data.whatsapp),
+                            child: _buildContactCard(
+                              context,
+                              item,
+                              data.whatsapp,
+                            ),
                           );
                         },
                       ),
@@ -203,10 +217,9 @@ class ContactUs extends StatelessWidget {
               children: [
                 Text(
                   data?.heading ?? 'تواصل معنا',
-                  style: AppTextStyle.medium18(context).copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTextStyle.medium18(
+                    context,
+                  ).copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 6.verticalSpace,
                 Text(
@@ -236,9 +249,11 @@ class ContactUs extends StatelessWidget {
     String? targetUrl = item.actionUrl;
     if (item.type == 'whatsapp' && whatsappInfo?.whatsappUrl != null) {
       targetUrl = whatsappInfo!.whatsappUrl;
-    } else if (item.type == 'phone' && (targetUrl == null || targetUrl.isEmpty)) {
+    } else if (item.type == 'phone' &&
+        (targetUrl == null || targetUrl.isEmpty)) {
       targetUrl = 'tel:${item.value}';
-    } else if (item.type == 'email' && (targetUrl == null || targetUrl.isEmpty)) {
+    } else if (item.type == 'email' &&
+        (targetUrl == null || targetUrl.isEmpty)) {
       targetUrl = 'mailto:${item.value}';
     }
 
@@ -256,7 +271,9 @@ class ContactUs extends StatelessWidget {
           ),
         ],
         border: Border.all(
-          color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.5),
+          color: Theme.of(
+            context,
+          ).colorScheme.surfaceTint.withValues(alpha: 0.5),
         ),
       ),
       child: Material(
@@ -277,11 +294,7 @@ class ContactUs extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Icon(
-                      iconData,
-                      color: iconColor,
-                      size: 22.sp,
-                    ),
+                    child: Icon(iconData, color: iconColor, size: 22.sp),
                   ),
                 ),
                 14.horizontalSpace,
@@ -302,7 +315,8 @@ class ContactUs extends StatelessWidget {
                           color: Theme.of(context).colorScheme.tertiary,
                           fontWeight: FontWeight.bold,
                         ),
-                        textDirection: item.type == 'phone' || item.type == 'whatsapp'
+                        textDirection:
+                            item.type == 'phone' || item.type == 'whatsapp'
                             ? TextDirection.ltr
                             : null,
                       ),

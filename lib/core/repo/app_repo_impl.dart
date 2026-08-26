@@ -28,6 +28,7 @@ class AppRepoImpl implements AppRepo {
       return Left(ServerFailure(error.toString()));
     }
   }
+
   @override
   Future<Either<Failure, EmptyResponse>> deleteAccount() async {
     try {
@@ -142,5 +143,4 @@ class AppRepoImpl implements AppRepo {
       return Left(ServerFailure(error.toString()));
     }
   }
- 
 }

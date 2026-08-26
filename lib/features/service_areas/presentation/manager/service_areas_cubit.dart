@@ -35,13 +35,12 @@ class ServiceAreasCubit extends Cubit<ServiceAreasState> {
   Future<void> getGovernorates() async {
     emit(GetGovernoratesLoading());
     final result = await repo.getGovernorates();
-    result.fold(
-      (failure) => emit(GetGovernoratesFailure(failure.message)),
-      (response) {
-        governorates = response.data ?? [];
-        emit(GetGovernoratesSuccess(governorates));
-      },
-    );
+    result.fold((failure) => emit(GetGovernoratesFailure(failure.message)), (
+      response,
+    ) {
+      governorates = response.data ?? [];
+      emit(GetGovernoratesSuccess(governorates));
+    });
   }
 
   Future<void> getCities() async {
@@ -56,16 +55,15 @@ class ServiceAreasCubit extends Cubit<ServiceAreasState> {
     final selectedGovIds = selectedGovernorates.map((g) => g.id!).toList();
     final result = await repo.getCities(selectedGovIds);
 
-    result.fold(
-      (failure) => emit(GetCitiesFailure(failure.message)),
-      (response) {
-        cities = response.data ?? [];
-        selectedCities.removeWhere(
-          (selectedCity) => !cities.any((c) => c.id == selectedCity.id),
-        );
-        emit(GetCitiesSuccess(cities));
-      },
-    );
+    result.fold((failure) => emit(GetCitiesFailure(failure.message)), (
+      response,
+    ) {
+      cities = response.data ?? [];
+      selectedCities.removeWhere(
+        (selectedCity) => !cities.any((c) => c.id == selectedCity.id),
+      );
+      emit(GetCitiesSuccess(cities));
+    });
   }
 
   void toggleGovernorate(GovernorateModel governorate) {

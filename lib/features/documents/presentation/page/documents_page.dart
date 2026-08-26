@@ -74,9 +74,7 @@ class DocumentsPage extends StatelessWidget {
                   24.verticalSpace,
 
                   // National ID
-                  FieldTitle(
-                    title: AppLocalizations.of(context)!.nationalId,
-                  ),
+                  FieldTitle(title: AppLocalizations.of(context)!.nationalId),
                   12.verticalSpace,
                   Row(
                     children: [

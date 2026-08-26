@@ -16,7 +16,7 @@ class ProfileItem extends StatelessWidget {
   final IconData icon;
   final String title;
   final bool isLast;
-  final Widget? leading,trailing;
+  final Widget? leading, trailing;
   final String? trailingText;
   final void Function()? onPressed;
 

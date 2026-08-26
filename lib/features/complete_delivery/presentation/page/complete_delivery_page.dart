@@ -29,7 +29,8 @@ class CompleteDeliveryPage extends StatefulWidget {
 class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
   final _SignatureController _signatureController = _SignatureController();
   final TextEditingController _otpController = TextEditingController();
-  final TextEditingController _recipientNameController = TextEditingController();
+  final TextEditingController _recipientNameController =
+      TextEditingController();
   final TextEditingController _deliveryNoteController = TextEditingController();
   late TextEditingController _collectedAmountController;
 
@@ -40,7 +41,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
   @override
   void initState() {
     super.initState();
-    _collectedAmountController = TextEditingController(text: _collectedAmount.toStringAsFixed(2));
+    _collectedAmountController = TextEditingController(
+      text: _collectedAmount.toStringAsFixed(2),
+    );
     context.read<OrderDetailsCubit>().fetchOrderDetails(widget.orderId);
   }
 
@@ -68,7 +71,11 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
       }
     } catch (e) {
       if (mounted) {
-        showToast(context, message: 'تعذر التقاط الصورة', state: ToastStates.error);
+        showToast(
+          context,
+          message: 'تعذر التقاط الصورة',
+          state: ToastStates.error,
+        );
       }
     }
   }
@@ -120,17 +127,23 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
           );
           Navigator.of(context).pop();
         } else if (appState is CompleteDeliveryOrderErrorState) {
-          showToast(context, message: appState.message, state: ToastStates.error);
+          showToast(
+            context,
+            message: appState.message,
+            state: ToastStates.error,
+          );
         }
       },
       child: BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
         builder: (context, state) {
           final cubit = context.read<OrderDetailsCubit>();
-          final isLoading = state is OrderDetailsLoading && cubit.orderDetails == null;
+          final isLoading =
+              state is OrderDetailsLoading && cubit.orderDetails == null;
           final order = cubit.orderDetails;
           final ongoing = order?.ongoingOrder;
 
-          final addressText = ongoing?.locationAddress ??
+          final addressText =
+              ongoing?.locationAddress ??
               ongoing?.dropoffAddress ??
               order?.dropoffAddress ??
               'حي النرجس، طريق الملك عبدالعزيز، الرياض، المملكة العربية السعودية';
@@ -142,7 +155,10 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
             _collectedAmountController.text = estimatedFee.toStringAsFixed(2);
           }
 
-          final remainingAmount = (_requiredAmount - _collectedAmount).clamp(0.0, double.infinity);
+          final remainingAmount = (_requiredAmount - _collectedAmount).clamp(
+            0.0,
+            double.infinity,
+          );
 
           return ScreenWrapper(
             appBar: const CustomAppBar(
@@ -188,9 +204,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
                                   4.horizontalSpace,
                                   Text(
                                     'إعادة التوقيع',
-                                    style: AppTextStyle.medium14(context).copyWith(
-                                      color: const Color(0xFF6E56CF),
-                                    ),
+                                    style: AppTextStyle.medium14(
+                                      context,
+                                    ).copyWith(color: const Color(0xFF6E56CF)),
                                   ),
                                 ],
                               ),
@@ -247,19 +263,17 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
                                               orderId: widget.orderId,
                                               proofPhoto: _proofPhotoFile,
                                               signature: signatureBase64,
-                                              recipientOtp:
-                                                  _otpController.text.trim(),
+                                              recipientOtp: _otpController.text
+                                                  .trim(),
                                               collectedAmount:
                                                   _collectedAmountController
                                                       .text
                                                       .trim(),
                                               deliveryNote:
-                                                  _deliveryNoteController
-                                                      .text
+                                                  _deliveryNoteController.text
                                                       .trim(),
                                               recipientName:
-                                                  _recipientNameController
-                                                      .text
+                                                  _recipientNameController.text
                                                       .trim(),
                                             );
                                       }
@@ -291,7 +305,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.5),
+          color: Theme.of(
+            context,
+          ).colorScheme.surfaceTint.withValues(alpha: 0.5),
         ),
       ),
       child: Row(
@@ -304,15 +320,17 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
                 Text(
                   'عنوان التوصيل',
                   style: AppTextStyle.regular14(context).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.5),
                   ),
                 ),
                 6.verticalSpace,
                 Text(
                   addressText,
-                  style: AppTextStyle.bold16(context).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                  style: AppTextStyle.bold16(
+                    context,
+                  ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                 ),
               ],
             ),
@@ -431,7 +449,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
               Text(
                 'التقاط صورة للشحنة عند الباب',
                 style: AppTextStyle.regular14(context).copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
               ),
             ],
@@ -448,7 +468,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.5),
+          color: Theme.of(
+            context,
+          ).colorScheme.surfaceTint.withValues(alpha: 0.5),
         ),
       ),
       child: Column(
@@ -459,9 +481,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
             children: [
               Text(
                 'الدفع نقداً',
-                style: AppTextStyle.bold16(context).copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+                style: AppTextStyle.bold16(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
@@ -471,9 +493,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
                 ),
                 child: Text(
                   'مطلوب التحصيل',
-                  style: AppTextStyle.medium12(context).copyWith(
-                    color: const Color(0xFF6E56CF),
-                  ),
+                  style: AppTextStyle.medium12(
+                    context,
+                  ).copyWith(color: const Color(0xFF6E56CF)),
                 ),
               ),
             ],
@@ -487,14 +509,16 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
               Text(
                 'المبلغ المطلوب',
                 style: AppTextStyle.regular14(context).copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
               Text(
                 '${_requiredAmount.toStringAsFixed(2)} ج.م',
-                style: AppTextStyle.bold16(context).copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+                style: AppTextStyle.bold16(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
             ],
           ),
@@ -507,7 +531,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
               Text(
                 'المبلغ المستلم',
                 style: AppTextStyle.regular14(context).copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
               SizedBox(
@@ -515,13 +541,18 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
                 height: 40.h,
                 child: TextFormField(
                   controller: _collectedAmountController,
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                  textAlign: TextAlign.center,
-                  style: AppTextStyle.bold14(context).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
                   ),
+                  textAlign: TextAlign.center,
+                  style: AppTextStyle.bold14(
+                    context,
+                  ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 8.w,
+                      vertical: 8.h,
+                    ),
                     suffixText: 'ج.م',
                     filled: true,
                     fillColor: const Color(0xFFF5F5F5),
@@ -549,14 +580,16 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
               Text(
                 'المبلغ المتبقي',
                 style: AppTextStyle.regular14(context).copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
               Text(
                 '${remainingAmount.toStringAsFixed(2)} ج.م',
-                style: AppTextStyle.bold14(context).copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+                style: AppTextStyle.bold14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
             ],
           ),
@@ -569,14 +602,16 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
     final defaultPinTheme = PinTheme(
       width: 56.w,
       height: 56.h,
-      textStyle: AppTextStyle.bold20(context).copyWith(
-        color: Theme.of(context).colorScheme.onSurface,
-      ),
+      textStyle: AppTextStyle.bold20(
+        context,
+      ).copyWith(color: Theme.of(context).colorScheme.onSurface),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.4),
+          color: Theme.of(
+            context,
+          ).colorScheme.surfaceTint.withValues(alpha: 0.4),
         ),
       ),
     );
@@ -592,9 +627,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
         Center(
           child: Text(
             'رمز التحقق',
-            style: AppTextStyle.bold16(context).copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
+            style: AppTextStyle.bold16(
+              context,
+            ).copyWith(color: Theme.of(context).colorScheme.onSurface),
           ),
         ),
         6.verticalSpace,
@@ -602,7 +637,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
           child: Text(
             'أدخل الرمز المكون من 4 أرقام المستلم لدى العميل',
             style: AppTextStyle.regular14(context).copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.5),
             ),
             textAlign: TextAlign.center,
           ),
@@ -628,9 +665,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
       children: [
         Text(
           'معلومات المستلم والملاحظات',
-          style: AppTextStyle.bold16(context).copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
+          style: AppTextStyle.bold16(
+            context,
+          ).copyWith(color: Theme.of(context).colorScheme.onSurface),
         ),
         10.verticalSpace,
         TextFormField(
@@ -643,7 +680,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14.r),
               borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.4),
+                color: Theme.of(
+                  context,
+                ).colorScheme.surfaceTint.withValues(alpha: 0.4),
               ),
             ),
           ),
@@ -660,7 +699,9 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14.r),
               borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.4),
+                color: Theme.of(
+                  context,
+                ).colorScheme.surfaceTint.withValues(alpha: 0.4),
               ),
             ),
           ),
@@ -676,10 +717,7 @@ class _SignaturePad extends StatefulWidget {
   final _SignatureController controller;
   final String hintText;
 
-  const _SignaturePad({
-    required this.controller,
-    required this.hintText,
-  });
+  const _SignaturePad({required this.controller, required this.hintText});
 
   @override
   State<_SignaturePad> createState() => _SignaturePadState();
@@ -695,12 +733,16 @@ class _SignaturePadState extends State<_SignaturePad> {
         return GestureDetector(
           onPanStart: (details) {
             final renderBox = context.findRenderObject() as RenderBox;
-            final localPosition = renderBox.globalToLocal(details.globalPosition);
+            final localPosition = renderBox.globalToLocal(
+              details.globalPosition,
+            );
             widget.controller.addPoint(localPosition);
           },
           onPanUpdate: (details) {
             final renderBox = context.findRenderObject() as RenderBox;
-            final localPosition = renderBox.globalToLocal(details.globalPosition);
+            final localPosition = renderBox.globalToLocal(
+              details.globalPosition,
+            );
             widget.controller.addPoint(localPosition);
           },
           onPanEnd: (details) {
@@ -717,7 +759,9 @@ class _SignaturePadState extends State<_SignaturePad> {
                   child: Text(
                     widget.hintText,
                     style: AppTextStyle.regular14(context).copyWith(
-                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.4),
                     ),
                   ),
                 ),

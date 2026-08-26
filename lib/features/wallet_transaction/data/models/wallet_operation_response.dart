@@ -8,11 +8,7 @@ class WalletOperationsResponse {
   final String? message;
   final WalletOperationsDataModel? data;
 
-  WalletOperationsResponse({
-    this.success,
-    this.message,
-    this.data,
-  });
+  WalletOperationsResponse({this.success, this.message, this.data});
 
   factory WalletOperationsResponse.fromJson(Map<String, dynamic> json) =>
       _$WalletOperationsResponseFromJson(json);
@@ -25,10 +21,7 @@ class WalletOperationsDataModel {
   final List<WalletOperationItemModel>? items;
   final WalletPaginationModel? pagination;
 
-  WalletOperationsDataModel({
-    this.items,
-    this.pagination,
-  });
+  WalletOperationsDataModel({this.items, this.pagination});
 
   factory WalletOperationsDataModel.fromJson(Map<String, dynamic> json) =>
       _$WalletOperationsDataModelFromJson(json);

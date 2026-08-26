@@ -119,10 +119,7 @@ class _FaqPageState extends State<FaqPage> {
                           if (isLoading) {
                             return const Padding(
                               padding: EdgeInsets.only(bottom: 12.0),
-                              child: FaqItemCard(
-                                item: null,
-                                isMock: true,
-                              ),
+                              child: FaqItemCard(item: null, isMock: true),
                             );
                           }
                           return Padding(
@@ -161,11 +158,7 @@ class _FaqPageState extends State<FaqPage> {
               color: MyColors.primaryColor,
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              Icons.quiz_outlined,
-              color: Colors.white,
-              size: 24.sp,
-            ),
+            child: Icon(Icons.quiz_outlined, color: Colors.white, size: 24.sp),
           ),
           12.horizontalSpace,
           Expanded(
@@ -182,9 +175,9 @@ class _FaqPageState extends State<FaqPage> {
                 4.verticalSpace,
                 Text(
                   'إليك إجابات لأكثر الأسئلة شائعة بين المندوبين',
-                  style: AppTextStyle.regular12(context).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                  style: AppTextStyle.regular12(
+                    context,
+                  ).copyWith(color: Theme.of(context).colorScheme.onSurface),
                 ),
               ],
             ),
@@ -204,9 +197,9 @@ class _FaqPageState extends State<FaqPage> {
       },
       decoration: InputDecoration(
         hintText: 'ابحث عن سؤال...',
-        hintStyle: AppTextStyle.regular14(context).copyWith(
-          color: Theme.of(context).colorScheme.onSurface,
-        ),
+        hintStyle: AppTextStyle.regular14(
+          context,
+        ).copyWith(color: Theme.of(context).colorScheme.onSurface),
         prefixIcon: Icon(
           Icons.search,
           color: Theme.of(context).colorScheme.primary,
@@ -227,21 +220,15 @@ class _FaqPageState extends State<FaqPage> {
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
-          ),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
-          ),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.primary,
-          ),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
         ),
       ),
     );
@@ -249,11 +236,7 @@ class _FaqPageState extends State<FaqPage> {
 }
 
 class FaqItemCard extends StatefulWidget {
-  const FaqItemCard({
-    super.key,
-    this.item,
-    this.isMock = false,
-  });
+  const FaqItemCard({super.key, this.item, this.isMock = false});
 
   final FaqItemModel? item;
   final bool isMock;
@@ -277,9 +260,15 @@ class _FaqItemCardState extends State<FaqItemCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('كيف يمكنني إنشاء حساب جديد؟', style: AppTextStyle.medium14(context)),
+            Text(
+              'كيف يمكنني إنشاء حساب جديد؟',
+              style: AppTextStyle.medium14(context),
+            ),
             8.verticalSpace,
-            Text('يمكنك إنشاء حساب بسهولة من التطبيق...', style: AppTextStyle.regular12(context)),
+            Text(
+              'يمكنك إنشاء حساب بسهولة من التطبيق...',
+              style: AppTextStyle.regular12(context),
+            ),
           ],
         ),
       );
@@ -295,7 +284,9 @@ class _FaqItemCardState extends State<FaqItemCard> {
         border: Border.all(
           color: _isExpanded
               ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.5)
-              : Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.5),
+              : Theme.of(
+                  context,
+                ).colorScheme.surfaceTint.withValues(alpha: 0.5),
         ),
         boxShadow: [
           BoxShadow(
@@ -324,7 +315,9 @@ class _FaqItemCardState extends State<FaqItemCard> {
             decoration: BoxDecoration(
               color: _isExpanded
                   ? MyColors.primaryColor.withValues(alpha: 0.1)
-                  : Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+                  : Theme.of(
+                      context,
+                    ).colorScheme.outline.withValues(alpha: 0.3),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -355,7 +348,9 @@ class _FaqItemCardState extends State<FaqItemCard> {
               width: double.infinity,
               padding: EdgeInsets.all(12.r),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                color: Theme.of(
+                  context,
+                ).colorScheme.outline.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: Text(

@@ -58,6 +58,8 @@ import 'package:metw_go/features/forget_password/data/repo/forget_password_repo_
     as _i718;
 import 'package:metw_go/features/forget_password/presentation/manager/forget_password_cubit.dart'
     as _i37;
+import 'package:metw_go/features/home/data/data_source/home_data_source.dart'
+    as _i551;
 import 'package:metw_go/features/home/presentation/manager/home_cubit.dart'
     as _i171;
 import 'package:metw_go/features/login/data/data_source/login_data_source.dart'
@@ -229,6 +231,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i201.FaqDataSource>(() => _i201.FaqDataSource(gh<_i361.Dio>()));
     gh.factory<_i904.ForgetPasswordDataSource>(
       () => _i904.ForgetPasswordDataSource(gh<_i361.Dio>()),
+    );
+    gh.factory<_i551.HomeDataSource>(
+      () => _i551.HomeDataSource(gh<_i361.Dio>()),
     );
     gh.factory<_i101.LoginDataSource>(
       () => _i101.LoginDataSource(gh<_i361.Dio>()),

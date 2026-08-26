@@ -75,24 +75,18 @@ class SettingSection extends StatelessWidget {
     // final profileCubit = context.read<ProfileCubit>();
     return BlocConsumer<AppCubit, AppState>(
       // buildWhen: (prev, curr) => curr is ChangeLanguageState,
-       listener: (context, state) {
-            if(state is AppDeleteAccountSuccessState){
-              context.read<AppCubit>().logout();
-            }
-            if(state is AppDeleteAccountErrorState){
-              showToast(
-                context,
-               message: state.message,
-               state: ToastStates.error,
-              );
-              
-            }
-          },
+      listener: (context, state) {
+        if (state is AppDeleteAccountSuccessState) {
+          context.read<AppCubit>().logout();
+        }
+        if (state is AppDeleteAccountErrorState) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        }
+      },
       builder: (context, appState) {
         final appCubit = context.read<AppCubit>();
         final isArabic = appCubit.currentLocale.languageCode == 'ar';
         return BlocBuilder<ProfileCubit, ProfileState>(
-         
           // buildWhen: (prev, curr) => curr is ToggleNotificationsState,
           builder: (context, profileState) {
             return CustomSection(
@@ -132,10 +126,12 @@ class SettingSection extends StatelessWidget {
                     ),
                   ),
                 ),
-                ProfileItem(onPressed: () => context.read<AppCubit>().deleteAccount(),
+                ProfileItem(
+                  onPressed: () => context.read<AppCubit>().deleteAccount(),
                   icon: Icons.delete_outline,
                   trailing: appState is AppDeleteAccountLoadingState
-                  ? CupertinoActivityIndicator():null,
+                      ? CupertinoActivityIndicator()
+                      : null,
                   title: AppLocalizations.of(context)!.deleteAccount,
                   isLast: true,
                 ),

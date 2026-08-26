@@ -81,18 +81,20 @@ class AppCubit extends Cubit<AppState> {
       emit(ApplogoutLogoutSuccessState());
     });
   }
+
   Future<void> deleteAccount() async {
     emit(AppDeleteAccountLoadingState());
     final result = await _appRepo.deleteAccount();
-    result.fold((failure) => emit(AppDeleteAccountErrorState(failure.message)), (
-      response,
-    ) {
-      // TrackingLocationService().stopTracking(
-      //   CacheHelper.getUserData()?.id.toString() ?? '',
-      // );
-      CacheHelper.clearAll();
-      emit(AppDeleteAccountSuccessState());
-    });
+    result.fold(
+      (failure) => emit(AppDeleteAccountErrorState(failure.message)),
+      (response) {
+        // TrackingLocationService().stopTracking(
+        //   CacheHelper.getUserData()?.id.toString() ?? '',
+        // );
+        CacheHelper.clearAll();
+        emit(AppDeleteAccountSuccessState());
+      },
+    );
   }
 
   Future<void> acceptStartOrder({required int orderId}) async {

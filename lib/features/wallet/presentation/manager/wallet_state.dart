@@ -11,10 +11,7 @@ class WalletSuccessState extends WalletState {
   final WalletOverviewDataModel overviewData;
   final List<WalletOperationItemModel> operations;
 
-  WalletSuccessState({
-    required this.overviewData,
-    required this.operations,
-  });
+  WalletSuccessState({required this.overviewData, required this.operations});
 }
 
 class WalletFailureState extends WalletState {

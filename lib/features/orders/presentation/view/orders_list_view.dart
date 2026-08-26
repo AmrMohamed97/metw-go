@@ -45,19 +45,20 @@ class _OrdersListViewState extends State<OrdersListView> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
-      
       listener: (context, appState) {
-        if(appState is AcceptStartOrderSuccessState){
-          showToast(context,
-          message: appState.response.message??"success",
-          state: ToastStates.success
+        if (appState is AcceptStartOrderSuccessState) {
+          showToast(
+            context,
+            message: appState.response.message ?? "success",
+            state: ToastStates.success,
           );
-        context.read<MainViewCubit>().changePage(0);
+          context.read<MainViewCubit>().changePage(0);
         }
-        if(appState is AcceptStartOrderErrorState){
-          showToast(context,
-          message: appState.message,
-          state: ToastStates.error
+        if (appState is AcceptStartOrderErrorState) {
+          showToast(
+            context,
+            message: appState.message,
+            state: ToastStates.error,
           );
         }
       },
@@ -66,7 +67,7 @@ class _OrdersListViewState extends State<OrdersListView> {
         return BlocBuilder<OrdersCubit, OrdersState>(
           builder: (context, state) {
             final cubit = context.read<OrdersCubit>();
-    
+
             if (state is IncomingOrdersLoadingState) {
               return Expanded(
                 child: Skeletonizer(
@@ -91,17 +92,19 @@ class _OrdersListViewState extends State<OrdersListView> {
                 ),
               );
             }
-    
+
             if (state is IncomingOrdersErrorState) {
               return Expanded(child: Center(child: Text(state.error)));
             }
-    
+
             final orders = cubit.orders;
-    
+
             if (orders.isEmpty) {
-              return const Expanded(child: Center(child: Text("لا توجد طلبات")));
+              return const Expanded(
+                child: Center(child: Text("لا توجد طلبات")),
+              );
             }
-    
+
             return Expanded(
               child: ListView.builder(
                 controller: _scrollController,
@@ -114,23 +117,28 @@ class _OrdersListViewState extends State<OrdersListView> {
                       child: Center(child: CupertinoActivityIndicator()),
                     );
                   }
-    
+
                   final order = orders[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 12.0),
                     child: OrderItem(
-                      onPressed: ()=>appCubit.acceptStartOrder(orderId: order.id!),
-                      isLoading: appState is AcceptStartOrderLoadingState && appState.orderId == order.id,
+                      onPressed: () =>
+                          appCubit.acceptStartOrder(orderId: order.id!),
+                      isLoading:
+                          appState is AcceptStartOrderLoadingState &&
+                          appState.orderId == order.id,
                       orderId: order.orderNumber ?? "",
                       distance: order.distanceKm != null
                           ? "${order.distanceKm} كم"
                           : "",
                       isUrgent: order.priority == "urgent",
-                      
+
                       pickup: order.pickupAddress ?? "",
                       delivery: order.dropoffAddress ?? "",
-                      onDetailsPressed: () =>
-                          context.push(AppRoutes.orderDetailsPage, extra: order.id),
+                      onDetailsPressed: () => context.push(
+                        AppRoutes.orderDetailsPage,
+                        extra: order.id,
+                      ),
                       // borderColor: Theme.of(context).colorScheme.secondary,
                     ),
                   );

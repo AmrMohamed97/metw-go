@@ -10,7 +10,7 @@ class PersonalInfoCubit extends Cubit<PersonalInfoState> {
   final PersonalInfoRepo personalInfoRepo;
 
   PersonalInfoCubit({required this.personalInfoRepo})
-      : super(PersonalInfoInitialState());
+    : super(PersonalInfoInitialState());
 
   bool isMale = true;
 

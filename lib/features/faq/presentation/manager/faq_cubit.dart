@@ -20,12 +20,11 @@ class FaqCubit extends Cubit<FaqState> {
     emit(FaqLoadingState());
     final result = await repo.getFaq();
 
-    result.fold(
-      (failure) => emit(FaqFailureState(failure.message)),
-      (response) {
-        faqData = response.data;
-        emit(FaqSuccessState(faqData ?? FaqDataModel()));
-      },
-    );
+    result.fold((failure) => emit(FaqFailureState(failure.message)), (
+      response,
+    ) {
+      faqData = response.data;
+      emit(FaqSuccessState(faqData ?? FaqDataModel()));
+    });
   }
 }

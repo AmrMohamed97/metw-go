@@ -18,16 +18,16 @@ class OrderItem extends StatelessWidget {
     this.onDetailsPressed,
     this.isLoading = false,
     this.onPressed,
-    
+
     // required this.borderColor,
   });
   final String orderId;
   final String distance;
-  final bool isUrgent, isTodayOrders,isLoading;
+  final bool isUrgent, isTodayOrders, isLoading;
   final String pickup;
   final String delivery;
   final String? deliveryLabel;
-  final void Function()? onDetailsPressed,onPressed;
+  final void Function()? onDetailsPressed, onPressed;
   // final Color borderColor;
 
   @override
@@ -193,14 +193,14 @@ class OrderItem extends StatelessWidget {
                 //     ),
                 //   )
                 // else
-                  Expanded(
-                    flex: 2,
-                    child: CustomButton(
-                      text: AppLocalizations.of(context)!.startOrder,
-                      onPressed: onPressed,
-                      loading: isLoading,
-                    ),
+                Expanded(
+                  flex: 2,
+                  child: CustomButton(
+                    text: AppLocalizations.of(context)!.startOrder,
+                    onPressed: onPressed,
+                    loading: isLoading,
                   ),
+                ),
                 12.horizontalSpace,
                 Expanded(
                   flex: 1,

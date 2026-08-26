@@ -20,12 +20,11 @@ class ContactUsCubit extends Cubit<ContactUsState> {
     emit(ContactUsLoadingState());
     final result = await repo.getContactUs();
 
-    result.fold(
-      (failure) => emit(ContactUsFailureState(failure.message)),
-      (response) {
-        contactUsData = response.data;
-        emit(ContactUsSuccessState(contactUsData ?? ContactUsDataModel()));
-      },
-    );
+    result.fold((failure) => emit(ContactUsFailureState(failure.message)), (
+      response,
+    ) {
+      contactUsData = response.data;
+      emit(ContactUsSuccessState(contactUsData ?? ContactUsDataModel()));
+    });
   }
 }

@@ -224,15 +224,15 @@ class VehiclePage extends StatelessWidget {
 
                     50.verticalSpace,
                     Center(
-              child: CustomButton(
-                isMax: state is! UpdateTransportLoading,
-                loading: state is UpdateTransportLoading,
-                text: 'حفظ',
-                onPressed: () {
-                  cubit.updateTransport();
-                },
-              ),
-            ),
+                      child: CustomButton(
+                        isMax: state is! UpdateTransportLoading,
+                        loading: state is UpdateTransportLoading,
+                        text: 'حفظ',
+                        onPressed: () {
+                          cubit.updateTransport();
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),

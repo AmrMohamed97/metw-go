@@ -278,7 +278,8 @@ class AppRouter {
         path: AppRoutes.onWayOrder,
         name: AppRoutes.onWayOrder,
         builder: (context, state) => BlocProvider(
-          create: (context) => getIt<OrderDetailsCubit>()..fetchOrderDetails(state.extra as int),
+          create: (context) =>
+              getIt<OrderDetailsCubit>()..fetchOrderDetails(state.extra as int),
           child: OnWayOrderPage(orderId: state.extra as int),
         ),
       ),
@@ -288,7 +289,8 @@ class AppRouter {
         builder: (context, state) {
           final orderId = state.extra is int ? state.extra as int : 0;
           return BlocProvider(
-            create: (context) => getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),
+            create: (context) =>
+                getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),
             child: ConfirmPickupPage(orderId: orderId),
           );
         },
@@ -299,7 +301,8 @@ class AppRouter {
         builder: (context, state) {
           final orderId = state.extra is int ? state.extra as int : 0;
           return BlocProvider(
-            create: (context) => getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),
+            create: (context) =>
+                getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),
             child: CompleteDeliveryPage(orderId: orderId),
           );
         },

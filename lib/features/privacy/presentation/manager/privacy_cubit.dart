@@ -20,12 +20,11 @@ class PrivacyCubit extends Cubit<PrivacyState> {
     emit(PrivacyLoadingState());
     final result = await repo.getPrivacy();
 
-    result.fold(
-      (failure) => emit(PrivacyFailureState(failure.message)),
-      (response) {
-        privacyData = response.data;
-        emit(PrivacySuccessState(privacyData ?? PrivacyDataModel()));
-      },
-    );
+    result.fold((failure) => emit(PrivacyFailureState(failure.message)), (
+      response,
+    ) {
+      privacyData = response.data;
+      emit(PrivacySuccessState(privacyData ?? PrivacyDataModel()));
+    });
   }
 }

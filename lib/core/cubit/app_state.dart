@@ -32,6 +32,7 @@ class ApplogoutErrorState extends AppState {
 
   ApplogoutErrorState(this.message);
 }
+
 class AppDeleteAccountLoadingState extends AppState {}
 
 class AppDeleteAccountSuccessState extends AppState {}

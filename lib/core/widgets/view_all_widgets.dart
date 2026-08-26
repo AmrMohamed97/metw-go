@@ -27,7 +27,6 @@ class ViewAllWidget extends StatelessWidget {
               context,
             ).copyWith(color: Theme.of(context).colorScheme.primary),
           ),
-          
         ),
       ],
     );

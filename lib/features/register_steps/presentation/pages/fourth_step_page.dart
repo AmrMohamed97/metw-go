@@ -30,7 +30,9 @@ class FourthStepPage extends StatelessWidget {
             message: AppLocalizations.of(context)!.savedSuccessfully,
             state: ToastStates.success,
           );
-          context.go(AppRoutes.commingSoonPage); // Proceeding to OTP or equivalent
+          context.go(
+            AppRoutes.commingSoonPage,
+          ); // Proceeding to OTP or equivalent
         } else if (state is SubmitFourthStepFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
         }

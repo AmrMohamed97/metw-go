@@ -83,7 +83,8 @@ class _PrivacyManagerState extends State<PrivacyManager> {
       builder: (context, state) {
         final cubit = context.read<PrivacyCubit>();
         final title =
-            cubit.privacyData?.title ?? AppLocalizations.of(context)!.privacyPolicy;
+            cubit.privacyData?.title ??
+            AppLocalizations.of(context)!.privacyPolicy;
         final webUrl = cubit.privacyData?.webviewUrl;
 
         return ScreenWrapper(
@@ -143,8 +144,9 @@ class _PrivacyManagerState extends State<PrivacyManager> {
           LinearProgressIndicator(
             value: _loadingProgress / 100.0,
             color: Theme.of(context).colorScheme.primary,
-            backgroundColor:
-                Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+            backgroundColor: Theme.of(
+              context,
+            ).colorScheme.primary.withValues(alpha: 0.1),
           ),
         Expanded(
           child: _hasWebError

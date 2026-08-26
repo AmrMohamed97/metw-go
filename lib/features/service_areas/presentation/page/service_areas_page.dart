@@ -142,12 +142,8 @@ class ServiceAreasPage extends StatelessWidget {
                     ],
                     32.verticalSpace,
                     RuralServiceToggle(
-                      title: AppLocalizations.of(
-                        context,
-                      )!.activateRuralService,
-                      subtitle: AppLocalizations.of(
-                        context,
-                      )!.ruralServiceDesc,
+                      title: AppLocalizations.of(context)!.activateRuralService,
+                      subtitle: AppLocalizations.of(context)!.ruralServiceDesc,
                       value: cubit.isRuralServiceEnabled,
                       onChanged: cubit.toggleRuralService,
                     ),
@@ -250,11 +246,8 @@ class ServiceAreasPage extends StatelessWidget {
                                     width: isSelected ? 1.5 : 1,
                                   ),
                                   color: isSelected
-                                      ? Theme.of(
-                                          context,
-                                        ).colorScheme.primary.withValues(
-                                          alpha: 0.05,
-                                        )
+                                      ? Theme.of(context).colorScheme.primary
+                                            .withValues(alpha: 0.05)
                                       : Colors.transparent,
                                 ),
                                 child: Row(
@@ -264,15 +257,16 @@ class ServiceAreasPage extends StatelessWidget {
                                     Expanded(
                                       child: Text(
                                         gov.name ?? '',
-                                        style: Theme.of(
-                                          context,
-                                        ).textTheme.bodyMedium?.copyWith(
-                                          color: isSelected
-                                              ? Theme.of(
-                                                  context,
-                                                ).colorScheme.primary
-                                              : null,
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(
+                                              color: isSelected
+                                                  ? Theme.of(
+                                                      context,
+                                                    ).colorScheme.primary
+                                                  : null,
+                                            ),
                                       ),
                                     ),
                                     Checkbox(
@@ -367,11 +361,8 @@ class ServiceAreasPage extends StatelessWidget {
                                     width: isSelected ? 1.5 : 1,
                                   ),
                                   color: isSelected
-                                      ? Theme.of(
-                                          context,
-                                        ).colorScheme.primary.withValues(
-                                          alpha: 0.05,
-                                        )
+                                      ? Theme.of(context).colorScheme.primary
+                                            .withValues(alpha: 0.05)
                                       : Colors.transparent,
                                 ),
                                 child: Row(
@@ -381,15 +372,16 @@ class ServiceAreasPage extends StatelessWidget {
                                     Expanded(
                                       child: Text(
                                         city.name ?? '',
-                                        style: Theme.of(
-                                          context,
-                                        ).textTheme.bodyMedium?.copyWith(
-                                          color: isSelected
-                                              ? Theme.of(
-                                                  context,
-                                                ).colorScheme.primary
-                                              : null,
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(
+                                              color: isSelected
+                                                  ? Theme.of(
+                                                      context,
+                                                    ).colorScheme.primary
+                                                  : null,
+                                            ),
                                       ),
                                     ),
                                     Checkbox(

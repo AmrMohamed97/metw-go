@@ -71,10 +71,7 @@ class BalanceCard extends StatelessWidget {
             child: InkWell(
               onTap: () {},
               child: Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 12.h,
-                  horizontal: 24.w,
-                ),
+                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,

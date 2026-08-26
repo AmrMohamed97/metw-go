@@ -21,8 +21,11 @@ class OrderDetailsResponse {
     OrderDetails? orderData = generated.data;
     if (json['data'] != null && json['data'] is Map<String, dynamic>) {
       final dataMap = json['data'] as Map<String, dynamic>;
-      if (dataMap['active_order'] != null && dataMap['active_order'] is Map<String, dynamic>) {
-        orderData = OrderDetails.fromJson(dataMap['active_order'] as Map<String, dynamic>);
+      if (dataMap['active_order'] != null &&
+          dataMap['active_order'] is Map<String, dynamic>) {
+        orderData = OrderDetails.fromJson(
+          dataMap['active_order'] as Map<String, dynamic>,
+        );
       }
     }
     return OrderDetailsResponse(

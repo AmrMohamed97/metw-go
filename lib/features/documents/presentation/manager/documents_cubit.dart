@@ -40,9 +40,7 @@ class DocumentsCubit extends Cubit<DocumentsState> with ImageMixin {
     required bool isFront,
   }) async {
     final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(
-      source: ImageSource.camera,
-    );
+    final XFile? image = await picker.pickImage(source: ImageSource.camera);
     if (image != null) {
       currentlyLoadingDoc = '${docType}_${isFront ? 'front' : 'back'}';
       emit(PickDocumentImageLoading());
@@ -76,7 +74,9 @@ class DocumentsCubit extends Cubit<DocumentsState> with ImageMixin {
         drivingLicenseBack == null &&
         vehicleLicenseFront == null &&
         vehicleLicenseBack == null) {
-      emit(UpdateDocumentsFailure('الرجاء اختيار مستند واحد على الأقل للتحديث'));
+      emit(
+        UpdateDocumentsFailure('الرجاء اختيار مستند واحد على الأقل للتحديث'),
+      );
       return;
     }
 

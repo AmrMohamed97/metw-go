@@ -324,7 +324,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               if (appState is AcceptStartOrderSuccessState) {
                 showToast(
                   context,
-                  message: appState.response.message??'success',
+                  message: appState.response.message ?? 'success',
                   state: ToastStates.success,
                 );
                 context.pushReplacement(

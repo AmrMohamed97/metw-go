@@ -36,12 +36,20 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
       } else {
         if (context.mounted) {
-          showToast(context, message: 'تعذر إجراء الاتصال', state: ToastStates.error);
+          showToast(
+            context,
+            message: 'تعذر إجراء الاتصال',
+            state: ToastStates.error,
+          );
         }
       }
     } catch (e) {
       if (context.mounted) {
-        showToast(context, message: 'تعذر إجراء الاتصال', state: ToastStates.error);
+        showToast(
+          context,
+          message: 'تعذر إجراء الاتصال',
+          state: ToastStates.error,
+        );
       }
     }
   }
@@ -65,15 +73,24 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
           );
           context.read<OrderDetailsCubit>().fetchOrderDetails(widget.orderId);
         } else if (appState is ArriveAtDropoffOrderErrorState) {
-          showToast(context, message: appState.message, state: ToastStates.error);
+          showToast(
+            context,
+            message: appState.message,
+            state: ToastStates.error,
+          );
         } else if (appState is ArriveAtPickupOrderErrorState) {
-          showToast(context, message: appState.message, state: ToastStates.error);
+          showToast(
+            context,
+            message: appState.message,
+            state: ToastStates.error,
+          );
         }
       },
       child: BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
         builder: (context, state) {
           final cubit = context.read<OrderDetailsCubit>();
-          final isLoading = state is OrderDetailsLoading && cubit.orderDetails == null;
+          final isLoading =
+              state is OrderDetailsLoading && cubit.orderDetails == null;
           final order = cubit.orderDetails;
           final ongoing = order?.ongoingOrder;
 
@@ -108,7 +125,11 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // 1. Location Header Status
-                              _buildLocationStatusHeader(context, ongoing, order),
+                              _buildLocationStatusHeader(
+                                context,
+                                ongoing,
+                                order,
+                              ),
                               20.verticalSpace,
 
                               // 2. Parcel Details Card ("تفاصيل الشحنة")
@@ -141,12 +162,15 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     dynamic ongoing,
     OrderDetails? order,
   ) {
-    final headerNote = ongoing?.headerNote ?? 'تواصل مع العميل للحصول على الموقع';
-    final contactName = ongoing?.contactName ??
+    final headerNote =
+        ongoing?.headerNote ?? 'تواصل مع العميل للحصول على الموقع';
+    final contactName =
+        ongoing?.contactName ??
         order?.receiver?.name ??
         order?.sender?.name ??
         'مخبز لافندر الفرنسي';
-    final contactPhone = ongoing?.contactPhone ??
+    final contactPhone =
+        ongoing?.contactPhone ??
         order?.receiver?.phone ??
         order?.sender?.phone ??
         '';
@@ -249,9 +273,9 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                       children: [
                         Text(
                           headerNote,
-                          style: AppTextStyle.medium14(context).copyWith(
-                            color: const Color(0xFFFF5E3A),
-                          ),
+                          style: AppTextStyle.medium14(
+                            context,
+                          ).copyWith(color: const Color(0xFFFF5E3A)),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -262,7 +286,9 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                               child: Text(
                                 contactName,
                                 style: AppTextStyle.bold16(context).copyWith(
-                                  color: Theme.of(context).colorScheme.onSurface,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -300,16 +326,19 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     dynamic ongoing,
     OrderDetails? order,
   ) {
-    final locationTitle = ongoing?.locationTitle ??
+    final locationTitle =
+        ongoing?.locationTitle ??
         ongoing?.dropoffTitle ??
         ongoing?.pickupTitle ??
         'جاري الوصول لموقع الاستلام';
-    final locationAddress = ongoing?.locationAddress ??
+    final locationAddress =
+        ongoing?.locationAddress ??
         ongoing?.dropoffAddress ??
         order?.dropoffAddress ??
         order?.pickupAddress ??
         'حي النخيل، شارع التخصصي';
-    final locationCountry = ongoing?.locationCountry ??
+    final locationCountry =
+        ongoing?.locationCountry ??
         ongoing?.dropoffCountry ??
         'الرياض، المملكة العربية السعودية';
 
@@ -333,25 +362,27 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                   6.horizontalSpace,
                   Text(
                     locationTitle,
-                    style: AppTextStyle.medium14(context).copyWith(
-                      color: const Color(0xFFFF5E3A),
-                    ),
+                    style: AppTextStyle.medium14(
+                      context,
+                    ).copyWith(color: const Color(0xFFFF5E3A)),
                   ),
                 ],
               ),
               6.verticalSpace,
               Text(
                 locationAddress,
-                style: AppTextStyle.bold18(context).copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+                style: AppTextStyle.bold18(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
               if (locationCountry.isNotEmpty) ...[
                 4.verticalSpace,
                 Text(
                   locationCountry,
                   style: AppTextStyle.regular14(context).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.5),
                   ),
                 ),
               ],
@@ -381,17 +412,19 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     OrderDetails? order,
   ) {
     final detailsTitle = ongoing?.detailsTitle ?? 'تفاصيل الشحنة';
-    final packageDescription = ongoing?.packageDescription ??
+    final packageDescription =
+        ongoing?.packageDescription ??
         order?.parcels?.firstOrNull?.description ??
         'علبة معجنات مشكلة + عصير';
-    final weightLabel = ongoing?.weightLabel ??
+    final weightLabel =
+        ongoing?.weightLabel ??
         '${order?.parcels?.firstOrNull?.weight ?? 5} كجم تقريباً';
-    final paymentMethodLabel = ongoing?.paymentMethodLabel ??
-        'الدفع عند الاستلام (كاش)';
-    final orderTotalLabel = ongoing?.orderTotalLabel ??
-        '${order?.estimatedFee ?? 145.00} ج.م';
-    final deliveryFeeLabel = ongoing?.deliveryFeeLabel ??
-        '${order?.estimatedFee ?? 100.00} ج.م';
+    final paymentMethodLabel =
+        ongoing?.paymentMethodLabel ?? 'الدفع عند الاستلام (كاش)';
+    final orderTotalLabel =
+        ongoing?.orderTotalLabel ?? '${order?.estimatedFee ?? 145.00} ج.م';
+    final deliveryFeeLabel =
+        ongoing?.deliveryFeeLabel ?? '${order?.estimatedFee ?? 100.00} ج.م';
 
     return Container(
       padding: EdgeInsets.all(16.r),
@@ -399,7 +432,9 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(18.r),
         border: Border.all(
-          color: Theme.of(context).colorScheme.surfaceTint.withValues(alpha: 0.5),
+          color: Theme.of(
+            context,
+          ).colorScheme.surfaceTint.withValues(alpha: 0.5),
         ),
       ),
       child: Column(
@@ -416,9 +451,9 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
               8.horizontalSpace,
               Text(
                 detailsTitle,
-                style: AppTextStyle.bold16(context).copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+                style: AppTextStyle.bold16(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
             ],
           ),
@@ -433,11 +468,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
           12.verticalSpace,
 
           // Row 2: الوزن التقريبي
-          _buildDetailRow(
-            context,
-            label: 'الوزن التقريبي',
-            value: weightLabel,
-          ),
+          _buildDetailRow(context, label: 'الوزن التقريبي', value: weightLabel),
           12.verticalSpace,
 
           // Row 3: طريقة الدفع
@@ -493,23 +524,24 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
         Text(
           label,
           style: AppTextStyle.regular14(context).copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.6),
           ),
         ),
         Row(
           children: [
-            if (icon != null) ...[
-              icon,
-              6.horizontalSpace,
-            ],
+            if (icon != null) ...[icon, 6.horizontalSpace],
             Text(
               value,
               style: isBold
                   ? AppTextStyle.bold16(context).copyWith(
-                      color: valueColor ?? Theme.of(context).colorScheme.onSurface,
+                      color:
+                          valueColor ?? Theme.of(context).colorScheme.onSurface,
                     )
                   : AppTextStyle.medium14(context).copyWith(
-                      color: valueColor ?? Theme.of(context).colorScheme.onSurface,
+                      color:
+                          valueColor ?? Theme.of(context).colorScheme.onSurface,
                     ),
             ),
           ],
@@ -539,9 +571,9 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
           Expanded(
             child: Text(
               hint,
-              style: AppTextStyle.medium14(context).copyWith(
-                color: const Color(0xFF7F56D9),
-              ),
+              style: AppTextStyle.medium14(
+                context,
+              ).copyWith(color: const Color(0xFF7F56D9)),
             ),
           ),
         ],
@@ -555,7 +587,8 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     int orderId,
   ) {
     final contactPhone = ongoing?.contactPhone ?? '';
-    final primaryActionLabel = ongoing?.primaryActionLabel ?? 'تم الوصول للموقع';
+    final primaryActionLabel =
+        ongoing?.primaryActionLabel ?? 'تم الوصول للموقع';
     final mode = ongoing?.mode ?? 'dropoff';
 
     return Container(
@@ -612,13 +645,13 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                   loading: isActionLoading,
                   onPressed: () {
                     if (mode == 'dropoff') {
-                      context
-                          .read<AppCubit>()
-                          .arriveAtDropoffOrder(orderId: orderId);
+                      context.read<AppCubit>().arriveAtDropoffOrder(
+                        orderId: orderId,
+                      );
                     } else {
-                      context
-                          .read<AppCubit>()
-                          .arriveAtPickupOrder(orderId: orderId);
+                      context.read<AppCubit>().arriveAtPickupOrder(
+                        orderId: orderId,
+                      );
                     }
                   },
                   isMax: true,

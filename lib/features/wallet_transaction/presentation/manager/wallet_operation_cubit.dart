@@ -41,15 +41,14 @@ class WalletOperationCubit extends Cubit<WalletOperationState> {
 
     final result = await repo.getWalletOperations(page: currentPage);
 
-    result.fold(
-      (failure) => emit(WalletOperationFailure(failure.message)),
-      (response) {
-        final data = response.data;
-        operations = List.from(data?.items ?? []);
-        hasMore = data?.pagination?.hasMore ?? false;
-        emit(WalletOperationSuccess(items: operations, hasMore: hasMore));
-      },
-    );
+    result.fold((failure) => emit(WalletOperationFailure(failure.message)), (
+      response,
+    ) {
+      final data = response.data;
+      operations = List.from(data?.items ?? []);
+      hasMore = data?.pagination?.hasMore ?? false;
+      emit(WalletOperationSuccess(items: operations, hasMore: hasMore));
+    });
   }
 
   Future<void> loadMoreOperations() async {

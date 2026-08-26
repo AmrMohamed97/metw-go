@@ -27,7 +27,11 @@ class WalletOperationPage extends StatelessWidget {
         : Icons.remove_circle_outline;
   }
 
-  Color _getIconColor(BuildContext context, String? iconKey, String? direction) {
+  Color _getIconColor(
+    BuildContext context,
+    String? iconKey,
+    String? direction,
+  ) {
     if (iconKey == 'earning' || direction == 'increase') {
       return MyColors.green;
     } else if (iconKey == 'credit') {

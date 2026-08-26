@@ -12,10 +12,7 @@ class WalletOperationSuccess extends WalletOperationState {
   final List<WalletOperationItemModel> items;
   final bool hasMore;
 
-  WalletOperationSuccess({
-    required this.items,
-    required this.hasMore,
-  });
+  WalletOperationSuccess({required this.items, required this.hasMore});
 }
 
 class WalletOperationFailure extends WalletOperationState {

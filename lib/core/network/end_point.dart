@@ -2,8 +2,8 @@ abstract class EndPoints {
   static const String baseUrl = "https://lasco.evyx.lol/api/metwgo/";
   static const String baseImageUrl = "https://lasco.evyx.lol/";
   // static const String baseImageUrl = '${baseUrl}uploads/';
-  // static const String baseFileUrl = '${baseUrl}uploads/files/';
 
+  static const String homeUrl = 'home';
   //  Auth
   static const String loginUrl = 'auth/login';
   static const String logoutUrl = 'auth/logout';
@@ -34,13 +34,11 @@ abstract class EndPoints {
   static const String profileDocumentsUrl = 'profile/documents';
 
   static const String startOrdersUrl = 'orders/{order_id}/start';
-  static const String arrivePickupOrdersUrl =
-      'orders/{order_id}/arrive-pickup';
+  static const String arrivePickupOrdersUrl = 'orders/{order_id}/arrive-pickup';
   static const String confirmationOrdersUrl =
       'orders/{order_id}/pickup-confirmation';
   static const String dropoffOrdersUrl = 'orders/{order_id}/arrive-dropoff';
-  static const String completeOrdersUrl =
-      'orders/{order_id}/complete-delivery';
+  static const String completeOrdersUrl = 'orders/{order_id}/complete-delivery';
 
   static const String walletOperationsUrl = 'wallet/operations';
   static const String walletOverviewUrl = 'wallet/overview';

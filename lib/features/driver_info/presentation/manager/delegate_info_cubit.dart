@@ -11,7 +11,7 @@ class DelegateInfoCubit extends Cubit<DelegateInfoState> {
   final DelegateInfoRepo delegateInfoRepo;
 
   DelegateInfoCubit({required this.delegateInfoRepo})
-      : super(DelegateInfoInitialState());
+    : super(DelegateInfoInitialState());
 
   final secondViewFormKey = GlobalKey<FormState>();
   bool isIndependentDelegate = true;
@@ -45,13 +45,12 @@ class DelegateInfoCubit extends Cubit<DelegateInfoState> {
   Future<void> getWarehouses() async {
     emit(GetWarehousesLoading());
     final result = await delegateInfoRepo.getWarehouses();
-    result.fold(
-      (failure) => emit(GetWarehousesFailure(failure.message)),
-      (response) {
-        warehouses = response.data ?? [];
-        emit(GetWarehousesSuccess());
-      },
-    );
+    result.fold((failure) => emit(GetWarehousesFailure(failure.message)), (
+      response,
+    ) {
+      warehouses = response.data ?? [];
+      emit(GetWarehousesSuccess());
+    });
   }
 
   void selectWarehouse(WarehouseModel warehouse) {
@@ -61,7 +60,8 @@ class DelegateInfoCubit extends Cubit<DelegateInfoState> {
 
   Future<void> updateWorkInfo() async {
     List<String> selectedWorkTypes = [];
-    if (isDeliveryDelegate) selectedWorkTypes.add('delivery_inside_governorate');
+    if (isDeliveryDelegate)
+      selectedWorkTypes.add('delivery_inside_governorate');
     if (isShippingDelegate) selectedWorkTypes.add('inter_governorate_shipping');
     if (isBusDriver) selectedWorkTypes.add('bus_driver');
 
