@@ -14,6 +14,7 @@ import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/core/widgets/custom_toast.dart';
+import 'package:metw_go/core/widgets/image_mixin.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -26,7 +27,7 @@ class ConfirmPickupPage extends StatefulWidget {
   State<ConfirmPickupPage> createState() => _ConfirmPickupPageState();
 }
 
-class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
+class _ConfirmPickupPageState extends State<ConfirmPickupPage> with ImageMixin {
   final TextEditingController _signatureController = TextEditingController();
 
   bool _conditionVerified = false;
@@ -55,8 +56,9 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
         imageQuality: 85,
       );
       if (pickedFile != null) {
+        final compressedFile = await compress(targetImage: File(pickedFile.path));
         setState(() {
-          _proofPhotoFile = File(pickedFile.path);
+          _proofPhotoFile = compressedFile;
         });
       }
     } catch (e) {
