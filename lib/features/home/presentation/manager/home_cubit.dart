@@ -22,6 +22,16 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeSuccess(homeData!));
     });
   }
+
+  Future<void> changeStatus({required String status}) async {
+    emit(ChangeStatusLoading());
+    final result = await repo.changeStatus(status: status);
+    result.fold((failure) => emit(ChangeStatusFailure(failure.message)), (
+      response,
+    ) {
+      emit(ChangeStatusSuccess(response));
+    });
+  }
   // {
   //   realTime(9);
   // }
