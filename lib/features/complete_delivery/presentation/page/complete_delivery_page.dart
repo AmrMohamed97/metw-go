@@ -262,16 +262,23 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage>
                             loading: isActionLoading,
                             onPressed: isActionLoading
                                 ? null
-                                : () {
+                                : () async {
                                     final signatureText =
                                         _signatureController.text.trim();
+
+                                    File? proofPhotoToUpload = _proofPhotoFile;
+                                    if (proofPhotoToUpload != null) {
+                                      proofPhotoToUpload = await compress(
+                                        targetImage: proofPhotoToUpload,
+                                      );
+                                    }
 
                                     if (context.mounted) {
                                       context
                                           .read<AppCubit>()
                                           .completeDeliveryOrder(
                                             orderId: widget.orderId,
-                                            proofPhoto: _proofPhotoFile,
+                                            proofPhoto: proofPhotoToUpload,
                                             signature: signatureText.isNotEmpty
                                                 ? signatureText
                                                 : null,
