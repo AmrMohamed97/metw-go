@@ -885,4 +885,57 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get takePhotoForProofOfPickup => 'التقط صورة لإثبات الاستلام';
+
+  @override
+  String get deliveryConfirmedSuccess => 'تم تأكيد التسليم بنجاح';
+
+  @override
+  String get defaultDeliveryAddress =>
+      'حي النرجس، طريق الملك عبدالعزيز، الرياض، المملكة العربية السعودية';
+
+  @override
+  String get confirmDelivery => 'تأكيد التسليم';
+
+  @override
+  String get deliveryAddress => 'عنوان التوصيل';
+
+  @override
+  String get customerSignature => 'توقيع العميل';
+
+  @override
+  String get cashPayment => 'الدفع نقداً';
+
+  @override
+  String get otpVerification => 'رمز التحقق';
+
+  @override
+  String get recipientInfoAndNotes => 'معلومات المستلم والملاحظات';
+
+  @override
+  String get signHereForDelivery => 'وقع هنا للتسليم';
+
+  @override
+  String get takePhotoAtDoor => 'التقاط صورة للشحنة عند الباب';
+
+  @override
+  String get collectionRequired => 'مطلوب التحصيل';
+
+  @override
+  String get requiredAmount => 'المبلغ المطلوب';
+
+  @override
+  String get collectedAmount => 'المبلغ المستلم';
+
+  @override
+  String get remainingAmount => 'المبلغ المتبقي';
+
+  @override
+  String get enter4DigitOtp =>
+      'أدخل الرمز المكون من 4 أرقام المستلم لدى العميل';
+
+  @override
+  String get recipientNameOptional => 'اسم المستلم (اختياري)';
+
+  @override
+  String get deliveryNotesOptional => 'ملاحظات التسليم (اختياري)';
 }

@@ -316,5 +316,22 @@
     "verifyPackageCount": "التأكد من عدد القطع",
     "obtainMerchantSignature": "الحصول على توقيع التاجر",
     "signHereForPickup": "وقع هنا للاستلام",
-    "takePhotoForProofOfPickup": "التقط صورة لإثبات الاستلام"
+    "takePhotoForProofOfPickup": "التقط صورة لإثبات الاستلام",
+    "deliveryConfirmedSuccess": "تم تأكيد التسليم بنجاح",
+    "defaultDeliveryAddress": "حي النرجس، طريق الملك عبدالعزيز، الرياض، المملكة العربية السعودية",
+    "confirmDelivery": "تأكيد التسليم",
+    "deliveryAddress": "عنوان التوصيل",
+    "customerSignature": "توقيع العميل",
+    "cashPayment": "الدفع نقداً",
+    "otpVerification": "رمز التحقق",
+    "recipientInfoAndNotes": "معلومات المستلم والملاحظات",
+    "signHereForDelivery": "وقع هنا للتسليم",
+    "takePhotoAtDoor": "التقاط صورة للشحنة عند الباب",
+    "collectionRequired": "مطلوب التحصيل",
+    "requiredAmount": "المبلغ المطلوب",
+    "collectedAmount": "المبلغ المستلم",
+    "remainingAmount": "المبلغ المتبقي",
+    "enter4DigitOtp": "أدخل الرمز المكون من 4 أرقام المستلم لدى العميل",
+    "recipientNameOptional": "اسم المستلم (اختياري)",
+    "deliveryNotesOptional": "ملاحظات التسليم (اختياري)"
 }

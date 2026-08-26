@@ -1807,6 +1807,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Take photo for proof of pickup'**
   String get takePhotoForProofOfPickup;
+
+  /// No description provided for @deliveryConfirmedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery confirmed successfully'**
+  String get deliveryConfirmedSuccess;
+
+  /// No description provided for @defaultDeliveryAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Nargis District, King Abdulaziz Road, Riyadh, Saudi Arabia'**
+  String get defaultDeliveryAddress;
+
+  /// No description provided for @confirmDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Delivery'**
+  String get confirmDelivery;
+
+  /// No description provided for @deliveryAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Address'**
+  String get deliveryAddress;
+
+  /// No description provided for @customerSignature.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer Signature'**
+  String get customerSignature;
+
+  /// No description provided for @cashPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash Payment'**
+  String get cashPayment;
+
+  /// No description provided for @otpVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP Verification'**
+  String get otpVerification;
+
+  /// No description provided for @recipientInfoAndNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient Information & Notes'**
+  String get recipientInfoAndNotes;
+
+  /// No description provided for @signHereForDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign here for delivery'**
+  String get signHereForDelivery;
+
+  /// No description provided for @takePhotoAtDoor.
+  ///
+  /// In en, this message translates to:
+  /// **'Take photo of parcel at door'**
+  String get takePhotoAtDoor;
+
+  /// No description provided for @collectionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Collection Required'**
+  String get collectionRequired;
+
+  /// No description provided for @requiredAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Required Amount'**
+  String get requiredAmount;
+
+  /// No description provided for @collectedAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Collected Amount'**
+  String get collectedAmount;
+
+  /// No description provided for @remainingAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining Amount'**
+  String get remainingAmount;
+
+  /// No description provided for @enter4DigitOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 4-digit code received by the customer'**
+  String get enter4DigitOtp;
+
+  /// No description provided for @recipientNameOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient Name (Optional)'**
+  String get recipientNameOptional;
+
+  /// No description provided for @deliveryNotesOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Notes (Optional)'**
+  String get deliveryNotesOptional;
 }
 
 class _AppLocalizationsDelegate

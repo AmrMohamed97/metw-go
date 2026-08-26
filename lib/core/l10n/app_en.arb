@@ -316,5 +316,22 @@
     "verifyPackageCount": "Verify Package Count",
     "obtainMerchantSignature": "Obtain Merchant Signature",
     "signHereForPickup": "Sign here for pickup",
-    "takePhotoForProofOfPickup": "Take photo for proof of pickup"
+    "takePhotoForProofOfPickup": "Take photo for proof of pickup",
+    "deliveryConfirmedSuccess": "Delivery confirmed successfully",
+    "defaultDeliveryAddress": "Al Nargis District, King Abdulaziz Road, Riyadh, Saudi Arabia",
+    "confirmDelivery": "Confirm Delivery",
+    "deliveryAddress": "Delivery Address",
+    "customerSignature": "Customer Signature",
+    "cashPayment": "Cash Payment",
+    "otpVerification": "OTP Verification",
+    "recipientInfoAndNotes": "Recipient Information & Notes",
+    "signHereForDelivery": "Sign here for delivery",
+    "takePhotoAtDoor": "Take photo of parcel at door",
+    "collectionRequired": "Collection Required",
+    "requiredAmount": "Required Amount",
+    "collectedAmount": "Collected Amount",
+    "remainingAmount": "Remaining Amount",
+    "enter4DigitOtp": "Enter the 4-digit code received by the customer",
+    "recipientNameOptional": "Recipient Name (Optional)",
+    "deliveryNotesOptional": "Delivery Notes (Optional)"
 }

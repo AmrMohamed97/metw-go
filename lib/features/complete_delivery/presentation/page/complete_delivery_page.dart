@@ -9,10 +9,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
+import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_toast.dart';
+import 'package:metw_go/core/widgets/image_mixin.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart';
 import 'package:pinput/pinput.dart';
@@ -26,12 +28,14 @@ class CompleteDeliveryPage extends StatefulWidget {
   State<CompleteDeliveryPage> createState() => _CompleteDeliveryPageState();
 }
 
-class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
+class _CompleteDeliveryPageState extends State<CompleteDeliveryPage>
+    with ImageMixin {
   final _SignatureController _signatureController = _SignatureController();
   final TextEditingController _otpController = TextEditingController();
   final TextEditingController _recipientNameController =
       TextEditingController();
-  final TextEditingController _deliveryNoteController = TextEditingController();
+  final TextEditingController _deliveryNoteController =
+      TextEditingController();
   late TextEditingController _collectedAmountController;
 
   File? _proofPhotoFile;
@@ -58,6 +62,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
+    final l10n = AppLocalizations.of(context)!;
     try {
       final picker = ImagePicker();
       final pickedFile = await picker.pickImage(
@@ -65,15 +70,18 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
         imageQuality: 85,
       );
       if (pickedFile != null) {
+        final compressedFile = await compress(
+          targetImage: File(pickedFile.path),
+        );
         setState(() {
-          _proofPhotoFile = File(pickedFile.path);
+          _proofPhotoFile = compressedFile;
         });
       }
     } catch (e) {
       if (mounted) {
         showToast(
           context,
-          message: 'تعذر التقاط الصورة',
+          message: l10n.unableToCaptureImage,
           state: ToastStates.error,
         );
       }
@@ -81,6 +89,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
   }
 
   void _showImagePickerModal() {
+    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -94,7 +103,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
             children: [
               ListTile(
                 leading: const Icon(Icons.camera_alt_outlined),
-                title: const Text('التقاط صورة بواسطة الكاميرا'),
+                title: Text(l10n.takePhotoWithCamera),
                 onTap: () {
                   Navigator.of(ctx).pop();
                   _pickImage(ImageSource.camera);
@@ -102,7 +111,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
               ),
               ListTile(
                 leading: const Icon(Icons.photo_library_outlined),
-                title: const Text('اختيار من المعرض'),
+                title: Text(l10n.chooseFromGallery),
                 onTap: () {
                   Navigator.of(ctx).pop();
                   _pickImage(ImageSource.gallery);
@@ -117,12 +126,14 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return BlocListener<AppCubit, AppState>(
       listener: (context, appState) {
         if (appState is CompleteDeliveryOrderSuccessState) {
           showToast(
             context,
-            message: appState.response.message ?? 'تم تأكيد التسليم بنجاح',
+            message: appState.response.message ?? l10n.deliveryConfirmedSuccess,
             state: ToastStates.success,
           );
           Navigator.of(context).pop();
@@ -146,7 +157,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
               ongoing?.locationAddress ??
               ongoing?.dropoffAddress ??
               order?.dropoffAddress ??
-              'حي النرجس، طريق الملك عبدالعزيز، الرياض، المملكة العربية السعودية';
+              l10n.defaultDeliveryAddress;
 
           final estimatedFee = order?.estimatedFee ?? 150.0;
           if (estimatedFee > 0 && _requiredAmount != estimatedFee) {
@@ -161,133 +172,130 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
           );
 
           return ScreenWrapper(
-            appBar: const CustomAppBar(
-              title: 'تأكيد التسليم',
+            appBar: CustomAppBar(
+              title: l10n.confirmDelivery,
               centerTitle: true,
             ),
-            body: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Skeletonizer(
-                enabled: isLoading,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18.w),
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        12.verticalSpace,
+            body: Skeletonizer(
+              enabled: isLoading,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18.w),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      12.verticalSpace,
 
-                        // 1. Delivery Address Card
-                        _buildAddressCard(context, addressText),
-                        20.verticalSpace,
+                      // 1. Delivery Address Card
+                      _buildAddressCard(context, addressText, l10n),
+                      20.verticalSpace,
 
-                        // 2. Customer Signature Section ("توقيع العميل")
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'توقيع العميل',
-                              style: AppTextStyle.bold16(context).copyWith(
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
+                      // 2. Customer Signature Section ("توقيع العميل")
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            l10n.customerSignature,
+                            style: AppTextStyle.bold16(context).copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
-                            InkWell(
-                              onTap: () => _signatureController.clear(),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.refresh_rounded,
-                                    size: 18.sp,
-                                    color: const Color(0xFF6E56CF),
-                                  ),
-                                  4.horizontalSpace,
-                                  Text(
-                                    'إعادة التوقيع',
-                                    style: AppTextStyle.medium14(
-                                      context,
-                                    ).copyWith(color: const Color(0xFF6E56CF)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        10.verticalSpace,
-                        _buildSignatureBox(context),
-                        24.verticalSpace,
-
-                        // 3. Proof Photo Section ("صورة الشحنة")
-                        Text(
-                          'صورة الشحنة',
-                          style: AppTextStyle.bold16(context).copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
                           ),
+                          InkWell(
+                            onTap: () => _signatureController.clear(),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.refresh_rounded,
+                                  size: 18.sp,
+                                  color: const Color(0xFF6E56CF),
+                                ),
+                                4.horizontalSpace,
+                                Text(
+                                  l10n.clearSignature,
+                                  style: AppTextStyle.medium14(
+                                    context,
+                                  ).copyWith(color: const Color(0xFF6E56CF)),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      10.verticalSpace,
+                      _buildSignatureBox(context, l10n),
+                      24.verticalSpace,
+
+                      // 3. Proof Photo Section ("صورة الشحنة")
+                      Text(
+                        l10n.parcelPhoto,
+                        style: AppTextStyle.bold16(context).copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
-                        10.verticalSpace,
-                        _buildProofPhotoBox(context),
-                        24.verticalSpace,
+                      ),
+                      10.verticalSpace,
+                      _buildProofPhotoBox(context, l10n),
+                      24.verticalSpace,
 
-                        // 4. Cash Payment Section ("الدفع نقداً")
-                        _buildCashPaymentCard(context, remainingAmount),
-                        24.verticalSpace,
+                      // 4. Cash Payment Section ("الدفع نقداً")
+                      _buildCashPaymentCard(context, remainingAmount, l10n),
+                      24.verticalSpace,
 
-                        // 5. OTP Verification Section ("رمز التحقق")
-                        _buildOtpSection(context),
-                        24.verticalSpace,
+                      // 5. OTP Verification Section ("رمز التحقق")
+                      _buildOtpSection(context, l10n),
+                      24.verticalSpace,
 
-                        // 6. Recipient Name & Delivery Note (Optional)
-                        _buildOptionalFields(context),
-                        32.verticalSpace,
+                      // 6. Recipient Name & Delivery Note (Optional)
+                      _buildOptionalFields(context, l10n),
+                      32.verticalSpace,
 
-                        // 7. Submit Action Button ("تأكيد التسليم")
-                        BlocBuilder<AppCubit, AppState>(
-                          builder: (context, appState) {
-                            final isActionLoading =
-                                appState is CompleteDeliveryOrderLoadingState;
+                      // 7. Submit Action Button ("تأكيد التسليم")
+                      BlocBuilder<AppCubit, AppState>(
+                        builder: (context, appState) {
+                          final isActionLoading =
+                              appState is CompleteDeliveryOrderLoadingState;
 
-                            return CustomButton(
-                              text: 'تأكيد التسليم',
-                              loading: isActionLoading,
-                              onPressed: isActionLoading
-                                  ? null
-                                  : () async {
-                                      final signatureBase64 =
-                                          await _signatureController
-                                              .exportBase64Png();
+                          return CustomButton(
+                            text: l10n.confirmDelivery,
+                            loading: isActionLoading,
+                            onPressed: isActionLoading
+                                ? null
+                                : () async {
+                                    final signatureBase64 =
+                                        await _signatureController
+                                            .exportBase64Png();
 
-                                      if (context.mounted) {
-                                        context
-                                            .read<AppCubit>()
-                                            .completeDeliveryOrder(
-                                              orderId: widget.orderId,
-                                              proofPhoto: _proofPhotoFile,
-                                              signature: signatureBase64,
-                                              recipientOtp: _otpController.text
-                                                  .trim(),
-                                              collectedAmount:
-                                                  _collectedAmountController
-                                                      .text
-                                                      .trim(),
-                                              deliveryNote:
-                                                  _deliveryNoteController.text
-                                                      .trim(),
-                                              recipientName:
-                                                  _recipientNameController.text
-                                                      .trim(),
-                                            );
-                                      }
-                                    },
-                              isMax: true,
-                              backgroundColor: const Color(0xFFFF5E3A),
-                              textColor: Colors.white,
-                              radius: 30.r,
-                            );
-                          },
-                        ),
-                        32.verticalSpace,
-                      ],
-                    ),
+                                    if (context.mounted) {
+                                      context
+                                          .read<AppCubit>()
+                                          .completeDeliveryOrder(
+                                            orderId: widget.orderId,
+                                            proofPhoto: _proofPhotoFile,
+                                            signature: signatureBase64,
+                                            recipientOtp: _otpController.text
+                                                .trim(),
+                                            collectedAmount:
+                                                _collectedAmountController
+                                                    .text
+                                                    .trim(),
+                                            deliveryNote:
+                                                _deliveryNoteController.text
+                                                    .trim(),
+                                            recipientName:
+                                                _recipientNameController.text
+                                                    .trim(),
+                                          );
+                                    }
+                                  },
+                            isMax: true,
+                            backgroundColor: const Color(0xFFFF5E3A),
+                            textColor: Colors.white,
+                            radius: 30.r,
+                          );
+                        },
+                      ),
+                      32.verticalSpace,
+                    ],
                   ),
                 ),
               ),
@@ -298,7 +306,11 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
     );
   }
 
-  Widget _buildAddressCard(BuildContext context, String addressText) {
+  Widget _buildAddressCard(
+    BuildContext context,
+    String addressText,
+    AppLocalizations l10n,
+  ) {
     return Container(
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
@@ -318,7 +330,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'عنوان التوصيل',
+                  l10n.deliveryAddress,
                   style: AppTextStyle.regular14(context).copyWith(
                     color: Theme.of(
                       context,
@@ -353,7 +365,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
     );
   }
 
-  Widget _buildSignatureBox(BuildContext context) {
+  Widget _buildSignatureBox(BuildContext context, AppLocalizations l10n) {
     return DottedBorder(
       options: RoundedRectDottedBorderOptions(
         radius: Radius.circular(16.r),
@@ -372,14 +384,14 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
           borderRadius: BorderRadius.circular(16.r),
           child: _SignaturePad(
             controller: _signatureController,
-            hintText: 'وقع هنا للتسليم',
+            hintText: l10n.signHereForDelivery,
           ),
         ),
       ),
     );
   }
 
-  Widget _buildProofPhotoBox(BuildContext context) {
+  Widget _buildProofPhotoBox(BuildContext context, AppLocalizations l10n) {
     if (_proofPhotoFile != null) {
       return Stack(
         children: [
@@ -447,7 +459,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
               ),
               10.verticalSpace,
               Text(
-                'التقاط صورة للشحنة عند الباب',
+                l10n.takePhotoAtDoor,
                 style: AppTextStyle.regular14(context).copyWith(
                   color: Theme.of(
                     context,
@@ -461,7 +473,11 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
     );
   }
 
-  Widget _buildCashPaymentCard(BuildContext context, double remainingAmount) {
+  Widget _buildCashPaymentCard(
+    BuildContext context,
+    double remainingAmount,
+    AppLocalizations l10n,
+  ) {
     return Container(
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
@@ -480,7 +496,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'الدفع نقداً',
+                l10n.cashPayment,
                 style: AppTextStyle.bold16(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.onSurface),
@@ -492,7 +508,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
-                  'مطلوب التحصيل',
+                  l10n.collectionRequired,
                   style: AppTextStyle.medium12(
                     context,
                   ).copyWith(color: const Color(0xFF6E56CF)),
@@ -507,7 +523,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'المبلغ المطلوب',
+                l10n.requiredAmount,
                 style: AppTextStyle.regular14(context).copyWith(
                   color: Theme.of(
                     context,
@@ -515,7 +531,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
                 ),
               ),
               Text(
-                '${_requiredAmount.toStringAsFixed(2)} ج.م',
+                '${_requiredAmount.toStringAsFixed(2)} ${l10n.egp}',
                 style: AppTextStyle.bold16(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.onSurface),
@@ -529,7 +545,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'المبلغ المستلم',
+                l10n.collectedAmount,
                 style: AppTextStyle.regular14(context).copyWith(
                   color: Theme.of(
                     context,
@@ -553,7 +569,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
                       horizontal: 8.w,
                       vertical: 8.h,
                     ),
-                    suffixText: 'ج.م',
+                    suffixText: l10n.egp,
                     filled: true,
                     fillColor: const Color(0xFFF5F5F5),
                     border: OutlineInputBorder(
@@ -578,7 +594,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'المبلغ المتبقي',
+                l10n.remainingAmount,
                 style: AppTextStyle.regular14(context).copyWith(
                   color: Theme.of(
                     context,
@@ -586,7 +602,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
                 ),
               ),
               Text(
-                '${remainingAmount.toStringAsFixed(2)} ج.م',
+                '${remainingAmount.toStringAsFixed(2)} ${l10n.egp}',
                 style: AppTextStyle.bold14(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.onSurface),
@@ -598,7 +614,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
     );
   }
 
-  Widget _buildOtpSection(BuildContext context) {
+  Widget _buildOtpSection(BuildContext context, AppLocalizations l10n) {
     final defaultPinTheme = PinTheme(
       width: 56.w,
       height: 56.h,
@@ -626,7 +642,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
       children: [
         Center(
           child: Text(
-            'رمز التحقق',
+            l10n.otpVerification,
             style: AppTextStyle.bold16(
               context,
             ).copyWith(color: Theme.of(context).colorScheme.onSurface),
@@ -635,7 +651,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
         6.verticalSpace,
         Center(
           child: Text(
-            'أدخل الرمز المكون من 4 أرقام المستلم لدى العميل',
+            l10n.enter4DigitOtp,
             style: AppTextStyle.regular14(context).copyWith(
               color: Theme.of(
                 context,
@@ -659,12 +675,12 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
     );
   }
 
-  Widget _buildOptionalFields(BuildContext context) {
+  Widget _buildOptionalFields(BuildContext context, AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'معلومات المستلم والملاحظات',
+          l10n.recipientInfoAndNotes,
           style: AppTextStyle.bold16(
             context,
           ).copyWith(color: Theme.of(context).colorScheme.onSurface),
@@ -673,7 +689,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
         TextFormField(
           controller: _recipientNameController,
           decoration: InputDecoration(
-            hintText: 'اسم المستلم (اختياري)',
+            hintText: l10n.recipientNameOptional,
             prefixIcon: const Icon(Icons.person_outline),
             filled: true,
             fillColor: Theme.of(context).colorScheme.surface,
@@ -692,7 +708,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage> {
           controller: _deliveryNoteController,
           maxLines: 2,
           decoration: InputDecoration(
-            hintText: 'ملاحظات التسليم (اختياري)',
+            hintText: l10n.deliveryNotesOptional,
             prefixIcon: const Icon(Icons.note_alt_outlined),
             filled: true,
             fillColor: Theme.of(context).colorScheme.surface,

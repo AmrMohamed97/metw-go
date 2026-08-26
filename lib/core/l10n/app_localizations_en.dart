@@ -891,4 +891,57 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get takePhotoForProofOfPickup => 'Take photo for proof of pickup';
+
+  @override
+  String get deliveryConfirmedSuccess => 'Delivery confirmed successfully';
+
+  @override
+  String get defaultDeliveryAddress =>
+      'Al Nargis District, King Abdulaziz Road, Riyadh, Saudi Arabia';
+
+  @override
+  String get confirmDelivery => 'Confirm Delivery';
+
+  @override
+  String get deliveryAddress => 'Delivery Address';
+
+  @override
+  String get customerSignature => 'Customer Signature';
+
+  @override
+  String get cashPayment => 'Cash Payment';
+
+  @override
+  String get otpVerification => 'OTP Verification';
+
+  @override
+  String get recipientInfoAndNotes => 'Recipient Information & Notes';
+
+  @override
+  String get signHereForDelivery => 'Sign here for delivery';
+
+  @override
+  String get takePhotoAtDoor => 'Take photo of parcel at door';
+
+  @override
+  String get collectionRequired => 'Collection Required';
+
+  @override
+  String get requiredAmount => 'Required Amount';
+
+  @override
+  String get collectedAmount => 'Collected Amount';
+
+  @override
+  String get remainingAmount => 'Remaining Amount';
+
+  @override
+  String get enter4DigitOtp =>
+      'Enter the 4-digit code received by the customer';
+
+  @override
+  String get recipientNameOptional => 'Recipient Name (Optional)';
+
+  @override
+  String get deliveryNotesOptional => 'Delivery Notes (Optional)';
 }
