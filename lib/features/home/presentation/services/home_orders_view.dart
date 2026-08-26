@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/cubit/app_cubit.dart';
+import 'package:metw_go/core/cubit/app_state.dart';
 import 'package:metw_go/core/router/app_routes.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/order_item.dart';
 import 'package:metw_go/core/widgets/view_all_widgets.dart';
 import 'package:metw_go/features/home/presentation/manager/home_cubit.dart';
@@ -13,63 +16,95 @@ class HomeOrdersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
-      builder: (context, state) {
-        final cubit = context.read<HomeCubit>();
-        return Column(
-          children: [
-            if (cubit.homeData?.data?.incomingOrders?.isNotEmpty ?? false)
-              Column(
-                crossAxisAlignment: .start,
-                children: [
-                  ViewAllWidget(),
-                  12.verticalSpace,
-                  // Active Order
-                  ...List.generate(
-                    cubit.homeData?.data?.incomingOrders?.length ?? 0,
-                    (index) {
-                      final order =
-                          cubit.homeData!.data!.incomingOrders![index];
-                      return OrderItem(
-                        orderId: order.id.toString(),
-                        distance: order.distanceKm?.toString() ?? "",
-                        isUrgent: order.priority == "urgent",
-                        pickup: order.pickupAddress ?? "",
-                        delivery: order.dropoffAddress ?? "",
+    return BlocConsumer<AppCubit, AppState>(
+      listener: (context, appState) {
+        if (appState is AcceptStartOrderSuccessState) {
+          showToast(
+            context,
+            message: appState.response.message ?? "success",
+            state: ToastStates.success,
+          );
+          context.read<HomeCubit>().getHomeData();
+        }
+        if (appState is AcceptStartOrderErrorState) {
+          showToast(
+            context,
+            message: appState.message,
+            state: ToastStates.error,
+          );
+        }
+      },
+      builder: (context, appState) {
+        final appCubit = context.read<AppCubit>();
+        return BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            final cubit = context.read<HomeCubit>();
+            return Column(
+              children: [
+                if (cubit.homeData?.data?.incomingOrders?.isNotEmpty ?? false)
+                  Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      ViewAllWidget(),
+                      12.verticalSpace,
+                      // Active Order
+                      ...List.generate(
+                        cubit.homeData?.data?.incomingOrders?.length ?? 0,
+                        (index) {
+                          final order =
+                              cubit.homeData!.data!.incomingOrders![index];
+                          return OrderItem(
+                            onPressed: () => appCubit.acceptStartOrder(
+                              orderId: order.id as int,
+                            ),
+                            isLoading:
+                                appState is AcceptStartOrderLoadingState &&
+                                appState.orderId == order.id,
+                            orderId: order.id.toString(),
+                            distance: order.distanceKm?.toString() ?? "",
+                            isUrgent: order.priority == "urgent",
+                            pickup: order.pickupAddress ?? "",
+                            delivery: order.dropoffAddress ?? "",
+                            onDetailsPressed: () => context.push(
+                              AppRoutes.orderDetailsPage,
+                              extra: order.id,
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                if (cubit.homeData?.data?.activeOrder != null)
+                  Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      OrderItem(
+                        onPressed: null,
+                        orderId: cubit.homeData!.data!.activeOrder!.id
+                            .toString(),
+                        distance:
+                            cubit.homeData!.data!.activeOrder!.distanceKm
+                                ?.toString() ??
+                            "",
+                        isUrgent:
+                            cubit.homeData!.data!.activeOrder!.priority ==
+                            "urgent",
+                        pickup:
+                            cubit.homeData!.data!.activeOrder!.pickupAddress ??
+                            "",
+                        delivery:
+                            cubit.homeData!.data!.activeOrder!.dropoffAddress ??
+                            "",
                         onDetailsPressed: () => context.push(
-                          AppRoutes.orderDetailsPage,
-                          extra: order.id,
+                          AppRoutes.onWayOrder,
+                          extra: cubit.homeData!.data!.activeOrder!.id,
                         ),
-                      );
-                    },
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            if (cubit.homeData?.data?.activeOrder != null)
-              Column(
-                crossAxisAlignment: .start,
-                children: [
-                  OrderItem(
-                    onPressed: null,
-                    orderId: cubit.homeData!.data!.activeOrder!.id.toString(),
-                    distance:
-                        cubit.homeData!.data!.activeOrder!.distanceKm
-                            ?.toString() ??
-                        "",
-                    isUrgent:
-                        cubit.homeData!.data!.activeOrder!.priority == "urgent",
-                    pickup:
-                        cubit.homeData!.data!.activeOrder!.pickupAddress ?? "",
-                    delivery:
-                        cubit.homeData!.data!.activeOrder!.dropoffAddress ?? "",
-                    onDetailsPressed: () => context.push(
-                      AppRoutes.onWayOrder,
-                      extra: cubit.homeData!.data!.activeOrder!.id,
-                    ),
-                  ),
-                ],
-              ),
-          ],
+              ],
+            );
+          },
         );
       },
     );
