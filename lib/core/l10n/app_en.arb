@@ -333,5 +333,6 @@
     "remainingAmount": "Remaining Amount",
     "enter4DigitOtp": "Enter the 4-digit code received by the customer",
     "recipientNameOptional": "Recipient Name (Optional)",
-    "deliveryNotesOptional": "Delivery Notes (Optional)"
+    "deliveryNotesOptional": "Delivery Notes (Optional)",
+    "deliveringOrder": "Out for Delivery"
 }

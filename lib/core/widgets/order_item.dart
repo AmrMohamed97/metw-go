@@ -229,7 +229,7 @@ class OrderItem extends StatelessWidget {
                               8.horizontalSpace,
                               Expanded(
                                 child: Text(
-                                  "جاري التوصيل",
+                                  AppLocalizations.of(context)!.deliveringOrder,
                                   style: AppTextStyle.medium14(context)
                                       .copyWith(
                                         color: Theme.of(

@@ -944,4 +944,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deliveryNotesOptional => 'Delivery Notes (Optional)';
+
+  @override
+  String get deliveringOrder => 'Out for Delivery';
 }

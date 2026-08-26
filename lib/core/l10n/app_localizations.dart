@@ -1909,6 +1909,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delivery Notes (Optional)'**
   String get deliveryNotesOptional;
+
+  /// No description provided for @deliveringOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Out for Delivery'**
+  String get deliveringOrder;
 }
 
 class _AppLocalizationsDelegate

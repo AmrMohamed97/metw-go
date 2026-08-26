@@ -333,5 +333,6 @@
     "remainingAmount": "المبلغ المتبقي",
     "enter4DigitOtp": "أدخل الرمز المكون من 4 أرقام المستلم لدى العميل",
     "recipientNameOptional": "اسم المستلم (اختياري)",
-    "deliveryNotesOptional": "ملاحظات التسليم (اختياري)"
+    "deliveryNotesOptional": "ملاحظات التسليم (اختياري)",
+    "deliveringOrder": "جاري التوصيل"
 }

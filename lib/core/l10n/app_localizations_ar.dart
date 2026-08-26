@@ -938,4 +938,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get deliveryNotesOptional => 'ملاحظات التسليم (اختياري)';
+
+  @override
+  String get deliveringOrder => 'جاري التوصيل';
 }
