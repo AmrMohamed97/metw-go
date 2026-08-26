@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:ui' as ui;
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +12,7 @@ import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
+import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart';
@@ -28,7 +27,7 @@ class ConfirmPickupPage extends StatefulWidget {
 }
 
 class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
-  final _SignatureController _signatureController = _SignatureController();
+  final TextEditingController _signatureController = TextEditingController();
 
   bool _conditionVerified = false;
   bool _countVerified = false;
@@ -142,10 +141,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
               l10n.noorGiftsStore;
 
           return ScreenWrapper(
-            appBar: CustomAppBar(
-              title: l10n.confirmPickup,
-              centerTitle: true,
-            ),
+            appBar: CustomAppBar(title: l10n.confirmPickup, centerTitle: true),
             body: Skeletonizer(
               enabled: isLoading,
               child: Padding(
@@ -183,7 +179,10 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
                             ),
                           ),
                           InkWell(
-                            onTap: () => _signatureController.clear(),
+                            onTap: () {
+                              _signatureController.clear();
+                              setState(() {});
+                            },
                             child: Row(
                               children: [
                                 Icon(
@@ -224,42 +223,46 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
                           final isActionLoading =
                               appState is ConfirmPickupOrderLoadingState;
 
-                          return CustomButton(
-                            text: l10n.pickupCompleted,
-                            loading: isActionLoading,
-                            onPressed: isActionLoading
-                                ? null
-                                : () async {
-                                    final signatureBase64 =
-                                        await _signatureController
-                                            .exportBase64Png();
+                          return Center(
+                            child: CustomButton(
+                              text: l10n.pickupCompleted,
+                              loading: isActionLoading,
+                              onPressed: isActionLoading
+                                  ? null
+                                  : () {
+                                      final signatureText = _signatureController
+                                          .text
+                                          .trim();
 
-                                    if (context.mounted) {
-                                      context
-                                          .read<AppCubit>()
-                                          .confirmPickupOrder(
-                                            orderId: widget.orderId,
-                                            proofPhoto: _proofPhotoFile,
-                                            signature: signatureBase64,
-                                            packageCountVerified: _countVerified
-                                                ? '1'
-                                                : '0',
-                                            packageConditionVerified:
-                                                _conditionVerified ? '1' : '0',
-                                            merchantSignatureObtained:
-                                                (_signatureController
-                                                        .points
-                                                        .isNotEmpty ||
-                                                    _signatureObtained)
-                                                ? '1'
-                                                : '0',
-                                          );
-                                    }
-                                  },
-                            isMax: true,
-                            backgroundColor: const Color(0xFFFF5E3A),
-                            textColor: Colors.white,
-                            radius: 30.r,
+                                      if (context.mounted) {
+                                        context
+                                            .read<AppCubit>()
+                                            .confirmPickupOrder(
+                                              orderId: widget.orderId,
+                                              proofPhoto: _proofPhotoFile,
+                                              signature:
+                                                  signatureText.isNotEmpty
+                                                  ? signatureText
+                                                  : null,
+                                              packageCountVerified:
+                                                  _countVerified ? '1' : '0',
+                                              packageConditionVerified:
+                                                  _conditionVerified
+                                                  ? '1'
+                                                  : '0',
+                                              merchantSignatureObtained:
+                                                  (signatureText.isNotEmpty ||
+                                                      _signatureObtained)
+                                                  ? '1'
+                                                  : '0',
+                                            );
+                                      }
+                                    },
+                              isMax: true,
+                              backgroundColor: const Color(0xFFFF5E3A),
+                              textColor: Colors.white,
+                              radius: 30.r,
+                            ),
                           );
                         },
                       ),
@@ -392,7 +395,9 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
           _buildChecklistItem(
             context,
             title: l10n.obtainMerchantSignature,
-            value: _signatureObtained || _signatureController.points.isNotEmpty,
+            value:
+                _signatureObtained ||
+                _signatureController.text.trim().isNotEmpty,
             onChanged: (val) =>
                 setState(() => _signatureObtained = val ?? false),
           ),
@@ -435,28 +440,19 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
   }
 
   Widget _buildSignatureBox(BuildContext context, AppLocalizations l10n) {
-    return DottedBorder(
-      options: RoundedRectDottedBorderOptions(
-        radius: Radius.circular(16.r),
-        dashPattern: const [6, 4],
-        color: const Color(0xFFFFD5C6),
-        strokeWidth: 1.5,
+    return CustomTextField(
+      controller: _signatureController,
+      hintText: l10n.signHereForPickup,
+      onChanged: (_) => setState(() {}),
+      prefixIcon: Icon(
+        Icons.edit_note_rounded,
+        color: const Color(0xFFFF5E3A),
+        size: 24.sp,
       ),
-      child: Container(
-        height: 150.h,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: BorderRadius.circular(16.r),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16.r),
-          child: _SignaturePad(
-            controller: _signatureController,
-            hintText: l10n.signHereForPickup,
-          ),
-        ),
-      ),
+      filled: true,
+      filledColor: Theme.of(context).colorScheme.surface,
+      borderColor: const Color(0xFFFFD5C6),
+      radius: 14.r,
     );
   }
 
@@ -541,130 +537,4 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> {
       ),
     );
   }
-}
-
-// ─── Custom Built-in Signature Pad & Controller ───────────────────────────
-
-class _SignaturePad extends StatefulWidget {
-  final _SignatureController controller;
-  final String hintText;
-
-  const _SignaturePad({required this.controller, required this.hintText});
-
-  @override
-  State<_SignaturePad> createState() => _SignaturePadState();
-}
-
-class _SignaturePadState extends State<_SignaturePad> {
-  @override
-  Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: widget.controller,
-      builder: (context, child) {
-        final isEmpty = widget.controller.points.isEmpty;
-        return GestureDetector(
-          onPanStart: (details) {
-            final renderBox = context.findRenderObject() as RenderBox;
-            final localPosition = renderBox.globalToLocal(
-              details.globalPosition,
-            );
-            widget.controller.addPoint(localPosition);
-          },
-          onPanUpdate: (details) {
-            final renderBox = context.findRenderObject() as RenderBox;
-            final localPosition = renderBox.globalToLocal(
-              details.globalPosition,
-            );
-            widget.controller.addPoint(localPosition);
-          },
-          onPanEnd: (details) {
-            widget.controller.addPoint(null);
-          },
-          child: Stack(
-            children: [
-              CustomPaint(
-                painter: _SignaturePainter(widget.controller.points),
-                size: Size.infinite,
-              ),
-              if (isEmpty)
-                Center(
-                  child: Text(
-                    widget.hintText,
-                    style: AppTextStyle.regular14(context).copyWith(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.onSurface.withValues(alpha: 0.4),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _SignatureController extends ChangeNotifier {
-  final List<Offset?> points = [];
-
-  void addPoint(Offset? point) {
-    points.add(point);
-    notifyListeners();
-  }
-
-  void clear() {
-    points.clear();
-    notifyListeners();
-  }
-
-  Future<String?> exportBase64Png() async {
-    if (points.isEmpty) return null;
-    try {
-      final recorder = ui.PictureRecorder();
-      final canvas = Canvas(recorder);
-      final paint = Paint()
-        ..color = Colors.black
-        ..strokeCap = StrokeCap.round
-        ..strokeWidth = 3.0;
-
-      for (int i = 0; i < points.length - 1; i++) {
-        if (points[i] != null && points[i + 1] != null) {
-          canvas.drawLine(points[i]!, points[i + 1]!, paint);
-        }
-      }
-
-      final picture = recorder.endRecording();
-      final img = await picture.toImage(300, 150);
-      final byteData = await img.toByteData(format: ui.ImageByteFormat.png);
-      if (byteData == null) return null;
-      final buffer = byteData.buffer.asUint8List();
-      return 'data:image/png;base64,${base64Encode(buffer)}';
-    } catch (e) {
-      return null;
-    }
-  }
-}
-
-class _SignaturePainter extends CustomPainter {
-  final List<Offset?> points;
-
-  _SignaturePainter(this.points);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF222222)
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 3.0;
-
-    for (int i = 0; i < points.length - 1; i++) {
-      if (points[i] != null && points[i + 1] != null) {
-        canvas.drawLine(points[i]!, points[i + 1]!, paint);
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _SignaturePainter oldDelegate) => true;
 }
