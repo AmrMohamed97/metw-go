@@ -298,13 +298,11 @@ class AppRouter {
         path: AppRoutes.completeDeliveryPage,
         name: AppRoutes.completeDeliveryPage,
         builder: (context, state) {
-          final  data = state.extra as (int, String);
-          final orderId = data.$1;
-          final dropOffAddress = data.$2;
+          final  orderId = state.extra as int;
           return BlocProvider(
             create: (context) =>
                 getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),
-            child: CompleteDeliveryPage(orderId: orderId, dropOffAddress: dropOffAddress),
+            child: CompleteDeliveryPage(orderId: orderId),
           );
         },
       ),

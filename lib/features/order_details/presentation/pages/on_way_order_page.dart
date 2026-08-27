@@ -717,7 +717,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                     if (lifecycle?.currentStage == "dropoff_confirmation") {
                       context.push(
                         AppRoutes.completeDeliveryPage,
-                        extra: (orderId, ongoing?.dropoffAddress),
+                        extra: orderId ,
                       );
                     }
                   },

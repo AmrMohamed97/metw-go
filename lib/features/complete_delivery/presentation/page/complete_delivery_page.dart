@@ -24,8 +24,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 class CompleteDeliveryPage extends StatefulWidget {
   final int orderId;
-  final String dropOffAddress;
-  const CompleteDeliveryPage({super.key, required this.orderId, required this.dropOffAddress});
+  const CompleteDeliveryPage({super.key, required this.orderId});
 
   @override
   State<CompleteDeliveryPage> createState() => _CompleteDeliveryPageState();
