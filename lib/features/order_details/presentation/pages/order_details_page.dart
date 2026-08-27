@@ -329,7 +329,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 );
                 context.pushReplacement(
                   AppRoutes.confirmPickupPage,
-                  extra: widget.orderId,
+                  extra: widget.orderId ,
                 );
               } else if (appState is AcceptStartOrderErrorState) {
                 showToast(

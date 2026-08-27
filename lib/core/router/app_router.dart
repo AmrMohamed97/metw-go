@@ -286,7 +286,7 @@ class AppRouter {
         path: AppRoutes.confirmPickupPage,
         name: AppRoutes.confirmPickupPage,
         builder: (context, state) {
-          final orderId = state.extra is int ? state.extra as int : 0;
+          final  orderId = state.extra as int;
           return BlocProvider(
             create: (context) =>
                 getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),
@@ -298,11 +298,13 @@ class AppRouter {
         path: AppRoutes.completeDeliveryPage,
         name: AppRoutes.completeDeliveryPage,
         builder: (context, state) {
-          final orderId = state.extra is int ? state.extra as int : 0;
+          final  data = state.extra as (int, String);
+          final orderId = data.$1;
+          final dropOffAddress = data.$2;
           return BlocProvider(
             create: (context) =>
                 getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),
-            child: CompleteDeliveryPage(orderId: orderId),
+            child: CompleteDeliveryPage(orderId: orderId, dropOffAddress: dropOffAddress),
           );
         },
       ),

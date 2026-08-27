@@ -30,4 +30,5 @@ class AppRoutes {
   static const String onWayOrder = '/onWayOrder';
   static const String confirmPickupPage = '/confirmPickupPage';
   static const String completeDeliveryPage = '/completeDeliveryPage';
+
 }

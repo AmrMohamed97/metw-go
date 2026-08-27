@@ -56,7 +56,9 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> with ImageMixin {
         imageQuality: 85,
       );
       if (pickedFile != null) {
-        final compressedFile = await compress(targetImage: File(pickedFile.path));
+        final compressedFile = await compress(
+          targetImage: File(pickedFile.path),
+        );
         setState(() {
           _proofPhotoFile = compressedFile;
         });
