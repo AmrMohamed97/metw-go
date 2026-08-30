@@ -72,6 +72,12 @@ import 'package:metw_go/features/login/presentation/manager/login_cubit.dart'
     as _i563;
 import 'package:metw_go/features/main_view/manager/main_view_cubit.dart'
     as _i419;
+import 'package:metw_go/features/notification/data/data_source/notification_data_source.dart'
+    as _i283;
+import 'package:metw_go/features/notification/data/repo/notification_repo.dart'
+    as _i1001;
+import 'package:metw_go/features/notification/data/repo/notification_repo_impl.dart'
+    as _i314;
 import 'package:metw_go/features/notification/presentation/manager/notification_cubit.dart'
     as _i364;
 import 'package:metw_go/features/order_details/data/data_source/order_details_data_source.dart'
@@ -205,7 +211,6 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i419.MainViewCubit>(() => _i419.MainViewCubit());
-    gh.factory<_i364.NotificationCubit>(() => _i364.NotificationCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => registerModule.secureStorage,
     );
@@ -238,6 +243,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i101.LoginDataSource>(
       () => _i101.LoginDataSource(gh<_i361.Dio>()),
+    );
+    gh.factory<_i283.NotificationDataSource>(
+      () => _i283.NotificationDataSource(gh<_i361.Dio>()),
     );
     gh.factory<_i304.OrderDetailsDataSource>(
       () => _i304.OrderDetailsDataSource(gh<_i361.Dio>()),
@@ -394,6 +402,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i963.PrivacyCubit>(
       () => _i963.PrivacyCubit(gh<_i195.PrivacyRepo>()),
     );
+    gh.factory<_i1001.NotificationRepo>(
+      () => _i314.NotificationRepoImpl(
+        dataSource: gh<_i283.NotificationDataSource>(),
+      ),
+    );
     gh.factory<_i203.DelegateInfoCubit>(
       () => _i203.DelegateInfoCubit(
         delegateInfoRepo: gh<_i848.DelegateInfoRepo>(),
@@ -414,6 +427,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i571.OrderDetailsCubit>(
       () => _i571.OrderDetailsCubit(gh<_i603.OrderDetailsRepository>()),
+    );
+    gh.factory<_i364.NotificationCubit>(
+      () => _i364.NotificationCubit(gh<_i1001.NotificationRepo>()),
     );
     gh.factory<_i859.OtpCubit>(() => _i859.OtpCubit(gh<_i72.OtpRepo>()));
     gh.factory<_i661.ServiceAreasCubit>(
