@@ -6,7 +6,7 @@ part 'return_reasons_response.g.dart';
 class ReturnReasonsResponse {
   final bool? success;
   final String? message;
-  final ReturnReasonsDataModel? data;
+  final List<ReasonItemModel>? data;
 
   ReturnReasonsResponse({this.success, this.message, this.data});
 
@@ -14,18 +14,6 @@ class ReturnReasonsResponse {
       _$ReturnReasonsResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ReturnReasonsResponseToJson(this);
-}
-
-@JsonSerializable()
-class ReturnReasonsDataModel {
-  final List<ReasonItemModel>? reasons;
-
-  ReturnReasonsDataModel({this.reasons});
-
-  factory ReturnReasonsDataModel.fromJson(Map<String, dynamic> json) =>
-      _$ReturnReasonsDataModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ReturnReasonsDataModelToJson(this);
 }
 
 @JsonSerializable()

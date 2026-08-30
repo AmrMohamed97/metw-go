@@ -11,9 +11,9 @@ ReturnReasonsResponse _$ReturnReasonsResponseFromJson(
 ) => ReturnReasonsResponse(
   success: json['success'] as bool?,
   message: json['message'] as String?,
-  data: json['data'] == null
-      ? null
-      : ReturnReasonsDataModel.fromJson(json['data'] as Map<String, dynamic>),
+  data: (json['data'] as List<dynamic>?)
+      ?.map((e) => ReasonItemModel.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$ReturnReasonsResponseToJson(
@@ -23,18 +23,6 @@ Map<String, dynamic> _$ReturnReasonsResponseToJson(
   'message': instance.message,
   'data': instance.data,
 };
-
-ReturnReasonsDataModel _$ReturnReasonsDataModelFromJson(
-  Map<String, dynamic> json,
-) => ReturnReasonsDataModel(
-  reasons: (json['reasons'] as List<dynamic>?)
-      ?.map((e) => ReasonItemModel.fromJson(e as Map<String, dynamic>))
-      .toList(),
-);
-
-Map<String, dynamic> _$ReturnReasonsDataModelToJson(
-  ReturnReasonsDataModel instance,
-) => <String, dynamic>{'reasons': instance.reasons};
 
 ReasonItemModel _$ReasonItemModelFromJson(Map<String, dynamic> json) =>
     ReasonItemModel(

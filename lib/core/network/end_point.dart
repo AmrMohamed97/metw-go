@@ -49,6 +49,6 @@ abstract class EndPoints {
   static const String privacyUrl = 'support/privacy';
   static const String contactUsUrl = 'support/contact-us';
 
-  static const String returnReasonsUrl = 'return-reasons';
+  static const String returnReasonsUrl = 'rejection-reasons';
   static const String rejectOrderUrl = 'orders/{orderId}/reject';
 }

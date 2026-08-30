@@ -33,7 +33,7 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     emit(ReturnReasonsLoading());
     try {
       final response = await repository.fetchReturnReasons();
-      returnReasons = response.data?.reasons ?? [];
+      returnReasons = response.data ?? [];
       emit(ReturnReasonsLoaded(returnReasons));
     } catch (e) {
       emit(ReturnReasonsError(e.toString()));

@@ -61,7 +61,7 @@ class _OrderDetailsDataSource implements OrderDetailsDataSource {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'return-reasons',
+            'rejection-reasons',
             queryParameters: queryParameters,
             data: _data,
           )
