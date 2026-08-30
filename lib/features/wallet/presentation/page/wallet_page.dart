@@ -67,6 +67,10 @@ class WalletPageContent extends StatelessWidget {
       listener: (context, state) {
         if (state is WalletFailureState) {
           showToast(context, message: state.message, state: ToastStates.error);
+        } else if (state is WithdrawFailureState) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        } else if (state is WithdrawSuccessState) {
+          showToast(context, message: state.message, state: ToastStates.success);
         }
       },
       builder: (context, state) {

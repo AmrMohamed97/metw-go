@@ -5,6 +5,8 @@ import 'package:metw_go/features/wallet_transaction/data/models/wallet_operation
 import 'package:metw_go/features/wallet/data/repo/wallet_repo.dart';
 import 'package:metw_go/features/wallet/presentation/manager/wallet_state.dart';
 
+import 'package:metw_go/features/wallet/data/models/withdraw_request_model.dart';
+
 @injectable
 class WalletCubit extends Cubit<WalletState> {
   final WalletRepo walletRepo;
@@ -51,6 +53,34 @@ class WalletCubit extends Cubit<WalletState> {
             );
           },
         );
+      },
+    );
+  }
+
+  Future<void> requestWithdrawal({
+    required num amount,
+    required String method,
+    required String accountReference,
+  }) async {
+    emit(WithdrawLoadingState());
+
+    final request = WithdrawRequestModel(
+      amount: amount,
+      method: method,
+      accountReference: accountReference,
+    );
+
+    final result = await walletRepo.requestWithdrawal(request);
+
+    result.fold(
+      (failure) => emit(WithdrawFailureState(failure.message)),
+      (response) {
+        emit(
+          WithdrawSuccessState(
+            response.message ?? 'تم إرسال طلب سحب الرصيد',
+          ),
+        );
+        getWalletData();
       },
     );
   }

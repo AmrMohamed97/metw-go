@@ -19,3 +19,17 @@ class WalletFailureState extends WalletState {
 
   WalletFailureState(this.message);
 }
+
+class WithdrawLoadingState extends WalletState {}
+
+class WithdrawSuccessState extends WalletState {
+  final String message;
+
+  WithdrawSuccessState(this.message);
+}
+
+class WithdrawFailureState extends WalletState {
+  final String message;
+
+  WithdrawFailureState(this.message);
+}

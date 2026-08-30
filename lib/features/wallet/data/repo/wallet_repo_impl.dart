@@ -7,6 +7,9 @@ import 'package:metw_go/features/wallet/data/models/wallet_overview_response.dar
 import 'package:metw_go/features/wallet_transaction/data/models/wallet_operation_response.dart';
 import 'package:metw_go/features/wallet/data/repo/wallet_repo.dart';
 
+import 'package:metw_go/features/wallet/data/models/withdraw_request_model.dart';
+import 'package:metw_go/features/wallet/data/models/withdraw_response_model.dart';
+
 @Injectable(as: WalletRepo)
 class WalletRepoImpl implements WalletRepo {
   final WalletDataSource walletDataSource;
@@ -36,6 +39,21 @@ class WalletRepoImpl implements WalletRepo {
         page,
         perPage,
       );
+      return Right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, WithdrawResponseModel>> requestWithdrawal(
+    WithdrawRequestModel body,
+  ) async {
+    try {
+      final response = await walletDataSource.requestWithdrawal(body);
       return Right(response);
     } catch (e) {
       if (e is DioException) {

@@ -5,6 +5,9 @@ import 'package:metw_go/features/wallet/data/models/wallet_overview_response.dar
 import 'package:metw_go/features/wallet_transaction/data/models/wallet_operation_response.dart';
 import 'package:retrofit/retrofit.dart';
 
+import 'package:metw_go/features/wallet/data/models/withdraw_request_model.dart';
+import 'package:metw_go/features/wallet/data/models/withdraw_response_model.dart';
+
 part 'wallet_data_source.g.dart';
 
 @injectable
@@ -20,5 +23,10 @@ abstract class WalletDataSource {
   Future<WalletOperationsResponse> getWalletOperations(
     @Query('page') int page,
     @Query('per_page') int perPage,
+  );
+
+  @POST(EndPoints.walletWithdrawalsUrl)
+  Future<WithdrawResponseModel> requestWithdrawal(
+    @Body() WithdrawRequestModel body,
   );
 }
