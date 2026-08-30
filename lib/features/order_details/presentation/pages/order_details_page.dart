@@ -610,10 +610,7 @@ class _RejectBottomSheetState extends State<_RejectBottomSheet> {
             message: state.message,
             state: ToastStates.success,
           );
-          Navigator.of(context).pop(); // Close bottom sheet
-          Navigator.of(
-            context,
-          ).pop(); // Exit order details page after rejection
+          context.go(AppRoutes.nextPage); 
         } else if (state is RejectOrderFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
         } else if (state is ReturnReasonsError) {

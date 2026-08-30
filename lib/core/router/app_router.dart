@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
+import 'package:metw_go/core/utils/next_page.dart';
 // import 'package:metw_go/core/models/auth_model/auth_model.dart';
 // import 'package:metw_go/core/utils/cache_helper.dart';
 import 'package:metw_go/features/comming_soon/comming_soon_page.dart';
@@ -304,6 +305,13 @@ class AppRouter {
                 getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),
             child: CompleteDeliveryPage(orderId: orderId),
           );
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.nextPage,
+        name: AppRoutes.nextPage,
+        builder: (context, state) {
+          return NextPage();
         },
       ),
 

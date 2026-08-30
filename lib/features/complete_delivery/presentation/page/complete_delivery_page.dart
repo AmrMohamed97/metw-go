@@ -137,7 +137,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage>
             message: appState.response.message ?? l10n.deliveryConfirmedSuccess,
             state: ToastStates.success,
           );
-          context.go(AppRoutes.mainView);
+          context.go(AppRoutes.nextPage);
         } else if (appState is CompleteDeliveryOrderErrorState) {
           showToast(
             context,
