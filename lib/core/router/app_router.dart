@@ -19,6 +19,7 @@ import 'package:metw_go/features/faq/presentation/page/faq_page.dart';
 import 'package:metw_go/features/forget_password/presentation/manager/forget_password_cubit.dart';
 import 'package:metw_go/features/forget_password/presentation/page/change_password_page.dart';
 import 'package:metw_go/features/forget_password/presentation/page/forget_password_page.dart';
+import 'package:metw_go/features/history/presentation/manager/history_cubit.dart';
 import 'package:metw_go/features/history/presentation/page/history_page.dart';
 import 'package:metw_go/features/login/presentation/manager/login_cubit.dart';
 import 'package:metw_go/features/login/presentation/page/login_page.dart';
@@ -146,7 +147,10 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.historyPage,
         name: AppRoutes.historyPage,
-        builder: (context, state) => const HistoryPage(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<HistoryCubit>()..init(),
+          child: const HistoryPage(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.completeOrderPage,

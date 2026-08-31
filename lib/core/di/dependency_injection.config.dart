@@ -58,6 +58,13 @@ import 'package:metw_go/features/forget_password/data/repo/forget_password_repo_
     as _i718;
 import 'package:metw_go/features/forget_password/presentation/manager/forget_password_cubit.dart'
     as _i37;
+import 'package:metw_go/features/history/data/data_source/history_data_source.dart'
+    as _i446;
+import 'package:metw_go/features/history/data/repo/history_repo.dart' as _i150;
+import 'package:metw_go/features/history/data/repo/history_repo_impl.dart'
+    as _i1068;
+import 'package:metw_go/features/history/presentation/manager/history_cubit.dart'
+    as _i614;
 import 'package:metw_go/features/home/data/data_source/home_data_source.dart'
     as _i551;
 import 'package:metw_go/features/home/data/repo/home_repo.dart' as _i576;
@@ -238,6 +245,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i904.ForgetPasswordDataSource>(
       () => _i904.ForgetPasswordDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i446.HistoryDataSource>(
+      () => _i446.HistoryDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i551.HomeDataSource>(
       () => _i551.HomeDataSource(gh<_i361.Dio>()),
     );
@@ -356,6 +366,9 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.factory<_i405.AppCubit>(() => _i405.AppCubit(gh<_i444.AppRepo>()));
+    gh.factory<_i150.HistoryRepo>(
+      () => _i1068.HistoryRepoImpl(dataSource: gh<_i446.HistoryDataSource>()),
+    );
     gh.factory<_i642.DocumentsRepo>(
       () => _i547.DocumentsRepoImpl(
         documentsDataSource: gh<_i818.DocumentsDataSource>(),
@@ -446,6 +459,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i661.WalletCubit>(
       () => _i661.WalletCubit(walletRepo: gh<_i141.WalletRepo>()),
+    );
+    gh.factory<_i614.HistoryCubit>(
+      () => _i614.HistoryCubit(gh<_i150.HistoryRepo>()),
     );
     gh.factory<_i273.ThirdStepCubit>(
       () => _i273.ThirdStepCubit(gh<_i319.ThirdStepRepo>()),
