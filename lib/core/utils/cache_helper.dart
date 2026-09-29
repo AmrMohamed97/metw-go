@@ -17,12 +17,11 @@ class CacheHelper {
   // }
 
   static Future<void> saveAuthData(AuthModel authModel) async {
-    final userDataString = const JsonEncoder().convert(authModel.toJson());
+    final authDataString = const JsonEncoder().convert(authModel.toJson());
     await getIt<SharedPreferences>().setString(
-      AppConstant.userData,
-      userDataString,
+      AppConstant.authData,
+      authDataString,
     );
-    // await getIt<SharedPreferences>().setInt(PrefsKeys.roleId, userData.roleId);
   }
 
   static AuthModel? getauthData() {
@@ -36,25 +35,24 @@ class CacheHelper {
     return authData;
   }
 
-  static Future<void> saveAuthModel(UserModel userModel) async {
-    final authDataString = const JsonEncoder().convert(userModel.toJson());
-    await getIt<SharedPreferences>().setString(
-      AppConstant.authData,
-      authDataString,
-    );
-    // await getIt<SharedPreferences>().setInt(PrefsKeys.roleId, userData.roleId);
-  }
+  // static Future<void> saveAuthModel(UserModel userModel) async {
+  //   final userDataString = const JsonEncoder().convert(userModel.toJson());
+  //   await getIt<SharedPreferences>().setString(
+  //     AppConstant.userData,
+  //     userDataString,
+  //   );
+  // }
 
-  static UserModel? getUserData() {
-    final userDataString = getIt<SharedPreferences>().getString(
-      AppConstant.userData,
-    );
-    if (userDataString == null) {
-      return null;
-    }
-    final userData = UserModel.fromJson(jsonDecode(userDataString));
-    return userData;
-  }
+  // static UserModel? getUserData() {
+  //   final userDataString = getIt<SharedPreferences>().getString(
+  //     AppConstant.userData,
+  //   );
+  //   if (userDataString == null) {
+  //     return null;
+  //   }
+  //   final userData = UserModel.fromJson(jsonDecode(userDataString));
+  //   return userData;
+  // }
 
   static Future<bool> saveData({
     required String key,
@@ -127,6 +125,7 @@ class CacheHelper {
 
   static Future<void> clearAll() async {
     removeData(key: AppConstant.userData);
+    removeData(key: AppConstant.authData);
     removeData(key: AppConstant.isLogin);
     removeSecuerString(key: AppConstant.accessToken);
   }

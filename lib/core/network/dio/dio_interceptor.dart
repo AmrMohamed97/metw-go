@@ -9,6 +9,9 @@ import 'package:metw_go/core/router/app_router.dart';
 import 'package:metw_go/core/router/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:flutter/widgets.dart';
+import 'package:metw_go/core/utils/cache_helper.dart';
+
 @injectable
 class CustomInterceptor implements Interceptor {
   final SharedPreferences sharedPreferences;
@@ -20,14 +23,17 @@ class CustomInterceptor implements Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (kDebugMode) {
       print(
-        "ERROR:"
+        "ERROR: err.response?.statusCode: ${err.response?.statusCode} err.response?.data: ${err.response?.data} "
         "Endpoint: ${err.requestOptions.path}\n"
         "Body:",
       );
       log("${err.response}");
     }
     if (err.response?.statusCode == 401) {
-      AppRouter.router.go(AppRoutes.login);
+      CacheHelper.clearAll();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        AppRouter.router.go(AppRoutes.login);
+      });
     }
     handler.reject(err);
   }

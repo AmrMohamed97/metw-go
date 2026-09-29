@@ -58,7 +58,7 @@ class ThirdStepRepoImpl implements ThirdStepRepo {
       );
       CacheHelper.saveAuthData(
         AuthModel(
-          status: "incomplete",
+          isAuthorized: false,
           isVerified: true,
           currentStep: response.data?.currentStep,
         ),

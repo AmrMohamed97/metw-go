@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
+import 'package:metw_go/core/models/auth_model/auth_model.dart';
+import 'package:metw_go/core/utils/cache_helper.dart';
 import 'package:metw_go/core/utils/next_page.dart';
 // import 'package:metw_go/core/models/auth_model/auth_model.dart';
 // import 'package:metw_go/core/utils/cache_helper.dart';
@@ -73,6 +75,32 @@ class AppRouter {
     //   }
     //   return null;
     // },
+    // redirect: (context, state) async {
+    //   final String currentPath = state.matchedLocation;
+
+    //   // 1. الخروج المبكر: لا نحتاج لهذه الحسابات إلا عند محاولة فتح الصفحة الرئيسية
+    //   if (currentPath != '/') return null;
+
+    //   final AuthModel? authData = CacheHelper.getauthData();
+    //   final bool isComplete = authData?.status == "complete";
+
+    //   // إذا لم يكمل المستخدم الـ onboarding، نقله لصفحة الـ onboarding
+    //   if (isComplete) return AppRoutes.mainView;
+    //   return null;
+    // },
+    redirect: (context, state) {
+      final String currentPath = state.matchedLocation;
+      final AuthModel? authData = CacheHelper.getauthData();
+      final bool isComplete = authData?.isAuthorized ?? false;
+
+      // إذا كان المستخدم قد أكمل بياناته وهو حالياً في صفحة تسجيل الدخول، حوّله للشاشة الرئيسية
+      if (isComplete && currentPath == AppRoutes.login) {
+        return AppRoutes.mainView;
+      }
+
+      return null;
+    },
+
     routes: [
       // GoRoute(
       //   path: AppRoutes.splashScreen,
@@ -291,7 +319,7 @@ class AppRouter {
         path: AppRoutes.confirmPickupPage,
         name: AppRoutes.confirmPickupPage,
         builder: (context, state) {
-          final  orderId = state.extra as int;
+          final orderId = state.extra as int;
           return BlocProvider(
             create: (context) =>
                 getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),
@@ -303,7 +331,7 @@ class AppRouter {
         path: AppRoutes.completeDeliveryPage,
         name: AppRoutes.completeDeliveryPage,
         builder: (context, state) {
-          final  orderId = state.extra as int;
+          final orderId = state.extra as int;
           return BlocProvider(
             create: (context) =>
                 getIt<OrderDetailsCubit>()..fetchOrderDetails(orderId),

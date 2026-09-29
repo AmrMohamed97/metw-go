@@ -32,7 +32,7 @@ class LoginRepoImpl implements LoginRepo {
       );
       await CacheHelper.saveAuthData(
         AuthModel(
-          status: result.data?.status,
+          isAuthorized: result.data?.isAuthorized,
           isVerified: result.data?.isVerified,
           currentStep: result.data?.registrationProgress?.currentStep,
         ),
@@ -41,6 +41,10 @@ class LoginRepoImpl implements LoginRepo {
         key: AppConstant.accessToken,
         value: result.data?.accessToken ?? '',
       );
+      print('===================================');
+      print("isAuthorized: ${CacheHelper.getauthData()?.isAuthorized}");
+      print("isVerified: ${CacheHelper.getauthData()?.isVerified}");
+      print("currentStep: ${CacheHelper.getauthData()?.currentStep}");
       return Right(result);
     } catch (e) {
       if (e is DioException) {

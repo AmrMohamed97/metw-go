@@ -43,7 +43,7 @@ class FourthStepRepoImpl implements FourthStepRepo {
       );
       CacheHelper.saveAuthData(
         AuthModel(
-          status: "complete",
+          isAuthorized: true,
           isVerified: true,
           currentStep: response.data?.currentStep,
         ),
