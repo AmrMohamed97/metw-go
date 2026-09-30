@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
           } else if (state.loginOutModel?.data?.isVerified == false) {
             context.go(
               AppRoutes.otp,
-              extra: (true, context.read<LoginCubit>().phoneController.text),
+              extra: (AppRoutes.firstStepPage, context.read<LoginCubit>().phoneController.text),
             );
           } else if (state
                   .loginOutModel

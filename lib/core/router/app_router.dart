@@ -114,8 +114,8 @@ class AppRouter {
         name: AppRoutes.otp,
         builder: (context, state) {
           // final extra = state.extra;
-          final arg = state.extra as (bool, String);
-          bool fromLogin = arg.$1;
+          final arg = state.extra as (String, String);
+          String nextPage = arg.$1;
           String phone = arg.$2;
           // if (extra is bool) {
           //   fromLogin = extra;
@@ -125,7 +125,7 @@ class AppRouter {
           // }
           return BlocProvider(
             create: (context) => getIt<OtpCubit>(),
-            child: OtpPage(fromLogin: fromLogin, phone: phone),
+            child: OtpPage(nextPage: nextPage, phone: phone),
           );
         },
       ),

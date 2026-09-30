@@ -27,7 +27,7 @@ class RegisterPage extends StatelessWidget {
           context.go(
             AppRoutes.otp,
             extra: (
-              false,
+              AppRoutes.login,
               context.read<RegisterCubit>().firstPhoneController.text,
             ),
           );

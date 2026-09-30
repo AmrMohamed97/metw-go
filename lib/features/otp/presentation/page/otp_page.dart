@@ -18,8 +18,8 @@ import 'package:metw_go/features/otp/presentation/widgets/otp_fields.dart';
 import 'package:metw_go/features/otp/presentation/widgets/otp_timer.dart';
 
 class OtpPage extends StatefulWidget {
-  const OtpPage({super.key, this.fromLogin = false, this.phone = ''});
-  final bool fromLogin;
+  const OtpPage({super.key,required this.nextPage, required this.phone});
+  final String nextPage;
   final String phone;
 
   @override
@@ -50,9 +50,10 @@ class _OtpPageState extends State<OtpPage> {
             message: state.verifyOtpOutModel.message ?? '',
             state: ToastStates.success,
           );
-          widget.fromLogin
-              ? context.pushReplacement(AppRoutes.firstStepPage)
-              : context.pushReplacement(AppRoutes.changePasswordPage);
+          context.pushReplacement(widget.nextPage);
+          // widget.fromLogin
+          //     ? context.pushReplacement(AppRoutes.firstStepPage)
+          //     : context.pushReplacement(AppRoutes.changePasswordPage);
         } else if (state is VerifyOtpErrorState) {
           showToast(context, message: state.error, state: ToastStates.error);
         } else if (state is ResendOtpSuccessState) {
@@ -69,9 +70,7 @@ class _OtpPageState extends State<OtpPage> {
         final cubit = context.read<OtpCubit>();
         return ScreenWrapper(
           appBar: CustomAppBar(
-            popPress: widget.fromLogin
-                ? null
-                : () => context.go(AppRoutes.login),
+            popPress:() => context.go(AppRoutes.login),
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),

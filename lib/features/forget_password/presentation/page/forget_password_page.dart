@@ -31,7 +31,7 @@ class ForgetPasswordPage extends StatelessWidget {
           context.pushReplacement(
             AppRoutes.otp,
             extra: (
-              false,
+              AppRoutes.changePasswordPage,
               context.read<ForgetPasswordCubit>().phoneController.text,
             ),
           );
