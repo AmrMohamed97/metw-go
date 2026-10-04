@@ -54,9 +54,9 @@ class AppCubit extends Cubit<AppState> {
       CacheHelper.getData(key: AppConstant.kTheme) ??
       (ui.PlatformDispatcher.instance.platformBrightness == ui.Brightness.dark);
 
-  void changeLanguage(Locale locale) {
+  void changeLanguage(Locale locale) {//AppConstant.langKey
     currentLocale = locale;
-    CacheHelper.saveData(key: AppConstant.lang, value: locale.languageCode);
+    CacheHelper.saveData(key: AppConstant.langKey, value: locale.languageCode);
     emit(ChangeLanguageState());
   }
 

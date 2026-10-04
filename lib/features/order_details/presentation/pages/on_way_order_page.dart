@@ -180,7 +180,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     OrderDetails? order,
     AppLocalizations l10n,
   ) {
-    final headerNote = ongoing?.headerNote ?? l10n.contactCustomerForLocation;
+    final headerNote = l10n.contactCustomerForLocation;
     final contactName =
         ongoing?.contactName ??
         order?.receiver?.name ??
@@ -344,21 +344,14 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     OrderDetails? order,
     AppLocalizations l10n,
   ) {
-    final locationTitle =
-        ongoing?.locationTitle ??
-        ongoing?.dropoffTitle ??
-        ongoing?.pickupTitle ??
-        l10n.arrivingAtPickupLocation;
+    final locationTitle = l10n.arrivingAtPickupLocation;
     final locationAddress =
         ongoing?.locationAddress ??
         ongoing?.dropoffAddress ??
         order?.dropoffAddress ??
         order?.pickupAddress ??
         l10n.nakheelDistrictTaxasusi;
-    final locationCountry =
-        ongoing?.locationCountry ??
-        ongoing?.dropoffCountry ??
-        l10n.riyadhSaudiArabia;
+    final locationCountry = l10n.riyadhSaudiArabia;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -430,7 +423,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     OrderDetails? order,
     AppLocalizations l10n,
   ) {
-    final detailsTitle = ongoing?.detailsTitle ?? l10n.parcelDetails;
+    final detailsTitle = l10n.parcelDetails;
     final packageDescription =
         ongoing?.packageDescription ??
         order?.parcels?.firstOrNull?.description ??
@@ -438,8 +431,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     final weightLabel =
         ongoing?.weightLabel ??
         l10n.approxWeight(order?.parcels?.firstOrNull?.weight ?? 5);
-    final paymentMethodLabel =
-        ongoing?.paymentMethodLabel ?? l10n.cashOnDelivery;
+    final paymentMethodLabel = l10n.cashOnDelivery;
     final orderTotalLabel =
         ongoing?.orderTotalLabel ??
         '${order?.estimatedFee ?? 145.00} ${l10n.egp}';
@@ -580,7 +572,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     dynamic ongoing,
     AppLocalizations l10n,
   ) {
-    final hint = ongoing?.arrivalHint ?? l10n.contactBeforeArrivalHint;
+    final hint = l10n.contactBeforeArrivalHint;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
@@ -618,8 +610,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
     Lifecycle? lifecycle,
   ) {
     final contactPhone = ongoing?.contactPhone ?? '';
-    final primaryActionLabel =
-        ongoing?.primaryActionLabel ?? l10n.arrivedAtLocation;
+    final primaryActionLabel = l10n.arrivedAtLocation;
 
     return Container(
       padding: EdgeInsets.only(
@@ -717,7 +708,7 @@ class _OnWayOrderPageState extends State<OnWayOrderPage> {
                     if (lifecycle?.currentStage == "dropoff_confirmation") {
                       context.push(
                         AppRoutes.completeDeliveryPage,
-                        extra: orderId ,
+                        extra: orderId,
                       );
                     }
                   },
