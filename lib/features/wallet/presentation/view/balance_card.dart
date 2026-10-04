@@ -17,6 +17,10 @@ class BalanceCard extends StatelessWidget {
 
   void _showWithdrawBottomSheet(BuildContext context) {
     final walletCubit = context.read<WalletCubit>();
+    final currencyText =
+        walletData?.currencyLabel ?? AppLocalizations.of(context)!.egp;
+    final maxBonus = walletData?.bonusBalance ?? 0;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -24,7 +28,8 @@ class BalanceCard extends StatelessWidget {
       builder: (ctx) => BlocProvider.value(
         value: walletCubit,
         child: _WithdrawBottomSheet(
-          availableBalance: walletData?.availableBalance ?? walletData?.balance ?? 0,
+          maxBonusBalance: maxBonus,
+          currency: currencyText,
         ),
       ),
     );
@@ -32,15 +37,18 @@ class BalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final balanceVal = walletData?.availableBalance ?? walletData?.balance ?? 0;
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+    final balanceVal = walletData?.balance ?? 0;
+    final bonusVal = walletData?.bonusBalance ?? 0;
+    final canWithdraw = walletData?.canWithdraw == true;
     final currencyText =
         walletData?.currencyLabel ?? AppLocalizations.of(context)!.egp;
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12.r),
         gradient: LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
@@ -49,80 +57,158 @@ class BalanceCard extends StatelessWidget {
             MyColors.primaryColor,
           ],
         ),
-      ),
-      child: Column(
-        children: [
-          Text(
-            AppLocalizations.of(context)!.availableBalance,
-            style: AppTextStyle.regular14(
-              context,
-            ).copyWith(color: Colors.white.withValues(alpha: 0.9)),
-          ),
-          8.verticalSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "$balanceVal",
-                style: AppTextStyle.medium18(context).copyWith(
-                  color: Theme.of(context).colorScheme.surface,
-                  fontSize: 20.sp,
-                ),
-              ),
-              4.horizontalSpace,
-              Text(
-                currencyText,
-                style: AppTextStyle.medium14(
-                  context,
-                ).copyWith(color: Theme.of(context).colorScheme.surface),
-              ),
-            ],
-          ),
-          16.verticalSpace,
-          Material(
-            color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadiusDirectional.only(
-              bottomEnd: Radius.circular(36.r),
-              bottomStart: Radius.circular(16.r),
-              topEnd: Radius.circular(16.r),
-              topStart: Radius.circular(16.r),
-            ),
-            child: InkWell(
-              onTap: () => _showWithdrawBottomSheet(context),
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.account_balance_wallet_outlined,
-                      color: Colors.white,
-                      size: 20.sp,
-                    ),
-                    8.horizontalSpace,
-                    Text(
-                      AppLocalizations.of(context)!.withdrawProfits,
-                      style: AppTextStyle.medium14(context).copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+        boxShadow: [
+          BoxShadow(
+            color: MyColors.primaryColor.withValues(alpha: 0.25),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
           ),
         ],
       ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: _buildBalanceItem(
+                  context,
+                  title: isArabic ? 'الرصيد المستحق' : 'Due Balance',
+                  amount: "$balanceVal",
+                  currency: currencyText,
+                  icon: Icons.account_balance_wallet_outlined,
+                ),
+              ),
+              Container(
+                height: 48.h,
+                width: 1,
+                margin: EdgeInsets.symmetric(horizontal: 8.w),
+                color: Colors.white.withValues(alpha: 0.25),
+              ),
+              Expanded(
+                child: _buildBalanceItem(
+                  context,
+                  title: isArabic ? 'رصيد البونص' : 'Bonus Balance',
+                  amount: "$bonusVal",
+                  currency: currencyText,
+                  icon: Icons.stars_rounded,
+                ),
+              ),
+            ],
+          ),
+          if (canWithdraw) ...[
+            18.verticalSpace,
+            Material(
+              color: Theme.of(context).colorScheme.primary,
+              clipBehavior: Clip.antiAlias,
+              borderRadius: BorderRadiusDirectional.only(
+                bottomEnd: Radius.circular(36.r),
+                bottomStart: Radius.circular(16.r),
+                topEnd: Radius.circular(16.r),
+                topStart: Radius.circular(16.r),
+              ),
+              child: InkWell(
+                onTap: () => _showWithdrawBottomSheet(context),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 12.h,
+                    horizontal: 24.w,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.account_balance_wallet_outlined,
+                        color: Colors.white,
+                        size: 20.sp,
+                      ),
+                      8.horizontalSpace,
+                      Text(
+                        AppLocalizations.of(context)!.withdrawProfits,
+                        style: AppTextStyle.medium14(context).copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBalanceItem(
+    BuildContext context, {
+    required String title,
+    required String amount,
+    required String currency,
+    required IconData icon,
+  }) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 16.sp,
+              color: Colors.white.withValues(alpha: 0.9),
+            ),
+            6.horizontalSpace,
+            Flexible(
+              child: Text(
+                title,
+                style: AppTextStyle.regular14(context).copyWith(
+                  color: Colors.white.withValues(alpha: 0.9),
+                ),
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+        8.verticalSpace,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Flexible(
+              child: Text(
+                amount,
+                style: AppTextStyle.medium18(context).copyWith(
+                  color: Theme.of(context).colorScheme.surface,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            4.horizontalSpace,
+            Text(
+              currency,
+              style: AppTextStyle.medium14(context).copyWith(
+                color: Theme.of(context).colorScheme.surface,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
 
 class _WithdrawBottomSheet extends StatefulWidget {
-  final num availableBalance;
-  const _WithdrawBottomSheet({required this.availableBalance});
+  final num maxBonusBalance;
+  final String currency;
+
+  const _WithdrawBottomSheet({
+    required this.maxBonusBalance,
+    required this.currency,
+  });
 
   @override
   State<_WithdrawBottomSheet> createState() => _WithdrawBottomSheetState();
@@ -130,7 +216,7 @@ class _WithdrawBottomSheet extends StatefulWidget {
 
 class _WithdrawBottomSheetState extends State<_WithdrawBottomSheet> {
   final _formKey = GlobalKey<FormState>();
-  final _amountController = TextEditingController(text: '100');
+  final _amountController = TextEditingController();
   final _accountController = TextEditingController();
   final String _selectedMethod = 'mobile_wallet';
 
@@ -174,9 +260,21 @@ class _WithdrawBottomSheetState extends State<_WithdrawBottomSheet> {
                 ),
                 16.verticalSpace,
                 Text(
-                  isArabic ? 'سحب الرصيد' : 'Withdraw Balance',
+                  isArabic ? 'سحب الأرباح' : 'Withdraw Profits',
                   style: AppTextStyle.bold16(context).copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                ),
+                4.verticalSpace,
+                Text(
+                  isArabic
+                      ? 'الحد الأقصى المتاح للسحب (رصيد البونص): ${widget.maxBonusBalance} ${widget.currency}'
+                      : 'Max available to withdraw (Bonus): ${widget.maxBonusBalance} ${widget.currency}',
+                  style: AppTextStyle.regular12(context).copyWith(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withValues(alpha: 0.7),
                   ),
                 ),
                 16.verticalSpace,
@@ -185,13 +283,32 @@ class _WithdrawBottomSheetState extends State<_WithdrawBottomSheet> {
                   hintText: isArabic ? 'مبلغ السحب' : 'Withdrawal Amount',
                   textInputType: TextInputType.number,
                   prefixIcon: const Icon(Icons.money),
+                  suffixIcon: TextButton(
+                    onPressed: () {
+                      _amountController.text = '${widget.maxBonusBalance}';
+                    },
+                    child: Text(
+                      isArabic ? 'الكل' : 'Max',
+                      style: AppTextStyle.medium12(context).copyWith(
+                        color: MyColors.primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   validator: (val) {
                     if (val == null || val.trim().isEmpty) {
-                      return isArabic ? 'برجاء إدخال المبلغ' : 'Please enter amount';
+                      return isArabic
+                          ? 'برجاء إدخال المبلغ'
+                          : 'Please enter amount';
                     }
                     final numVal = num.tryParse(val);
                     if (numVal == null || numVal <= 0) {
                       return isArabic ? 'مبلغ غير صالح' : 'Invalid amount';
+                    }
+                    if (numVal > widget.maxBonusBalance) {
+                      return isArabic
+                          ? 'لا يمكن سحب مبلغ أكبر من رصيد البونص (${widget.maxBonusBalance} ${widget.currency})'
+                          : 'Cannot withdraw more than bonus balance (${widget.maxBonusBalance} ${widget.currency})';
                     }
                     return null;
                   },
@@ -218,12 +335,14 @@ class _WithdrawBottomSheetState extends State<_WithdrawBottomSheet> {
                   builder: (context, state) {
                     final isLoading = state is WithdrawLoadingState;
                     return CustomButton(
-                      text: isArabic ? 'تأكيد طلب السحب' : 'Confirm Withdrawal',
+                      text:
+                          isArabic ? 'تأكيد طلب السحب' : 'Confirm Withdrawal',
                       loading: isLoading,
                       isMax: true,
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          final amount = num.parse(_amountController.text.trim());
+                          final amount =
+                              num.parse(_amountController.text.trim());
                           final accountRef = _accountController.text.trim();
                           context.read<WalletCubit>().requestWithdrawal(
                                 amount: amount,
