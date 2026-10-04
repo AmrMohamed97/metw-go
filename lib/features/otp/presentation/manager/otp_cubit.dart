@@ -29,7 +29,7 @@ class OtpCubit extends Cubit<OtpState> {
     emit(ResendOtpLoadingState());
     final inputModel = ResendOtpInputModel(
       phone: phone,
-      purpose: "forgot_password",
+      purpose: purpose,
     );
     final result = await otpRepo.resendOtp(inputModel);
     result.fold(

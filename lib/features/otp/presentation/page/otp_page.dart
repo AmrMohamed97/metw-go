@@ -16,6 +16,7 @@ import 'package:metw_go/features/otp/presentation/manager/otp_cubit.dart';
 import 'package:metw_go/features/otp/presentation/manager/otp_state.dart';
 import 'package:metw_go/features/otp/presentation/widgets/otp_fields.dart';
 import 'package:metw_go/features/otp/presentation/widgets/otp_timer.dart';
+import 'package:metw_go/features/otp/data/models/otp_purpose.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({super.key, required this.nextPage, required this.phone});
@@ -113,14 +114,14 @@ class _OtpPageState extends State<OtpPage> {
                             cubit.resendOtp(
                               phone: widget.phone,
                               purpose: widget.nextPage == AppRoutes.login
-                                    ? "registration"
-                                    : widget.nextPage ==
-                                          AppRoutes.changePasswordPage
-                                    ? "forgot_password"
-                                    : widget.nextPage ==
-                                          AppRoutes.firstStepPage
-                                    ? "phone_verification"
-                                    : "secondary_phone_verification",
+                                  ? OtpPurpose.registration.value
+                                  : widget.nextPage ==
+                                        AppRoutes.changePasswordPage
+                                  ? OtpPurpose.forgotPassword.value
+                                  : widget.nextPage ==
+                                        AppRoutes.firstStepPage
+                                  ? OtpPurpose.phoneVerification.value
+                                  : OtpPurpose.secondaryPhoneVerification.value,
                             );
                           },
                         ),
@@ -135,14 +136,14 @@ class _OtpPageState extends State<OtpPage> {
                                 phone: widget.phone,
                                 otp: _otpCode,
                                 purpose: widget.nextPage == AppRoutes.login
-                                    ? "registration"
+                                    ? OtpPurpose.registration.value
                                     : widget.nextPage ==
                                           AppRoutes.changePasswordPage
-                                    ? "forgot_password"
+                                    ? OtpPurpose.forgotPassword.value
                                     : widget.nextPage ==
                                           AppRoutes.firstStepPage
-                                    ? "phone_verification"
-                                    : "secondary_phone_verification",
+                                    ? OtpPurpose.phoneVerification.value
+                                    : OtpPurpose.secondaryPhoneVerification.value,
                               );
                             } else {
                               showToast(
