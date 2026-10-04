@@ -11,12 +11,12 @@ class OtpCubit extends Cubit<OtpState> {
   final OtpRepo otpRepo;
   OtpCubit(this.otpRepo) : super(InitialOtpState());
 
-  Future<void> verifyOtp(String phone, String otp) async {
+  Future<void> verifyOtp({required String phone, required String otp, required String purpose}) async {
     emit(VerifyOtpLoadingState());
     final inputModel = VerifyOtpInputModel(
       phone: phone,
       otp: otp,
-      purpose: "forgot_password",
+      purpose: purpose,
     );
     final result = await otpRepo.verifyOtp(inputModel);
     result.fold(
@@ -25,7 +25,7 @@ class OtpCubit extends Cubit<OtpState> {
     );
   }
 
-  Future<void> resendOtp(String phone) async {
+  Future<void> resendOtp({required String phone, required String purpose}) async {
     emit(ResendOtpLoadingState());
     final inputModel = ResendOtpInputModel(
       phone: phone,

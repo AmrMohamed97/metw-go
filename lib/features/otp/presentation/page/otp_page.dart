@@ -18,7 +18,7 @@ import 'package:metw_go/features/otp/presentation/widgets/otp_fields.dart';
 import 'package:metw_go/features/otp/presentation/widgets/otp_timer.dart';
 
 class OtpPage extends StatefulWidget {
-  const OtpPage({super.key,required this.nextPage, required this.phone});
+  const OtpPage({super.key, required this.nextPage, required this.phone});
   final String nextPage;
   final String phone;
 
@@ -69,9 +69,7 @@ class _OtpPageState extends State<OtpPage> {
       builder: (context, state) {
         final cubit = context.read<OtpCubit>();
         return ScreenWrapper(
-          appBar: CustomAppBar(
-            popPress:() => context.go(AppRoutes.login),
-          ),
+          appBar: CustomAppBar(popPress: () => context.go(AppRoutes.login)),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -112,7 +110,18 @@ class _OtpPageState extends State<OtpPage> {
                         SizedBox(height: 48.h),
                         OtpTimer(
                           onResend: () {
-                            cubit.resendOtp(widget.phone);
+                            cubit.resendOtp(
+                              phone: widget.phone,
+                              purpose: widget.nextPage == AppRoutes.login
+                                    ? "registration"
+                                    : widget.nextPage ==
+                                          AppRoutes.changePasswordPage
+                                    ? "forgot_password"
+                                    : widget.nextPage ==
+                                          AppRoutes.firstStepPage
+                                    ? "phone_verification"
+                                    : "secondary_phone_verification",
+                            );
                           },
                         ),
                         // const Spacer(),
@@ -122,7 +131,19 @@ class _OtpPageState extends State<OtpPage> {
                           text: AppLocalizations.of(context)!.confirm,
                           onPressed: () {
                             if (_otpCode.length == 4) {
-                              cubit.verifyOtp(widget.phone, _otpCode);
+                              cubit.verifyOtp(
+                                phone: widget.phone,
+                                otp: _otpCode,
+                                purpose: widget.nextPage == AppRoutes.login
+                                    ? "registration"
+                                    : widget.nextPage ==
+                                          AppRoutes.changePasswordPage
+                                    ? "forgot_password"
+                                    : widget.nextPage ==
+                                          AppRoutes.firstStepPage
+                                    ? "phone_verification"
+                                    : "secondary_phone_verification",
+                              );
                             } else {
                               showToast(
                                 context,
