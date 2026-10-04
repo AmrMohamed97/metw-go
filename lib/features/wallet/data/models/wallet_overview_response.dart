@@ -45,9 +45,12 @@ class WalletDataModel {
   final num? minWithdrawal;
   @JsonKey(name: 'can_withdraw')
   final bool? canWithdraw;
+  @JsonKey(name: 'bonus_balance')
+  final num? bonusBalance;
 
   WalletDataModel({
     this.balance,
+    this.bonusBalance,
     this.pendingWithdrawals,
     this.availableBalance,
     this.currency,

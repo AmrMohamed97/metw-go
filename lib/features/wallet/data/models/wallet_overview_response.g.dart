@@ -51,6 +51,7 @@ Map<String, dynamic> _$WalletOverviewDataModelToJson(
 WalletDataModel _$WalletDataModelFromJson(Map<String, dynamic> json) =>
     WalletDataModel(
       balance: json['balance'] as num?,
+      bonusBalance: json['bonus_balance'] as num?,
       pendingWithdrawals: json['pending_withdrawals'] as num?,
       availableBalance: json['available_balance'] as num?,
       currency: json['currency'] as String?,
@@ -68,6 +69,7 @@ Map<String, dynamic> _$WalletDataModelToJson(WalletDataModel instance) =>
       'currency_label': instance.currencyLabel,
       'min_withdrawal': instance.minWithdrawal,
       'can_withdraw': instance.canWithdraw,
+      'bonus_balance': instance.bonusBalance,
     };
 
 TodayPerformanceModel _$TodayPerformanceModelFromJson(
