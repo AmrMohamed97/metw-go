@@ -6,6 +6,7 @@ import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/features/wallet/data/models/wallet_overview_response.dart';
 import 'package:metw_go/features/wallet/presentation/manager/wallet_cubit.dart';
 import 'package:metw_go/features/wallet/presentation/manager/wallet_state.dart';
@@ -16,10 +17,23 @@ class BalanceCard extends StatelessWidget {
   final WalletDataModel? walletData;
 
   void _showWithdrawBottomSheet(BuildContext context) {
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
     final walletCubit = context.read<WalletCubit>();
     final currencyText =
         walletData?.currencyLabel ?? AppLocalizations.of(context)!.egp;
     final maxBonus = walletData?.bonusBalance ?? 0;
+    final minWithdrawal = walletData?.minWithdrawal ?? 0;
+
+    if (minWithdrawal > 0 && maxBonus < minWithdrawal) {
+      showToast(
+        context,
+        message: isArabic
+            ? 'الحد الأدنى للسحب هو $minWithdrawal $currencyText ورصيدك الحالي غير كافٍ'
+            : 'Minimum withdrawal is $minWithdrawal $currencyText and your current balance is insufficient',
+        state: ToastStates.warning,
+      );
+      return;
+    }
 
     showModalBottomSheet(
       context: context,
@@ -29,6 +43,7 @@ class BalanceCard extends StatelessWidget {
         value: walletCubit,
         child: _WithdrawBottomSheet(
           maxBonusBalance: maxBonus,
+          minWithdrawal: minWithdrawal,
           currency: currencyText,
         ),
       ),
@@ -203,10 +218,12 @@ class BalanceCard extends StatelessWidget {
 
 class _WithdrawBottomSheet extends StatefulWidget {
   final num maxBonusBalance;
+  final num minWithdrawal;
   final String currency;
 
   const _WithdrawBottomSheet({
     required this.maxBonusBalance,
+    required this.minWithdrawal,
     required this.currency,
   });
 
@@ -277,10 +294,30 @@ class _WithdrawBottomSheetState extends State<_WithdrawBottomSheet> {
                         .withValues(alpha: 0.7),
                   ),
                 ),
+                if (widget.minWithdrawal > 0) ...[
+                  4.verticalSpace,
+                  Text(
+                    isArabic
+                        ? 'الحد الأدنى للسحب: ${widget.minWithdrawal} ${widget.currency}'
+                        : 'Minimum withdrawal: ${widget.minWithdrawal} ${widget.currency}',
+                    style: AppTextStyle.regular12(context).copyWith(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withValues(alpha: 0.7),
+                    ),
+                  ),
+                ],
                 16.verticalSpace,
                 CustomTextField(
                   controller: _amountController,
-                  hintText: isArabic ? 'مبلغ السحب' : 'Withdrawal Amount',
+                  hintText: isArabic
+                      ? (widget.minWithdrawal > 0
+                          ? 'مبلغ السحب (الحد الأدنى ${widget.minWithdrawal})'
+                          : 'مبلغ السحب')
+                      : (widget.minWithdrawal > 0
+                          ? 'Withdrawal Amount (Min ${widget.minWithdrawal})'
+                          : 'Withdrawal Amount'),
                   textInputType: TextInputType.number,
                   prefixIcon: const Icon(Icons.money),
                   suffixIcon: TextButton(
@@ -304,6 +341,12 @@ class _WithdrawBottomSheetState extends State<_WithdrawBottomSheet> {
                     final numVal = num.tryParse(val);
                     if (numVal == null || numVal <= 0) {
                       return isArabic ? 'مبلغ غير صالح' : 'Invalid amount';
+                    }
+                    if (widget.minWithdrawal > 0 &&
+                        numVal < widget.minWithdrawal) {
+                      return isArabic
+                          ? 'أقل قيمة يمكن سحبها هي ${widget.minWithdrawal} ${widget.currency}'
+                          : 'Minimum withdrawal amount is ${widget.minWithdrawal} ${widget.currency}';
                     }
                     if (numVal > widget.maxBonusBalance) {
                       return isArabic
