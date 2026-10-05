@@ -19,15 +19,48 @@ class PrivacyResponse {
 @JsonSerializable()
 class PrivacyDataModel {
   final String? title;
+  final String? url;
   @JsonKey(name: 'webview_url')
   final String? webviewUrl;
+  final String? body;
+  final String? content;
+  final List<PrivacyBlockModel>? blocks;
   @JsonKey(name: 'is_configured')
   final bool? isConfigured;
 
-  PrivacyDataModel({this.title, this.webviewUrl, this.isConfigured});
+  PrivacyDataModel({
+    this.title,
+    this.url,
+    this.webviewUrl,
+    this.body,
+    this.content,
+    this.blocks,
+    this.isConfigured,
+  });
+
+  /// The active URL to load (url or webviewUrl)
+  String? get effectiveUrl =>
+      (url != null && url!.isNotEmpty) ? url : webviewUrl;
+
+  /// The active HTML content (body or content)
+  String? get effectiveHtml =>
+      (body != null && body!.isNotEmpty) ? body : content;
 
   factory PrivacyDataModel.fromJson(Map<String, dynamic> json) =>
       _$PrivacyDataModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$PrivacyDataModelToJson(this);
+}
+
+@JsonSerializable()
+class PrivacyBlockModel {
+  final String? title;
+  final String? body;
+
+  PrivacyBlockModel({this.title, this.body});
+
+  factory PrivacyBlockModel.fromJson(Map<String, dynamic> json) =>
+      _$PrivacyBlockModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PrivacyBlockModelToJson(this);
 }

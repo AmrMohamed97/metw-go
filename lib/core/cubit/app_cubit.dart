@@ -56,7 +56,7 @@ class AppCubit extends Cubit<AppState> {
 
   void changeLanguage(Locale locale) {
     currentLocale = locale;
-    CacheHelper.saveData(key: AppConstant.lang, value: locale.languageCode);
+    CacheHelper.saveData(key: AppConstant.langKey, value: locale.languageCode);
     emit(ChangeLanguageState());
   }
 
