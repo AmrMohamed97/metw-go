@@ -95,9 +95,15 @@ class AppCubit extends Cubit<AppState> {
     );
   }
 
-  Future<void> acceptStartOrder({required int orderId}) async {
+  Future<void> acceptStartOrder({
+    required int orderId,
+    num? acceptedFee,
+  }) async {
     emit(AcceptStartOrderLoadingState(orderId));
-    final result = await _appRepo.acceptStartOrder(orderId: orderId);
+    final result = await _appRepo.acceptStartOrder(
+      orderId: orderId,
+      acceptedFee: acceptedFee,
+    );
     result.fold(
       (failure) => emit(AcceptStartOrderErrorState(failure.message)),
       (response) => emit(AcceptStartOrderSuccessState(response)),

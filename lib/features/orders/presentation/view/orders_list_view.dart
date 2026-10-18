@@ -12,6 +12,9 @@ import 'package:metw_go/features/orders/presentation/manager/orders_state.dart';
 
 import 'package:skeletonizer/skeletonizer.dart';
 
+import 'package:metw_go/core/widgets/edit_fee_bottom_sheet.dart';
+import 'package:metw_go/features/orders/data/models/order_model.dart';
+
 class OrdersListView extends StatefulWidget {
   const OrdersListView({super.key});
 
@@ -34,6 +37,24 @@ class _OrdersListViewState extends State<OrdersListView> {
         _scrollController.position.maxScrollExtent * 0.9) {
       context.read<OrdersCubit>().getIncomingOrders(isLoadMore: true);
     }
+  }
+
+  void _openFeeModal(OrderModel order, AppCubit appCubit) {
+    showEditFeeBottomSheet(
+      context: context,
+      orderId: order.id!,
+      orderNumber: order.orderNumber,
+      initialFee: order.estimatedFee,
+      onConfirm: (acceptedFee) {
+        setState(() {
+          order.estimatedFee = acceptedFee;
+        });
+        appCubit.acceptStartOrder(
+          orderId: order.id!,
+          acceptedFee: acceptedFee,
+        );
+      },
+    );
   }
 
   @override
@@ -84,6 +105,7 @@ class _OrdersListViewState extends State<OrdersListView> {
                           isUrgent: false,
                           pickup: "عنوان استلام وهمي طويل لغرض التحميل",
                           delivery: "عنوان تسليم وهمي طويل لغرض التحميل",
+                          estimatedFee: 100,
                           onDetailsPressed: () {},
                         ),
                       );
@@ -122,8 +144,14 @@ class _OrdersListViewState extends State<OrdersListView> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 12.0),
                     child: OrderItem(
-                      onPressed: () =>
-                          appCubit.acceptStartOrder(orderId: order.id!),
+                      onPressed: () {
+                        if (order.requiresFeeInput == true) {
+                          _openFeeModal(order, appCubit);
+                        } else {
+                          appCubit.acceptStartOrder(orderId: order.id!);
+                        }
+                      },
+                      onEditFee: () => _openFeeModal(order, appCubit),
                       isLoading:
                           appState is AcceptStartOrderLoadingState &&
                           appState.orderId == order.id,
@@ -132,14 +160,14 @@ class _OrdersListViewState extends State<OrdersListView> {
                           ? "${order.distanceKm} كم"
                           : "",
                       isUrgent: order.priority == "urgent",
-
                       pickup: order.pickupAddress ?? "",
                       delivery: order.dropoffAddress ?? "",
+                      estimatedFee: order.estimatedFee,
+                      requiresFeeInput: order.requiresFeeInput ?? false,
                       onDetailsPressed: () => context.push(
                         AppRoutes.orderDetailsPage,
                         extra: order.id,
                       ),
-                      // borderColor: Theme.of(context).colorScheme.secondary,
                     ),
                   );
                 },

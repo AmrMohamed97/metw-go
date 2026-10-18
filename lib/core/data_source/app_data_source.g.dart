@@ -76,16 +76,23 @@ class _AppDataSource implements AppDataSource {
   }
 
   @override
-  Future<StartOrderResponse> acceptStartOrder({required int orderId}) async {
+  Future<StartOrderResponse> acceptStartOrder({
+    required int orderId,
+    Map<String, dynamic>? body,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    if (body != null) {
+      _data.addAll(body!);
+    }
     final _options = _setStreamType<StartOrderResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'orders/${orderId}/start',
+            'shipping-requests/${orderId}/start',
             queryParameters: queryParameters,
             data: _data,
           )

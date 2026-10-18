@@ -34,7 +34,7 @@ abstract class EndPoints {
   static const String profileServiceAreasUrl = 'profile/service-areas';
   static const String profileDocumentsUrl = 'profile/documents';
 
-  static const String startOrdersUrl = 'orders/{order_id}/start';
+  static const String startOrdersUrl = 'shipping-requests/{order_id}/start';
   static const String arrivePickupOrdersUrl = 'orders/{order_id}/arrive-pickup';
   static const String confirmationOrdersUrl =
       'orders/{order_id}/pickup-confirmation';

@@ -12,6 +12,7 @@ abstract class AppRepo {
 
   Future<Either<Failure, StartOrderResponse>> acceptStartOrder({
     required int orderId,
+    num? acceptedFee,
   });
 
   Future<Either<Failure, OrderActionResponse>> arriveAtPickupOrder({

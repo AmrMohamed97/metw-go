@@ -15,13 +15,17 @@ class OrderModel {
   OrderStatus? status;
   String? priority;
   @JsonKey(name: 'distance_km')
-  double? distanceKm;
+  num? distanceKm;
   @JsonKey(name: 'pickup_address')
   String? pickupAddress;
   @JsonKey(name: 'dropoff_address')
   String? dropoffAddress;
   @JsonKey(name: 'estimated_fee')
   num? estimatedFee;
+  @JsonKey(name: 'fee_mode')
+  String? feeMode;
+  @JsonKey(name: 'requires_fee_input')
+  bool? requiresFeeInput;
   @JsonKey(name: 'created_at')
   String? createdAt;
   @JsonKey(name: 'can_start')
@@ -41,6 +45,8 @@ class OrderModel {
     this.pickupAddress,
     this.dropoffAddress,
     this.estimatedFee,
+    this.feeMode,
+    this.requiresFeeInput,
     this.createdAt,
     this.canStart,
     this.lifecycle,

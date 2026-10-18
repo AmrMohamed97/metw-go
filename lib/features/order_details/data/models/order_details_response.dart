@@ -45,13 +45,22 @@ class OrderDetails {
   final String? orderNumber;
   final String? priority;
   @JsonKey(name: 'distance_km')
-  final double? distanceKm;
+  final num? distanceKm;
   @JsonKey(name: 'pickup_address')
   final String? pickupAddress;
   @JsonKey(name: 'dropoff_address')
   final String? dropoffAddress;
+  final num? fee;
   @JsonKey(name: 'estimated_fee')
-  final double? estimatedFee;
+  final num? estimatedFee;
+  @JsonKey(name: 'accepted_fee')
+  final num? acceptedFee;
+  @JsonKey(name: 'fee_mode')
+  final String? feeMode;
+  @JsonKey(name: 'requires_fee_input')
+  final bool? requiresFeeInput;
+  final String? currency;
+  final String? status;
   @JsonKey(name: 'created_at')
   final String? createdAt;
   @JsonKey(name: 'can_start')
@@ -63,6 +72,16 @@ class OrderDetails {
   final Lifecycle? lifecycle;
   @JsonKey(name: 'ongoing_order')
   final OngoingOrderModel? ongoingOrder;
+  @JsonKey(name: 'order_details')
+  final Map<String, dynamic>? orderDetails;
+  @JsonKey(name: 'available_actions')
+  final Map<String, dynamic>? availableActions;
+  @JsonKey(name: 'pickup_confirmation')
+  final Map<String, dynamic>? pickupConfirmation;
+  @JsonKey(name: 'dropoff_confirmation')
+  final Map<String, dynamic>? dropoffConfirmation;
+  @JsonKey(name: 'delivered_success')
+  final Map<String, dynamic>? deliveredSuccess;
 
   OrderDetails({
     this.id,
@@ -71,7 +90,13 @@ class OrderDetails {
     this.distanceKm,
     this.pickupAddress,
     this.dropoffAddress,
+    this.fee,
     this.estimatedFee,
+    this.acceptedFee,
+    this.feeMode,
+    this.requiresFeeInput,
+    this.currency,
+    this.status,
     this.createdAt,
     this.canStart,
     this.courier,
@@ -80,6 +105,11 @@ class OrderDetails {
     this.parcels,
     this.lifecycle,
     this.ongoingOrder,
+    this.orderDetails,
+    this.availableActions,
+    this.pickupConfirmation,
+    this.dropoffConfirmation,
+    this.deliveredSuccess,
   });
 
   factory OrderDetails.fromJson(Map<String, dynamic> json) =>

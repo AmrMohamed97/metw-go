@@ -12,6 +12,7 @@ import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_error_widget.dart';
 import 'package:metw_go/core/widgets/custom_toast.dart';
+import 'package:metw_go/core/widgets/edit_fee_bottom_sheet.dart';
 import 'package:metw_go/features/order_details/presentation/cubit/order_details_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -33,6 +34,7 @@ class OrderDetailsPage extends StatefulWidget {
 
 class _OrderDetailsPageState extends State<OrderDetailsPage> {
   late final OrderDetailsCubit _cubit;
+  num? _customAcceptedFee;
 
   static final _dummyOrder = OrderDetails(
     id: 0,
@@ -124,8 +126,10 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       (sum, p) => sum + (p.weight ?? 0),
     );
     final parcelWeight = weightSum > 0 ? '$weightSum كجم تقريباً' : '---';
-    final feeText = order.estimatedFee != null
-        ? '${order.estimatedFee} ج.م'
+    final currentFee = _customAcceptedFee ?? order.estimatedFee ?? order.fee;
+    final currency = order.currency ?? 'ج.م';
+    final feeText = currentFee != null
+        ? '$currentFee $currency'
         : '---';
     final pickupText = [
       order.pickupAddress,
@@ -287,10 +291,55 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                   value: feeText,
                   valueColor: MyColors.primaryColor,
                   isBold: true,
+                  badge: order.requiresFeeInput == true
+                      ? Container(
+                          margin: EdgeInsetsDirectional.only(start: 6.w),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 6.w,
+                            vertical: 2.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.secondary.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(6.r),
+                          ),
+                          child: Text(
+                            "قابل للتعديل",
+                            style: AppTextStyle.medium12(context).copyWith(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      : null,
+                  actionWidget: (order.requiresFeeInput == true)
+                      ? InkWell(
+                          onTap: () => _openFeeModal(order, context.read<AppCubit>()),
+                          borderRadius: BorderRadius.circular(6.r),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.only(start: 8.w),
+                            child: Icon(
+                              Icons.edit_outlined,
+                              size: 18.sp,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                        )
+                      : null,
                 ),
               ],
             ),
           ),
+          if (order.orderDetails != null &&
+              order.orderDetails!['earnings'] is Map<String, dynamic>) ...[
+            SizedBox(height: 16.h),
+            _buildEarningsCard(
+              context,
+              order.orderDetails!['earnings'] as Map<String, dynamic>,
+            ),
+          ],
           SizedBox(height: 24.h),
           Container(
             padding: EdgeInsets.all(16.w),
@@ -343,8 +392,13 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               final appCubit = context.read<AppCubit>();
               return CustomButton(
                 text: l10n.acceptOrder,
-                onPressed: () =>
-                    appCubit.acceptStartOrder(orderId: widget.orderId),
+                onPressed: () {
+                  if (order.requiresFeeInput == true) {
+                    _openFeeModal(order, appCubit);
+                  } else {
+                    appCubit.acceptStartOrder(orderId: widget.orderId);
+                  }
+                },
                 isMax:
                     appState is AcceptStartOrderLoadingState &&
                         appState.orderId == widget.orderId
@@ -374,6 +428,101 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
     );
   }
 
+  void _openFeeModal(OrderDetails order, AppCubit appCubit) {
+    showEditFeeBottomSheet(
+      context: context,
+      orderId: widget.orderId,
+      orderNumber: order.orderNumber,
+      initialFee: _customAcceptedFee ?? order.estimatedFee ?? order.fee,
+      onConfirm: (acceptedFee) {
+        setState(() {
+          _customAcceptedFee = acceptedFee;
+        });
+        appCubit.acceptStartOrder(
+          orderId: widget.orderId,
+          acceptedFee: acceptedFee,
+        );
+      },
+    );
+  }
+
+  Widget _buildEarningsCard(
+    BuildContext context,
+    Map<String, dynamic> earnings,
+  ) {
+    final title = earnings['title']?.toString() ?? 'تفاصيل الأرباح';
+    final currency = earnings['currency']?.toString() ?? 'ج.م';
+    final netEarningsLabel =
+        earnings['net_earnings_label']?.toString() ?? 'صافي الربح';
+    final netEarnings = earnings['net_earnings']?.toString() ?? '0';
+    final orderAmountLabel =
+        earnings['order_amount_label']?.toString() ?? 'سعر الطلب';
+    final orderAmount = earnings['order_amount']?.toString() ?? '0';
+    final deliveryFeeLabel =
+        earnings['delivery_fee_label']?.toString() ?? 'الأجرة';
+    final deliveryFee = earnings['delivery_fee']?.toString() ?? '0';
+    final commissionLabel =
+        earnings['commission_label']?.toString() ?? 'العمولة';
+    final commissionAmount =
+        earnings['commission_amount']?.toString() ?? '0';
+
+    return Container(
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: Theme.of(context).colorScheme.scrim),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.account_balance_wallet_outlined,
+                color: MyColors.primaryColor,
+                size: 24.r,
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                title,
+                style: AppTextStyle.medium16(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+              ),
+            ],
+          ),
+          SizedBox(height: 16.h),
+          _buildDetailRow(
+            context,
+            title: orderAmountLabel,
+            value: '$orderAmount $currency',
+          ),
+          _buildDetailRow(
+            context,
+            title: deliveryFeeLabel,
+            value: '$deliveryFee $currency',
+          ),
+          _buildDetailRow(
+            context,
+            title: commissionLabel,
+            value: '$commissionAmount $currency',
+          ),
+          SizedBox(height: 16.h),
+          DashedDivider(color: Theme.of(context).colorScheme.surfaceTint),
+          SizedBox(height: 16.h),
+          _buildDetailRow(
+            context,
+            title: netEarningsLabel,
+            value: '$netEarnings $currency',
+            valueColor: MyColors.primaryColor,
+            isBold: true,
+          ),
+        ],
+      ),
+    );
+  }
+
   void _showRejectBottomSheet(BuildContext context, int orderId) {
     final cubit = context.read<OrderDetailsCubit>();
     showModalBottomSheet(
@@ -393,6 +542,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
     required String value,
     Color? valueColor,
     Widget? icon,
+    Widget? badge,
+    Widget? actionWidget,
     bool isBold = false,
   }) {
     return Padding(
@@ -400,13 +551,20 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: AppTextStyle.regular14(
-              context,
-            ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                style: AppTextStyle.regular14(
+                  context,
+                ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+              ),
+              if (badge != null) badge,
+            ],
           ),
           Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               if (icon != null) ...[icon, SizedBox(width: 8.w)],
               Text(
@@ -423,6 +581,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                             Theme.of(context).colorScheme.onSurface,
                       ),
               ),
+              if (actionWidget != null) actionWidget,
             ],
           ),
         ],

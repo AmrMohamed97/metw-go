@@ -160,7 +160,7 @@ class _CompleteDeliveryPageState extends State<CompleteDeliveryPage>
               order?.dropoffAddress ??
               l10n.defaultDeliveryAddress;
 
-          final estimatedFee = order?.estimatedFee ?? 150.0;
+          final estimatedFee = (order?.estimatedFee ?? 150.0).toDouble();
           if (estimatedFee > 0 && _requiredAmount != estimatedFee) {
             _requiredAmount = estimatedFee;
             _collectedAmount = estimatedFee;

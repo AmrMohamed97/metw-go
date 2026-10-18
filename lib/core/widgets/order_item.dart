@@ -18,6 +18,10 @@ class OrderItem extends StatelessWidget {
     this.onDetailsPressed,
     this.isLoading = false,
     this.onPressed,
+    this.estimatedFee,
+    this.requiresFeeInput = false,
+    this.onEditFee,
+    this.currency = "ج.م",
 
     // required this.borderColor,
   });
@@ -28,6 +32,10 @@ class OrderItem extends StatelessWidget {
   final String delivery;
   final String? deliveryLabel;
   final void Function()? onDetailsPressed, onPressed;
+  final num? estimatedFee;
+  final bool requiresFeeInput;
+  final void Function()? onEditFee;
+  final String currency;
   // final Color borderColor;
 
   @override
@@ -85,20 +93,21 @@ class OrderItem extends StatelessWidget {
                     ),
                   ),
                   8.horizontalSpace,
-                  Text(
-                    orderId,
-                    style: AppTextStyle.medium16(
-                      context,
-                    ).copyWith(color: Theme.of(context).colorScheme.tertiary),
-                  ),
                 ],
-                const Spacer(),
                 Text(
-                  distance,
-                  style: AppTextStyle.medium14(
+                  orderId,
+                  style: AppTextStyle.medium16(
                     context,
                   ).copyWith(color: Theme.of(context).colorScheme.tertiary),
                 ),
+                const Spacer(),
+                if (distance.isNotEmpty)
+                  Text(
+                    distance,
+                    style: AppTextStyle.medium14(
+                      context,
+                    ).copyWith(color: Theme.of(context).colorScheme.tertiary),
+                  ),
               ],
             ),
             16.verticalSpace,
@@ -179,6 +188,91 @@ class OrderItem extends StatelessWidget {
                 ),
               ],
             ),
+            if (estimatedFee != null) ...[
+              14.verticalSpace,
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+                decoration: BoxDecoration(
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.primary.withValues(alpha: 0.06),
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.15),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delivery_dining_outlined,
+                      size: 20.sp,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    8.horizontalSpace,
+                    Text(
+                      AppLocalizations.of(context)!.deliveryFare,
+                      style: AppTextStyle.medium14(context).copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    if (requiresFeeInput) ...[
+                      6.horizontalSpace,
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 6.w,
+                          vertical: 2.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.secondary.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(6.r),
+                        ),
+                        child: Text(
+                          "قابل للتعديل",
+                          style: AppTextStyle.medium12(context).copyWith(
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                    const Spacer(),
+                    Text(
+                      "$estimatedFee $currency",
+                      style: AppTextStyle.bold16(context).copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    if (requiresFeeInput && onEditFee != null) ...[
+                      8.horizontalSpace,
+                      InkWell(
+                        onTap: onEditFee,
+                        borderRadius: BorderRadius.circular(6.r),
+                        child: Container(
+                          padding: EdgeInsets.all(4.r),
+                          decoration: BoxDecoration(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.secondary.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(6.r),
+                          ),
+                          child: Icon(
+                            Icons.edit_outlined,
+                            size: 16.sp,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
             20.verticalSpace,
 
             // Bottom Row

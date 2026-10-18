@@ -46,9 +46,13 @@ class AppRepoImpl implements AppRepo {
   @override
   Future<Either<Failure, StartOrderResponse>> acceptStartOrder({
     required int orderId,
+    num? acceptedFee,
   }) async {
     try {
-      final response = await _apiService.acceptStartOrder(orderId: orderId);
+      final response = await _apiService.acceptStartOrder(
+        orderId: orderId,
+        body: acceptedFee != null ? {'accepted_fee': acceptedFee} : null,
+      );
       return Right(response);
     } catch (error) {
       if (error is DioException) {

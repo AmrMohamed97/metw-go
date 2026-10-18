@@ -26,6 +26,7 @@ abstract class AppDataSource {
   @POST(EndPoints.startOrdersUrl)
   Future<StartOrderResponse> acceptStartOrder({
     @Path("order_id") required int orderId,
+    @Body() Map<String, dynamic>? body,
   });
 
   @POST(EndPoints.arrivePickupOrdersUrl)
