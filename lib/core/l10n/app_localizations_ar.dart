@@ -598,6 +598,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get orders => 'الطلبات';
 
   @override
+  String get shippingRequests => 'طلبات الشحن';
+
+  @override
   String get immediateDeliveryOnePoint => 'توصيل فوري | نقطة واحدة';
 
   @override

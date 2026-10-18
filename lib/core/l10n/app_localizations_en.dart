@@ -601,6 +601,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get orders => 'Orders';
 
   @override
+  String get shippingRequests => 'Shipping Requests';
+
+  @override
   String get immediateDeliveryOnePoint => 'Immediate Delivery | One Point';
 
   @override

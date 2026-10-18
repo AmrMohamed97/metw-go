@@ -14,6 +14,7 @@ class MainViewCubit extends Cubit<MainViewState> {
   final List<Widget> pages = [
     HomePage(),
     OrdersPage(),
+    SizedBox.shrink(), // Placeholder for the middle button
     WalletPage(),
     ProfilePage(),
   ];

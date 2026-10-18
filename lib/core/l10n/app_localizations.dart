@@ -1244,6 +1244,12 @@ abstract class AppLocalizations {
   /// **'Orders'**
   String get orders;
 
+  /// No description provided for @shippingRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping Requests'**
+  String get shippingRequests;
+
   /// No description provided for @immediateDeliveryOnePoint.
   ///
   /// In en, this message translates to:

@@ -197,6 +197,7 @@
     "mockDate3": "Today, 02:45 PM",
     "mockFare3": "25.00 EGP",
     "orders": "Orders",
+    "shippingRequests": "Shipping Requests",
     "immediateDeliveryOnePoint": "Immediate Delivery | One Point",
     "electronicPayment": "Electronic Payment",
     "orderNumber": "Order Number",
