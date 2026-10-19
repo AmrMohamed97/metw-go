@@ -1250,6 +1250,18 @@ abstract class AppLocalizations {
   /// **'Shipping Requests'**
   String get shippingRequests;
 
+  /// No description provided for @shipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get shipments;
+
+  /// No description provided for @bulkShipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulk Shipments'**
+  String get bulkShipments;
+
   /// No description provided for @immediateDeliveryOnePoint.
   ///
   /// In en, this message translates to:

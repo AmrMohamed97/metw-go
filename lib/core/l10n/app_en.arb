@@ -198,6 +198,8 @@
     "mockFare3": "25.00 EGP",
     "orders": "Orders",
     "shippingRequests": "Shipping Requests",
+    "shipments": "Shipments",
+    "bulkShipments": "Bulk Shipments",
     "immediateDeliveryOnePoint": "Immediate Delivery | One Point",
     "electronicPayment": "Electronic Payment",
     "orderNumber": "Order Number",

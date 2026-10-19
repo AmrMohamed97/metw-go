@@ -129,6 +129,8 @@
     "home": "الرئيسية",
     "orders": "الطلبات",
     "shippingRequests": "طلبات الشحن",
+    "shipments": "الشحنات",
+    "bulkShipments": "الشحنات المجمعة",
     "myAccount": "حسابي",
     "search": "بحث",
     "todayOrders": "طلبات اليوم",

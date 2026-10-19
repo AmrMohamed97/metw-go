@@ -601,6 +601,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shippingRequests => 'طلبات الشحن';
 
   @override
+  String get shipments => 'الشحنات';
+
+  @override
+  String get bulkShipments => 'الشحنات المجمعة';
+
+  @override
   String get immediateDeliveryOnePoint => 'توصيل فوري | نقطة واحدة';
 
   @override

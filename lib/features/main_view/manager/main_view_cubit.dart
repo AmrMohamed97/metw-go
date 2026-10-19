@@ -5,6 +5,7 @@ import 'package:metw_go/features/home/presentation/page/home_page.dart';
 import 'package:metw_go/features/main_view/manager/main_view_state.dart';
 import 'package:metw_go/features/orders/presentation/page/orders_page.dart';
 import 'package:metw_go/features/profile/presentation/page/profile_page.dart';
+import 'package:metw_go/features/shippment_viewer/presentation/shippment_viewer.dart';
 import 'package:metw_go/features/wallet/presentation/page/wallet_page.dart';
 
 @injectable
@@ -14,7 +15,7 @@ class MainViewCubit extends Cubit<MainViewState> {
   final List<Widget> pages = [
     HomePage(),
     OrdersPage(),
-    SizedBox.shrink(), // Placeholder for the middle button
+    ShippmentViewer(),
     WalletPage(),
     ProfilePage(),
   ];
