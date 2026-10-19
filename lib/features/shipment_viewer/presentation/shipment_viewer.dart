@@ -4,6 +4,7 @@ import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
+import 'package:metw_go/features/shipments/presentation/page/shipments_page.dart';
 
 class ShipmentViewer extends StatelessWidget {
   const ShipmentViewer({super.key});
@@ -49,9 +50,13 @@ class ShipmentViewer extends StatelessWidget {
         body: TabBarView(
           children: [
             // الشحنات
-            SizedBox(),
+            ShipmentsPage(),
             // الشحنات المجمعة
-            SizedBox(),
+            Center(
+              child: Text(
+                AppLocalizations.of(context)!.noCurrentOperations,
+              ),
+            ),
           ],
         ),
       ),

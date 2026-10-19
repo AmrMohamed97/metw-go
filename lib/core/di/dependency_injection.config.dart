@@ -179,6 +179,14 @@ import 'package:metw_go/features/service_areas/data/repo/service_areas_repo_impl
     as _i508;
 import 'package:metw_go/features/service_areas/presentation/manager/service_areas_cubit.dart'
     as _i661;
+import 'package:metw_go/features/shipments/data/data_source/shipments_data_source.dart'
+    as _i42;
+import 'package:metw_go/features/shipments/data/repo/shipments_repo.dart'
+    as _i315;
+import 'package:metw_go/features/shipments/data/repo/shipments_repo_impl.dart'
+    as _i170;
+import 'package:metw_go/features/shipments/presentation/manager/shipments_cubit.dart'
+    as _i429;
 import 'package:metw_go/features/vehicle_data/data/data_source/vehicle_data_source.dart'
     as _i773;
 import 'package:metw_go/features/vehicle_data/data/repo/vehicle_repo.dart'
@@ -291,6 +299,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i139.ServiceAreasDataSource>(
       () => _i139.ServiceAreasDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i42.ShipmentsDataSource>(
+      () => _i42.ShipmentsDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i773.VehicleDataSource>(
       () => _i773.VehicleDataSource(gh<_i361.Dio>()),
     );
@@ -363,6 +374,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i869.ProfileRepo>(
       () => _i731.ProfileRepoImpl(
         profileDataSource: gh<_i587.ProfileDataSource>(),
+      ),
+    );
+    gh.factory<_i315.ShipmentsRepo>(
+      () => _i170.ShipmentsRepoImpl(
+        shipmentsDataSource: gh<_i42.ShipmentsDataSource>(),
       ),
     );
     gh.factory<_i405.AppCubit>(() => _i405.AppCubit(gh<_i444.AppRepo>()));
@@ -447,6 +463,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i859.OtpCubit>(() => _i859.OtpCubit(gh<_i72.OtpRepo>()));
     gh.factory<_i661.ServiceAreasCubit>(
       () => _i661.ServiceAreasCubit(gh<_i967.ServiceAreasRepo>()),
+    );
+    gh.factory<_i429.ShipmentsCubit>(
+      () => _i429.ShipmentsCubit(gh<_i315.ShipmentsRepo>()),
     );
     gh.factory<_i171.HomeCubit>(
       () => _i171.HomeCubit(repo: gh<_i576.HomeRepo>()),
