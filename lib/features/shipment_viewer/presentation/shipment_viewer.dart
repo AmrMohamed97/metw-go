@@ -17,7 +17,7 @@ class ShipmentViewer extends StatelessWidget {
         topSafeArea: true,
         appBar: AppBar(
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(48.h),
+            preferredSize: Size.fromHeight(25),
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
               decoration: BoxDecoration(
@@ -53,9 +53,7 @@ class ShipmentViewer extends StatelessWidget {
             ShipmentsPage(),
             // الشحنات المجمعة
             Center(
-              child: Text(
-                AppLocalizations.of(context)!.noCurrentOperations,
-              ),
+              child: Text(AppLocalizations.of(context)!.noCurrentOperations),
             ),
           ],
         ),
