@@ -5,22 +5,16 @@ import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 
-class ShippmentViewer extends StatelessWidget {
-  const ShippmentViewer({super.key});
+class ShipmentViewer extends StatelessWidget {
+  const ShipmentViewer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
     return DefaultTabController(
       length: 2,
       child: ScreenWrapper(
         topSafeArea: true,
         appBar: AppBar(
-          // title: Text(
-          //   l10n.shippingRequests,
-          //   style: AppTextStyle.bold18(context),
-          // ),
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(48.h),
             child: Container(
@@ -45,15 +39,20 @@ class ShippmentViewer extends StatelessWidget {
                   context,
                 ).copyWith(color: MyColors.grey),
                 tabs: [
-                  Tab(text: l10n.shipments),
-                  Tab(text: l10n.bulkShipments),
+                  Tab(text: AppLocalizations.of(context)!.shipments),
+                  Tab(text: AppLocalizations.of(context)!.bulkShipments),
                 ],
               ),
             ),
           ),
         ),
-        body: const TabBarView(
-          children: [_ActiveShipmentsView(), _ShipmentHistoryView()],
+        body: TabBarView(
+          children: [
+            // الشحنات
+            SizedBox(),
+            // الشحنات المجمعة
+            SizedBox(),
+          ],
         ),
       ),
     );
