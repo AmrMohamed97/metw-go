@@ -12,6 +12,7 @@ class AppRoutes {
   static const String historyPage = '/historyPage';
   static const String completeOrderPage = '/completeOrderPage';
   static const String orderDetailsPage = '/orderDetailsPage';
+  static const String shipmentDetailsPage = '/shipmentDetailsPage';
   static const String personalInfoPage = '/personalInfoPage';
   static const String delegateInfoPage = '/delegateInfoPage';
   static const String vehiclePage = '/vehiclePage';

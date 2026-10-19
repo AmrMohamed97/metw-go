@@ -53,6 +53,7 @@ import 'package:metw_go/features/vehicle_data/presentation/manager/vehicle_cubit
 import 'package:metw_go/features/vehicle_data/presentation/page/vehicle_page.dart';
 import 'package:metw_go/features/wallet_transaction/presentation/manager/wallet_operation_cubit.dart';
 import 'package:metw_go/features/wallet_transaction/presentation/page/wallet_operation_page.dart';
+import 'package:metw_go/features/shipment_details/presentation/page/shipment_details.dart';
 
 import 'app_routes.dart';
 
@@ -192,6 +193,12 @@ class AppRouter {
           create: (context) => getIt<OrderDetailsCubit>(),
           child: OrderDetailsPage(orderId: state.extra as int),
         ),
+      ),
+      GoRoute(
+        path: AppRoutes.shipmentDetailsPage,
+        name: AppRoutes.shipmentDetailsPage,
+        builder: (context, state) =>
+            ShipmentDetails(shipmentId: state.extra as int),
       ),
       GoRoute(
         path: AppRoutes.personalInfoPage,
@@ -346,6 +353,7 @@ class AppRouter {
           return NextPage();
         },
       ),
+       
 
       // ========== onbording ==========
       // GoRoute(

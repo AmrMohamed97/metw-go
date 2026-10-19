@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:metw_go/core/cubit/app_cubit.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
+import 'package:metw_go/core/router/app_routes.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
+import 'package:metw_go/core/widgets/edit_fee_bottom_sheet.dart';
 import 'package:metw_go/features/shipments/data/models/shipment_model.dart';
 import 'package:metw_go/features/shipments/presentation/manager/shipments_cubit.dart';
 import 'package:metw_go/features/shipments/presentation/manager/shipments_state.dart';
@@ -74,8 +78,8 @@ class _ShipmentsPageState extends State<ShipmentsPage> {
         padding: const EdgeInsets.all(16),
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 4,
-        separatorBuilder: (_, __) => const SizedBox(height: 12),
-        itemBuilder: (_, __) => ShipmentItem(
+        separatorBuilder: (context, index) => const SizedBox(height: 12),
+        itemBuilder: (context, index) => ShipmentItem(
           shipment: ShipmentModel(
             requestNumber: 'DEL-00000000067',
             pickupAddress: 'عنوان استلام وهمي طويل لغرض التحميل',
@@ -143,7 +147,7 @@ class _ShipmentsPageState extends State<ShipmentsPage> {
       padding: const EdgeInsets.all(16),
       physics: const BouncingScrollPhysics(),
       itemCount: shipments.length + (cubit.isLoadingMore ? 1 : 0),
-      separatorBuilder: (_, __) => const SizedBox(height: 12),
+      separatorBuilder: (context, index) => const SizedBox(height: 12),
       itemBuilder: (context, index) {
         if (index >= shipments.length) {
           return const Padding(
@@ -153,13 +157,36 @@ class _ShipmentsPageState extends State<ShipmentsPage> {
         }
 
         final shipment = shipments[index];
+        final shipmentId = shipment.id ?? shipment.shipmentRequestId ?? 0;
         return ShipmentItem(
           shipment: shipment,
           onAcceptPressed: () {
-            // TODO: connect to accept shipment action
+            if (shipment.requiresFeeInput == true) {
+              showEditFeeBottomSheet(
+                context: context,
+                orderId: shipmentId,
+                orderNumber: shipment.requestNumber,
+                initialFee: shipment.acceptedFee ??
+                    shipment.estimatedFee ??
+                    shipment.fee,
+                onConfirm: (acceptedFee) {
+                  context.read<AppCubit>().acceptStartOrder(
+                        orderId: shipmentId,
+                        acceptedFee: acceptedFee,
+                      );
+                },
+              );
+            } else {
+              context.read<AppCubit>().acceptStartOrder(
+                    orderId: shipmentId,
+                  );
+            }
           },
           onDetailsPressed: () {
-            // TODO: navigate to shipment details page
+            context.pushNamed(
+              AppRoutes.shipmentDetailsPage,
+              extra: shipmentId,
+            );
           },
         );
       },

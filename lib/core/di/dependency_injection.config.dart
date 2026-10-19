@@ -179,6 +179,14 @@ import 'package:metw_go/features/service_areas/data/repo/service_areas_repo_impl
     as _i508;
 import 'package:metw_go/features/service_areas/presentation/manager/service_areas_cubit.dart'
     as _i661;
+import 'package:metw_go/features/shipment_details/data/data_source/shipment_details_data_source.dart'
+    as _i756;
+import 'package:metw_go/features/shipment_details/data/repo/shipment_details_repo.dart'
+    as _i139;
+import 'package:metw_go/features/shipment_details/data/repo/shipment_details_repo_impl.dart'
+    as _i79;
+import 'package:metw_go/features/shipment_details/presentation/manager/shipment_details_cubit.dart'
+    as _i521;
 import 'package:metw_go/features/shipments/data/data_source/shipments_data_source.dart'
     as _i42;
 import 'package:metw_go/features/shipments/data/repo/shipments_repo.dart'
@@ -299,6 +307,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i139.ServiceAreasDataSource>(
       () => _i139.ServiceAreasDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i756.ShipmentDetailsDataSource>(
+      () => _i756.ShipmentDetailsDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i42.ShipmentsDataSource>(
       () => _i42.ShipmentsDataSource(gh<_i361.Dio>()),
     );
@@ -319,6 +330,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i444.AppRepo>(
       () => _i837.AppRepoImpl(gh<_i863.AppDataSource>()),
+    );
+    gh.factory<_i139.ShipmentDetailsRepo>(
+      () => _i79.ShipmentDetailsRepoImpl(
+        dataSource: gh<_i756.ShipmentDetailsDataSource>(),
+      ),
     );
     gh.factory<_i522.FaqRepo>(
       () => _i679.FaqRepoImpl(dataSource: gh<_i201.FaqDataSource>()),
@@ -416,6 +432,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i863.WalletOperationRepoImpl(
         dataSource: gh<_i997.WalletOperationDataSource>(),
       ),
+    );
+    gh.factory<_i521.ShipmentDetailsCubit>(
+      () => _i521.ShipmentDetailsCubit(gh<_i139.ShipmentDetailsRepo>()),
     );
     gh.factory<_i319.ThirdStepRepo>(
       () => _i220.ThirdStepRepoImpl(gh<_i837.ThirdStepDataSource>()),
