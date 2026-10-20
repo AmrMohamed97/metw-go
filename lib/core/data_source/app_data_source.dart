@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:metw_go/core/models/empty_response/empty_response.dart';
 import 'package:metw_go/core/models/order_action_response/order_action_response.dart';
 import 'package:metw_go/core/models/start_order_response/start_order_response.dart';
+import 'package:metw_go/core/models/start_shipment_response/start_shipment_response.dart';
 import 'package:metw_go/core/network/end_point.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -63,5 +64,11 @@ abstract class AppDataSource {
     @Part(name: 'collected_amount') String? collectedAmount,
     @Part(name: 'delivery_note') String? deliveryNote,
     @Part(name: 'recipient_name') String? recipientName,
+  });
+
+  @POST(EndPoints.startShipmentUrl)
+  Future<StartShipmentResponse> startShipment({
+    @Path("bus_assignment_id") required int assignmentId,
+    @Body() Map<String, dynamic>? body,
   });
 }

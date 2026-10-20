@@ -8,6 +8,8 @@ import 'package:metw_go/core/error/failure.dart';
 import 'package:metw_go/core/models/empty_response/empty_response.dart';
 import 'package:metw_go/core/models/order_action_response/order_action_response.dart';
 import 'package:metw_go/core/models/start_order_response/start_order_response.dart';
+import 'package:metw_go/core/models/start_shipment_input_model/start_shipment_input_model.dart';
+import 'package:metw_go/core/models/start_shipment_response/start_shipment_response.dart';
 import 'package:metw_go/core/repo/app_repo.dart';
 
 @Injectable(as: AppRepo)
@@ -138,6 +140,25 @@ class AppRepoImpl implements AppRepo {
         collectedAmount: collectedAmount,
         deliveryNote: deliveryNote,
         recipientName: recipientName,
+      );
+      return Right(response);
+    } catch (error) {
+      if (error is DioException) {
+        return Left(ServerFailure.fromDioError(error));
+      }
+      return Left(ServerFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, StartShipmentResponse>> startShipment({
+    required int assignmentId,
+    StartShipmentInputModel? body,
+  }) async {
+    try {
+      final response = await _apiService.startShipment(
+        assignmentId: assignmentId,
+        body: body?.toJson(),
       );
       return Right(response);
     } catch (error) {

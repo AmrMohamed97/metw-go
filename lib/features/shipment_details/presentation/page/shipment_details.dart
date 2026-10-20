@@ -22,6 +22,7 @@ import 'package:metw_go/features/shipment_details/presentation/widgets/shipment_
 import 'package:metw_go/features/shipment_details/presentation/widgets/shipment_tracking_stepper.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+
 class ShipmentDetails extends StatelessWidget {
   final int shipmentId;
 

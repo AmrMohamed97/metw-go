@@ -5,6 +5,8 @@ import 'package:metw_go/core/error/failure.dart';
 import 'package:metw_go/core/models/empty_response/empty_response.dart';
 import 'package:metw_go/core/models/order_action_response/order_action_response.dart';
 import 'package:metw_go/core/models/start_order_response/start_order_response.dart';
+import 'package:metw_go/core/models/start_shipment_input_model/start_shipment_input_model.dart';
+import 'package:metw_go/core/models/start_shipment_response/start_shipment_response.dart';
 
 abstract class AppRepo {
   Future<Either<Failure, EmptyResponse>> logout();
@@ -40,5 +42,10 @@ abstract class AppRepo {
     String? collectedAmount,
     String? deliveryNote,
     String? recipientName,
+  });
+
+  Future<Either<Failure, StartShipmentResponse>> startShipment({
+    required int assignmentId,
+    StartShipmentInputModel? body,
   });
 }

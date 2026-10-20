@@ -1,5 +1,6 @@
 import 'package:metw_go/core/models/order_action_response/order_action_response.dart';
 import 'package:metw_go/core/models/start_order_response/start_order_response.dart';
+import 'package:metw_go/core/models/start_shipment_response/start_shipment_response.dart';
 
 abstract class AppState {}
 
@@ -114,3 +115,14 @@ class CompleteDeliveryOrderErrorState extends AppState {
 }
 
 //------------------------------------------------------------------------------
+class StartShipmentLoadingState extends AppState {}
+
+class StartShipmentSuccessState extends AppState {
+  final StartShipmentResponse response;
+  StartShipmentSuccessState(this.response);
+}
+
+class StartShipmentErrorState extends AppState {
+  final String message;
+  StartShipmentErrorState(this.message);
+}

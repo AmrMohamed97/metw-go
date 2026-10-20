@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metw_go/core/const/app_const.dart';
 import 'package:metw_go/core/cubit/app_state.dart';
+import 'package:metw_go/core/models/start_shipment_input_model/start_shipment_input_model.dart';
 import 'package:metw_go/core/repo/app_repo.dart';
 import 'package:metw_go/core/utils/cache_helper.dart';
 // import 'package:metw_go/features/homer/presentation/services/tracking_location_service.dart';
@@ -178,5 +179,20 @@ class AppCubit extends Cubit<AppState> {
 
   void update() {
     emit(AppUpdateState());
+  }
+
+  Future<void> startShipment({
+    required int assignmentId,
+    StartShipmentInputModel? body,
+  }) async {
+    emit(StartShipmentLoadingState());
+    final result = await _appRepo.startShipment(
+      assignmentId: assignmentId,
+      body: body,
+    );
+    result.fold(
+      (failure) => emit(StartShipmentErrorState(failure.message)),
+      (response) => emit(StartShipmentSuccessState(response)),
+    );
   }
 }
