@@ -1,7 +1,7 @@
 {
     "male": "ذكر",
     "female": "انثى",
-    "gender": "الجنس",
+    "gender": "النوع",
     "personalInfo": "المعلومات الشخصية",
     "startCreatingProfile": "لنبدأ بإنشاء ملفك الشخصي كمندوب في MetwGo",
     "firstName": "الاسم الاول",
