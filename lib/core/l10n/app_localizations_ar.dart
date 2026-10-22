@@ -135,7 +135,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get chooseMultipleClassifications =>
-      'يمكنك اختيار أكثر من تصنيف حسب نطاق عملك.';
+      'يمكنك تحديد خيار واحد فقط, او تحديد الخيار الاول و الخيار الثانى معا';
 
   @override
   String get deliveryDelegate => 'مندوب توصيل';
@@ -147,20 +147,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shippingDelegate => 'مندوب شحن';
 
   @override
-  String get shippingDelegateSubtitle => 'مندوب شحن بين محافظات';
+  String get shippingDelegateSubtitle => 'مندوب شحن بين المحافظات';
 
   @override
   String get busDriver => 'سائق باص';
 
   @override
-  String get busDriverSubtitle => 'نقل ركاب وبضائع خفيفة';
+  String get busDriverSubtitle => 'باص ركاب \"ميكروباص أو ميني باص كبير\"';
 
   @override
   String get higherProfitOpp => 'فرص أرباح أعلى!';
 
   @override
   String get intercityShippingIncreasesIncome =>
-      'تفعيل خيارات الشحن بين المدن يزيد من دخلك بنسبة 40%';
+      'تحديد خيار مندوب توصيل وخيار مندوب شحن معا يحقق لك فرص دخل أعلى';
 
   @override
   String get errChooseWarehouse => 'الرجاء اختيار رقم المستودع';
