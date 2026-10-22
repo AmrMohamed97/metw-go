@@ -9,7 +9,9 @@ part of 'first_step_input_model.dart';
 FirstStepInputModel _$FirstStepInputModelFromJson(Map<String, dynamic> json) =>
     FirstStepInputModel(
       courierType: json['courier_type'] as String,
-      warehouseId: (json['warehouse_id'] as num?)?.toInt(),
+      warehouseId: (json['warehouse_id'] as List<dynamic>?)
+          ?.map((e) => (e as num).toInt())
+          .toList(),
       workTypes: (json['work_types'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),

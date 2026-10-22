@@ -15,13 +15,18 @@ class FirstStepCubit extends Cubit<FirstStepState> {
   //----------------------------------------------------------------------------
   final firstStepFormKey = GlobalKey<FormState>();
   bool isIndependentDelegate = true;
-  WarehouseModel? selectedWarehouse;
+  List<WarehouseModel> selectedWarehouses = [];
+  WarehouseModel? get selectedWarehouse =>
+      selectedWarehouses.isNotEmpty ? selectedWarehouses.first : null;
   List<WarehouseModel> warehouses = [];
   // List<String> transportTypes = [];
   // List<String> selectedTransportTypes = [];
 
   void changeDelegateType(bool isIndependent) {
     isIndependentDelegate = isIndependent;
+    if (isIndependent) {
+      selectedWarehouses.clear();
+    }
     emit(ChangeDelegateTypeSuccess());
   }
 
@@ -76,8 +81,22 @@ class FirstStepCubit extends Cubit<FirstStepState> {
     });
   }
 
+  void toggleWarehouse(WarehouseModel warehouse) {
+    final index = selectedWarehouses.indexWhere((w) => w.id == warehouse.id);
+    if (index != -1) {
+      selectedWarehouses.removeAt(index);
+    } else {
+      selectedWarehouses.add(warehouse);
+    }
+    emit(ChangeDelegateTypeSuccess());
+  }
+
   void selectWarehouse(WarehouseModel warehouse) {
-    selectedWarehouse = warehouse;
+    toggleWarehouse(warehouse);
+  }
+
+  void clearSelectedWarehouses() {
+    selectedWarehouses.clear();
     emit(ChangeDelegateTypeSuccess());
   }
 
@@ -88,7 +107,7 @@ class FirstStepCubit extends Cubit<FirstStepState> {
     if (isBusDriver) selectedWorkTypes.add('bus_driver');
 
     bool hasSelectedWorkTypes = selectedWorkTypes.isNotEmpty;
-    bool hasSelectedWarehouse = selectedWarehouse != null;
+    bool hasSelectedWarehouse = selectedWarehouses.isNotEmpty;
 
     if (firstStepFormKey.currentState!.validate() &&
         (isIndependentDelegate
@@ -98,7 +117,12 @@ class FirstStepCubit extends Cubit<FirstStepState> {
 
       final input = FirstStepInputModel(
         courierType: isIndependentDelegate ? 'freelance' : 'warehouse',
-        warehouseId: isIndependentDelegate ? null : selectedWarehouse?.id,
+        warehouseId: isIndependentDelegate
+            ? null
+            : selectedWarehouses
+                .map((w) => w.id)
+                .whereType<int>()
+                .toList(),
         workTypes: selectedWorkTypes,
       );
 

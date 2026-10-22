@@ -7,7 +7,7 @@ class FirstStepInputModel {
   @JsonKey(name: 'courier_type')
   String courierType;
   @JsonKey(name: 'warehouse_id')
-  int? warehouseId;
+  List<int>? warehouseId;
   @JsonKey(name: 'work_types')
   List<String>? workTypes;
 
