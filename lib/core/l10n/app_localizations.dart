@@ -347,7 +347,7 @@ abstract class AppLocalizations {
   /// No description provided for @chooseMultipleClassifications.
   ///
   /// In en, this message translates to:
-  /// **'You can choose more than one classification based on your work scope.'**
+  /// **'You can select only one option, or select both the first and second options together'**
   String get chooseMultipleClassifications;
 
   /// No description provided for @deliveryDelegate.
@@ -383,7 +383,7 @@ abstract class AppLocalizations {
   /// No description provided for @busDriverSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Transporting passengers and light goods'**
+  /// **'Passenger bus \"microbus or minibus\"'**
   String get busDriverSubtitle;
 
   /// No description provided for @higherProfitOpp.
@@ -395,7 +395,7 @@ abstract class AppLocalizations {
   /// No description provided for @intercityShippingIncreasesIncome.
   ///
   /// In en, this message translates to:
-  /// **'Activating intercity shipping options increases your income by 40%'**
+  /// **'Selecting both delivery delegate and shipping delegate options gives you higher income opportunities'**
   String get intercityShippingIncreasesIncome;
 
   /// No description provided for @errChooseWarehouse.

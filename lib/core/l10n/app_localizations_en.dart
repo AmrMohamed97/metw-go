@@ -135,7 +135,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chooseMultipleClassifications =>
-      'You can choose more than one classification based on your work scope.';
+      'You can select only one option, or select both the first and second options together';
 
   @override
   String get deliveryDelegate => 'Delivery Delegate';
@@ -155,14 +155,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get busDriver => 'Bus Driver';
 
   @override
-  String get busDriverSubtitle => 'Transporting passengers and light goods';
+  String get busDriverSubtitle => 'Passenger bus \"microbus or minibus\"';
 
   @override
   String get higherProfitOpp => 'Higher profit opportunities!';
 
   @override
   String get intercityShippingIncreasesIncome =>
-      'Activating intercity shipping options increases your income by 40%';
+      'Selecting both delivery delegate and shipping delegate options gives you higher income opportunities';
 
   @override
   String get errChooseWarehouse => 'Please choose a warehouse number';
