@@ -26,7 +26,15 @@ class SecondStepCubit extends Cubit<SecondStepState> with ImageMixin {
   TextEditingController maxVolumeController = TextEditingController(
     text: '0.0',
   );
-  TextEditingController plateNumberController = TextEditingController();
+  /// خانة الحروف (مثل: أ ب ج)
+  TextEditingController plateLettersController = TextEditingController();
+
+  /// خانة الأرقام (مثل: 123)
+  TextEditingController plateNumbersController = TextEditingController();
+
+  /// القيمة المدمجة التي تُرسل للسيرفر: "حروف - أرقام"
+  String get plateNumberCombined =>
+      '${plateLettersController.text.trim()} - ${plateNumbersController.text.trim()}';
 
   File? vehicleImage;
 
@@ -70,7 +78,7 @@ class SecondStepCubit extends Cubit<SecondStepState> with ImageMixin {
 
       final result = await repo.submitSecondStep(
         selectedTransportType!.id!,
-        plateNumberController.text,
+        plateNumberCombined,
         vehicleImage!,
       );
 

@@ -199,6 +199,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get plateNumberHint => 'A B C - 1 2 3';
 
   @override
+  String get plateLetters => 'Plate Letters';
+
+  @override
+  String get plateLettersHint => 'A B C';
+
+  @override
+  String get plateNumbers => 'Plate Numbers';
+
+  @override
+  String get plateNumbersHint => '1 2 3';
+
+  @override
   String get plateNumberDesc =>
       'Please write the letters and numbers as they appear on the vehicle license';
 
@@ -226,6 +238,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errEnterPlateNumber => 'Please enter plate number';
+
+  @override
+  String get errEnterPlateLetters => 'Please enter plate letters';
+
+  @override
+  String get errInvalidPlateLetters => 'Only Arabic letters are allowed';
+
+  @override
+  String get errEnterPlateNumbers => 'Please enter plate numbers';
+
+  @override
+  String get errInvalidPlateNumbers => 'Only digits are allowed';
 
   @override
   String get errUploadVehicleImage => 'Please upload transport method image';

@@ -197,6 +197,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get plateNumberHint => 'أ ب ج - 1 2 3';
 
   @override
+  String get plateLetters => 'حروف اللوحة';
+
+  @override
+  String get plateLettersHint => 'أ ب ج';
+
+  @override
+  String get plateNumbers => 'أرقام اللوحة';
+
+  @override
+  String get plateNumbersHint => '1 2 3';
+
+  @override
   String get plateNumberDesc =>
       'يرجى كتابة الحروف والأرقام كما تظهر في رخصة المركبة';
 
@@ -224,6 +236,18 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get errEnterPlateNumber => 'الرجاء إدخال رقم اللوحة';
+
+  @override
+  String get errEnterPlateLetters => 'الرجاء إدخال حروف اللوحة';
+
+  @override
+  String get errInvalidPlateLetters => 'يسمح بالحروف العربية فقط';
+
+  @override
+  String get errEnterPlateNumbers => 'الرجاء إدخال أرقام اللوحة';
+
+  @override
+  String get errInvalidPlateNumbers => 'يسمح بالأرقام فقط';
 
   @override
   String get errUploadVehicleImage => 'الرجاء تحميل صورة وسيلة النقل';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -184,27 +185,99 @@ class SecondStepPage extends StatelessWidget {
                           title: AppLocalizations.of(context)!.plateNumber,
                         ),
                         4.verticalSpace,
-                        CustomTextField(
-                          hintText: AppLocalizations.of(
-                            context,
-                          )!.plateNumberHint,
-                          controller: cubit.plateNumberController,
-                          prefixIcon: Padding(
-                            padding: EdgeInsets.all(12.r),
-                            child: Image.asset(
-                              AppImages.balletNumIcon, // The plate icon
-                              height: 24.h,
-                              width: 24.h,
+                        // خانتان جنبًا لجنب: حروف اللوحة | أرقام اللوحة
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // خانة الحروف (يمين)
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  FieldTitle(
+                                    title: AppLocalizations.of(
+                                      context,
+                                    )!.plateLetters,
+                                  ),
+                                  4.verticalSpace,
+                                  CustomTextField(
+                                    hintText: AppLocalizations.of(
+                                      context,
+                                    )!.plateLettersHint,
+                                    controller: cubit.plateLettersController,
+                                    textInputType: TextInputType.text,
+                                    prefixIcon: Padding(
+                                      padding: EdgeInsets.all(12.r),
+                                      child: Image.asset(
+                                        AppImages.balletNumIcon,
+                                        height: 24.h,
+                                        width: 24.h,
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null ||
+                                          value.trim().isEmpty) {
+                                        return AppLocalizations.of(
+                                          context,
+                                        )!.errEnterPlateLetters;
+                                      }
+                                      // يسمح بالحروف العربية والمسافات فقط
+                                      if (!RegExp(
+                                        r'^[\u0600-\u06FF\s]+$',
+                                      ).hasMatch(value.trim())) {
+                                        return AppLocalizations.of(
+                                          context,
+                                        )!.errInvalidPlateLetters;
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppLocalizations.of(
-                                context,
-                              )!.errEnterPlateNumber;
-                            }
-                            return null;
-                          },
+                            12.horizontalSpace,
+                            // خانة الأرقام (يسار)
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  FieldTitle(
+                                    title: AppLocalizations.of(
+                                      context,
+                                    )!.plateNumbers,
+                                  ),
+                                  4.verticalSpace,
+                                  CustomTextField(
+                                    hintText: AppLocalizations.of(
+                                      context,
+                                    )!.plateNumbersHint,
+                                    controller: cubit.plateNumbersController,
+                                    textInputType: TextInputType.number,
+                                    prefixIcon: const Icon(Icons.tag_outlined),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                    ],
+                                    validator: (value) {
+                                      if (value == null ||
+                                          value.trim().isEmpty) {
+                                        return AppLocalizations.of(
+                                          context,
+                                        )!.errEnterPlateNumbers;
+                                      }
+                                      if (!RegExp(
+                                        r'^[0-9]+$',
+                                      ).hasMatch(value.trim())) {
+                                        return AppLocalizations.of(
+                                          context,
+                                        )!.errInvalidPlateNumbers;
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                         4.verticalSpace,
                         Text(
@@ -275,7 +348,10 @@ class SecondStepPage extends StatelessWidget {
                               horizontalPadding:
                                   state is SubmitSecondStepLoading ? null : 40,
                               text: AppLocalizations.of(context)!.next,
-                              onPressed: () => cubit.submitSecondStep(),
+                              onPressed: () {
+                                // cubit.submitSecondStep();
+                                context.go(AppRoutes.fourthStepPage);
+                              },
                             ),
                           ],
                         ),

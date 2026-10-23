@@ -464,6 +464,30 @@ abstract class AppLocalizations {
   /// **'A B C - 1 2 3'**
   String get plateNumberHint;
 
+  /// No description provided for @plateLetters.
+  ///
+  /// In en, this message translates to:
+  /// **'Plate Letters'**
+  String get plateLetters;
+
+  /// No description provided for @plateLettersHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A B C'**
+  String get plateLettersHint;
+
+  /// No description provided for @plateNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Plate Numbers'**
+  String get plateNumbers;
+
+  /// No description provided for @plateNumbersHint.
+  ///
+  /// In en, this message translates to:
+  /// **'1 2 3'**
+  String get plateNumbersHint;
+
   /// No description provided for @plateNumberDesc.
   ///
   /// In en, this message translates to:
@@ -517,6 +541,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter plate number'**
   String get errEnterPlateNumber;
+
+  /// No description provided for @errEnterPlateLetters.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter plate letters'**
+  String get errEnterPlateLetters;
+
+  /// No description provided for @errInvalidPlateLetters.
+  ///
+  /// In en, this message translates to:
+  /// **'Only Arabic letters are allowed'**
+  String get errInvalidPlateLetters;
+
+  /// No description provided for @errEnterPlateNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter plate numbers'**
+  String get errEnterPlateNumbers;
+
+  /// No description provided for @errInvalidPlateNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Only digits are allowed'**
+  String get errInvalidPlateNumbers;
 
   /// No description provided for @errUploadVehicleImage.
   ///
