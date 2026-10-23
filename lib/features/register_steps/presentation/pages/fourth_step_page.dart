@@ -54,7 +54,7 @@ class FourthStepPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
-                      crossAxisAlignment: .start,
+                      crossAxisAlignment: .start ,
                       children: [
                         50.verticalSpace,
                         Padding(
