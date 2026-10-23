@@ -962,4 +962,74 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deliveryAction => 'Deliver';
+
+  @override
+  String get documentsData => 'Documents Data';
+
+  @override
+  String get documentsDataDesc =>
+      'Please enter official documents numbers and expiry dates';
+
+  @override
+  String get nationalIdNumber => 'National ID Number';
+
+  @override
+  String get nationalIdNumberHint => 'Enter National ID (14 digits)';
+
+  @override
+  String get nationalIdExpiryDate => 'National ID Expiry Date';
+
+  @override
+  String get drivingLicenseNumber => 'Driving License Number';
+
+  @override
+  String get drivingLicenseNumberHint => 'Enter driving license number';
+
+  @override
+  String get drivingLicenseExpiryDate => 'Driving License Expiry Date';
+
+  @override
+  String get vehicleLicenseNumber => 'Vehicle License Number';
+
+  @override
+  String get vehicleLicenseNumberHint => 'Enter vehicle license number';
+
+  @override
+  String get vehicleLicenseExpiryDate => 'Vehicle License Expiry Date';
+
+  @override
+  String get errNationalIdRequired => 'Please enter national ID number';
+
+  @override
+  String get errInvalidNationalId =>
+      'Invalid national ID format (must be 14 digits)';
+
+  @override
+  String get errDrivingLicenseNumberRequired =>
+      'Please enter driving license number';
+
+  @override
+  String get errInvalidDrivingLicenseNumber =>
+      'Invalid driving license number format';
+
+  @override
+  String get errVehicleLicenseNumberRequired =>
+      'Please enter vehicle license number';
+
+  @override
+  String get errInvalidVehicleLicenseNumber =>
+      'Invalid vehicle license number format';
+
+  @override
+  String get errDateRequired => 'Please select the date';
+
+  @override
+  String get errDateFormat => 'Invalid date format (YYYY-MM-DD)';
+
+  @override
+  String get errDateMin45Days => 'The date must be valid for at least 45 days';
+
+  @override
+  String get documentsValidityNotice =>
+      'All document dates must be valid for at least 45 days';
 }

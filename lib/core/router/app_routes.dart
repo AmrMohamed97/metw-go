@@ -24,6 +24,7 @@ class AppRoutes {
   static const String secondStepPage = '/secondStepPage';
   static const String thirdStepPage = '/thirdStepPage';
   static const String fourthStepPage = '/fourthStepPage';
+  static const String fifthStepPage = '/fifthStepPage';
   static const String walletOperationPage = '/walletOperationPage';
   static const String faqPage = '/faqPage';
   static const String privacyPage = '/privacyPage';

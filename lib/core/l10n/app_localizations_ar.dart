@@ -956,4 +956,74 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get deliveryAction => 'تسليم';
+
+  @override
+  String get documentsData => 'بيانات المستندات';
+
+  @override
+  String get documentsDataDesc =>
+      'يرجى إدخال أرقام وتواريخ إنتهاء المستندات الرسمية';
+
+  @override
+  String get nationalIdNumber => 'الرقم القومي';
+
+  @override
+  String get nationalIdNumberHint => 'أدخل الرقم القومي (14 رقماً)';
+
+  @override
+  String get nationalIdExpiryDate => 'تاريخ إنتهاء بطاقة الرقم القومي';
+
+  @override
+  String get drivingLicenseNumber => 'رقم رخصة القيادة';
+
+  @override
+  String get drivingLicenseNumberHint => 'أدخل رقم رخصة القيادة';
+
+  @override
+  String get drivingLicenseExpiryDate => 'تاريخ إنتهاء رخصة القيادة';
+
+  @override
+  String get vehicleLicenseNumber => 'رقم رخصة وسيلة النقل';
+
+  @override
+  String get vehicleLicenseNumberHint => 'أدخل رقم رخصة وسيلة النقل';
+
+  @override
+  String get vehicleLicenseExpiryDate => 'تاريخ إنتهاء رخصة وسيلة النقل';
+
+  @override
+  String get errNationalIdRequired => 'الرجاء إدخال الرقم القومي';
+
+  @override
+  String get errInvalidNationalId =>
+      'صيغة الرقم القومي غير صحيحة (يجب أن يكون 14 رقماً)';
+
+  @override
+  String get errDrivingLicenseNumberRequired => 'الرجاء إدخال رقم رخصة القيادة';
+
+  @override
+  String get errInvalidDrivingLicenseNumber =>
+      'صيغة رقم رخصة القيادة غير صحيحة';
+
+  @override
+  String get errVehicleLicenseNumberRequired =>
+      'الرجاء إدخال رقم رخصة وسيلة النقل';
+
+  @override
+  String get errInvalidVehicleLicenseNumber =>
+      'صيغة رقم رخصة وسيلة النقل غير صحيحة';
+
+  @override
+  String get errDateRequired => 'الرجاء تحديد التاريخ';
+
+  @override
+  String get errDateFormat => 'صيغة التاريخ غير صحيحة (YYYY-MM-DD)';
+
+  @override
+  String get errDateMin45Days =>
+      'يجب أن يكون التاريخ سارياً لمدة لا تقل عن 45 يوماً';
+
+  @override
+  String get documentsValidityNotice =>
+      'يجب أن تكون جميع التواريخ سارية المفعول لمدة لا تقل عن 45 يوماً';
 }

@@ -31,7 +31,7 @@ class FirstStepPage extends StatelessWidget {
             message: AppLocalizations.of(context)!.savedSuccessfully,
             state: ToastStates.success,
           );
-          context.go(AppRoutes.secondStepPage);
+          context.go(AppRoutes.thirdStepPage);
         } else if (state is SubmitFirstStepFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
         } else if (state is GetWarehousesFailure) {
@@ -513,19 +513,20 @@ class FirstStepPage extends StatelessWidget {
                                   : 40,
                               text: AppLocalizations.of(context)!.next,
                               onPressed: () {
-                                if (!cubit.isDeliveryDelegate &&
-                                    !cubit.isShippingDelegate &&
-                                    !cubit.isBusDriver) {
-                                  showToast(
-                                    context,
-                                    message: AppLocalizations.of(
-                                      context,
-                                    )!.errChooseWorkClassification,
-                                    state: ToastStates.error,
-                                  );
-                                  return;
-                                }
-                                cubit.submitFirstStep();
+                                context.go(AppRoutes.thirdStepPage);
+                                // if (!cubit.isDeliveryDelegate &&
+                                //     !cubit.isShippingDelegate &&
+                                //     !cubit.isBusDriver) {
+                                //   showToast(
+                                //     context,
+                                //     message: AppLocalizations.of(
+                                //       context,
+                                //     )!.errChooseWorkClassification,
+                                //     state: ToastStates.error,
+                                //   );
+                                //   return;
+                                // }
+                                // cubit.submitFirstStep();
                               },
                             ),
                           ],

@@ -32,7 +32,8 @@ class SecondStepPage extends StatelessWidget {
             message: AppLocalizations.of(context)!.savedSuccessfully,
             state: ToastStates.success,
           );
-          context.go(AppRoutes.thirdStepPage);
+          // context.go(AppRoutes.thirdStepPage);
+          context.go(AppRoutes.fourthStepPage);
         } else if (state is SubmitSecondStepFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
         } else if (state is GetTransportTypesFailure) {
@@ -58,7 +59,7 @@ class SecondStepPage extends StatelessWidget {
                             start: 16.0,
                             end: 60,
                           ),
-                          child: const CustomSteper(currentStep: 1),
+                          child: const CustomSteper(currentStep: 3),
                         ),
                         16.verticalSpace,
                         Text(
@@ -112,70 +113,72 @@ class SecondStepPage extends StatelessWidget {
                             return null;
                           },
                         ),
-                        16.verticalSpace,
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  FieldTitle(
-                                    title: AppLocalizations.of(
-                                      context,
-                                    )!.maxWeight,
-                                  ),
-                                  4.verticalSpace,
-                                  CustomTextField(
-                                    hintText: AppLocalizations.of(
-                                      context,
-                                    )!.maxWeightHint,
-                                    controller: cubit.maxWeightController,
-                                    textInputType: TextInputType.number,
-                                    readOnly: true,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return AppLocalizations.of(
-                                          context,
-                                        )!.errEnterMaxWeight;
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ],
+                        if (cubit.selectedTransportType != null) ...[
+                          16.verticalSpace,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    FieldTitle(
+                                      title: AppLocalizations.of(
+                                        context,
+                                      )!.maxWeight,
+                                    ),
+                                    4.verticalSpace,
+                                    CustomTextField(
+                                      hintText: AppLocalizations.of(
+                                        context,
+                                      )!.maxWeightHint,
+                                      controller: cubit.maxWeightController,
+                                      textInputType: TextInputType.number,
+                                      readOnly: true,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return AppLocalizations.of(
+                                            context,
+                                          )!.errEnterMaxWeight;
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            16.horizontalSpace,
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  FieldTitle(
-                                    title: AppLocalizations.of(
-                                      context,
-                                    )!.maxVolume,
-                                  ),
-                                  4.verticalSpace,
-                                  CustomTextField(
-                                    hintText: AppLocalizations.of(
-                                      context,
-                                    )!.maxVolumeHint,
-                                    controller: cubit.maxVolumeController,
-                                    readOnly: true,
-                                    textInputType: TextInputType.number,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return AppLocalizations.of(
-                                          context,
-                                        )!.errEnterMaxVolume;
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ],
+                              16.horizontalSpace,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    FieldTitle(
+                                      title: AppLocalizations.of(
+                                        context,
+                                      )!.maxVolume,
+                                    ),
+                                    4.verticalSpace,
+                                    CustomTextField(
+                                      hintText: AppLocalizations.of(
+                                        context,
+                                      )!.maxVolumeHint,
+                                      controller: cubit.maxVolumeController,
+                                      readOnly: true,
+                                      textInputType: TextInputType.number,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return AppLocalizations.of(
+                                            context,
+                                          )!.errEnterMaxVolume;
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                        ],
                         16.verticalSpace,
                         FieldTitle(
                           title: AppLocalizations.of(context)!.plateNumber,
@@ -361,7 +364,7 @@ class SecondStepPage extends StatelessWidget {
                                   color: isSelected
                                       ? Theme.of(
                                           context,
-                                        ).primaryColor.withOpacity(0.05)
+                                        ).primaryColor.withValues(alpha: 0.05)
                                       : Colors.transparent,
                                 ),
                                 child: Row(

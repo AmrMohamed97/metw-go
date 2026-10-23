@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:step_progress/step_progress.dart';
 
 class CustomSteper extends StatelessWidget {
-  const CustomSteper({super.key, required this.currentStep});
+  const CustomSteper({
+    super.key,
+    required this.currentStep,
+    this.totalSteps = 5,
+  });
   final int currentStep;
+  final int totalSteps;
   @override
   Widget build(BuildContext context) {
     return StepProgress(
       currentStep: currentStep,
-      totalSteps: 4,
+      totalSteps: totalSteps,
 
       visibilityOptions: StepProgressVisibilityOptions.lineOnly,
       // controller: cubit.stepProgressController,

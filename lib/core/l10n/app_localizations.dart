@@ -1945,6 +1945,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Deliver'**
   String get deliveryAction;
+
+  /// No description provided for @documentsData.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents Data'**
+  String get documentsData;
+
+  /// No description provided for @documentsDataDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter official documents numbers and expiry dates'**
+  String get documentsDataDesc;
+
+  /// No description provided for @nationalIdNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'National ID Number'**
+  String get nationalIdNumber;
+
+  /// No description provided for @nationalIdNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter National ID (14 digits)'**
+  String get nationalIdNumberHint;
+
+  /// No description provided for @nationalIdExpiryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'National ID Expiry Date'**
+  String get nationalIdExpiryDate;
+
+  /// No description provided for @drivingLicenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Driving License Number'**
+  String get drivingLicenseNumber;
+
+  /// No description provided for @drivingLicenseNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter driving license number'**
+  String get drivingLicenseNumberHint;
+
+  /// No description provided for @drivingLicenseExpiryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Driving License Expiry Date'**
+  String get drivingLicenseExpiryDate;
+
+  /// No description provided for @vehicleLicenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle License Number'**
+  String get vehicleLicenseNumber;
+
+  /// No description provided for @vehicleLicenseNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter vehicle license number'**
+  String get vehicleLicenseNumberHint;
+
+  /// No description provided for @vehicleLicenseExpiryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle License Expiry Date'**
+  String get vehicleLicenseExpiryDate;
+
+  /// No description provided for @errNationalIdRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter national ID number'**
+  String get errNationalIdRequired;
+
+  /// No description provided for @errInvalidNationalId.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid national ID format (must be 14 digits)'**
+  String get errInvalidNationalId;
+
+  /// No description provided for @errDrivingLicenseNumberRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter driving license number'**
+  String get errDrivingLicenseNumberRequired;
+
+  /// No description provided for @errInvalidDrivingLicenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid driving license number format'**
+  String get errInvalidDrivingLicenseNumber;
+
+  /// No description provided for @errVehicleLicenseNumberRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter vehicle license number'**
+  String get errVehicleLicenseNumberRequired;
+
+  /// No description provided for @errInvalidVehicleLicenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid vehicle license number format'**
+  String get errInvalidVehicleLicenseNumber;
+
+  /// No description provided for @errDateRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select the date'**
+  String get errDateRequired;
+
+  /// No description provided for @errDateFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid date format (YYYY-MM-DD)'**
+  String get errDateFormat;
+
+  /// No description provided for @errDateMin45Days.
+  ///
+  /// In en, this message translates to:
+  /// **'The date must be valid for at least 45 days'**
+  String get errDateMin45Days;
+
+  /// No description provided for @documentsValidityNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'All document dates must be valid for at least 45 days'**
+  String get documentsValidityNotice;
 }
 
 class _AppLocalizationsDelegate

@@ -32,7 +32,8 @@ class ThirdStepPage extends StatelessWidget {
             message: AppLocalizations.of(context)!.savedSuccessfully,
             state: ToastStates.success,
           );
-          context.go(AppRoutes.fourthStepPage);
+          // context.go(AppRoutes.fourthStepPage);
+          context.go(AppRoutes.fifthStepPage);
         } else if (state is SubmitThirdStepFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
         } else if (state is GetGovernoratesFailure) {
@@ -57,7 +58,7 @@ class ThirdStepPage extends StatelessWidget {
                         50.verticalSpace,
                         Padding(
                           padding: const EdgeInsetsDirectional.only(end: 32),
-                          child: const CustomSteper(currentStep: 2),
+                          child: const CustomSteper(currentStep: 1),
                         ),
                         25.verticalSpace,
                         Text(
@@ -207,7 +208,10 @@ class ThirdStepPage extends StatelessWidget {
                                   ? null
                                   : 40,
                               text: AppLocalizations.of(context)!.next,
-                              onPressed: () => cubit.submitThirdStep(),
+                              onPressed: () {
+                                // cubit.submitThirdStep();
+                                context.go(AppRoutes.fifthStepPage);
+                              },
                             ),
                           ],
                         ),
