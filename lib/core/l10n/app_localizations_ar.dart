@@ -191,7 +191,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get maxVolumeHint => '0.05 م.م';
 
   @override
-  String get plateNumber => 'رقم اللوحة';
+  String get plateNumber => 'رقم اللوحة للمركبة المُرخصة';
 
   @override
   String get plateNumberHint => 'أ ب ج - 1 2 3';
@@ -201,7 +201,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'يرجى كتابة الحروف والأرقام كما تظهر في رخصة المركبة';
 
   @override
-  String get uploadVehicleImage => 'تحميل صورة المركبة';
+  String get uploadVehicleImage => 'تحميل صورة وسيلة النقل';
 
   @override
   String get uploadVehicleImageDesc => 'بحد أقصى 5 ميجا بايت JPG, PNG';
@@ -226,7 +226,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get errEnterPlateNumber => 'الرجاء إدخال رقم اللوحة';
 
   @override
-  String get errUploadVehicleImage => 'الرجاء تحميل صورة المركبة';
+  String get errUploadVehicleImage => 'الرجاء تحميل صورة وسيلة النقل';
 
   @override
   String get camera => 'الكاميرا';

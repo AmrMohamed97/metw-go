@@ -455,7 +455,7 @@ abstract class AppLocalizations {
   /// No description provided for @plateNumber.
   ///
   /// In en, this message translates to:
-  /// **'Plate Number'**
+  /// **'Licensed Vehicle Plate Number'**
   String get plateNumber;
 
   /// No description provided for @plateNumberHint.
@@ -473,7 +473,7 @@ abstract class AppLocalizations {
   /// No description provided for @uploadVehicleImage.
   ///
   /// In en, this message translates to:
-  /// **'Upload Vehicle Image'**
+  /// **'Upload Transport Method Image'**
   String get uploadVehicleImage;
 
   /// No description provided for @uploadVehicleImageDesc.
@@ -521,7 +521,7 @@ abstract class AppLocalizations {
   /// No description provided for @errUploadVehicleImage.
   ///
   /// In en, this message translates to:
-  /// **'Please upload vehicle image'**
+  /// **'Please upload transport method image'**
   String get errUploadVehicleImage;
 
   /// No description provided for @camera.

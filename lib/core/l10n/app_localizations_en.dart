@@ -193,7 +193,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get maxVolumeHint => '0.05 c.m';
 
   @override
-  String get plateNumber => 'Plate Number';
+  String get plateNumber => 'Licensed Vehicle Plate Number';
 
   @override
   String get plateNumberHint => 'A B C - 1 2 3';
@@ -203,7 +203,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please write the letters and numbers as they appear on the vehicle license';
 
   @override
-  String get uploadVehicleImage => 'Upload Vehicle Image';
+  String get uploadVehicleImage => 'Upload Transport Method Image';
 
   @override
   String get uploadVehicleImageDesc => 'Max 5 MB JPG, PNG';
@@ -228,7 +228,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errEnterPlateNumber => 'Please enter plate number';
 
   @override
-  String get errUploadVehicleImage => 'Please upload vehicle image';
+  String get errUploadVehicleImage => 'Please upload transport method image';
 
   @override
   String get camera => 'Camera';
