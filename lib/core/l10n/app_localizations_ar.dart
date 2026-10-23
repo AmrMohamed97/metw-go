@@ -288,7 +288,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ruralServiceWarning =>
-      ' تفعيل خدمة القرى قد يزيد من عدد الطلبات المتاحة لك بنسبة 25٪، ولكن تأكد من توفر وسيلة النقل المناسبة.';
+      'تفعيل خدمة القرى قد يزيد من عدد الطلبات المتاحة لك بنسبة 25٪، ولكن تأكد من توفر وسيلة النقل المناسبة .';
 
   @override
   String get uploadOfficialDocs => 'رفع المستندات الرسمية';

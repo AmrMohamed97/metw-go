@@ -13,9 +13,10 @@ import 'package:metw_go/core/widgets/pic_image_bottom_sheet.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/register/presentation/widgets/document_upload_box.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
-import 'package:metw_go/features/register/presentation/widgets/personal_photo_container.dart';
+import 'package:metw_go/features/register/presentation/widgets/image_upload_container.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_cubit.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_state.dart';
+
 
 class FourthStepPage extends StatelessWidget {
   const FourthStepPage({super.key});
@@ -79,12 +80,16 @@ class FourthStepPage extends StatelessWidget {
                         // Personal Photo
                         FieldTitle(
                           title: AppLocalizations.of(context)!.personalPhoto,
-                          // style: AppTextStyle.medium14(context),
                         ),
                         12.verticalSpace,
-                        PersonalPhotoContainer(
+                        ImageUploadContainer(
+                          title: AppLocalizations.of(context)!.personalPhoto,
+                          subtitle: AppLocalizations.of(
+                            context,
+                          )!.uploadVehicleImageDesc,
+                          iconPath: AppImages.uploadIcon,
+                          imagePath: cubit.personalPhoto?.path,
                           isLoading: isDocLoading('personalPhoto'),
-                          imageFile: cubit.personalPhoto,
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
