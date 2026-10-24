@@ -250,7 +250,7 @@ void main() {
           "delivered_success": {
             "title": "تم التسليم بنجاح",
             "subtitle": "تم تسليم الطلب بنجاح وإضافة العمولة إلى محفظتك.",
-            "badge": "توصيل فوري",
+            "badge": "توصيل داخل المحافظة",
             "earnings_title": "الأجرة المكتسبة",
             "earnings_amount": 52,
             "currency": "ج.م",

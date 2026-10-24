@@ -300,7 +300,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get personalPhoto => 'الصورة الشخصية';
 
   @override
-  String get nationalId => 'الهوية الوطنية';
+  String get nationalId => 'تصوير بطاقة الرقم القومى بالكاميرا';
 
   @override
   String get idFront => 'وجه البطاقة';
@@ -309,7 +309,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get idBack => 'ظهر البطاقة';
 
   @override
-  String get drivingLicense => 'رخصة القيادة';
+  String get drivingLicense => 'تصوير رخصة القيادة بالكاميرا';
 
   @override
   String get frontSide => 'الوجه الأمامي';
@@ -396,7 +396,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'قم بتفعيل حالتك لاستقبال طلبات التوصيل الجديدة في منطقتك.';
 
   @override
-  String get readyToReceive => 'جاهز للاستقبال';
+  String get readyToReceive => 'جاهز لاستقبال الطلبات';
 
   @override
   String get availableToReceive => 'متاح للاستقبال';
@@ -406,7 +406,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'أنت الآن في وضع الاتصال، بانتظار طلباتك القادمة.';
 
   @override
-  String get stopReceiving => 'إيقاف الاستقبال';
+  String get stopReceiving => 'إيقاف إستقبال الطلبات';
 
   @override
   String get home => 'الرئيسية';
@@ -493,7 +493,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ratingMock => '4.0';
 
   @override
-  String get totalEarnings => 'إجمالي الأرباح';
+  String get totalEarnings => 'إجمالي الدخل';
 
   @override
   String get earningsValueMock => '15,420 ج.م';
