@@ -49,33 +49,14 @@ class _SecondStepDataSource implements SecondStepDataSource {
   }
 
   @override
-  Future<FirstStepOutModel> submitSecondStep(
-    int transportTypeId,
-    String plateNumber,
-    File vehicleImage,
-  ) async {
+  Future<FirstStepOutModel> submitSecondStep(SecondStepInputModel input) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = FormData();
-    _data.fields.add(MapEntry('transport_type_id', transportTypeId.toString()));
-    _data.fields.add(MapEntry('plate_number', plateNumber));
-    _data.files.add(
-      MapEntry(
-        'vehicle_image',
-        MultipartFile.fromFileSync(
-          vehicleImage.path,
-          filename: vehicleImage.path.split(Platform.pathSeparator).last,
-        ),
-      ),
-    );
+    final _data = <String, dynamic>{};
+    _data.addAll(input.toJson());
     final _options = _setStreamType<FirstStepOutModel>(
-      Options(
-            method: 'POST',
-            headers: _headers,
-            extra: _extra,
-            contentType: 'multipart/form-data',
-          )
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             'auth/register/step-5',

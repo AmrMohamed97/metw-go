@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -9,6 +7,7 @@ import 'package:metw_go/core/models/auth_model/auth_model.dart';
 import 'package:metw_go/core/utils/cache_helper.dart';
 import 'package:metw_go/features/register_steps/data/data_source/second_step_data_source.dart';
 import 'package:metw_go/features/register_steps/data/models/first_step_out_model.dart';
+import 'package:metw_go/features/register_steps/data/models/second_step_input_model.dart';
 import 'package:metw_go/features/register_steps/data/models/transport_type_model.dart';
 import 'package:metw_go/features/register_steps/data/repo/second_step_repo.dart';
 
@@ -33,16 +32,10 @@ class SecondStepRepoImpl implements SecondStepRepo {
 
   @override
   Future<Either<Failure, FirstStepOutModel>> submitSecondStep(
-    int transportTypeId,
-    String plateNumber,
-    File vehicleImage,
+    SecondStepInputModel input,
   ) async {
     try {
-      final response = await dataSource.submitSecondStep(
-        transportTypeId,
-        plateNumber,
-        vehicleImage,
-      );
+      final response = await dataSource.submitSecondStep(input);
       CacheHelper.setSecuerString(
         key: AppConstant.accessToken,
         value: response.data?.registrationToken ?? '',

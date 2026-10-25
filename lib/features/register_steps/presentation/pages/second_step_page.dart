@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -12,10 +11,8 @@ import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_steper.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
 import 'package:metw_go/core/widgets/custom_toast.dart';
-import 'package:metw_go/core/widgets/pic_image_bottom_sheet.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
-import 'package:metw_go/features/register/presentation/widgets/image_upload_container.dart';
 import 'package:metw_go/features/register/presentation/widgets/info_banner.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/second_step_cubit.dart/second_step_cubit.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/second_step_cubit.dart/second_step_state.dart';
@@ -25,15 +22,16 @@ class SecondStepPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return BlocConsumer<SecondStepCubit, SecondStepState>(
       listener: (context, state) {
         if (state is SubmitSecondStepSuccess) {
           showToast(
             context,
-            message: AppLocalizations.of(context)!.savedSuccessfully,
+            message: l10n.savedSuccessfully,
             state: ToastStates.success,
           );
-          // context.go(AppRoutes.thirdStepPage);
           context.go(AppRoutes.fourthStepPage);
         } else if (state is SubmitSecondStepFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
@@ -43,6 +41,8 @@ class SecondStepPage extends StatelessWidget {
       },
       builder: (context, state) {
         final cubit = context.read<SecondStepCubit>();
+        final bool isLoading = state is SubmitSecondStepLoading;
+
         return ScreenWrapper(
           body: CustomScrollView(
             slivers: [
@@ -52,7 +52,7 @@ class SecondStepPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
-                      crossAxisAlignment: .start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         50.verticalSpace,
                         Padding(
@@ -64,29 +64,26 @@ class SecondStepPage extends StatelessWidget {
                         ),
                         16.verticalSpace,
                         Text(
-                          AppLocalizations.of(context)!.vehicleData,
+                          l10n.vehicleData,
                           style: AppTextStyle.medium16(
                             context,
                           ).copyWith(color: Theme.of(context).primaryColor),
                         ),
                         3.verticalSpace,
                         Text(
-                          AppLocalizations.of(context)!.startCreatingProfile,
+                          l10n.startCreatingProfile,
                           style: AppTextStyle.medium14(context).copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                         24.verticalSpace,
-                        FieldTitle(
-                          title: AppLocalizations.of(context)!.transportMethod,
-                        ),
+
+                        // 1. وسيلة النقل (Transport Method)
+                        FieldTitle(title: l10n.transportMethod),
                         4.verticalSpace,
                         CustomTextField(
-                          hintText:
-                              cubit.selectedTransportType?.name ??
-                              AppLocalizations.of(
-                                context,
-                              )!.chooseTransportMethod,
+                          hintText: cubit.selectedTransportType?.name ??
+                              l10n.chooseTransportMethod,
                           suffixIcon: state is GetTransportTypesLoading
                               ? const SizedBox(
                                   width: 20,
@@ -107,9 +104,7 @@ class SecondStepPage extends StatelessWidget {
                           },
                           validator: (value) {
                             if (cubit.selectedTransportType == null) {
-                              return AppLocalizations.of(
-                                context,
-                              )!.errChooseWorkClassification; // Or a specific error
+                              return l10n.chooseTransportMethod;
                             }
                             return null;
                           },
@@ -122,24 +117,16 @@ class SecondStepPage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    FieldTitle(
-                                      title: AppLocalizations.of(
-                                        context,
-                                      )!.maxWeight,
-                                    ),
+                                    FieldTitle(title: l10n.maxWeight),
                                     4.verticalSpace,
                                     CustomTextField(
-                                      hintText: AppLocalizations.of(
-                                        context,
-                                      )!.maxWeightHint,
+                                      hintText: l10n.maxWeightHint,
                                       controller: cubit.maxWeightController,
                                       textInputType: TextInputType.number,
                                       readOnly: true,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return AppLocalizations.of(
-                                            context,
-                                          )!.errEnterMaxWeight;
+                                          return l10n.errEnterMaxWeight;
                                         }
                                         return null;
                                       },
@@ -152,24 +139,16 @@ class SecondStepPage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    FieldTitle(
-                                      title: AppLocalizations.of(
-                                        context,
-                                      )!.maxVolume,
-                                    ),
+                                    FieldTitle(title: l10n.maxVolume),
                                     4.verticalSpace,
                                     CustomTextField(
-                                      hintText: AppLocalizations.of(
-                                        context,
-                                      )!.maxVolumeHint,
+                                      hintText: l10n.maxVolumeHint,
                                       controller: cubit.maxVolumeController,
                                       readOnly: true,
                                       textInputType: TextInputType.number,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return AppLocalizations.of(
-                                            context,
-                                          )!.errEnterMaxVolume;
+                                          return l10n.errEnterMaxVolume;
                                         }
                                         return null;
                                       },
@@ -181,29 +160,76 @@ class SecondStepPage extends StatelessWidget {
                           ),
                         ],
                         16.verticalSpace,
-                        FieldTitle(
-                          title: AppLocalizations.of(context)!.plateNumber,
-                        ),
-                        4.verticalSpace,
-                        // خانتان جنبًا لجنب: حروف اللوحة | أرقام اللوحة
+
+                        // 2. ماركة المركبة وموديلها (Vehicle Brand & Model)
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // خانة الحروف (يمين)
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  FieldTitle(
-                                    title: AppLocalizations.of(
-                                      context,
-                                    )!.plateLetters,
-                                  ),
+                                  const FieldTitle(title: "ماركة المركبة"),
                                   4.verticalSpace,
                                   CustomTextField(
-                                    hintText: AppLocalizations.of(
-                                      context,
-                                    )!.plateLettersHint,
+                                    hintText: "مثال: Toyota",
+                                    controller: cubit.vehicleBrandController,
+                                    textInputType: TextInputType.text,
+                                    prefixIcon: const Icon(
+                                      Icons.branding_watermark_outlined,
+                                    ),
+                                    validator: (value) {
+                                      if (value == null ||
+                                          value.trim().isEmpty) {
+                                        return "الرجاء إدخال ماركة المركبة";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            12.horizontalSpace,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const FieldTitle(title: "موديل المركبة"),
+                                  4.verticalSpace,
+                                  CustomTextField(
+                                    hintText: "مثال: Corolla",
+                                    controller: cubit.vehicleModelController,
+                                    textInputType: TextInputType.text,
+                                    prefixIcon: const Icon(
+                                      Icons.directions_car_filled_outlined,
+                                    ),
+                                    validator: (value) {
+                                      if (value == null ||
+                                          value.trim().isEmpty) {
+                                        return "الرجاء إدخال موديل المركبة";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        16.verticalSpace,
+
+                        // 3. حروف اللوحة ورقم اللوحة الكامل (Plate Letters & Plate Number)
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  FieldTitle(title: l10n.plateLetters),
+                                  4.verticalSpace,
+                                  CustomTextField(
+                                    hintText: l10n.plateLettersHint,
                                     controller: cubit.plateLettersController,
                                     textInputType: TextInputType.text,
                                     prefixIcon: Padding(
@@ -217,17 +243,7 @@ class SecondStepPage extends StatelessWidget {
                                     validator: (value) {
                                       if (value == null ||
                                           value.trim().isEmpty) {
-                                        return AppLocalizations.of(
-                                          context,
-                                        )!.errEnterPlateLetters;
-                                      }
-                                      // يسمح بالحروف العربية والمسافات فقط
-                                      if (!RegExp(
-                                        r'^[\u0600-\u06FF\s]+$',
-                                      ).hasMatch(value.trim())) {
-                                        return AppLocalizations.of(
-                                          context,
-                                        )!.errInvalidPlateLetters;
+                                        return l10n.errEnterPlateLetters;
                                       }
                                       return null;
                                     },
@@ -236,40 +252,21 @@ class SecondStepPage extends StatelessWidget {
                               ),
                             ),
                             12.horizontalSpace,
-                            // خانة الأرقام (يسار)
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  FieldTitle(
-                                    title: AppLocalizations.of(
-                                      context,
-                                    )!.plateNumbers,
-                                  ),
+                                  const FieldTitle(title: "رقم اللوحة"),
                                   4.verticalSpace,
                                   CustomTextField(
-                                    hintText: AppLocalizations.of(
-                                      context,
-                                    )!.plateNumbersHint,
-                                    controller: cubit.plateNumbersController,
-                                    textInputType: TextInputType.number,
-                                    prefixIcon: const Icon(Icons.tag_outlined),
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly,
-                                    ],
+                                    hintText: "مثال: ABC-1234 أو 1234",
+                                    controller: cubit.plateNumberController,
+                                    textInputType: TextInputType.text,
+                                    prefixIcon: const Icon(Icons.pin_outlined),
                                     validator: (value) {
                                       if (value == null ||
                                           value.trim().isEmpty) {
-                                        return AppLocalizations.of(
-                                          context,
-                                        )!.errEnterPlateNumbers;
-                                      }
-                                      if (!RegExp(
-                                        r'^[0-9]+$',
-                                      ).hasMatch(value.trim())) {
-                                        return AppLocalizations.of(
-                                          context,
-                                        )!.errInvalidPlateNumbers;
+                                        return "الرجاء إدخال رقم اللوحة";
                                       }
                                       return null;
                                     },
@@ -281,48 +278,19 @@ class SecondStepPage extends StatelessWidget {
                         ),
                         4.verticalSpace,
                         Text(
-                          AppLocalizations.of(context)!.plateNumberDesc,
+                          l10n.plateNumberDesc,
                           style: AppTextStyle.regular12(
                             context,
                           ).copyWith(color: Colors.grey.shade600),
                         ),
                         24.verticalSpace,
-                        ImageUploadContainer(
-                          title: AppLocalizations.of(
-                            context,
-                          )!.uploadVehicleImage,
-                          subtitle: AppLocalizations.of(
-                            context,
-                          )!.uploadVehicleImageDesc,
-                          iconPath:
-                              AppImages.uploadIcon, // Camera icon with plus
-                          imagePath: cubit.vehicleImage?.path,
-                          isLoading: state is PickVehicleImageLoading,
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              backgroundColor: Colors.transparent,
-                              builder: (ctx) {
-                                return BlocProvider.value(
-                                  value: cubit,
-                                  child: PickImageBottomSheet(
-                                    ctx: ctx,
-                                    onPick: (source) =>
-                                        cubit.pickVehicleImage(source),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                        24.verticalSpace,
+
                         InfoBanner(
-                          text: AppLocalizations.of(
-                            context,
-                          )!.vehicleDataWarning,
+                          text: l10n.vehicleDataWarning,
                           iconPath: AppImages.warningIcon,
                         ),
                         34.verticalSpace,
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -339,18 +307,21 @@ class SecondStepPage extends StatelessWidget {
                                   size: 18.sp,
                                   color: Colors.grey.shade600,
                                 ),
-                                onPressed: () {},
-                                // cubit.changePage(1), // Back to SecondView
+                                onPressed: () {
+                                  if (context.canPop()) {
+                                    context.pop();
+                                  } else {
+                                    context.go(AppRoutes.fifthStepPage);
+                                  }
+                                },
                               ),
                             ),
                             CustomButton(
-                              loading: state is SubmitSecondStepLoading,
-                              horizontalPadding:
-                                  state is SubmitSecondStepLoading ? null : 40,
-                              text: AppLocalizations.of(context)!.next,
+                              loading: isLoading,
+                              horizontalPadding: isLoading ? null : 40,
+                              text: l10n.next,
                               onPressed: () {
                                 cubit.submitSecondStep();
-                                // context.go(AppRoutes.fourthStepPage);
                               },
                             ),
                           ],

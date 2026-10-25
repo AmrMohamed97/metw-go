@@ -1,16 +1,13 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:metw_go/core/widgets/image_mixin.dart';
+import 'package:metw_go/features/register_steps/data/models/second_step_input_model.dart';
 import 'package:metw_go/features/register_steps/data/models/transport_type_model.dart';
 import 'package:metw_go/features/register_steps/data/repo/second_step_repo.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/second_step_cubit.dart/second_step_state.dart';
 
 @injectable
-class SecondStepCubit extends Cubit<SecondStepState> with ImageMixin {
+class SecondStepCubit extends Cubit<SecondStepState> {
   final SecondStepRepo repo;
 
   SecondStepCubit(this.repo) : super(SecondStepInitial());
@@ -20,23 +17,24 @@ class SecondStepCubit extends Cubit<SecondStepState> with ImageMixin {
   List<TransportTypeModel> transportTypes = [];
   TransportTypeModel? selectedTransportType;
 
-  TextEditingController maxWeightController = TextEditingController(
+  final TextEditingController maxWeightController = TextEditingController(
     text: '0.0',
   );
-  TextEditingController maxVolumeController = TextEditingController(
+  final TextEditingController maxVolumeController = TextEditingController(
     text: '0.0',
   );
-  /// خانة الحروف (مثل: أ ب ج)
-  TextEditingController plateLettersController = TextEditingController();
 
-  /// خانة الأرقام (مثل: 123)
-  TextEditingController plateNumbersController = TextEditingController();
+  /// ماركة المركبة (Toyota)
+  final TextEditingController vehicleBrandController = TextEditingController();
 
-  /// القيمة المدمجة التي تُرسل للسيرفر: "حروف - أرقام"
-  String get plateNumberCombined =>
-      '${plateLettersController.text.trim()} - ${plateNumbersController.text.trim()}';
+  /// موديل / طراز المركبة (Corolla)
+  final TextEditingController vehicleModelController = TextEditingController();
 
-  File? vehicleImage;
+  /// خانة الحروف (مثل: س م)
+  final TextEditingController plateLettersController = TextEditingController();
+
+  /// رقم اللوحة الكامل (مثل: ABC-1234)
+  final TextEditingController plateNumberController = TextEditingController();
 
   void init() {
     getTransportTypes();
@@ -60,32 +58,45 @@ class SecondStepCubit extends Cubit<SecondStepState> with ImageMixin {
     emit(ChangeTransportTypeSuccess());
   }
 
-  Future<void> pickVehicleImage(ImageSource source) async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: source);
-    if (image != null) {
-      emit(PickVehicleImageLoading());
-      vehicleImage = await compress(targetImage: File(image.path));
-      emit(PickVehicleImageSuccess());
+  Future<void> submitSecondStep() async {
+    if (selectedTransportType == null) {
+      emit(SubmitSecondStepFailure('الرجاء اختيار وسيلة النقل'));
+      return;
     }
+
+    if (!secondStepFormKey.currentState!.validate()) {
+      return;
+    }
+
+    emit(SubmitSecondStepLoading());
+
+    final letters = plateLettersController.text.trim();
+    final plate = plateNumberController.text.trim();
+
+    final input = SecondStepInputModel(
+      transportTypeId: selectedTransportType!.id!,
+      plateNumber: plate,
+      vehicleBrand: vehicleBrandController.text.trim(),
+      vehicleModel: vehicleModelController.text.trim(),
+      registrationPlateLetters: letters.isNotEmpty ? letters : null,
+    );
+
+    final result = await repo.submitSecondStep(input);
+
+    result.fold(
+      (failure) => emit(SubmitSecondStepFailure(failure.message)),
+      (response) => emit(SubmitSecondStepSuccess()),
+    );
   }
 
-  Future<void> submitSecondStep() async {
-    if (secondStepFormKey.currentState!.validate() &&
-        selectedTransportType != null &&
-        vehicleImage != null) {
-      emit(SubmitSecondStepLoading());
-
-      final result = await repo.submitSecondStep(
-        selectedTransportType!.id!,
-        plateNumberCombined,
-        vehicleImage!,
-      );
-
-      result.fold(
-        (failure) => emit(SubmitSecondStepFailure(failure.message)),
-        (response) => emit(SubmitSecondStepSuccess()),
-      );
-    }
+  @override
+  Future<void> close() {
+    maxWeightController.dispose();
+    maxVolumeController.dispose();
+    vehicleBrandController.dispose();
+    vehicleModelController.dispose();
+    plateLettersController.dispose();
+    plateNumberController.dispose();
+    return super.close();
   }
 }
