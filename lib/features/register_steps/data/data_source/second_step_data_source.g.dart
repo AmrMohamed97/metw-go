@@ -78,7 +78,7 @@ class _SecondStepDataSource implements SecondStepDataSource {
           )
           .compose(
             _dio.options,
-            'auth/register/step-3',
+            'auth/register/step-5',
             queryParameters: queryParameters,
             data: _data,
           )

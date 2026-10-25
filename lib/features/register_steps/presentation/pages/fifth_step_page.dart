@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
@@ -10,9 +11,13 @@ import 'package:metw_go/core/utils/view_insets_space.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_steper.dart';
 import 'package:metw_go/core/widgets/custom_text_field.dart';
+import 'package:metw_go/core/widgets/custom_toast.dart';
 import 'package:metw_go/core/widgets/screen_wrapper.dart';
 import 'package:metw_go/features/register/presentation/widgets/field_title.dart';
 import 'package:metw_go/features/register/presentation/widgets/info_banner.dart';
+import 'package:metw_go/features/register_steps/data/models/fifth_step_input_model.dart';
+import 'package:metw_go/features/register_steps/presentation/manager/fifth_step_cubit/fifth_step_cubit.dart';
+import 'package:metw_go/features/register_steps/presentation/manager/fifth_step_cubit/fifth_step_state.dart';
 
 class FifthStepPage extends StatefulWidget {
   const FifthStepPage({super.key});
@@ -158,203 +163,248 @@ class _FifthStepPageState extends State<FifthStepPage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return ScreenWrapper(
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    50.verticalSpace,
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        start: 16.0,
-                        end: 60,
-                      ),
-                      child: const CustomSteper(currentStep: 2, totalSteps: 5),
-                    ),
-                    16.verticalSpace,
-                    Text(
-                      l10n.documentsData,
-                      style: AppTextStyle.medium16(
-                        context,
-                      ).copyWith(color: Theme.of(context).primaryColor),
-                    ),
-                    3.verticalSpace,
-                    Text(
-                      l10n.documentsDataDesc,
-                      style: AppTextStyle.medium14(context).copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
-                    16.verticalSpace,
-                    InfoBanner(
-                      text: l10n.documentsValidityNotice,
-                      iconPath: AppImages.warningIcon,
-                    ),
-                    24.verticalSpace,
+    return BlocConsumer<FifthStepCubit, FifthStepState>(
+      listener: (context, state) {
+        if (state is SubmitFifthStepSuccess) {
+          showToast(
+            context,
+            message: l10n.savedSuccessfully,
+            state: ToastStates.success,
+          );
+          context.go(AppRoutes.secondStepPage);
+        } else if (state is SubmitFifthStepFailure) {
+          showToast(context, message: state.message, state: ToastStates.error);
+        }
+      },
+      builder: (context, state) {
+        final cubit = context.read<FifthStepCubit>();
+        final bool isLoading = state is SubmitFifthStepLoading;
 
-                    // 1. الرقم القومي (National ID Number)
-                    FieldTitle(title: l10n.nationalIdNumber),
-                    4.verticalSpace,
-                    CustomTextField(
-                      controller: _nationalIdController,
-                      hintText: l10n.nationalIdNumberHint,
-                      textInputType: TextInputType.number,
-                      isFixed: false,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(14),
-                      ],
-                      prefixIcon: const Icon(Icons.badge_outlined),
-                      validator: _validateNationalId,
-                    ),
-                    16.verticalSpace,
-
-                    // 2. تاريخ إنتهاء بطاقة الرقم القومي (National ID Expiry Date)
-                    FieldTitle(title: l10n.nationalIdExpiryDate),
-                    4.verticalSpace,
-                    CustomTextField(
-                      controller: _nationalIdExpiryController,
-                      hintText: "YYYY-MM-DD",
-                      readOnly: true,
-                      isFixed: false,
-                      prefixIcon: const Icon(Icons.event_outlined),
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.calendar_month_outlined),
-                        onPressed: () => _pickExpiryDate(
-                          controller: _nationalIdExpiryController,
-                        ),
-                      ),
-                      onTap: () => _pickExpiryDate(
-                        controller: _nationalIdExpiryController,
-                      ),
-                      validator: _validateExpiryDate,
-                    ),
-                    24.verticalSpace,
-
-                    // 3. رقم رخصة القيادة (Driving License Number)
-                    FieldTitle(title: l10n.drivingLicenseNumber),
-                    4.verticalSpace,
-                    CustomTextField(
-                      controller: _drivingLicenseNumberController,
-                      hintText: l10n.drivingLicenseNumberHint,
-                      textInputType: TextInputType.number,
-                      isFixed: false,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      prefixIcon: const Icon(Icons.credit_card_outlined),
-                      validator: _validateDrivingLicenseNumber,
-                    ),
-                    16.verticalSpace,
-
-                    // 4. تاريخ إنتهاء رخصة القيادة (Driving License Expiry Date)
-                    FieldTitle(title: l10n.drivingLicenseExpiryDate),
-                    4.verticalSpace,
-                    CustomTextField(
-                      controller: _drivingLicenseExpiryController,
-                      hintText: "YYYY-MM-DD",
-                      readOnly: true,
-                      isFixed: false,
-                      prefixIcon: const Icon(Icons.event_outlined),
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.calendar_month_outlined),
-                        onPressed: () => _pickExpiryDate(
-                          controller: _drivingLicenseExpiryController,
-                        ),
-                      ),
-                      onTap: () => _pickExpiryDate(
-                        controller: _drivingLicenseExpiryController,
-                      ),
-                      validator: _validateExpiryDate,
-                    ),
-                    24.verticalSpace,
-
-                    // 5. رقم رخصة وسيلة النقل (Vehicle License Number)
-                    FieldTitle(title: l10n.vehicleLicenseNumber),
-                    4.verticalSpace,
-                    CustomTextField(
-                      controller: _vehicleLicenseNumberController,
-                      hintText: l10n.vehicleLicenseNumberHint,
-                      textInputType: TextInputType.number,
-                      isFixed: false,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      prefixIcon: const Icon(Icons.directions_car_outlined),
-                      validator: _validateVehicleLicenseNumber,
-                    ),
-                    16.verticalSpace,
-
-                    // 6. تاريخ إنتهاء رخصة وسيلة النقل (Vehicle License Expiry Date)
-                    FieldTitle(title: l10n.vehicleLicenseExpiryDate),
-                    4.verticalSpace,
-                    CustomTextField(
-                      controller: _vehicleLicenseExpiryController,
-                      hintText: "YYYY-MM-DD",
-                      readOnly: true,
-                      isFixed: false,
-                      prefixIcon: const Icon(Icons.event_outlined),
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.calendar_month_outlined),
-                        onPressed: () => _pickExpiryDate(
-                          controller: _vehicleLicenseExpiryController,
-                        ),
-                      ),
-                      onTap: () => _pickExpiryDate(
-                        controller: _vehicleLicenseExpiryController,
-                      ),
-                      validator: _validateExpiryDate,
-                    ),
-                    34.verticalSpace,
-
-                    // Bottom Navigation View (matches FirstStepPage)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return ScreenWrapper(
+          body: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 46.h,
-                          width: 46.h,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.outline,
-                            borderRadius: BorderRadius.circular(8.r),
+                        50.verticalSpace,
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                            start: 16.0,
+                            end: 60,
                           ),
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.arrow_back_ios_new,
-                              size: 18.sp,
-                              color: Colors.grey.shade600,
+                          child: const CustomSteper(
+                            currentStep: 2,
+                            totalSteps: 5,
+                          ),
+                        ),
+                        16.verticalSpace,
+                        Text(
+                          l10n.documentsData,
+                          style: AppTextStyle.medium16(
+                            context,
+                          ).copyWith(color: Theme.of(context).primaryColor),
+                        ),
+                        3.verticalSpace,
+                        Text(
+                          l10n.documentsDataDesc,
+                          style: AppTextStyle.medium14(context).copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                        16.verticalSpace,
+                        InfoBanner(
+                          text: l10n.documentsValidityNotice,
+                          iconPath: AppImages.warningIcon,
+                        ),
+                        24.verticalSpace,
+
+                        // 1. الرقم القومي (National ID Number)
+                        FieldTitle(title: l10n.nationalIdNumber),
+                        4.verticalSpace,
+                        CustomTextField(
+                          controller: _nationalIdController,
+                          hintText: l10n.nationalIdNumberHint,
+                          textInputType: TextInputType.number,
+                          isFixed: false,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(14),
+                          ],
+                          prefixIcon: const Icon(Icons.badge_outlined),
+                          validator: _validateNationalId,
+                        ),
+                        16.verticalSpace,
+
+                        // 2. تاريخ إنتهاء بطاقة الرقم القومي (National ID Expiry Date)
+                        FieldTitle(title: l10n.nationalIdExpiryDate),
+                        4.verticalSpace,
+                        CustomTextField(
+                          controller: _nationalIdExpiryController,
+                          hintText: "YYYY-MM-DD",
+                          readOnly: true,
+                          isFixed: false,
+                          prefixIcon: const Icon(Icons.event_outlined),
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.calendar_month_outlined),
+                            onPressed: () => _pickExpiryDate(
+                              controller: _nationalIdExpiryController,
                             ),
-                            onPressed: () {
-                              if (context.canPop()) {
-                                context.pop();
-                              } else {
-                                context.go(AppRoutes.fourthStepPage);
-                              }
-                            },
                           ),
+                          onTap: () => _pickExpiryDate(
+                            controller: _nationalIdExpiryController,
+                          ),
+                          validator: _validateExpiryDate,
                         ),
-                        CustomButton(
-                          horizontalPadding: 40,
-                          text: l10n.next,
-                          onPressed: () {
-                            // if (_formKey.currentState!.validate()) {
-                            context.go(AppRoutes.secondStepPage);
-                            // }
-                          },
+                        24.verticalSpace,
+
+                        // 3. رقم رخصة القيادة (Driving License Number)
+                        FieldTitle(title: l10n.drivingLicenseNumber),
+                        4.verticalSpace,
+                        CustomTextField(
+                          controller: _drivingLicenseNumberController,
+                          hintText: l10n.drivingLicenseNumberHint,
+                          textInputType: TextInputType.number,
+                          isFixed: false,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          prefixIcon: const Icon(Icons.credit_card_outlined),
+                          validator: _validateDrivingLicenseNumber,
                         ),
+                        16.verticalSpace,
+
+                        // 4. تاريخ إنتهاء رخصة القيادة (Driving License Expiry Date)
+                        FieldTitle(title: l10n.drivingLicenseExpiryDate),
+                        4.verticalSpace,
+                        CustomTextField(
+                          controller: _drivingLicenseExpiryController,
+                          hintText: "YYYY-MM-DD",
+                          readOnly: true,
+                          isFixed: false,
+                          prefixIcon: const Icon(Icons.event_outlined),
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.calendar_month_outlined),
+                            onPressed: () => _pickExpiryDate(
+                              controller: _drivingLicenseExpiryController,
+                            ),
+                          ),
+                          onTap: () => _pickExpiryDate(
+                            controller: _drivingLicenseExpiryController,
+                          ),
+                          validator: _validateExpiryDate,
+                        ),
+                        24.verticalSpace,
+
+                        // 5. رقم رخصة وسيلة النقل (Vehicle License Number)
+                        FieldTitle(title: l10n.vehicleLicenseNumber),
+                        4.verticalSpace,
+                        CustomTextField(
+                          controller: _vehicleLicenseNumberController,
+                          hintText: l10n.vehicleLicenseNumberHint,
+                          textInputType: TextInputType.number,
+                          isFixed: false,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          prefixIcon: const Icon(Icons.directions_car_outlined),
+                          validator: _validateVehicleLicenseNumber,
+                        ),
+                        16.verticalSpace,
+
+                        // 6. تاريخ إنتهاء رخصة وسيلة النقل (Vehicle License Expiry Date)
+                        FieldTitle(title: l10n.vehicleLicenseExpiryDate),
+                        4.verticalSpace,
+                        CustomTextField(
+                          controller: _vehicleLicenseExpiryController,
+                          hintText: "YYYY-MM-DD",
+                          readOnly: true,
+                          isFixed: false,
+                          prefixIcon: const Icon(Icons.event_outlined),
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.calendar_month_outlined),
+                            onPressed: () => _pickExpiryDate(
+                              controller: _vehicleLicenseExpiryController,
+                            ),
+                          ),
+                          onTap: () => _pickExpiryDate(
+                            controller: _vehicleLicenseExpiryController,
+                          ),
+                          validator: _validateExpiryDate,
+                        ),
+                        34.verticalSpace,
+
+                        // Bottom Navigation View
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 46.h,
+                              width: 46.h,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.outline,
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back_ios_new,
+                                  size: 18.sp,
+                                  color: Colors.grey.shade600,
+                                ),
+                                onPressed: () {
+                                  if (context.canPop()) {
+                                    context.pop();
+                                  } else {
+                                    context.go(AppRoutes.thirdStepPage);
+                                  }
+                                },
+                              ),
+                            ),
+                            CustomButton(
+                              loading: isLoading,
+                              horizontalPadding: isLoading ? null : 40,
+                              text: l10n.next,
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  final input = FifthStepInputModel(
+                                    nationalIdNumber:
+                                        _nationalIdController.text.trim(),
+                                    nationalIdExpiresAt:
+                                        _nationalIdExpiryController.text.trim(),
+                                    drivingLicenseNumber:
+                                        _drivingLicenseNumberController.text
+                                            .trim(),
+                                    drivingLicenseExpiresAt:
+                                        _drivingLicenseExpiryController.text
+                                            .trim(),
+                                    vehicleLicenseNumber:
+                                        _vehicleLicenseNumberController.text
+                                            .trim(),
+                                    vehicleLicenseExpiresAt:
+                                        _vehicleLicenseExpiryController.text
+                                            .trim(),
+                                  );
+                                  cubit.submitFifthStep(input);
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                        20.verticalSpace,
+                        const ViewInsetsSpace(),
                       ],
                     ),
-                    20.verticalSpace,
-                    const ViewInsetsSpace(),
-                  ],
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

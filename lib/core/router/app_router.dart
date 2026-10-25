@@ -41,6 +41,7 @@ import 'package:metw_go/features/register/presentation/manager/register_cubit.da
 import 'package:metw_go/features/register/presentation/page/register_page.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_cubit.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_cubit.dart';
+import 'package:metw_go/features/register_steps/presentation/manager/fifth_step_cubit/fifth_step_cubit.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/second_step_cubit.dart/second_step_cubit.dart';
 import 'package:metw_go/features/register_steps/presentation/manager/third_step_cubit.dart/third_step_cubit.dart';
 import 'package:metw_go/features/register_steps/presentation/pages/first_step_page.dart';
@@ -285,7 +286,10 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.fifthStepPage,
         name: AppRoutes.fifthStepPage,
-        builder: (context, state) => const FifthStepPage(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<FifthStepCubit>(),
+          child: const FifthStepPage(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.walletOperationPage,

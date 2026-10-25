@@ -113,7 +113,7 @@ class _ThirdStepDataSource implements ThirdStepDataSource {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'auth/register/step-4',
+            'auth/register/step-3',
             queryParameters: queryParameters,
             data: _data,
           )

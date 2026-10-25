@@ -139,6 +139,8 @@ import 'package:metw_go/features/register/data/repo/register_repo_implement.dart
     as _i142;
 import 'package:metw_go/features/register/presentation/manager/register_cubit.dart'
     as _i1006;
+import 'package:metw_go/features/register_steps/data/data_source/fifth_step_data_source.dart'
+    as _i510;
 import 'package:metw_go/features/register_steps/data/data_source/first_step_data_source.dart'
     as _i655;
 import 'package:metw_go/features/register_steps/data/data_source/fourth_step_data_source.dart'
@@ -147,6 +149,10 @@ import 'package:metw_go/features/register_steps/data/data_source/second_step_dat
     as _i497;
 import 'package:metw_go/features/register_steps/data/data_source/third_step_data_source.dart'
     as _i837;
+import 'package:metw_go/features/register_steps/data/repo/fifth_step_repo.dart'
+    as _i760;
+import 'package:metw_go/features/register_steps/data/repo/fifth_step_repo_impl.dart'
+    as _i138;
 import 'package:metw_go/features/register_steps/data/repo/first_step_repo.dart'
     as _i305;
 import 'package:metw_go/features/register_steps/data/repo/first_step_repo_impl.dart'
@@ -163,6 +169,8 @@ import 'package:metw_go/features/register_steps/data/repo/third_step_repo.dart'
     as _i319;
 import 'package:metw_go/features/register_steps/data/repo/third_step_repo_impl.dart'
     as _i220;
+import 'package:metw_go/features/register_steps/presentation/manager/fifth_step_cubit/fifth_step_cubit.dart'
+    as _i367;
 import 'package:metw_go/features/register_steps/presentation/manager/first_step_cubit/first_step_cubit.dart'
     as _i212;
 import 'package:metw_go/features/register_steps/presentation/manager/fourth_step_cubit/fourth_step_cubit.dart'
@@ -292,6 +300,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i961.RegisterDataSource>(
       () => _i961.RegisterDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i510.FifthStepDataSource>(
+      () => _i510.FifthStepDataSource(gh<_i361.Dio>()),
+    );
     gh.factory<_i655.FirstStepDataSource>(
       () => _i655.FirstStepDataSource(gh<_i361.Dio>()),
     );
@@ -331,6 +342,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i444.AppRepo>(
       () => _i837.AppRepoImpl(gh<_i863.AppDataSource>()),
     );
+    gh.factory<_i760.FifthStepRepo>(
+      () => _i138.FifthStepRepoImpl(gh<_i510.FifthStepDataSource>()),
+    );
     gh.factory<_i139.ShipmentDetailsRepo>(
       () => _i79.ShipmentDetailsRepoImpl(
         dataSource: gh<_i756.ShipmentDetailsDataSource>(),
@@ -338,6 +352,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i522.FaqRepo>(
       () => _i679.FaqRepoImpl(dataSource: gh<_i201.FaqDataSource>()),
+    );
+    gh.factory<_i367.FifthStepCubit>(
+      () => _i367.FifthStepCubit(gh<_i760.FifthStepRepo>()),
     );
     gh.factory<_i169.PersonalInfoRepo>(
       () => _i74.PersonalInfoRepoImpl(

@@ -349,8 +349,8 @@ class SecondStepPage extends StatelessWidget {
                                   state is SubmitSecondStepLoading ? null : 40,
                               text: AppLocalizations.of(context)!.next,
                               onPressed: () {
-                                // cubit.submitSecondStep();
-                                context.go(AppRoutes.fourthStepPage);
+                                cubit.submitSecondStep();
+                                // context.go(AppRoutes.fourthStepPage);
                               },
                             ),
                           ],

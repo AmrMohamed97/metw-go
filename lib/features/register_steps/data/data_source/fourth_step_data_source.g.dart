@@ -107,7 +107,7 @@ class _FourthStepDataSource implements FourthStepDataSource {
           )
           .compose(
             _dio.options,
-            'auth/register/step-5',
+            'auth/register/step-6',
             queryParameters: queryParameters,
             data: _data,
           )

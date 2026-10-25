@@ -11,13 +11,14 @@ abstract class EndPoints {
   static const String deleteAccountUrl = 'profile/delete-account';
   static const String registerUrl = 'auth/register/step-1';
   static const String registerStep2 = 'auth/register/step-2';
+  static const String registerStep6 = 'auth/register/step-4';
   static const String warehouses = 'warehouses';
   static const String transportTypes = 'lookups/transport-types';
   static const String governorates = 'lookups/governorates';
   static const String cities = 'lookups/cities';
-  static const String registerStep3 = 'auth/register/step-3';
-  static const String registerStep4 = 'auth/register/step-4';
-  static const String registerStep5 = 'auth/register/step-5';
+  static const String registerStep3 = 'auth/register/step-5';
+  static const String registerStep4 = 'auth/register/step-3';
+  static const String registerStep5 = 'auth/register/step-6';
   static const String registerProfile = 'auth/register/profile';
   static const String forgotPasswordSendOtpUrl =
       'auth/forgot-password/send-otp';
