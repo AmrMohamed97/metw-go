@@ -1,6 +1,8 @@
 import 'package:metw_go/features/register_steps/data/models/city_model.dart';
 import 'package:metw_go/features/register_steps/data/models/governorate_model.dart';
 
+import 'package:metw_go/features/register_steps/data/models/register_profile_response.dart';
+
 abstract class ThirdStepState {}
 
 class ThirdStepInitial extends ThirdStepState {}
@@ -8,6 +10,18 @@ class ThirdStepInitial extends ThirdStepState {}
 class ChangeRuralServiceState extends ThirdStepState {}
 
 class UpdateSelectionsState extends ThirdStepState {}
+
+class GetRegisterProfileLoading extends ThirdStepState {}
+
+class GetRegisterProfileSuccess extends ThirdStepState {
+  final RegisterProfile profile;
+  GetRegisterProfileSuccess(this.profile);
+}
+
+class GetRegisterProfileFailure extends ThirdStepState {
+  final String message;
+  GetRegisterProfileFailure(this.message);
+}
 
 class GetGovernoratesLoading extends ThirdStepState {}
 

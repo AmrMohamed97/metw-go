@@ -32,7 +32,6 @@ class ThirdStepPage extends StatelessWidget {
             message: AppLocalizations.of(context)!.savedSuccessfully,
             state: ToastStates.success,
           );
-          // context.go(AppRoutes.fourthStepPage);
           context.go(AppRoutes.fifthStepPage);
         } else if (state is SubmitThirdStepFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
@@ -40,10 +39,16 @@ class ThirdStepPage extends StatelessWidget {
           showToast(context, message: state.message, state: ToastStates.error);
         } else if (state is GetCitiesFailure) {
           showToast(context, message: state.message, state: ToastStates.error);
+        } else if (state is GetRegisterProfileFailure) {
+          showToast(context, message: state.message, state: ToastStates.error);
         }
       },
       builder: (context, state) {
         final cubit = context.read<ThirdStepCubit>();
+        final bool isGovLoading = state is GetGovernoratesLoading ||
+            state is GetRegisterProfileLoading;
+        final bool isCitiesLoading = state is GetCitiesLoading;
+
         return ScreenWrapper(
           body: CustomScrollView(
             slivers: [
@@ -53,12 +58,12 @@ class ThirdStepPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
-                      crossAxisAlignment: .start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         50.verticalSpace,
-                        Padding(
-                          padding: const EdgeInsetsDirectional.only(end: 32),
-                          child: const CustomSteper(currentStep: 1),
+                        const Padding(
+                          padding: EdgeInsetsDirectional.only(end: 32),
+                          child: CustomSteper(currentStep: 1),
                         ),
                         25.verticalSpace,
                         Text(
@@ -75,16 +80,19 @@ class ThirdStepPage extends StatelessWidget {
                         ),
                         16.verticalSpace,
                         FieldTitle(
-                          title: AppLocalizations.of(
-                            context,
-                          )!.chooseGovernorates,
+                          title: cubit.isMultipleGovernorates
+                              ? AppLocalizations.of(context)!.chooseGovernorates
+                              : 'اختر المحافظة',
                         ),
                         4.verticalSpace,
                         CustomTextField(
-                          hintText: AppLocalizations.of(context)!.governorates,
+                          hintText: cubit.selectedGovernorates.isNotEmpty &&
+                                  !cubit.isMultipleGovernorates
+                              ? cubit.selectedGovernorates.first.name
+                              : AppLocalizations.of(context)!.governorates,
                           isFixed: false,
                           readOnly: true,
-                          suffixIcon: state is GetGovernoratesLoading
+                          suffixIcon: isGovLoading
                               ? const SizedBox(
                                   width: 20,
                                   height: 20,
@@ -121,9 +129,16 @@ class ThirdStepPage extends StatelessWidget {
                         ),
                         4.verticalSpace,
                         CustomTextField(
-                          hintText: AppLocalizations.of(context)!.cities,
+                          hintText: !cubit.isCitiesActive
+                              ? 'غير متاح لمندوب الشحن وسائق الباص'
+                              : AppLocalizations.of(context)!.cities,
                           readOnly: true,
-                          suffixIcon: state is GetCitiesLoading
+                          enabled: cubit.isCitiesActive,
+                          filled: !cubit.isCitiesActive,
+                          filledColor: !cubit.isCitiesActive
+                              ? Colors.grey.shade100
+                              : null,
+                          suffixIcon: isCitiesLoading
                               ? const SizedBox(
                                   width: 20,
                                   height: 20,
@@ -134,8 +149,19 @@ class ThirdStepPage extends StatelessWidget {
                                     ),
                                   ),
                                 )
-                              : const Icon(Icons.keyboard_arrow_down),
-                          onTap: () {
+                              : cubit.isCitiesActive
+                                  ? const Icon(Icons.keyboard_arrow_down)
+                                  : null,
+                          onTap: () async {
+                            if (!cubit.isCitiesActive) {
+                              showToast(
+                                context,
+                                message:
+                                    'اختيار المدن نشط لمندوب التوصيل فقط',
+                                state: ToastStates.warning,
+                              );
+                              return;
+                            }
                             if (cubit.selectedGovernorates.isEmpty) {
                               showToast(
                                 context,
@@ -146,12 +172,18 @@ class ThirdStepPage extends StatelessWidget {
                             }
                             if (cubit.cities.isNotEmpty) {
                               _showCitiesBottomSheet(context, cubit);
+                            } else if (state is! GetCitiesLoading) {
+                              await cubit.getCities();
+                              if (context.mounted && cubit.cities.isNotEmpty) {
+                                _showCitiesBottomSheet(context, cubit);
+                              }
                             }
                           },
                           isFixed: false,
                         ),
                         8.verticalSpace,
-                        if (cubit.selectedCities.isNotEmpty) ...[
+                        if (cubit.isCitiesActive &&
+                            cubit.selectedCities.isNotEmpty) ...[
                           Wrap(
                             spacing: 8.w,
                             runSpacing: 8.h,
@@ -209,8 +241,7 @@ class ThirdStepPage extends StatelessWidget {
                                   : 40,
                               text: AppLocalizations.of(context)!.next,
                               onPressed: () {
-                                // cubit.submitThirdStep();
-                                context.go(AppRoutes.fifthStepPage);
+                                cubit.submitThirdStep();
                               },
                             ),
                           ],
@@ -267,7 +298,9 @@ class ThirdStepPage extends StatelessWidget {
                       ),
                       16.verticalSpace,
                       Text(
-                        AppLocalizations.of(context)!.chooseGovernorates,
+                        cubit.isMultipleGovernorates
+                            ? AppLocalizations.of(context)!.chooseGovernorates
+                            : 'اختر المحافظة',
                         style: AppTextStyle.bold18(context),
                       ),
                       16.verticalSpace,
@@ -282,7 +315,12 @@ class ThirdStepPage extends StatelessWidget {
                             final isSelected = cubit.selectedGovernorates
                                 .contains(gov);
                             return InkWell(
-                              onTap: () => cubit.toggleGovernorate(gov),
+                              onTap: () {
+                                cubit.toggleGovernorate(gov);
+                                if (!cubit.isMultipleGovernorates) {
+                                  Navigator.pop(ctx);
+                                }
+                              },
                               borderRadius: BorderRadius.circular(12.r),
                               child: Container(
                                 padding: const EdgeInsets.all(16),
@@ -297,7 +335,7 @@ class ThirdStepPage extends StatelessWidget {
                                   color: isSelected
                                       ? Theme.of(
                                           context,
-                                        ).primaryColor.withOpacity(0.05)
+                                        ).primaryColor.withValues(alpha: 0.05)
                                       : Colors.transparent,
                                 ),
                                 child: Row(
@@ -403,7 +441,7 @@ class ThirdStepPage extends StatelessWidget {
                                   color: isSelected
                                       ? Theme.of(
                                           context,
-                                        ).primaryColor.withOpacity(0.05)
+                                        ).primaryColor.withValues(alpha: 0.05)
                                       : Colors.transparent,
                                 ),
                                 child: Row(

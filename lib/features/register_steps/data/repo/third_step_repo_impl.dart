@@ -9,6 +9,7 @@ import 'package:metw_go/features/register_steps/data/data_source/third_step_data
 import 'package:metw_go/features/register_steps/data/models/city_model.dart';
 import 'package:metw_go/features/register_steps/data/models/first_step_out_model.dart';
 import 'package:metw_go/features/register_steps/data/models/governorate_model.dart';
+import 'package:metw_go/features/register_steps/data/models/register_profile_response.dart';
 import 'package:metw_go/features/register_steps/data/models/third_step_input_model.dart';
 import 'package:metw_go/features/register_steps/data/repo/third_step_repo.dart';
 
@@ -22,6 +23,19 @@ class ThirdStepRepoImpl implements ThirdStepRepo {
   Future<Either<Failure, GovernorateListResponse>> getGovernorates() async {
     try {
       final response = await dataSource.getGovernorates();
+      return Right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, RegisterProfileResponse>> getRegisterProfile() async {
+    try {
+      final response = await dataSource.getRegisterProfile();
       return Right(response);
     } catch (e) {
       if (e is DioException) {

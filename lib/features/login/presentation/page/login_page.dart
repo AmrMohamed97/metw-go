@@ -56,20 +56,27 @@ class LoginPage extends StatelessWidget {
                   ?.registrationProgress
                   ?.currentStep ==
               3) {
-            context.go(AppRoutes.secondStepPage);
-          } else if (state
-                  .loginOutModel
-                  ?.data
-                  ?.registrationProgress
-                  ?.currentStep ==
-              4) {
             context.go(AppRoutes.thirdStepPage);
           } else if (state
                   .loginOutModel
                   ?.data
                   ?.registrationProgress
                   ?.currentStep ==
+              4) {
+            context.go(AppRoutes.fifthStepPage);
+          }else if (state
+                  .loginOutModel
+                  ?.data
+                  ?.registrationProgress
+                  ?.currentStep ==
               5) {
+            context.go(AppRoutes.secondStepPage);
+          }  else if (state
+                  .loginOutModel
+                  ?.data
+                  ?.registrationProgress
+                  ?.currentStep ==
+              6) {
             context.go(AppRoutes.fourthStepPage);
           }
         } else if (state is LoginFailure) {
