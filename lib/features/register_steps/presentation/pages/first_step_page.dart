@@ -513,20 +513,20 @@ class FirstStepPage extends StatelessWidget {
                                   : 40,
                               text: AppLocalizations.of(context)!.next,
                               onPressed: () {
-                                context.go(AppRoutes.thirdStepPage);
-                                // if (!cubit.isDeliveryDelegate &&
-                                //     !cubit.isShippingDelegate &&
-                                //     !cubit.isBusDriver) {
-                                //   showToast(
-                                //     context,
-                                //     message: AppLocalizations.of(
-                                //       context,
-                                //     )!.errChooseWorkClassification,
-                                //     state: ToastStates.error,
-                                //   );
-                                //   return;
-                                // }
-                                // cubit.submitFirstStep();
+                                // context.go(AppRoutes.thirdStepPage);
+                                if (!cubit.isDeliveryDelegate &&
+                                    !cubit.isShippingDelegate &&
+                                    !cubit.isBusDriver) {
+                                  showToast(
+                                    context,
+                                    message: AppLocalizations.of(
+                                      context,
+                                    )!.errChooseWorkClassification,
+                                    state: ToastStates.error,
+                                  );
+                                  return;
+                                }
+                                cubit.submitFirstStep();
                               },
                             ),
                           ],

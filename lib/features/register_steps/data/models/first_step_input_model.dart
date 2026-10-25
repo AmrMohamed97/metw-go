@@ -6,14 +6,14 @@ part 'first_step_input_model.g.dart';
 class FirstStepInputModel {
   @JsonKey(name: 'courier_type')
   String courierType;
-  @JsonKey(name: 'warehouse_id')
-  List<int>? warehouseId;
+  @JsonKey(name: 'warehouse_ids')
+  List<int>? warehouseIds;
   @JsonKey(name: 'work_types')
   List<String>? workTypes;
 
   FirstStepInputModel({
     required this.courierType,
-    this.warehouseId,
+    this.warehouseIds,
     this.workTypes,
   });
 

@@ -117,7 +117,7 @@ class FirstStepCubit extends Cubit<FirstStepState> {
 
       final input = FirstStepInputModel(
         courierType: isIndependentDelegate ? 'freelance' : 'warehouse',
-        warehouseId: isIndependentDelegate
+        warehouseIds: isIndependentDelegate
             ? null
             : selectedWarehouses
                 .map((w) => w.id)
