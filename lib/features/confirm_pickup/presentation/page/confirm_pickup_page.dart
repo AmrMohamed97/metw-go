@@ -172,7 +172,7 @@ class _ConfirmPickupPageState extends State<ConfirmPickupPage> with ImageMixin {
                       _buildChecklistCard(context, l10n),
                       24.verticalSpace,
 
-                      // 3. Merchant Signature Section ("توقيع التاجر")
+                      // 3. Merchant Signature Section ("توقيع المتجر")
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

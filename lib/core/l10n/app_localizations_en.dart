@@ -148,8 +148,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shippingDelegate => 'Shipping Delegate';
 
   @override
-  String get shippingDelegateSubtitle =>
-      'Shipping delegate between governorates';
+  String get shippingDelegateSubtitle => 'Shipping Delegate';
 
   @override
   String get busDriver => 'Bus Driver';
@@ -565,7 +564,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get orderId => 'Order ID';
 
   @override
-  String get merchant => 'Merchant';
+  String get merchant => 'Store';
 
   @override
   String get deliveredAt => 'Delivered at';
@@ -746,7 +745,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get receiptConfirmationNote =>
-      'Please ensure to receive the paper invoice from the merchant upon pickup.';
+      'Please ensure to receive the paper invoice from the store upon pickup.';
 
   @override
   String get acceptOrder => 'Accept Order';
@@ -895,7 +894,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pickupSteps => 'Pickup Steps';
 
   @override
-  String get merchantSignature => 'Merchant Signature';
+  String get merchantSignature => 'Store Signature';
 
   @override
   String get clearSignature => 'Re-sign';
@@ -907,8 +906,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pickupCompleted => 'Pickup Completed';
 
   @override
-  String get confirmPickupFromMerchant =>
-      'Confirm pickup process from merchant';
+  String get confirmPickupFromMerchant => 'Confirm pickup process from store';
 
   @override
   String get verifyPackage => 'Package Condition Verification';
@@ -917,7 +915,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verifyPackageCount => 'Verify Package Count';
 
   @override
-  String get obtainMerchantSignature => 'Obtain Merchant Signature';
+  String get obtainMerchantSignature => 'Obtain Store Signature';
 
   @override
   String get signHereForPickup => 'Sign here for pickup';

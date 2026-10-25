@@ -138,16 +138,16 @@ class AppLocalizationsAr extends AppLocalizations {
       'يمكنك تحديد خيار واحد فقط, او تحديد الخيار الاول و الخيار الثانى معا';
 
   @override
-  String get deliveryDelegate => 'مندوب توصيل';
+  String get deliveryDelegate => 'مندوب دليفري';
 
   @override
-  String get deliveryDelegateSubtitle => 'مندوب توصيل بداخل محافظة';
+  String get deliveryDelegateSubtitle => 'مندوب دليفري بداخل محافظة';
 
   @override
   String get shippingDelegate => 'مندوب شحن';
 
   @override
-  String get shippingDelegateSubtitle => 'مندوب شحن بين المحافظات';
+  String get shippingDelegateSubtitle => 'مندوب شحن';
 
   @override
   String get busDriver => 'سائق باص';
@@ -160,7 +160,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get intercityShippingIncreasesIncome =>
-      'تحديد خيار مندوب توصيل وخيار مندوب شحن معا يحقق لك فرص دخل أعلى';
+      'تحديد خيار مندوب دليفري وخيار مندوب شحن معا يحقق لك فرص دخل أعلى';
 
   @override
   String get errChooseWarehouse => 'الرجاء اختيار رقم المستودع';
@@ -393,7 +393,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get activateStatusToReceiveOrders =>
-      'قم بتفعيل حالتك لاستقبال طلبات التوصيل الجديدة في منطقتك.';
+      'قم بتفعيل حالتك لاستقبال طلبات الدليفري الجديدة في منطقتك.';
 
   @override
   String get readyToReceive => 'جاهز لاستقبال الطلبات';
@@ -427,7 +427,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get today => 'اليوم';
 
   @override
-  String get deliveryProfitsMock => 'أرباح توصيل - #1245';
+  String get deliveryProfitsMock => 'أرباح دليفري - #1245';
 
   @override
   String get todayTimeMock => 'اليوم، 02:30 م';
@@ -562,7 +562,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get orderId => 'معرف الطلب';
 
   @override
-  String get merchant => 'التاجر';
+  String get merchant => 'المتجر';
 
   @override
   String get deliveredAt => 'تم التوصيل في';
@@ -743,7 +743,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get receiptConfirmationNote =>
-      'يرجى التأكد من استلام الفاتورة الورقية من التاجر عند الاستلام.';
+      'يرجى التأكد من استلام الفاتورة الورقية من المتجر عند الاستلام.';
 
   @override
   String get acceptOrder => 'قبول الطلب';
@@ -890,7 +890,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pickupSteps => 'خطوات الاستلام';
 
   @override
-  String get merchantSignature => 'توقيع التاجر';
+  String get merchantSignature => 'توقيع المتجر';
 
   @override
   String get clearSignature => 'إعادة التوقيع';
@@ -902,7 +902,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pickupCompleted => 'تم الاستلام';
 
   @override
-  String get confirmPickupFromMerchant => 'تأكيد عملية الاستلام من التاجر';
+  String get confirmPickupFromMerchant => 'تأكيد عملية الاستلام من المتجر';
 
   @override
   String get verifyPackage => 'التحقق من الشحنة';
@@ -911,7 +911,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get verifyPackageCount => 'التأكد من عدد القطع';
 
   @override
-  String get obtainMerchantSignature => 'الحصول على توقيع التاجر';
+  String get obtainMerchantSignature => 'الحصول على توقيع المتجر';
 
   @override
   String get signHereForPickup => 'وقع هنا للاستلام';

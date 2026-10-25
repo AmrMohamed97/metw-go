@@ -371,7 +371,7 @@ abstract class AppLocalizations {
   /// No description provided for @shippingDelegateSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Shipping delegate between governorates'**
+  /// **'Shipping Delegate'**
   String get shippingDelegateSubtitle;
 
   /// No description provided for @busDriver.
@@ -1175,7 +1175,7 @@ abstract class AppLocalizations {
   /// No description provided for @merchant.
   ///
   /// In en, this message translates to:
-  /// **'Merchant'**
+  /// **'Store'**
   String get merchant;
 
   /// No description provided for @deliveredAt.
@@ -1535,7 +1535,7 @@ abstract class AppLocalizations {
   /// No description provided for @receiptConfirmationNote.
   ///
   /// In en, this message translates to:
-  /// **'Please ensure to receive the paper invoice from the merchant upon pickup.'**
+  /// **'Please ensure to receive the paper invoice from the store upon pickup.'**
   String get receiptConfirmationNote;
 
   /// No description provided for @acceptOrder.
@@ -1817,7 +1817,7 @@ abstract class AppLocalizations {
   /// No description provided for @merchantSignature.
   ///
   /// In en, this message translates to:
-  /// **'Merchant Signature'**
+  /// **'Store Signature'**
   String get merchantSignature;
 
   /// No description provided for @clearSignature.
@@ -1841,7 +1841,7 @@ abstract class AppLocalizations {
   /// No description provided for @confirmPickupFromMerchant.
   ///
   /// In en, this message translates to:
-  /// **'Confirm pickup process from merchant'**
+  /// **'Confirm pickup process from store'**
   String get confirmPickupFromMerchant;
 
   /// No description provided for @verifyPackage.
@@ -1859,7 +1859,7 @@ abstract class AppLocalizations {
   /// No description provided for @obtainMerchantSignature.
   ///
   /// In en, this message translates to:
-  /// **'Obtain Merchant Signature'**
+  /// **'Obtain Store Signature'**
   String get obtainMerchantSignature;
 
   /// No description provided for @signHereForPickup.
