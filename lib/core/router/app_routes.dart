@@ -33,5 +33,6 @@ class AppRoutes {
   static const String confirmPickupPage = '/confirmPickupPage';
   static const String completeDeliveryPage = '/completeDeliveryPage';
   static const String nextPage = '/nextPage';
+  static const String aggregationDetailsPage = '/aggregationDetailsPage';
 
 }

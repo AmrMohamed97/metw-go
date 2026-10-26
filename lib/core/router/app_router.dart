@@ -56,6 +56,7 @@ import 'package:metw_go/features/vehicle_data/presentation/page/vehicle_page.dar
 import 'package:metw_go/features/wallet_transaction/presentation/manager/wallet_operation_cubit.dart';
 import 'package:metw_go/features/wallet_transaction/presentation/page/wallet_operation_page.dart';
 import 'package:metw_go/features/shipment_details/presentation/page/shipment_details.dart';
+import 'package:metw_go/features/aggregation_details/presentation/page/aggregation_details_page.dart';
 
 import 'app_routes.dart';
 
@@ -361,6 +362,14 @@ class AppRouter {
         name: AppRoutes.nextPage,
         builder: (context, state) {
           return NextPage();
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.aggregationDetailsPage,
+        name: AppRoutes.aggregationDetailsPage,
+        builder: (context, state) {
+          final batch = state.extra as String;
+          return AggregationDetailsPage(batch: batch);
         },
       ),
        

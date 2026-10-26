@@ -126,6 +126,14 @@ abstract class AppTextStyle {
     );
   }
 
+  static TextStyle regular10(BuildContext context) {
+    return _getTextStyle(
+      fontSize: 10.sp,
+      fontWeight: FontWeight.normal,
+      color: Theme.of(context).colorScheme.surface,
+    );
+  }
+
   static TextStyle _getTextStyle({
     required double fontSize,
     required FontWeight fontWeight,

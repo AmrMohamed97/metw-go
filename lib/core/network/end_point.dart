@@ -60,5 +60,10 @@ abstract class EndPoints {
 
   static const String startShipmentUrl = 'assignments/{bus_assignment_id}/accept';
   static const String rejectShipmentUrl = 'assignments/{assignment_id}/reject';
+
+  static const String aggregationsUrl = 'aggregations';
+  static const String aggregationShipmentsUrl = 'aggregations/{batch}/shipments';
+  static const String selectAggregationUrl = 'aggregations/{batch}/select';
 }
+
 
