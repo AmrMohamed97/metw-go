@@ -67,9 +67,9 @@ class VehicleCubit extends Cubit<VehicleState> with ImageMixin {
       emit(UpdateTransportFailure('يرجى اختيار وسيلة النقل'));
       return;
     }
-    print('======================================');
-    print(selectedTransportType!.id!);
-    print(plateNumberController.text);
+    // print('======================================');
+    // print(selectedTransportType!.id!);
+    // print(plateNumberController.text);
 
     if (thirdViewFormKey.currentState?.validate() == true) {
       emit(UpdateTransportLoading());

@@ -4,7 +4,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:metw_go/core/const/app_const.dart';
 import 'package:metw_go/core/di/dependency_injection.dart';
 import 'package:metw_go/core/models/auth_model/auth_model.dart';
-import 'package:metw_go/core/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {

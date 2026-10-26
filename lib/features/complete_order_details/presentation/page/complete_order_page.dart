@@ -124,7 +124,7 @@ class CompleteOrderPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha:0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -153,7 +153,7 @@ class CompleteOrderPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+              color: Theme.of(context).colorScheme.secondary.withValues(alpha:0.1),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Text(
@@ -209,7 +209,7 @@ class CompleteOrderPage extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha:0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -221,7 +221,7 @@ class CompleteOrderPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: iconColor.withOpacity(0.1),
+              color: iconColor.withValues(alpha:0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: iconColor, size: 24.sp),
@@ -280,7 +280,7 @@ class CompleteOrderPage extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha:0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -345,7 +345,7 @@ class CompleteOrderPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha:0.05),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -389,7 +389,7 @@ class CompleteOrderPage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: MyColors.primaryColor.withOpacity(0.1),
+                  color: MyColors.primaryColor.withValues(alpha:0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
@@ -421,9 +421,9 @@ class CompleteOrderPage extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: MyColors.red.withOpacity(0.02),
+            color: MyColors.red.withValues(alpha:0.02),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: MyColors.red.withOpacity(0.2)),
+            border: Border.all(color: MyColors.red.withValues(alpha:0.2)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -455,7 +455,7 @@ class CompleteOrderPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha:0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -558,7 +558,7 @@ class CompleteOrderPage extends StatelessWidget {
                 height: 32.h,
                 color: Theme.of(
                   context,
-                ).colorScheme.surfaceTint.withOpacity(0.5),
+                ).colorScheme.surfaceTint.withValues(alpha:0.5),
               ),
           ],
         ),
