@@ -48,4 +48,10 @@ abstract class AppRepo {
     required int assignmentId,
     StartShipmentInputModel? body,
   });
+
+  Future<Either<Failure, dynamic>> rejectShipment({
+    required int assignmentId,
+    String? reason,
+  });
 }
+

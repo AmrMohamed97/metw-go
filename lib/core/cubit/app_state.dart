@@ -115,7 +115,10 @@ class CompleteDeliveryOrderErrorState extends AppState {
 }
 
 //------------------------------------------------------------------------------
-class StartShipmentLoadingState extends AppState {}
+class StartShipmentLoadingState extends AppState {
+  final int? assignmentId;
+  StartShipmentLoadingState([this.assignmentId]);
+}
 
 class StartShipmentSuccessState extends AppState {
   final StartShipmentResponse response;
@@ -126,3 +129,19 @@ class StartShipmentErrorState extends AppState {
   final String message;
   StartShipmentErrorState(this.message);
 }
+
+class RejectShipmentLoadingState extends AppState {
+  final int? assignmentId;
+  RejectShipmentLoadingState([this.assignmentId]);
+}
+
+class RejectShipmentSuccessState extends AppState {
+  final String? message;
+  RejectShipmentSuccessState([this.message]);
+}
+
+class RejectShipmentErrorState extends AppState {
+  final String message;
+  RejectShipmentErrorState(this.message);
+}
+

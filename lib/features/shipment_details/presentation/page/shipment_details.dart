@@ -8,6 +8,8 @@ import 'package:metw_go/core/di/dependency_injection.dart';
 import 'package:metw_go/core/l10n/app_localizations.dart';
 import 'package:metw_go/core/theme/app_text_style.dart';
 import 'package:metw_go/core/theme/my_colors.dart';
+import 'package:metw_go/core/models/start_shipment_input_model/start_shipment_input_model.dart';
+import 'package:metw_go/core/widgets/bus_station_accept_bottom_sheet.dart';
 import 'package:metw_go/core/widgets/custom_app_bar.dart';
 import 'package:metw_go/core/widgets/custom_button.dart';
 import 'package:metw_go/core/widgets/custom_error_widget.dart';
@@ -136,9 +138,9 @@ class _ShipmentDetailsViewState extends State<ShipmentDetailsView> {
     final l10n = AppLocalizations.of(context)!;
     final currency = shipment.currency ?? 'ج.م';
     final feeValue = _customAcceptedFee ??
-        shipment.acceptedFee ??
-        shipment.estimatedFee ??
-        shipment.fee;
+        (shipment.requiresFeeInput == false
+            ? (shipment.offeredFee ?? shipment.fee)
+            : (shipment.acceptedFee ?? shipment.estimatedFee ?? shipment.fee));
     final feeText = feeValue != null ? '$feeValue $currency' : '---';
 
     return SingleChildScrollView(
@@ -251,24 +253,34 @@ class _ShipmentDetailsViewState extends State<ShipmentDetailsView> {
                   ],
                 ],
               ),
-              if (shipment.requestStatusLabel != null)
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.w,
-                    vertical: 5.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: MyColors.primaryColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Text(
-                    shipment.requestStatusLabel!,
-                    style: AppTextStyle.medium12(context).copyWith(
-                      color: MyColors.primaryColor,
-                      fontWeight: FontWeight.bold,
+              Wrap(
+                spacing: 8.w,
+                runSpacing: 4.h,
+                children: [
+                  if (shipment.status != null)
+                    _buildStatusChip(context, shipment.status!),
+                  if (shipment.requestStatusLabel != null)
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.w,
+                        vertical: 5.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest
+                            .withValues(alpha: 0.5),
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                      child: Text(
+                        shipment.requestStatusLabel!,
+                        style: AppTextStyle.medium12(context).copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                ],
+              ),
             ],
           ),
           if (shipment.createdAt != null && shipment.createdAt!.isNotEmpty) ...[
@@ -399,17 +411,45 @@ class _ShipmentDetailsViewState extends State<ShipmentDetailsView> {
     BuildContext context,
     ShipmentDetailsData shipment,
   ) {
-    final orderId = shipment.id ?? shipment.shipmentRequestId ?? widget.shipmentId;
+    final assignmentId = shipment.assignmentId ?? shipment.id ?? widget.shipmentId;
+    final isPending = shipment.status == null || shipment.status == 'pending';
 
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, appState) {
-        if (appState is AcceptStartOrderSuccessState) {
+        if (appState is StartShipmentSuccessState) {
+          showToast(
+            context,
+            message: appState.response.message ?? 'تم قبول العرض بنجاح',
+            state: ToastStates.success,
+          );
+          // Refresh details after acceptance
+          context.read<ShipmentDetailsCubit>().fetchShipmentDetails(widget.shipmentId);
+        } else if (appState is StartShipmentErrorState) {
+          showToast(
+            context,
+            message: appState.message,
+            state: ToastStates.error,
+          );
+        } else if (appState is RejectShipmentSuccessState) {
+          showToast(
+            context,
+            message: appState.message ?? 'تم رفض العرض بنجاح',
+            state: ToastStates.success,
+          );
+          // Refresh details after rejection
+          context.read<ShipmentDetailsCubit>().fetchShipmentDetails(widget.shipmentId);
+        } else if (appState is RejectShipmentErrorState) {
+          showToast(
+            context,
+            message: appState.message,
+            state: ToastStates.error,
+          );
+        } else if (appState is AcceptStartOrderSuccessState) {
           showToast(
             context,
             message: appState.response.message ?? 'تم قبول الشحنة بنجاح',
             state: ToastStates.success,
           );
-          // Refresh details after acceptance
           context.read<ShipmentDetailsCubit>().fetchShipmentDetails(widget.shipmentId);
         } else if (appState is AcceptStartOrderErrorState) {
           showToast(
@@ -421,29 +461,166 @@ class _ShipmentDetailsViewState extends State<ShipmentDetailsView> {
       },
       builder: (context, appState) {
         final appCubit = context.read<AppCubit>();
-        final isLoading = appState is AcceptStartOrderLoadingState &&
-            appState.orderId == orderId;
+        final isLoading = (appState is StartShipmentLoadingState &&
+                appState.assignmentId == assignmentId) ||
+            (appState is AcceptStartOrderLoadingState &&
+                appState.orderId == assignmentId);
+        final isRejectLoading = appState is RejectShipmentLoadingState &&
+            appState.assignmentId == assignmentId;
 
-        return CustomButton(
-          text: 'قبول الشحنة',
-          loading: isLoading,
-          isMax: !isLoading,
-          backgroundColor: MyColors.primaryColor,
-          textColor: Theme.of(context).colorScheme.surface,
-          onPressed: () {
-            if (shipment.requiresFeeInput == true) {
-              _openFeeModal(shipment, appCubit);
-            } else {
-              appCubit.acceptStartOrder(orderId: orderId);
-            }
-          },
+        if (!isPending) {
+          return Center(child: _buildStatusChip(context, shipment.status!));
+        }
+
+        return Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: CustomButton(
+                text: 'قبول الشحنة',
+                loading: isLoading,
+                isMax: !isLoading,
+                backgroundColor: MyColors.primaryColor,
+                textColor: Theme.of(context).colorScheme.surface,
+                onPressed: () {
+                  if (shipment.legType == 'bus_segment') {
+                    showBusStationAcceptBottomSheet(
+                      context: context,
+                      assignmentId: assignmentId,
+                      requiresFeeInput: shipment.requiresFeeInput == true,
+                      offeredFee: shipment.offeredFee,
+                      initialFee: _customAcceptedFee ??
+                          shipment.acceptedFee ??
+                          shipment.estimatedFee ??
+                          shipment.fee,
+                      currency: shipment.currency,
+                      onConfirm: (inputModel) {
+                        appCubit.startShipment(
+                          assignmentId: assignmentId,
+                          body: inputModel,
+                        );
+                      },
+                    );
+                  } else if (shipment.requiresFeeInput == true) {
+                    _openFeeModal(shipment, appCubit);
+                  } else {
+                    appCubit.startShipment(
+                      assignmentId: assignmentId,
+                      body: StartShipmentInputModel(),
+                    );
+                  }
+                },
+              ),
+            ),
+            12.horizontalSpace,
+            Expanded(
+              flex: 1,
+              child: CustomButton(
+                text: 'رفض',
+                loading: isRejectLoading,
+                isMax: !isRejectLoading,
+                backgroundColor: MyColors.red.withValues(alpha: 0.1),
+                textColor: MyColors.red,
+                onPressed: () {
+                  _showRejectConfirmDialog(
+                    context,
+                    assignmentId,
+                    shipment.requestNumber,
+                    appCubit,
+                  );
+                },
+              ),
+            ),
+          ],
         );
       },
     );
   }
 
+  void _showRejectConfirmDialog(
+    BuildContext context,
+    int assignmentId,
+    String? requestNumber,
+    AppCubit appCubit,
+  ) {
+    final reasonController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (ctx) => Directionality(
+        textDirection: TextDirection.rtl,
+        child: AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          title: Row(
+            children: [
+              Icon(Icons.cancel_outlined, color: MyColors.red, size: 24.sp),
+              8.horizontalSpace,
+              const Text('رفض العرض'),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'هل أنت متأكد من رغبتك في رفض هذا العرض ${requestNumber != null ? "($requestNumber)" : ""}؟',
+                style: AppTextStyle.medium14(context),
+              ),
+              12.verticalSpace,
+              TextFormField(
+                controller: reasonController,
+                maxLines: 2,
+                decoration: InputDecoration(
+                  hintText: 'سبب الرفض (اختياري)...',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  contentPadding: EdgeInsets.all(12.w),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: Text(
+                'إلغاء',
+                style: AppTextStyle.medium14(context).copyWith(
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: MyColors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(ctx);
+                final reason = reasonController.text.trim();
+                appCubit.rejectShipment(
+                  assignmentId: assignmentId,
+                  reason: reason.isNotEmpty ? reason : null,
+                );
+              },
+              child: const Text(
+                'تأكيد الرفض',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
   void _openFeeModal(ShipmentDetailsData shipment, AppCubit appCubit) {
-    final orderId = shipment.id ?? shipment.shipmentRequestId ?? widget.shipmentId;
+    final assignmentId = shipment.assignmentId ?? shipment.id ?? widget.shipmentId;
     final initialFee = _customAcceptedFee ??
         shipment.acceptedFee ??
         shipment.estimatedFee ??
@@ -451,20 +628,84 @@ class _ShipmentDetailsViewState extends State<ShipmentDetailsView> {
 
     showEditFeeBottomSheet(
       context: context,
-      orderId: orderId,
+      orderId: assignmentId,
       orderNumber: shipment.requestNumber,
       initialFee: initialFee,
       onConfirm: (acceptedFee) {
         setState(() {
           _customAcceptedFee = acceptedFee;
         });
-        appCubit.acceptStartOrder(
-          orderId: orderId,
-          acceptedFee: acceptedFee,
+        appCubit.startShipment(
+          assignmentId: assignmentId,
+          body: StartShipmentInputModel(acceptedFee: acceptedFee),
         );
       },
     );
   }
+
+  Widget _buildStatusChip(BuildContext context, String status) {
+    String label;
+    Color color;
+
+    switch (status) {
+      case 'pending':
+        label = 'بانتظار ردك';
+        color = Theme.of(context).colorScheme.primary;
+        break;
+      case 'accepted':
+        label = 'تم القبول، بانتظار الاختيار';
+        color = Theme.of(context).colorScheme.secondary;
+        break;
+      case 'confirmed':
+        label = 'تم اختيارك';
+        color = MyColors.green;
+        break;
+      case 'reserve':
+        label = 'احتياطي';
+        color = Theme.of(context).colorScheme.secondary;
+        break;
+      case 'executing':
+        label = 'قيد التنفيذ';
+        color = MyColors.green;
+        break;
+      case 'completed':
+        label = 'أتمّ المرحلة';
+        color = MyColors.green;
+        break;
+      case 'rejected':
+        label = 'مرفوض';
+        color = MyColors.red;
+        break;
+      case 'expired':
+        label = 'منتهي الصلاحية';
+        color = MyColors.grey;
+        break;
+      case 'cancelled':
+        label = 'ملغي';
+        color = MyColors.red;
+        break;
+      default:
+        label = status;
+        color = MyColors.grey;
+    }
+
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
+      ),
+      child: Text(
+        label,
+        style: AppTextStyle.medium12(context).copyWith(
+          color: color,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
 
   Widget _buildDetailRow(
     BuildContext context, {

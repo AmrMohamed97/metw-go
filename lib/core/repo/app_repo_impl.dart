@@ -168,4 +168,24 @@ class AppRepoImpl implements AppRepo {
       return Left(ServerFailure(error.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, dynamic>> rejectShipment({
+    required int assignmentId,
+    String? reason,
+  }) async {
+    try {
+      final response = await _apiService.rejectShipment(
+        assignmentId: assignmentId,
+        body: reason != null ? {'rejection_reason': reason} : {},
+      );
+      return Right(response);
+    } catch (error) {
+      if (error is DioException) {
+        return Left(ServerFailure.fromDioError(error));
+      }
+      return Left(ServerFailure(error.toString()));
+    }
+  }
 }
+

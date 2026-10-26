@@ -71,4 +71,11 @@ abstract class AppDataSource {
     @Path("bus_assignment_id") required int assignmentId,
     @Body() Map<String, dynamic>? body,
   });
+
+  @POST(EndPoints.rejectShipmentUrl)
+  Future<dynamic> rejectShipment({
+    @Path("assignment_id") required int assignmentId,
+    @Body() Map<String, dynamic>? body,
+  });
 }
+

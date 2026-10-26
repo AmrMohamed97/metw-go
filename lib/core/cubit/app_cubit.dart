@@ -185,7 +185,7 @@ class AppCubit extends Cubit<AppState> {
     required int assignmentId,
     StartShipmentInputModel? body,
   }) async {
-    emit(StartShipmentLoadingState());
+    emit(StartShipmentLoadingState(assignmentId));
     final result = await _appRepo.startShipment(
       assignmentId: assignmentId,
       body: body,
@@ -195,4 +195,20 @@ class AppCubit extends Cubit<AppState> {
       (response) => emit(StartShipmentSuccessState(response)),
     );
   }
+
+  Future<void> rejectShipment({
+    required int assignmentId,
+    String? reason,
+  }) async {
+    emit(RejectShipmentLoadingState(assignmentId));
+    final result = await _appRepo.rejectShipment(
+      assignmentId: assignmentId,
+      reason: reason,
+    );
+    result.fold(
+      (failure) => emit(RejectShipmentErrorState(failure.message)),
+      (response) => emit(RejectShipmentSuccessState('تم رفض العرض بنجاح')),
+    );
+  }
 }
+

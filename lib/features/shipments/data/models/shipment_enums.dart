@@ -79,3 +79,100 @@ enum HandoffStatus {
   @JsonValue('cancelled')
   cancelled,
 }
+
+extension ShipmentRequestStatusX on ShipmentRequestStatus {
+  String get label {
+    switch (this) {
+      case ShipmentRequestStatus.draft:
+        return 'مسودة';
+      case ShipmentRequestStatus.submitted:
+        return 'تم إرسال الطلب';
+      case ShipmentRequestStatus.matching:
+        return 'جاري البحث عن أطراف المسار';
+      case ShipmentRequestStatus.awaitingPathSelection:
+        return 'بانتظار اختيار العميل';
+      case ShipmentRequestStatus.awaitingAdvance:
+        return 'بانتظار تأكيد السداد';
+      case ShipmentRequestStatus.executing:
+        return 'قيد التنفيذ';
+      case ShipmentRequestStatus.completed:
+        return 'مكتمل';
+      case ShipmentRequestStatus.cancelled:
+        return 'ملغي';
+      case ShipmentRequestStatus.rejected:
+        return 'مرفوض';
+      case ShipmentRequestStatus.failedUnavailable:
+        return 'لا توجد أطراف متاحة';
+    }
+  }
+}
+
+extension ShipmentPathStatusX on ShipmentPathStatus {
+  String get label {
+    switch (this) {
+      case ShipmentPathStatus.matching:
+        return 'جاري جمع ردود المندوبين والمستودعات';
+      case ShipmentPathStatus.courierConfirmed:
+        return 'تم تحديد طرف لكل مرحلة';
+      case ShipmentPathStatus.submittedToClient:
+        return 'معروض على العميل';
+      case ShipmentPathStatus.clientSelected:
+        return 'اختاره العميل';
+      case ShipmentPathStatus.executing:
+        return 'بدأ التنفيذ';
+      case ShipmentPathStatus.executed:
+        return 'تم التنفيذ بالكامل';
+      case ShipmentPathStatus.failed:
+        return 'فشل المسار';
+      case ShipmentPathStatus.cancelled:
+        return 'ملغي';
+    }
+  }
+}
+
+extension ShipmentAssignmentStatusX on ShipmentAssignmentStatus {
+  String get label {
+    switch (this) {
+      case ShipmentAssignmentStatus.pending:
+        return 'بانتظار ردك';
+      case ShipmentAssignmentStatus.accepted:
+        return 'تم القبول، بانتظار الاختيار';
+      case ShipmentAssignmentStatus.confirmed:
+        return 'تم اختيارك';
+      case ShipmentAssignmentStatus.reserve:
+        return 'احتياطي';
+      case ShipmentAssignmentStatus.executing:
+        return 'قيد التنفيذ';
+      case ShipmentAssignmentStatus.completed:
+        return 'أتمّ المرحلة';
+      case ShipmentAssignmentStatus.rejected:
+        return 'مرفوض';
+      case ShipmentAssignmentStatus.expired:
+        return 'منتهي الصلاحية';
+      case ShipmentAssignmentStatus.cancelled:
+        return 'ملغي';
+    }
+  }
+
+  bool get canRespond => this == ShipmentAssignmentStatus.pending;
+  bool get hideActions =>
+      this == ShipmentAssignmentStatus.expired ||
+      this == ShipmentAssignmentStatus.cancelled;
+}
+
+extension HandoffStatusX on HandoffStatus {
+  String get label {
+    switch (this) {
+      case HandoffStatus.locked:
+        return 'لم يحن دورها';
+      case HandoffStatus.awaitingReceiver:
+        return 'بانتظار تأكيد المستلم';
+      case HandoffStatus.awaitingSender:
+        return 'بانتظار تأكيد المُسلّم';
+      case HandoffStatus.completed:
+        return 'اكتملت الخطوة';
+      case HandoffStatus.cancelled:
+        return 'خطوة ملغية';
+    }
+  }
+}
