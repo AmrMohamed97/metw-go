@@ -20,6 +20,18 @@ import 'package:metw_go/core/network/dio/dio_factory.dart' as _i611;
 import 'package:metw_go/core/network/dio/dio_interceptor.dart' as _i402;
 import 'package:metw_go/core/repo/app_repo.dart' as _i444;
 import 'package:metw_go/core/repo/app_repo_impl.dart' as _i837;
+import 'package:metw_go/features/aggregation/data/data_source/aggregation_data_source.dart'
+    as _i201;
+import 'package:metw_go/features/aggregation/data/repo/aggregation_repo.dart'
+    as _i583;
+import 'package:metw_go/features/aggregation/presentation/manager/aggregation_cubit.dart'
+    as _i109;
+import 'package:metw_go/features/aggregation_details/data/data_source/aggregation_details_data_source.dart'
+    as _i1011;
+import 'package:metw_go/features/aggregation_details/data/repo/aggregation_details_repo.dart'
+    as _i980;
+import 'package:metw_go/features/aggregation_details/presentation/manager/aggregation_details_cubit.dart'
+    as _i720;
 import 'package:metw_go/features/contact_us/data/data_source/contact_us_data_source.dart'
     as _i359;
 import 'package:metw_go/features/contact_us/data/repo/contact_us_repo.dart'
@@ -255,6 +267,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i361.Dio>(
       () => dioFactory.getDio(gh<_i402.CustomInterceptor>()),
     );
+    gh.factory<_i201.AggregationDataSource>(
+      () => _i201.AggregationDataSourceImpl(gh<_i361.Dio>()),
+    );
     gh.factory<_i863.AppDataSource>(() => _i863.AppDataSource(gh<_i361.Dio>()));
     gh.factory<_i359.ContactUsDataSource>(
       () => _i359.ContactUsDataSource(gh<_i361.Dio>()),
@@ -333,6 +348,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i997.WalletOperationDataSource>(
       () => _i997.WalletOperationDataSource(gh<_i361.Dio>()),
     );
+    gh.factory<_i1011.AggregationDetailsDataSource>(
+      () => _i1011.AggregationDetailsDataSourceImpl(gh<_i361.Dio>()),
+    );
     gh.factory<_i540.LoginRepo>(
       () => _i770.LoginRepoImpl(loginDataSource: gh<_i101.LoginDataSource>()),
     );
@@ -364,6 +382,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i393.SecondStepRepo>(
       () => _i211.SecondStepRepoImpl(gh<_i497.SecondStepDataSource>()),
     );
+    gh.factory<_i980.AggregationDetailsRepo>(
+      () => _i980.AggregationDetailsRepoImpl(
+        gh<_i1011.AggregationDetailsDataSource>(),
+      ),
+    );
     gh.factory<_i212.FirstStepCubit>(
       () => _i212.FirstStepCubit(gh<_i305.FirstStepRepo>()),
     );
@@ -390,6 +413,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i195.PrivacyRepo>(
       () => _i914.PrivacyRepoImpl(dataSource: gh<_i160.PrivacyDataSource>()),
     );
+    gh.factory<_i583.AggregationRepo>(
+      () => _i583.AggregationRepoImpl(gh<_i201.AggregationDataSource>()),
+    );
     gh.factory<_i617.RegisterRepo>(
       () => _i142.RegisterRepoImplement(gh<_i961.RegisterDataSource>()),
     );
@@ -415,6 +441,9 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.factory<_i405.AppCubit>(() => _i405.AppCubit(gh<_i444.AppRepo>()));
+    gh.factory<_i720.AggregationDetailsCubit>(
+      () => _i720.AggregationDetailsCubit(gh<_i980.AggregationDetailsRepo>()),
+    );
     gh.factory<_i150.HistoryRepo>(
       () => _i1068.HistoryRepoImpl(dataSource: gh<_i446.HistoryDataSource>()),
     );
@@ -476,6 +505,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i203.DelegateInfoCubit(
         delegateInfoRepo: gh<_i848.DelegateInfoRepo>(),
       ),
+    );
+    gh.factory<_i109.AggregationCubit>(
+      () => _i109.AggregationCubit(gh<_i583.AggregationRepo>()),
     );
     gh.factory<_i129.FaqCubit>(() => _i129.FaqCubit(gh<_i522.FaqRepo>()));
     gh.factory<_i364.OrdersCubit>(

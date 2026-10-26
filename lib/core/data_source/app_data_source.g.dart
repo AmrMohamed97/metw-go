@@ -354,7 +354,7 @@ class _AppDataSource implements AppDataSource {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     if (body != null) {
-      _data.addAll(body);
+      _data.addAll(body!);
     }
     final _options = _setStreamType<dynamic>(
       Options(method: 'POST', headers: _headers, extra: _extra)
@@ -367,7 +367,8 @@ class _AppDataSource implements AppDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch(_options);
-    return _result.data;
+    final _value = _result.data;
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
